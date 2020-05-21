@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>Test Article</title>
-    <url>/2020/05/20/Test-Article/</url>
+    <url>http://jinl1874.github.io/2020/05/20/Test-Article/</url>
     <content><![CDATA[<p>This is a test article, weclome subscribe “<a href="https://jinl1874.github.io&quot;" target="_blank" rel="noopener">https://jinl1874.github.io&quot;</a></p>
 <p>▶ hexo s<br>INFO Start processing<br>INFO Hexo is running at <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> . Press Ctrl+C to stop.</p>
 ]]></content>
@@ -15,7 +15,7 @@
   </entry>
   <entry>
     <title>Hello World</title>
-    <url>/2020/05/20/hello-world/</url>
+    <url>http://jinl1874.github.io/2020/05/20/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 
@@ -33,7 +33,7 @@
   </entry>
   <entry>
     <title>使用Hexo和GithubPage免费搭建博客网站</title>
-    <url>/2020/05/21/hexo-0/</url>
+    <url>http://jinl1874.github.io/2020/05/21/hexo-0/</url>
     <content><![CDATA[<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>如果已经安装了下面两个软件，那么可以直接安装Hexo了。</p>
 <h3 id="1-安装Node-js"><a href="#1-安装Node-js" class="headerlink" title="1. 安装Node.js"></a>1. 安装Node.js</h3><p><a href="https://nodejs.org/en/" target="_blank" rel="noopener">安装node</a>，也可以去node.js中文网<a href="http://nodejs.cn/download/" target="_blank" rel="noopener">下载</a></p>
 <h3 id="2-安装Git"><a href="#2-安装Git" class="headerlink" title="2. 安装Git"></a>2. 安装Git</h3><p>Windows: <a href="https://git-scm.com/download/win" target="_blank" rel="noopener">下载</a><br>MAC: <code>▶ brew install git</code><br>Linux (Ubuntu, Debian)：<code>▶ sudo apt-get install git-core</code><br>Linux (Fedora, Red Hat, CentOS)：<code>▶ sudo yum install git-core</code></p>
