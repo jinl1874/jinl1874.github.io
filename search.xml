@@ -32,35 +32,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>使用自定义域名后出现“404There isn&#39;t a GitHub Pages site here”解决方法</title>
-    <url>/2020/05/22/blog-problem-0/</url>
-    <content><![CDATA[<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><ul>
-<li>每次将新文章使用“hexo d”推送后，再打开浏览器就会显示“404There isn’t a GitHub Pages site here”这个错误。</li>
-</ul>
-<h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><ul>
-<li>我们在自定义域名之前会在下图里“Custom domain”，<br><img src="http://image.jinl1874.xyz/img/blog_problem.png" alt="setting"></li>
-<li>点击“save”后，仓库的根目录会生成一个“CNAME”文件，<br><img src="http://image.jinl1874.xyz/img/blog_problem_2.png" alt=""></li>
-<li>但是本地的“public”目录里面并没有这个文件，所以更新会删除这个文件，就会导致访问失败。</li>
-</ul>
-<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><ul>
-<li>在hexo的source文件夹下新建一个CNAME文件，内容如下。这样使用<code>hexo generate</code>就会在public目录生成CNAME文件了，这样推送过去后就不会删除了。<br><img src="http://image.jinl1874.xyz/img/20200522235649.png" alt="solve"></li>
-<li>添加文件后，重新生成推送后，问题就迎刃而解了。<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-<blockquote>
-<p>欢迎访问个人博客主页 <a href="https://jinl1874.github.io" target="_blank" rel="noopener">jinl1874</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Problem</category>
-      </categories>
-      <tags>
-        <tag>hexo, blog</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用Hexo和GithubPage免费搭建博客网站</title>
     <url>/2020/05/21/hexo-0/</url>
     <content><![CDATA[<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>如果已经安装了下面两个软件，那么可以直接安装Hexo了。</p>
@@ -237,6 +208,35 @@
       <tags>
         <tag>blog</tag>
         <tag>image</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用自定义域名后出现“404There isn&#39;t a GitHub Pages site here”解决方法</title>
+    <url>/2020/05/22/blog-problem-0/</url>
+    <content><![CDATA[<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><ul>
+<li>每次将新文章使用“hexo d”推送后，再打开浏览器就会显示“404There isn’t a GitHub Pages site here”这个错误。</li>
+</ul>
+<h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><ul>
+<li>我们在自定义域名之前会在下图里“Custom domain”，<br><img src="http://image.jinl1874.xyz/img/blog_problem.png" alt="setting"></li>
+<li>点击“save”后，仓库的根目录会生成一个“CNAME”文件，<br><img src="http://image.jinl1874.xyz/img/blog_problem_2.png" alt=""></li>
+<li>但是本地的“public”目录里面并没有这个文件，所以更新会删除这个文件，就会导致访问失败。</li>
+</ul>
+<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><ul>
+<li>在hexo的source文件夹下新建一个CNAME文件，内容如下。这样使用<code>hexo generate</code>就会在public目录生成CNAME文件了，这样推送过去后就不会删除了。<br><img src="http://image.jinl1874.xyz/img/20200522235649.png" alt="solve"></li>
+<li>添加文件后，重新生成推送后，问题就迎刃而解了。<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<blockquote>
+<p>欢迎访问个人博客主页 <a href="https://jinl1874.github.io" target="_blank" rel="noopener">jinl1874</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Problem</category>
+      </categories>
+      <tags>
+        <tag>hexo, blog</tag>
       </tags>
   </entry>
 </search>
