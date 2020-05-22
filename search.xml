@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Test Article</title>
+    <url>/2020/05/20/Test-Article/</url>
+    <content><![CDATA[<p>This is a test article, weclome subscribe “<a href="https://jinl1874.github.io&quot;" target="_blank" rel="noopener">https://jinl1874.github.io&quot;</a></p>
+<p>▶ hexo s<br>INFO Start processing<br>INFO Hexo is running at <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> . Press Ctrl+C to stop.</p>
+]]></content>
+      <categories>
+        <category>Testing</category>
+      </categories>
+      <tags>
+        <tag>tags</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用七牛云和PicGo来创建自己的图床</title>
+    <url>/2020/05/22/qiniuImage/</url>
+    <content><![CDATA[<h2 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h2>]]></content>
+      <categories>
+        <category>Other, BlogBuild</category>
+      </categories>
+      <tags>
+        <tag>blog, image</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2020/05/20/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
@@ -17,19 +41,6 @@
 
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>Test Article</title>
-    <url>/2020/05/20/Test-Article/</url>
-    <content><![CDATA[<p>This is a test article, weclome subscribe “<a href="https://jinl1874.github.io&quot;" target="_blank" rel="noopener">https://jinl1874.github.io&quot;</a></p>
-<p>▶ hexo s<br>INFO Start processing<br>INFO Hexo is running at <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> . Press Ctrl+C to stop.</p>
-]]></content>
-      <categories>
-        <category>Testing</category>
-      </categories>
-      <tags>
-        <tag>tags</tag>
-      </tags>
   </entry>
   <entry>
     <title>使用Hexo和GithubPage免费搭建博客网站</title>
@@ -84,7 +95,7 @@
 <p>Websites for you and your projects.</p>
 </blockquote>
 <h3 id="1-仓库"><a href="#1-仓库" class="headerlink" title="1. 仓库"></a>1. 仓库</h3><ul>
-<li>打开<a href="https://github.com/" target="_blank" rel="noopener">github</a>注册账号。</li>
+<li>打开<a href="https://github.com/">github</a>注册账号。</li>
 <li>新建一个 Repository，仓库名为 <code>yourname.github.io</code>，例如 <code>jinl1874.github.io</code>，</li>
 <li>“Description”选填，</li>
 <li>勾选”Initialize this repository with a README”，</li>
@@ -141,7 +152,7 @@
 <blockquote>
 <p>更多next主题配置请访问next<a href="http://theme-next.iissnan.com/" target="_blank" rel="noopener">官方文档</a></p>
 </blockquote>
-<p>欢迎访问个人博客主页<a href="https://jinl1874.github.io">jinl1874</a></p>
+<p>欢迎访问个人博客主页<a href="https://jinl1874.github.io" target="_blank" rel="noopener">jinl1874</a></p>
 ]]></content>
       <categories>
         <category>BlogBuild</category>
