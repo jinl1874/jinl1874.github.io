@@ -1,0 +1,2 @@
+ Sitemap: https://jinl1874.xyz/sitemap.xml
+ Sitemap: http://example.com/my_sitemap.xml
