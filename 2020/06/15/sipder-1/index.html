@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="R2oAMB7LvFIsJi7IMB8It6i7HKdTfa1YRgm2K0phdyk">
+  <meta name="msvalidate.01" content="6334EAC73ED9572171FD69D21365060D">
+  <meta name="baidu-site-verification" content="ZXU3XgLWfh">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jinl1874.xyz","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="最近想找点漫画看，发现芝士漫画这个平台不错，于是就想着下载来看。  安装 python下载 python下载好 python 安装包，安装时一路 next 过去，注意勾上“add to path”(一般是默认勾选的)。 安装所需的模块本次的爬虫使用 requests 模块获取数据，再用 xpath 语法解析代码。需要的模块包括 requests，lxml，reportlab。使用 pip 安装">
+<meta property="og:type" content="article">
+<meta property="og:title" content="爬取芝士漫画里的图片并转为pdf">
+<meta property="og:url" content="https://jinl1874.xyz/2020/06/15/sipder-1/index.html">
+<meta property="og:site_name" content="MyBlog">
+<meta property="og:description" content="最近想找点漫画看，发现芝士漫画这个平台不错，于是就想着下载来看。  安装 python下载 python下载好 python 安装包，安装时一路 next 过去，注意勾上“add to path”(一般是默认勾选的)。 安装所需的模块本次的爬虫使用 requests 模块获取数据，再用 xpath 语法解析代码。需要的模块包括 requests，lxml，reportlab。使用 pip 安装">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://image.jinl1874.xyz/img/20200615222857.png">
+<meta property="og:image" content="http://image.jinl1874.xyz/img/20200615222947.png">
+<meta property="og:image" content="http://image.jinl1874.xyz/img/20200615223024.png">
+<meta property="article:published_time" content="2020-06-15T11:40:38.000Z">
+<meta property="article:modified_time" content="2020-06-15T14:31:54.656Z">
+<meta property="article:author" content="道理">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="spider">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://image.jinl1874.xyz/img/20200615222857.png">
+
+<link rel="canonical" href="https://jinl1874.xyz/2020/06/15/sipder-1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>爬取芝士漫画里的图片并转为pdf | MyBlog</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6e0d7c9a7d3673c17da082fa662c0ee4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MyBlog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">daoli</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/06/15/sipder-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="道理">
+      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MyBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          爬取芝士漫画里的图片并转为pdf
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-15 19:40:38 / 修改时间：22:31:54" itemprop="dateCreated datePublished" datetime="2020-06-15T19:40:38+08:00">2020-06-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>最近想找点漫画看，发现<a href="https://manhua.zsh8.com/" target="_blank" rel="noopener">芝士漫画</a>这个平台不错，于是就想着下载来看。</p>
+</blockquote>
+<h3 id="安装-python"><a href="#安装-python" class="headerlink" title="安装 python"></a>安装 python</h3><p><a href="https://www.python.org/downloads/" target="_blank" rel="noopener">下载 python</a><br>下载好 python 安装包，安装时一路 next 过去，注意勾上“add to path”(一般是默认勾选的)。</p>
+<h3 id="安装所需的模块"><a href="#安装所需的模块" class="headerlink" title="安装所需的模块"></a>安装所需的模块</h3><p>本次的爬虫使用 requests 模块获取数据，再用 xpath 语法解析代码。<br>需要的模块包括 requests，lxml，reportlab。<br>使用 pip 安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install requests</span><br><span class="line">pip install lxml</span><br><span class="line">pip install reportlab</span><br></pre></td></tr></table></figure>
+
+<h3 id="写代码"><a href="#写代码" class="headerlink" title="写代码"></a>写代码</h3><ol>
+<li>新建一个 python 文件</li>
+<li>导入相应的模块</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import sys</span><br><span class="line">import io</span><br><span class="line">import os</span><br><span class="line">import re</span><br><span class="line">import time</span><br><span class="line">from lxml import etree</span><br><span class="line">from reportlab.lib.pagesizes import A4, portrait, landscape</span><br><span class="line">from reportlab.pdfgen import canvas</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>定义全局变量</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">headers &#x3D; &#123;</span><br><span class="line">    &quot;User-Agent&quot;: &quot;Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64; rv:76.0) Gecko&#x2F;20100101 Firefox&#x2F;76.0&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 默认url</span><br><span class="line">url &#x3D; &quot;https:&#x2F;&#x2F;manhua.zsh8.com&#x2F;pxtt&#x2F;pxtt-040&#x2F;91864.html&quot;</span><br><span class="line"></span><br><span class="line"># 解析出url中的章节名</span><br><span class="line">re_object &#x3D; re.match(</span><br><span class="line">    &quot;https:&#x2F;&#x2F;manhua.zsh8.com&#x2F;.*?&#x2F;(.*?)&#x2F;.*?html&quot;, url)</span><br><span class="line">chapter &#x3D; re_object.group(1)</span><br><span class="line"></span><br><span class="line"># 文件当前目录</span><br><span class="line">current_dir &#x3D; os.getcwd()</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><p>定义方法</p>
+<ul>
+<li>get_text()：得到访问返回的资源</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def get_text(url):</span><br><span class="line">    response &#x3D; requests.get(url, headers&#x3D;headers)</span><br><span class="line">    return response</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>parse_text(text)：分析文档，保存图片，并得到下一章的 url</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">def parse_text(text):</span><br><span class="line">    # 建立解析</span><br><span class="line">    html &#x3D; etree.HTML(text, etree.HTMLParser())</span><br><span class="line">    # 获取漫画图片所有的链接</span><br><span class="line">    links &#x3D; html.xpath(&quot;&#x2F;&#x2F;div[@id&#x3D;&#39;gallery-1&#39;]&#x2F;&#x2F;dt&#x2F;a&#x2F;@href&quot;)</span><br><span class="line">    for i, link in enumerate(links):</span><br><span class="line">        save_image(link, i)</span><br><span class="line">        # 降低访问的速度，防止被识别为机器人</span><br><span class="line">        time.sleep(15)</span><br><span class="line">        print(&quot;完成&quot;, i, &quot;个......&quot;)</span><br><span class="line">    print(&quot;已完成&quot;, chapter, &quot;的下载!&quot;)</span><br><span class="line"></span><br><span class="line">    #　在第一章的时候只有一个next_chapter链接</span><br><span class="line">    try:</span><br><span class="line">        next_chapter &#x3D; html.xpath(</span><br><span class="line">            &quot;&#x2F;&#x2F;div[@class&#x3D;&#39;fusion-single-navigation-wrapper&#39;]&#x2F;a&#x2F;@href&quot;)[1]</span><br><span class="line">    except Exception as e:</span><br><span class="line">        next_chapter &#x3D; html.xpath(</span><br><span class="line">            &quot;&#x2F;&#x2F;div[@class&#x3D;&#39;fusion-single-navigation-wrapper&#39;]&#x2F;a&#x2F;@href&quot;)[0]</span><br><span class="line">        return next_chapter</span><br><span class="line">    return next_chapter</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>save_image(link, index): 访问得到的图片链接，并保存在本地</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">def save_image(link, index):</span><br><span class="line">    read &#x3D; requests.get(link)</span><br><span class="line">    # 当前文件夹的加上章节名形成新的文件夹</span><br><span class="line">    dir_ &#x3D; current_dir + &#39;\\&#39; + chapter</span><br><span class="line">    # 创建文件夹</span><br><span class="line">    if not os.path.exists(dir_):</span><br><span class="line">        os.makedirs(dir_)</span><br><span class="line">    # 保存图片</span><br><span class="line">    with open(dir_ + &#39;\\&#123;&#125;&#39;.format(str(index)+&quot;.jpg&quot;), &#39;wb&#39;) as fp:</span><br><span class="line">        fp.write(read.content)</span><br><span class="line">        fp.close()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>convert_images_to_pdf(img_path, pdf_path)：根据图片的文件夹以及 pdf 文件夹加上文件名来生成 pdf 文件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def convert_images_to_pdf(img_path, pdf_path):</span><br><span class="line">    pages &#x3D; 0</span><br><span class="line">    (w, h) &#x3D; portrait(A4)</span><br><span class="line">    c &#x3D; canvas.Canvas(pdf_path, pagesize&#x3D;portrait(A4))</span><br><span class="line">    l &#x3D; os.listdir(img_path)</span><br><span class="line">    l.sort(key&#x3D;lambda x: int(x[:-4]))</span><br><span class="line">    for i in l:</span><br><span class="line">        f &#x3D; img_path + os.sep + str(i)</span><br><span class="line">        c.drawImage(f, 0, 0, w, h)</span><br><span class="line">        c.showPage()</span><br><span class="line">        pages &#x3D; pages + 1</span><br><span class="line">    c.save()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>begin()：开始，并更新全局变量名</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">def begin():</span><br><span class="line">    global url</span><br><span class="line">    global re_object</span><br><span class="line">    global chapter</span><br><span class="line">    local_url &#x3D; input(</span><br><span class="line">        &quot;输入要下载的章节url(例: https:&#x2F;&#x2F;manhua.zsh8.com&#x2F;pxtt&#x2F;pxtt-041&#x2F;93181.html)\n&gt;&gt;&gt;&quot;)</span><br><span class="line">    # 判断是否符合url格式</span><br><span class="line">    re_object &#x3D; re.match(</span><br><span class="line">        &quot;https:&#x2F;&#x2F;manhua.zsh8.com&#x2F;.*?&#x2F;(.*?)&#x2F;.*?html&quot;, local_url)</span><br><span class="line">    if (re_object):</span><br><span class="line">        url &#x3D; local_url</span><br><span class="line">        # 更新章节名</span><br><span class="line">        re_object &#x3D; re.match(</span><br><span class="line">            &quot;https:&#x2F;&#x2F;manhua.zsh8.com&#x2F;.*?&#x2F;(.*?)&#x2F;.*?html&quot;, url)</span><br><span class="line">        chapter &#x3D; re_object.group(1)</span><br><span class="line">        print(&quot;即将开始.....&quot;)</span><br><span class="line">    else:</span><br><span class="line">        print(&quot;输入错误！将使用默认链接！\n&quot;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>main()：主函数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">if __name__ &#x3D;&#x3D; &quot;__main__&quot;:</span><br><span class="line">    begin()</span><br><span class="line">    boolean &#x3D; &quot;y&quot;</span><br><span class="line">    count &#x3D; 0</span><br><span class="line">    # 保存pdf的文件夹</span><br><span class="line">    if not os.path.exists(current_dir + &#39;\\pdf\\&#39;):</span><br><span class="line">        os.makedirs(current_dir + &#39;\\pdf\\&#39;)</span><br><span class="line">    while(boolean &#x3D;&#x3D; &quot;y&quot;):</span><br><span class="line">        text &#x3D; get_text(url).text</span><br><span class="line">        next_chapter &#x3D; parse_text(text)</span><br><span class="line"></span><br><span class="line">        img_path &#x3D; current_dir + &#39;\\&#39; + chapter</span><br><span class="line">        pdf_path &#x3D; current_dir + &#39;\\pdf\\&#39; + chapter + &#39;.pdf&#39;</span><br><span class="line">        #　有些图片是错误，会导致无法生成pdf文件。</span><br><span class="line">        try:</span><br><span class="line">            convert_images_to_pdf(img_path, pdf_path)</span><br><span class="line">        except Exception as e:</span><br><span class="line">            print(e)</span><br><span class="line">        re_object &#x3D; re.match(</span><br><span class="line">            &quot;https:&#x2F;&#x2F;manhua.zsh8.com&#x2F;.*?&#x2F;(.*?)&#x2F;.*?html&quot;, next_chapter)</span><br><span class="line">        chapter &#x3D; re_object.group(1)</span><br><span class="line">        print(&quot;下一章节：&quot;, chapter)</span><br><span class="line">        count +&#x3D; 1</span><br><span class="line">        print(count)</span><br><span class="line">        #　下载章节的数目，可根据自己需要更改</span><br><span class="line">        if (count &gt; 37):</span><br><span class="line">            break</span><br><span class="line">        url &#x3D; next_chapter</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>直接在终端运行 python 文件，等待一段时间，就会在 python 文件的当前目录下生成文件。<br><img src="http://image.jinl1874.xyz/img/20200615222857.png" alt="文件夹"><br>文件夹里的图片：<br><img src="http://image.jinl1874.xyz/img/20200615222947.png" alt="图片"><br>pdf 文件：<br><img src="http://image.jinl1874.xyz/img/20200615223024.png" alt="pdf"></p>
+<p>完整代码可参考我的<a href="https://github.com/jinl1874/spider" target="_blank" rel="noopener">github 库</a>下的 get_manga.py 文件。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/spider/" rel="tag"># spider</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/01/sipder/" rel="prev" title="获取必应首页的壁纸">
+      <i class="fa fa-chevron-left"></i> 获取必应首页的壁纸
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-python"><span class="nav-number">1.</span> <span class="nav-text">安装 python</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装所需的模块"><span class="nav-number">2.</span> <span class="nav-text">安装所需的模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#写代码"><span class="nav-number">3.</span> <span class="nav-text">写代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行"><span class="nav-number">4.</span> <span class="nav-text">运行</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="道理"
+      src="/images/head.jpg">
+  <p class="site-author-name" itemprop="name">道理</p>
+  <div class="site-description" itemprop="description">这个人很懒，什么也没有留下！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">粤ICP备19109479号 </a>
+      <img src="http://image.jinl1874.xyz/img/备案图标.png" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">道理</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
