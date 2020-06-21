@@ -208,6 +208,95 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/06/21/Jmeter/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="道理">
+      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MyBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/21/Jmeter/" class="post-title-link" itemprop="url">Jmeter 使用简介</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-21 09:59:50 / 修改时间：14:29:16" itemprop="dateCreated datePublished" datetime="2020-06-21T09:59:50+08:00">2020-06-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="使用Jmeter测试网页的性能"><a href="#使用Jmeter测试网页的性能" class="headerlink" title="使用Jmeter测试网页的性能"></a>使用Jmeter测试网页的性能</h4><ol>
+<li><p>打开Jmeter</p>
+</li>
+<li><p>添加测试线程组<br>右键 <code>Test Plan</code> $\rightarrow$ <code>Add</code> $\rightarrow$ <code>Threads(Users)</code> $\rightarrow$ <code>Thread Group</code>。</p>
+<p> <img src="http://image.jinl1874.xyz/img/20200621101959.png" alt="添加测试线程组"></p>
+</li>
+<li><p>添加Http请求<br>右键<code>Thread Group</code> $\rightarrow$ <code>Add</code> $\rightarrow$ <code>Samper</code> $\rightarrow$ <code>HTTP Request</code>。</p>
+<p><img src="http://image.jinl1874.xyz/img/20200621102456.png" alt="添加http request"></p>
+<p>结果：<br><img src="http://image.jinl1874.xyz/img/20200621102807.png" alt="result"></p>
+</li>
+<li><p>添加观察树<br>右键 <code>Test Plan</code> $\rightarrow$ <code>Add</code> $\rightarrow$ <code>Listener</code> $\rightarrow$ <code>View Result Tree</code>。<br><img src="http://image.jinl1874.xyz/img/20200621110646.png" alt="观察树"></p>
+</li>
+<li><p>测试<br>点击<code>HTTP Request</code>，在<code>path</code>项输入一个网址，例如 <a href="https://www.zhihu.com/" target="_blank" rel="noopener">https://www.zhihu.com/</a> ，然后点击<code>run</code>。<br> 然后点击<code>View Result Tree</code>，就会出现以下结果：<br> <img src="http://image.jinl1874.xyz/img/20200621140400.png" alt=""></p>
+</li>
+<li><p>集合点<br>右键<code>Thread Group</code> $\rightarrow$ <code>Add</code> $\rightarrow$ <code>Timer</code> $\rightarrow$ <code>Synchronizing Timer</code>。<br>第一个变量代表的是线程数量。<br>第二个变量代表的是结束的时间，当时间达到一个段后，所有的线程都会被释放。</p>
+</li>
+</ol>
+<h3 id="Thread-Group变量"><a href="#Thread-Group变量" class="headerlink" title="Thread Group变量"></a>Thread Group变量</h3><ol>
+<li>Number of Thread(users):  指模拟的用户数。<br>例子：如果要模拟一百个人，那么输入一百即可。</li>
+<li>Ramp-Up Period(in seconds)：虚拟用户增长时长。<br> 例子：测试一个考勤系统，登录的时候不是所有人一起登陆，而是有一个时间点是大家一起登陆的。比如是八点到九点这一段时间登录的，时长就是3600秒。但不需要设置这么大的数</li>
+<li>Loop Count：一个虚拟用户所需要做的测试数。如果把<code>Infinite</code>勾上的话，那么运行的时候是永不停止的，除非手动强制停止。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/06/15/sipder-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1153,20 +1242,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
