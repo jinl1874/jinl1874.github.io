@@ -436,4 +436,57 @@
         <tag>jmeter</tag>
       </tags>
   </entry>
+  <entry>
+    <title>安装并使用IDM(Internet Download Manager)</title>
+    <url>/2020/06/28/use-idm/</url>
+    <content><![CDATA[<h4 id="IDM是什么？"><a href="#IDM是什么？" class="headerlink" title="IDM是什么？"></a>IDM是什么？</h4><blockquote>
+<p>Internet Download Manager（简称IDM）是一个用于Windows系统的下载管理器。<br> IDM可以让用户自动下载某些类型的文件，可将文件划分为多个下载点以更快下载，并列出最近的下载，方便存取文件。相对于其他下载管理器，具有独特的动态档案分割技术。<br>其优点在于，能分析下载地址中的实际地址，但若地址无效时则跳换成失效网页，当地址重新有效而无法恢复成原来的地址。<br>而缺点在于，必须设置分段的临时文件存放的磁盘位置，下载完成后再自动合并成一个完整的文件，同时删除临时文件（这种做法不同于其他下载软件预先分配一整块磁盘空间）。所以，下载的如果是机密文件，就容易被数据恢复软件恢复，造成安全隐患。<br>– 摘自<a href="https://zh.wikipedia.org/zh-hans/Internet_Download_Manager" target="_blank" rel="noopener">维基百科</a></p>
+</blockquote>
+<p>通俗来讲就是一个优秀的下载工具。</p>
+<h4 id="为什么使用IDM"><a href="#为什么使用IDM" class="headerlink" title="为什么使用IDM"></a>为什么使用IDM</h4><p>因为IDM使用的是多线程下载，所以比浏览器自带的下载要快很多。<br>并且IDM其它的功能：</p>
+<ul>
+<li>下载百度网盘；</li>
+<li>下载BIliBili、Youtube等主流视频网站以及几乎所有的盗版视频网站的视频。</li>
+<li>下载文件自动分类</li>
+</ul>
+<h4 id="安装使用"><a href="#安装使用" class="headerlink" title="安装使用"></a>安装使用</h4><ol>
+<li>这是个收费软件，可以去<a href="https://www.internetdownloadmanager.com/" target="_blank" rel="noopener">官网</a>购买下载。</li>
+<li>也可使用绿色版：<br> <a href="https://pan.baidu.com/s/1o_QEqKeSZLFKu9WQToo-8Q" target="_blank" rel="noopener">网盘地址</a><br> 提取码：jinl<ul>
+<li>下载上述文件后，提取到一个纯英文目录（养好安装文件都放在纯英文目录的习惯）。</li>
+<li>打开其文件目录，点击<code>绿化.bat</code>文件。<small>// 不执行这一步的话浏览器无法调用IDM下载</small></li>
+</ul>
+</li>
+</ol>
+<h4 id="推荐配置"><a href="#推荐配置" class="headerlink" title="推荐配置"></a>推荐配置</h4><ul>
+<li>常规<br><img src="http://image.jinl1874.xyz/img/20200629000033.png" alt=""></li>
+<li>连接<br>把最大连接数改为32(虽然一般不会用到这么多）。</li>
+<li>代理服务器<br>如果你的电脑已经挂了代理，并希望下载Youtube等网站的东西，可选择切换为<code>使用系统代理</code>。</li>
+<li>其它的保持默认即可。</li>
+</ul>
+<h4 id="配置浏览器"><a href="#配置浏览器" class="headerlink" title="配置浏览器"></a>配置浏览器</h4><ul>
+<li>Firefox：打开浏览器$\rightarrow$打开Firefox附加组件$\rightarrow$搜索idm$\rightarrow$点进第一个搜索结果安装。</li>
+<li>Chrome：打开浏览器$\rightarrow$打开Chrome网上应用$\rightarrow$搜索idm$\rightarrow$点进第一个搜索结果安装。<br><small>Chrome需要额外配置：右上三点$\rightarrow$更多工具$\rightarrow$扩展$\rightarrow$<em>IDM Integration Module</em>$\rightarrow$详细信息$\rightarrow$打开允许访问文件网址。</small></li>
+<li>其它浏览器：同上</li>
+</ul>
+<p>配置好浏览器后，以后下载文件就是自动调用IDM下载了。</p>
+<h4 id="下载视频"><a href="#下载视频" class="headerlink" title="下载视频"></a>下载视频</h4><p>当浏览器开打含有视频播放的网页时，视视屏框的右上角会出现一个悬浮条，直接点击下载即可。<br><img src="http://image.jinl1874.xyz/img/20200629005318.png" alt=""><br> 注意：</p>
+<ol>
+<li>下载优酷的官方上传的版权视频时，会下载到一个无法解析的.ts文件。</li>
+<li>当B站的使用HTML5播放器时，下载的B站视频没有声音，此时使用Flash播放器即可。Flash就要淘汰了怎么办？可以在Chrome浏览下载一款名为“B站下载助手”的插件。</li>
+</ol>
+<h4 id="下载百度网盘的文件"><a href="#下载百度网盘的文件" class="headerlink" title="下载百度网盘的文件"></a>下载百度网盘的文件</h4><ol>
+<li>首先下载插件<a href="http://pan.newday.me/" target="_blank" rel="noopener">网盘助手</a>。<br>这个插件可以直接生成直链，而IDM需要直链才能下载。除此之外，此插件还有很多功能，如自动填充提取码等，就不一一赘述了。</li>
+<li>要下载网盘里的文件，首先需要将文件保存在自己的网盘里。在要下载的文件前打上勾，这时上方就会出现<code>生成链接</code>的选项$\downarrow$。<br><img src="http://image.jinl1874.xyz/img/20200629011751.png" alt="生成链接"></li>
+<li>点击后会出现下载直链$\downarrow$<br><img src="http://image.jinl1874.xyz/img/20200629012103.png" alt="直链"></li>
+<li>右键该链接，选择IDM下载。<br><img src="http://image.jinl1874.xyz/img/20200629012412.png" alt="idm"></li>
+</ol>
+<p>注意：如果出现403、401等错误，可以点击修改步骤三的里的应用ID，一般改为<code>778750</code>即可。</p>
+]]></content>
+      <categories>
+        <category>Other</category>
+      </categories>
+      <tags>
+        <tag>other</tag>
+      </tags>
+  </entry>
 </search>

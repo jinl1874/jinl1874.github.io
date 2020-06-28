@@ -23,29 +23,26 @@
     var CONFIG = {"hostname":"jinl1874.xyz","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="最近搭了个博客，就有较大放置图片的需求，于是就想搭了个图床。其它的图床不是要收费就是使用体验非常差，经常出现上传错误。而七牛云有10G的免费空间，对个人用户而言足够了。再加上PicGo的使用，能很方便能上传图户并获取链接。   所需工具七牛云，PicGo，备案好的域名。 1. 注册七牛云 打开七牛云注册账号，进行个人账号认证。需要上传身份，有了支付宝的认证也不需要人工审核了，上传身份后就认证成功">
+  <meta name="description" content="IDM是什么？ Internet Download Manager（简称IDM）是一个用于Windows系统的下载管理器。 IDM可以让用户自动下载某些类型的文件，可将文件划分为多个下载点以更快下载，并列出最近的下载，方便存取文件。相对于其他下载管理器，具有独特的动态档案分割技术。其优点在于，能分析下载地址中的实际地址，但若地址无效时则跳换成失效网页，当地址重新有效而无法恢复成原来的地址。而缺点在">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用七牛云和PicGo来创建自己的图床">
-<meta property="og:url" content="https://jinl1874.xyz/2020/05/22/qiniuImage/index.html">
+<meta property="og:title" content="安装并使用IDM(Internet Download Manager)">
+<meta property="og:url" content="https://jinl1874.xyz/2020/06/28/use-idm/index.html">
 <meta property="og:site_name" content="MyBlog">
-<meta property="og:description" content="最近搭了个博客，就有较大放置图片的需求，于是就想搭了个图床。其它的图床不是要收费就是使用体验非常差，经常出现上传错误。而七牛云有10G的免费空间，对个人用户而言足够了。再加上PicGo的使用，能很方便能上传图户并获取链接。   所需工具七牛云，PicGo，备案好的域名。 1. 注册七牛云 打开七牛云注册账号，进行个人账号认证。需要上传身份，有了支付宝的认证也不需要人工审核了，上传身份后就认证成功">
+<meta property="og:description" content="IDM是什么？ Internet Download Manager（简称IDM）是一个用于Windows系统的下载管理器。 IDM可以让用户自动下载某些类型的文件，可将文件划分为多个下载点以更快下载，并列出最近的下载，方便存取文件。相对于其他下载管理器，具有独特的动态档案分割技术。其优点在于，能分析下载地址中的实际地址，但若地址无效时则跳换成失效网页，当地址重新有效而无法恢复成原来的地址。而缺点在">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://image.jinl1874.xyz/img/%E6%8E%A7%E5%88%B6.png">
-<meta property="og:image" content="http://image.jinl1874.xyz/img/add_sub_domain.png">
-<meta property="og:image" content="http://image.jinl1874.xyz/img/input_sub_domain.png">
-<meta property="og:image" content="http://image.jinl1874.xyz/img/sub_domain_success.png">
-<meta property="og:image" content="http://image.jinl1874.xyz/img/success.png">
-<meta property="og:image" content="http://image.jinl1874.xyz/img/picgo_setting.png">
-<meta property="og:image" content="http://image.jinl1874.xyz/img/20200522225637.png">
-<meta property="article:published_time" content="2020-05-22T08:42:07.000Z">
-<meta property="article:modified_time" content="2020-05-22T16:05:57.450Z">
+<meta property="og:image" content="http://image.jinl1874.xyz/img/20200629000033.png">
+<meta property="og:image" content="http://image.jinl1874.xyz/img/20200629005318.png">
+<meta property="og:image" content="http://image.jinl1874.xyz/img/20200629011751.png">
+<meta property="og:image" content="http://image.jinl1874.xyz/img/20200629012103.png">
+<meta property="og:image" content="http://image.jinl1874.xyz/img/20200629012412.png">
+<meta property="article:published_time" content="2020-06-28T09:13:10.000Z">
+<meta property="article:modified_time" content="2020-06-28T17:26:39.177Z">
 <meta property="article:author" content="道理">
-<meta property="article:tag" content="blog">
-<meta property="article:tag" content="image">
+<meta property="article:tag" content="other">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://image.jinl1874.xyz/img/%E6%8E%A7%E5%88%B6.png">
+<meta name="twitter:image" content="http://image.jinl1874.xyz/img/20200629000033.png">
 
-<link rel="canonical" href="https://jinl1874.xyz/2020/05/22/qiniuImage/">
+<link rel="canonical" href="https://jinl1874.xyz/2020/06/28/use-idm/">
 
 
 <script id="page-configurations">
@@ -58,7 +55,7 @@
   };
 </script>
 
-  <title>使用七牛云和PicGo来创建自己的图床 | MyBlog</title>
+  <title>安装并使用IDM(Internet Download Manager) | MyBlog</title>
   
 
 
@@ -221,7 +218,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/05/22/qiniuImage/">
+    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/06/28/use-idm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.jpg">
@@ -234,7 +231,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          使用七牛云和PicGo来创建自己的图床
+          安装并使用IDM(Internet Download Manager)
         </h1>
 
         <div class="post-meta">
@@ -244,24 +241,20 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-05-22 16:42:07" itemprop="dateCreated datePublished" datetime="2020-05-22T16:42:07+08:00">2020-05-22</time>
+              <time title="创建时间：2020-06-28 17:13:10" itemprop="dateCreated datePublished" datetime="2020-06-28T17:13:10+08:00">2020-06-28</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-23 00:05:57" itemprop="dateModified" datetime="2020-05-23T00:05:57+08:00">2020-05-23</time>
+                <time title="修改时间：2020-06-29 01:26:39" itemprop="dateModified" datetime="2020-06-29T01:26:39+08:00">2020-06-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/BlogBuild/" itemprop="url" rel="index"><span itemprop="name">BlogBuild</span></a>
-                </span>
-                  ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Other/" itemprop="url" rel="index"><span itemprop="name">Other</span></a>
                 </span>
@@ -278,51 +271,48 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <blockquote>
-<p>最近搭了个博客，就有较大放置图片的需求，于是就想搭了个图床。<br>其它的图床不是要收费就是使用体验非常差，经常出现上传错误。而七牛云有10G的免费空间，对个人用户而言足够了。再加上PicGo的使用，能很方便能上传图户并获取链接。</p>
+        <h4 id="IDM是什么？"><a href="#IDM是什么？" class="headerlink" title="IDM是什么？"></a>IDM是什么？</h4><blockquote>
+<p>Internet Download Manager（简称IDM）是一个用于Windows系统的下载管理器。<br> IDM可以让用户自动下载某些类型的文件，可将文件划分为多个下载点以更快下载，并列出最近的下载，方便存取文件。相对于其他下载管理器，具有独特的动态档案分割技术。<br>其优点在于，能分析下载地址中的实际地址，但若地址无效时则跳换成失效网页，当地址重新有效而无法恢复成原来的地址。<br>而缺点在于，必须设置分段的临时文件存放的磁盘位置，下载完成后再自动合并成一个完整的文件，同时删除临时文件（这种做法不同于其他下载软件预先分配一整块磁盘空间）。所以，下载的如果是机密文件，就容易被数据恢复软件恢复，造成安全隐患。<br>– 摘自<a href="https://zh.wikipedia.org/zh-hans/Internet_Download_Manager" target="_blank" rel="noopener">维基百科</a></p>
 </blockquote>
-<hr>
-<h3 id="所需工具"><a href="#所需工具" class="headerlink" title="所需工具"></a>所需工具</h3><p>七牛云，PicGo，备案好的域名。</p>
-<h4 id="1-注册七牛云"><a href="#1-注册七牛云" class="headerlink" title="1. 注册七牛云"></a>1. 注册七牛云</h4><ul>
-<li>打开<a href="https://www.qiniu.com/" target="_blank" rel="noopener">七牛云</a>注册账号，进行个人账号认证。需要上传身份，有了支付宝的认证也不需要人工审核了，上传身份后就认证成功了。<h4 id="2-创建空间"><a href="#2-创建空间" class="headerlink" title="2. 创建空间"></a>2. 创建空间</h4></li>
-<li>管理控制台 $\rightarrow$ 对象储存 $\rightarrow$ 空间管理 $\rightarrow$ 新建空间。</li>
-<li>空间名称随便填，储存区域也可以随便选，访问控制选择公开，点击确定创建。</li>
+<p>通俗来讲就是一个优秀的下载工具。</p>
+<h4 id="为什么使用IDM"><a href="#为什么使用IDM" class="headerlink" title="为什么使用IDM"></a>为什么使用IDM</h4><p>因为IDM使用的是多线程下载，所以比浏览器自带的下载要快很多。<br>并且IDM其它的功能：</p>
+<ul>
+<li>下载百度网盘；</li>
+<li>下载BIliBili、Youtube等主流视频网站以及几乎所有的盗版视频网站的视频。</li>
+<li>下载文件自动分类</li>
 </ul>
-<h4 id="3-注册2级域名"><a href="#3-注册2级域名" class="headerlink" title="3. 注册2级域名"></a>3. 注册2级域名</h4><ul>
-<li>域名控制台 $\rightarrow$ 解析 $\rightarrow$ 添加记录 $\rightarrow$<br><img src="http://image.jinl1874.xyz/img/%E6%8E%A7%E5%88%B6.png" alt="域名控制"></li>
-<li>记录类型选择CNAME，主机记录按自己喜好，记录值随便填一个能用的。<br><img src="http://image.jinl1874.xyz/img/add_sub_domain.png" alt="域名"></li>
+<h4 id="安装使用"><a href="#安装使用" class="headerlink" title="安装使用"></a>安装使用</h4><ol>
+<li>这是个收费软件，可以去<a href="https://www.internetdownloadmanager.com/" target="_blank" rel="noopener">官网</a>购买下载。</li>
+<li>也可使用绿色版：<br> <a href="https://pan.baidu.com/s/1o_QEqKeSZLFKu9WQToo-8Q" target="_blank" rel="noopener">网盘地址</a><br> 提取码：jinl<ul>
+<li>下载上述文件后，提取到一个纯英文目录（养好安装文件都放在纯英文目录的习惯）。</li>
+<li>打开其文件目录，点击<code>绿化.bat</code>文件。<small>// 不执行这一步的话浏览器无法调用IDM下载</small></li>
 </ul>
-<h4 id="4-绑定二级域名"><a href="#4-绑定二级域名" class="headerlink" title="4. 绑定二级域名"></a>4. 绑定二级域名</h4><ul>
-<li><p>空间管理 $\rightarrow$ 域名管理 $\rightarrow$ 绑定域名 $\rightarrow$ 加速域名 $\rightarrow$填入子域名(如 &lt;image.jinl1874.xyz&gt;)。<br><img src="http://image.jinl1874.xyz/img/input_sub_domain.png" alt="填入子域名"></p>
 </li>
-<li><p>绑定成功后会跳转，复制CNAME的值。</p>
-</li>
-<li><p>回到域名控制台，修改刚才添加的记录，把CNAME的值放入放进记录值，然后保存。<br><img src="http://image.jinl1874.xyz/img/sub_domain_success.png" alt="成功"></p>
-</li>
-<li><p>可能会有一段时间的等待，回到域名管理，如果下图红圈出成功，那么七牛云已经创建并绑定成功了。<br><img src="http://image.jinl1874.xyz/img/success.png" alt="sucees"></p>
-</li>
+</ol>
+<h4 id="推荐配置"><a href="#推荐配置" class="headerlink" title="推荐配置"></a>推荐配置</h4><ul>
+<li>常规<br><img src="http://image.jinl1874.xyz/img/20200629000033.png" alt=""></li>
+<li>连接<br>把最大连接数改为32(虽然一般不会用到这么多）。</li>
+<li>代理服务器<br>如果你的电脑已经挂了代理，并希望下载Youtube等网站的东西，可选择切换为<code>使用系统代理</code>。</li>
+<li>其它的保持默认即可。</li>
 </ul>
-<h4 id="5-使用PicGO"><a href="#5-使用PicGO" class="headerlink" title="5. 使用PicGO"></a>5. 使用PicGO</h4><ul>
-<li><p>推荐下载<a href="https://github.com/Molunerfinn/PicGo/releases/tag/v2.2.2" target="_blank" rel="noopener">2.22版本</a></p>
-</li>
-<li><p>安装成功后，打开PicGo设置，拉到最下面，勾选“七牛图床”。</p>
-</li>
-<li><p>在图床设置，设置七牛图床。<br><img src="http://image.jinl1874.xyz/img/picgo_setting.png" alt="picGoSetting"></p>
-</li>
-<li><p>打开七牛云，进入密钥管理，复制AK和SK分别填到AccessKey和SecretKey；</p>
-</li>
-<li><p>存储空间名即是你创建的对象存储的名字</p>
-</li>
-<li><p>访问地址即你的http://+二级域名（如<a href="http://image.jinl1874.xyz" target="_blank" rel="noopener">http://image.jinl1874.xyz</a>)</p>
-</li>
-<li><p>存储区域根据下图而填，我的是华南区，所以填Z2。<br><img src="http://image.jinl1874.xyz/img/20200522225637.png" alt="area"></p>
-</li>
-<li><p>点击确定，建议设为默认图床。</p>
-</li>
-<li><p>此时已经设置成功，可以在“上传区”上传图片。</p>
-</li>
+<h4 id="配置浏览器"><a href="#配置浏览器" class="headerlink" title="配置浏览器"></a>配置浏览器</h4><ul>
+<li>Firefox：打开浏览器$\rightarrow$打开Firefox附加组件$\rightarrow$搜索idm$\rightarrow$点进第一个搜索结果安装。</li>
+<li>Chrome：打开浏览器$\rightarrow$打开Chrome网上应用$\rightarrow$搜索idm$\rightarrow$点进第一个搜索结果安装。<br><small>Chrome需要额外配置：右上三点$\rightarrow$更多工具$\rightarrow$扩展$\rightarrow$<em>IDM Integration Module</em>$\rightarrow$详细信息$\rightarrow$打开允许访问文件网址。</small></li>
+<li>其它浏览器：同上</li>
 </ul>
-<h4 id="到了此处，搭建图床的工作已经完成。"><a href="#到了此处，搭建图床的工作已经完成。" class="headerlink" title="到了此处，搭建图床的工作已经完成。"></a>到了此处，搭建图床的工作已经完成。</h4><p>欢迎访问个人博客主页<a href="jinl1874.github.io">jinl1874</a></p>
+<p>配置好浏览器后，以后下载文件就是自动调用IDM下载了。</p>
+<h4 id="下载视频"><a href="#下载视频" class="headerlink" title="下载视频"></a>下载视频</h4><p>当浏览器开打含有视频播放的网页时，视视屏框的右上角会出现一个悬浮条，直接点击下载即可。<br><img src="http://image.jinl1874.xyz/img/20200629005318.png" alt=""><br> 注意：</p>
+<ol>
+<li>下载优酷的官方上传的版权视频时，会下载到一个无法解析的.ts文件。</li>
+<li>当B站的使用HTML5播放器时，下载的B站视频没有声音，此时使用Flash播放器即可。Flash就要淘汰了怎么办？可以在Chrome浏览下载一款名为“B站下载助手”的插件。</li>
+</ol>
+<h4 id="下载百度网盘的文件"><a href="#下载百度网盘的文件" class="headerlink" title="下载百度网盘的文件"></a>下载百度网盘的文件</h4><ol>
+<li>首先下载插件<a href="http://pan.newday.me/" target="_blank" rel="noopener">网盘助手</a>。<br>这个插件可以直接生成直链，而IDM需要直链才能下载。除此之外，此插件还有很多功能，如自动填充提取码等，就不一一赘述了。</li>
+<li>要下载网盘里的文件，首先需要将文件保存在自己的网盘里。在要下载的文件前打上勾，这时上方就会出现<code>生成链接</code>的选项$\downarrow$。<br><img src="http://image.jinl1874.xyz/img/20200629011751.png" alt="生成链接"></li>
+<li>点击后会出现下载直链$\downarrow$<br><img src="http://image.jinl1874.xyz/img/20200629012103.png" alt="直链"></li>
+<li>右键该链接，选择IDM下载。<br><img src="http://image.jinl1874.xyz/img/20200629012412.png" alt="idm"></li>
+</ol>
+<p>注意：如果出现403、401等错误，可以点击修改步骤三的里的应用ID，一般改为<code>778750</code>即可。</p>
 
     </div>
 
@@ -332,8 +322,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/blog/" rel="tag"># blog</a>
-              <a href="/tags/image/" rel="tag"># image</a>
+              <a href="/tags/other/" rel="tag"># other</a>
           </div>
 
         
@@ -342,13 +331,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/05/21/hexo-0/" rel="prev" title="使用Hexo和GithubPage免费搭建博客网站">
-      <i class="fa fa-chevron-left"></i> 使用Hexo和GithubPage免费搭建博客网站
+    <a href="/2020/06/21/Jmeter/" rel="prev" title="Jmeter 使用简介">
+      <i class="fa fa-chevron-left"></i> Jmeter 使用简介
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/05/22/blog-problem-0/" rel="next" title="使用自定义域名后出现“404There isn't a GitHub Pages site here”解决方法">
-      使用自定义域名后出现“404There isn't a GitHub Pages site here”解决方法 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -407,7 +393,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#所需工具"><span class="nav-number">1.</span> <span class="nav-text">所需工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-注册七牛云"><span class="nav-number">1.1.</span> <span class="nav-text">1. 注册七牛云</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-创建空间"><span class="nav-number">1.2.</span> <span class="nav-text">2. 创建空间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-注册2级域名"><span class="nav-number">1.3.</span> <span class="nav-text">3. 注册2级域名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-绑定二级域名"><span class="nav-number">1.4.</span> <span class="nav-text">4. 绑定二级域名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-使用PicGO"><span class="nav-number">1.5.</span> <span class="nav-text">5. 使用PicGO</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#到了此处，搭建图床的工作已经完成。"><span class="nav-number">1.6.</span> <span class="nav-text">到了此处，搭建图床的工作已经完成。</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#IDM是什么？"><span class="nav-number">1.</span> <span class="nav-text">IDM是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么使用IDM"><span class="nav-number">2.</span> <span class="nav-text">为什么使用IDM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装使用"><span class="nav-number">3.</span> <span class="nav-text">安装使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#推荐配置"><span class="nav-number">4.</span> <span class="nav-text">推荐配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置浏览器"><span class="nav-number">5.</span> <span class="nav-text">配置浏览器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下载视频"><span class="nav-number">6.</span> <span class="nav-text">下载视频</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下载百度网盘的文件"><span class="nav-number">7.</span> <span class="nav-text">下载百度网盘的文件</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
