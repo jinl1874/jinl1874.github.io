@@ -439,54 +439,109 @@
   <entry>
     <title>安装并使用IDM(Internet Download Manager)</title>
     <url>/2020/06/28/use-idm/</url>
-    <content><![CDATA[<h4 id="IDM是什么？"><a href="#IDM是什么？" class="headerlink" title="IDM是什么？"></a>IDM是什么？</h4><blockquote>
-<p>Internet Download Manager（简称IDM）是一个用于Windows系统的下载管理器。<br> IDM可以让用户自动下载某些类型的文件，可将文件划分为多个下载点以更快下载，并列出最近的下载，方便存取文件。相对于其他下载管理器，具有独特的动态档案分割技术。<br>其优点在于，能分析下载地址中的实际地址，但若地址无效时则跳换成失效网页，当地址重新有效而无法恢复成原来的地址。<br>而缺点在于，必须设置分段的临时文件存放的磁盘位置，下载完成后再自动合并成一个完整的文件，同时删除临时文件（这种做法不同于其他下载软件预先分配一整块磁盘空间）。所以，下载的如果是机密文件，就容易被数据恢复软件恢复，造成安全隐患。<br>– 摘自<a href="https://zh.wikipedia.org/zh-hans/Internet_Download_Manager" target="_blank" rel="noopener">维基百科</a></p>
+    <content><![CDATA[<h4 id="IDM-是什么？"><a href="#IDM-是什么？" class="headerlink" title="IDM 是什么？"></a>IDM 是什么？</h4><blockquote>
+<p>Internet Download Manager（简称 IDM）是一个用于 Windows 系统的下载管理器。<br>IDM 可以让用户自动下载某些类型的文件，可将文件划分为多个下载点以更快下载，并列出最近的下载，方便存取文件。相对于其他下载管理器，具有独特的动态档案分割技术。<br>其优点在于，能分析下载地址中的实际地址，但若地址无效时则跳换成失效网页，当地址重新有效而无法恢复成原来的地址。<br>而缺点在于，必须设置分段的临时文件存放的磁盘位置，下载完成后再自动合并成一个完整的文件，同时删除临时文件（这种做法不同于其他下载软件预先分配一整块磁盘空间）。所以，下载的如果是机密文件，就容易被数据恢复软件恢复，造成安全隐患。<br>– 摘自<a href="https://zh.wikipedia.org/zh-hans/Internet_Download_Manager" target="_blank" rel="noopener">维基百科</a></p>
 </blockquote>
 <p>通俗来讲就是一个优秀的下载工具。</p>
-<h4 id="为什么使用IDM"><a href="#为什么使用IDM" class="headerlink" title="为什么使用IDM"></a>为什么使用IDM</h4><p>因为IDM使用的是多线程下载，所以比浏览器自带的下载要快很多。<br>并且IDM其它的功能：</p>
+<h4 id="为什么使用-IDM"><a href="#为什么使用-IDM" class="headerlink" title="为什么使用 IDM"></a>为什么使用 IDM</h4><p>因为 IDM 使用的是多线程下载，所以比浏览器自带的下载要快很多。<br>并且 IDM 其它的功能：</p>
 <ul>
 <li>下载百度网盘；</li>
-<li>下载BIliBili、Youtube等主流视频网站以及几乎所有的盗版视频网站的视频。</li>
+<li>下载 BIliBili、Youtube 等主流视频网站以及几乎所有的盗版视频网站的视频。</li>
 <li>下载文件自动分类</li>
 </ul>
 <h4 id="安装使用"><a href="#安装使用" class="headerlink" title="安装使用"></a>安装使用</h4><ol>
 <li>这是个收费软件，可以去<a href="https://www.internetdownloadmanager.com/" target="_blank" rel="noopener">官网</a>购买下载。</li>
-<li>也可使用绿色版：<br> <a href="https://pan.baidu.com/s/1o_QEqKeSZLFKu9WQToo-8Q" target="_blank" rel="noopener">网盘地址</a><br> 提取码：jinl<ul>
+<li>也可使用绿色版：<br><a href="https://pan.baidu.com/s/1o_QEqKeSZLFKu9WQToo-8Q" target="_blank" rel="noopener">网盘地址</a><br>提取码：jinl<ul>
 <li>下载上述文件后，提取到一个纯英文目录（养好安装文件都放在纯英文目录的习惯）。</li>
-<li>打开其文件目录，点击<code>绿化.bat</code>文件。<small>// 不执行这一步的话浏览器无法调用IDM下载</small></li>
+<li>打开其文件目录，点击<code>绿化.bat</code>文件。<small>// 不执行这一步的话浏览器无法调用 IDM 下载</small></li>
 </ul>
 </li>
 </ol>
 <h4 id="推荐配置"><a href="#推荐配置" class="headerlink" title="推荐配置"></a>推荐配置</h4><ul>
-<li>常规<br><img src="http://image.jinl1874.xyz/img/20200629000033.png" alt=""></li>
-<li>连接<br>把最大连接数改为32(虽然一般不会用到这么多）。</li>
-<li>代理服务器<br>如果你的电脑已经挂了代理，并希望下载Youtube等网站的东西，可选择切换为<code>使用系统代理</code>。</li>
+<li>常规<br><img src="http://image.jinl1874.xyz/img/20200629000033.png" alt="image"></li>
+<li>连接<br>把最大连接数改为 32(虽然一般不会用到这么多）。</li>
+<li>代理服务器<br>如果你的电脑已经挂了代理，并希望下载 Youtube 等网站的东西，可选择切换为<code>使用系统代理</code>。</li>
 <li>其它的保持默认即可。</li>
 </ul>
 <h4 id="配置浏览器"><a href="#配置浏览器" class="headerlink" title="配置浏览器"></a>配置浏览器</h4><ul>
-<li>Firefox：打开浏览器$\rightarrow$打开Firefox附加组件$\rightarrow$搜索idm$\rightarrow$点进第一个搜索结果安装。</li>
-<li>Chrome：打开浏览器$\rightarrow$打开Chrome网上应用$\rightarrow$搜索idm$\rightarrow$点进第一个搜索结果安装。<br><small>Chrome需要额外配置：右上三点$\rightarrow$更多工具$\rightarrow$扩展$\rightarrow$<em>IDM Integration Module</em>$\rightarrow$详细信息$\rightarrow$打开允许访问文件网址。</small></li>
+<li>Firefox：打开浏览器$\rightarrow$打开 Firefox 附加组件$\rightarrow$搜索 idm$\rightarrow$点进第一个搜索结果安装。</li>
+<li>Chrome：打开浏览器$\rightarrow$打开 Chrome 网上应用$\rightarrow$搜索 idm$\rightarrow$点进第一个搜索结果安装。<br><small>Chrome 需要额外配置：右上三点$\rightarrow$更多工具$\rightarrow$扩展$\rightarrow$<em>IDM Integration Module</em>$\rightarrow$详细信息$\rightarrow$打开允许访问文件网址。</small></li>
 <li>其它浏览器：同上</li>
 </ul>
-<p>配置好浏览器后，以后下载文件就是自动调用IDM下载了。</p>
-<h4 id="下载视频"><a href="#下载视频" class="headerlink" title="下载视频"></a>下载视频</h4><p>当浏览器开打含有视频播放的网页时，视视屏框的右上角会出现一个悬浮条，直接点击下载即可。<br><img src="http://image.jinl1874.xyz/img/20200629005318.png" alt=""><br> 注意：</p>
+<p>配置好浏览器后，以后下载文件就是自动调用 IDM 下载了。</p>
+<h4 id="下载视频"><a href="#下载视频" class="headerlink" title="下载视频"></a>下载视频</h4><p>当浏览器开打含有视频播放的网页时，视视屏框的右上角会出现一个悬浮条，直接点击下载即可。<br><img src="http://image.jinl1874.xyz/img/20200629005318.png" alt=""><br>注意：</p>
 <ol>
-<li>下载优酷的官方上传的版权视频时，会下载到一个无法解析的.ts文件。</li>
-<li>当B站的使用HTML5播放器时，下载的B站视频没有声音，此时使用Flash播放器即可。Flash就要淘汰了怎么办？可以在Chrome浏览下载一款名为“B站下载助手”的插件。</li>
+<li>下载优酷的官方上传的版权视频时，会下载到一个无法解析的.ts 文件。</li>
+<li>当 B 站的使用 HTML5 播放器时，下载的 B 站视频没有声音，此时使用 Flash 播放器即可。Flash 就要淘汰了怎么办？可以在 Chrome 浏览下载一款名为“B 站下载助手”的插件。</li>
 </ol>
 <h4 id="下载百度网盘的文件"><a href="#下载百度网盘的文件" class="headerlink" title="下载百度网盘的文件"></a>下载百度网盘的文件</h4><ol>
-<li>首先下载插件<a href="http://pan.newday.me/" target="_blank" rel="noopener">网盘助手</a>。<br>这个插件可以直接生成直链，而IDM需要直链才能下载。除此之外，此插件还有很多功能，如自动填充提取码等，就不一一赘述了。</li>
+<li>首先下载插件<a href="http://pan.newday.me/" target="_blank" rel="noopener">网盘助手</a>。<br>这个插件可以直接生成直链，而 IDM 需要直链才能下载。除此之外，此插件还有很多功能，如自动填充提取码等，就不一一赘述了。</li>
 <li>要下载网盘里的文件，首先需要将文件保存在自己的网盘里。在要下载的文件前打上勾，这时上方就会出现<code>生成链接</code>的选项$\downarrow$。<br><img src="http://image.jinl1874.xyz/img/20200629011751.png" alt="生成链接"></li>
 <li>点击后会出现下载直链$\downarrow$<br><img src="http://image.jinl1874.xyz/img/20200629012103.png" alt="直链"></li>
-<li>右键该链接，选择IDM下载。<br><img src="http://image.jinl1874.xyz/img/20200629012412.png" alt="idm"></li>
+<li>右键该链接，选择 IDM 下载。<br><img src="http://image.jinl1874.xyz/img/20200629012412.png" alt="idm"></li>
 </ol>
-<p>注意：如果出现403、401等错误，可以点击修改步骤三的里的应用ID，一般改为<code>778750</code>即可。</p>
+<p>注意：如果出现 403、401 等错误，可以点击修改步骤三的里的应用 ID，一般改为<code>778750</code>即可。</p>
+<hr>
+<p>以上就是全部内容，欢迎访问个人<a href="https://jinl1874.xyz">博客</a>。</p>
 ]]></content>
       <categories>
         <category>Other</category>
       </categories>
       <tags>
         <tag>other</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用js编写自动填写问卷星的脚本</title>
+    <url>/2020/06/29/%E4%BD%BF%E7%94%A8js%E6%93%8D%E4%BD%9C%E9%97%AE%E5%8D%B7%E6%98%9F/</url>
+    <content><![CDATA[<h5 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h5><p>最近闲来无事，想来做一个自动填写的问卷星 JS 脚本。</p>
+<h5 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h5><p>此脚本目前仅支持单选、多选以及填空题。<br>单选、多选采用随机选择的方法，而填空题则需要自己配置填写的内容。<br>具体配置方法为：<br>如果问卷里的第四题是填空题，那么在全局变量<code>config</code>加上一个键值，里面有 id 和 answer 两个键，填上相应的值（第四题即<code>id: 4</code>)即可。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> config = [</span><br><span class="line">  &#123;</span><br><span class="line">    id: <span class="number">4</span>,</span><br><span class="line">    answer: [<span class="string">"不知道"</span>, <span class="string">"随便吧"</span>, <span class="string">"自学去"</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<h5 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h5><p>打开浏览器，进入问卷页面如<a href="https://www.wjx.cn/jq/83481770.aspx" target="_blank" rel="noopener">js 测试</a>。<br>有以下两种方法运行：</p>
+<blockquote>
+<p>我用的是 Firefox 浏览器，其它浏览器的操作都差不多，可以就是快捷键有区别。</p>
+</blockquote>
+<ol>
+<li>按<code>F12</code>，点击控制台，再把脚本粘贴到文本输入框，再点击上面的<code>运行</code>即可。<br><img src="http://image.jinl1874.xyz/img/20200630132036.png" alt="运行js"></li>
+<li>浏览器安装一个名为<code>Violentmonkey</code>即<a href="https://violentmonkey.github.io/get-it/" target="_blank" rel="noopener">暴力猴</a>的脚本插件。安装完成之后，进入问卷页面，点击 violentmonkey 的图标，会出现一个弹框，<br><img src="http://image.jinl1874.xyz/img/20200630133801.png" alt="violentmonkey"><br>再点击其中的<code>+</code>，会出现编辑脚本的页面。<br><img src="http://image.jinl1874.xyz/img/20200630134305.png" alt="edit"><br>将脚本粘贴进去，保存文件，再回到问卷页面刷新，此时脚本即可自动运行。</li>
+</ol>
+<h5 id="脚本编写思路"><a href="#脚本编写思路" class="headerlink" title="脚本编写思路"></a>脚本编写思路</h5><ol>
+<li><p>主体思路，找到所有<code>class=&quot;div_question&quot;</code>的 div，再遍历<code>div</code>，分析每个 div 是什么类型的题目，再选择对应的操作。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Traverse</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> title_list = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"div_question"</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; title_list.length; i++) &#123;</span><br><span class="line">        <span class="keyword">const</span> title = title_list[i];</span><br><span class="line">        <span class="keyword">var</span> lies = title.getElementsByTagName(<span class="string">"li"</span>);</span><br><span class="line">        <span class="keyword">var</span> textarea = title.getElementsByTagName(<span class="string">"textarea"</span>);</span><br><span class="line">        <span class="keyword">var</span> lis = [];</span><br><span class="line">        <span class="comment">// 将lies放在数组里</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> kl = <span class="number">0</span>; kl &lt; lies.length; kl++) &#123;</span><br><span class="line">            lis.push(lies[kl]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果是选择，那么执行以下操作</span></span><br><span class="line">        <span class="keyword">if</span> (lis.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// 如果是多选</span></span><br><span class="line">            <span class="keyword">if</span> (lis[<span class="number">0</span>].getElementsByClassName(<span class="string">'jqCheckbox'</span>).length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                multiple_selection(lis);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 如果是单选</span></span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                single_selection(lis);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 如果是填空题，那么调用对应的处理函数。</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (textarea.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            blanks(title, textarea);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 如果是其它，添加相应的操作.....</span></span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"other"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>单选和多选采用随机数算法</p>
+<ul>
+<li>单选题，直接生成一个随机数，再点击随机数的选项。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 处理单选</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">single_selection</span>(<span class="params">lis</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> random_0 = random_num(lis.length);</span><br><span class="line">    lis[random_0].getElementsByClassName(<span class="string">'jqRadio'</span>)[<span class="number">0</span>].click();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>多选题，先随机生成一个要选的选项数，再用一个 for 循环执行。循环里面再生成随机数，接着去点击随机数对应的选项。<br>在随机的情况下，有可能会重复点击选项，导致没有选项选上，这时就需要检测一下有没有选项被选上了，如果没有，那就手动选一个。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 处理多选</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">multiple_selection</span>(<span class="params">lis</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 获取随机数</span></span><br><span class="line">    <span class="keyword">var</span> random_0 = random_num(lis.length);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt;= random_0; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> random_1 = random_num(lis.length);</span><br><span class="line">        lis[random_1].getElementsByClassName(<span class="string">'jqCheckbox'</span>)[<span class="number">0</span>].click();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果选中的全部抵消了，那么就手动加上一个</span></span><br><span class="line">    <span class="keyword">var</span> flag = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; lis.length; i++) &#123;</span><br><span class="line">        <span class="keyword">const</span> element = lis[i].getElementsByClassName(<span class="string">"jqChecked"</span>);</span><br><span class="line">        <span class="keyword">if</span> (element.length &gt; <span class="number">0</span>)</span><br><span class="line">            flag = <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!flag) &#123;</span><br><span class="line">        lis[random_0].getElementsByClassName(<span class="string">'jqCheckbox'</span>)[<span class="number">0</span>].click();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>填空题的内容从配置文件里找出，也采用随机填写。<br>先获取题目的 id，然后从<code>config</code>中找到对应的值，再随机选取一个值将其赋值到文本框里。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 填空</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">blanks</span>(<span class="params">title, textarea</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 获取当前题目的id</span></span><br><span class="line">    <span class="keyword">var</span> id_text = title.getAttribute(<span class="string">"id"</span>);</span><br><span class="line">    <span class="keyword">var</span> re_id = <span class="regexp">/div(\d+)/</span>;</span><br><span class="line">    <span class="keyword">var</span> id = re_id.exec(id_text)[<span class="number">1</span>]</span><br><span class="line">    <span class="comment">// 遍历config里id值为id的answer</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; config.length; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (id == config[j].id) &#123;</span><br><span class="line">            textarea[<span class="number">0</span>].innerHTML = config[j].answer[random_num(config[j].answer.length)];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重定向到 PC 版网页。<br>由于问卷星手机版的网页与 PC 版相差无几，因此使用正则表达式修改即可。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 将手机版网页转为PC版</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">redirect</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> re = <span class="regexp">/(https:\/\/www\.wjx\.cn\/)(m|jq)(.*)g/</span></span><br><span class="line">        <span class="keyword">var</span> obj = re.exec(url);</span><br><span class="line">        <span class="keyword">if</span> (obj[<span class="number">2</span>] == <span class="string">'m'</span>) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"redirect now"</span>);</span><br><span class="line">            <span class="built_in">window</span>.location.href = obj[<span class="number">1</span>] + <span class="string">"jq"</span> + obj[<span class="number">3</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"do......"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>由于填写完成并提交后会跳转到一个抽奖页面，此时的网址含有问卷页面的 id，因此可以将其抽取出来，重定向到问卷填写页面。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 完成填写重新打开填写界面</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">new_wxj</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> url = <span class="built_in">window</span>.location.href;</span><br><span class="line">    <span class="comment">//https://www.wjx.cn/wjx/join/complete.aspx?q=83481770&amp;JoinID=106588372552&amp;jidx=1&amp;s=&amp;njqj=1</span></span><br><span class="line">    <span class="keyword">var</span> re = <span class="regexp">/complete\.aspx\?q=(\d+)/</span>;</span><br><span class="line">    <span class="keyword">var</span> obj = re.exec(url);</span><br><span class="line">    <span class="keyword">if</span> (obj) &#123;</span><br><span class="line">        <span class="built_in">window</span>.location.href = <span class="string">"https://www.wjx.cn/jq/"</span> + obj[<span class="number">1</span>] + <span class="string">".aspx"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"no pat"</span>, obj);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>完整代码<a href="https://github.com/jinl1874/Javascript" target="_blank" rel="noopener">在此</a>，<br>欢迎访问我的博客<a href="https://jinl1874.xyz">网站</a></p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+        <tag>script</tag>
       </tags>
   </entry>
 </search>
