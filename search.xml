@@ -393,7 +393,7 @@
 </li>
 </ol>
 <h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>直接在终端运行 python 文件，等待一段时间，就会在 python 文件的当前目录下生成文件。<br><img src="http://image.jinl1874.xyz/img/20200615222857.png" alt="文件夹"><br>文件夹里的图片：<br><img src="http://image.jinl1874.xyz/img/20200615222947.png" alt="图片"><br>pdf 文件：<br><img src="http://image.jinl1874.xyz/img/20200615223024.png" alt="pdf"></p>
-<p>完整代码可参考我的<a href="https://github.com/jinl1874/spider" target="_blank" rel="noopener">github 库</a>下的 get_manga.py 文件。</p>
+<p>完整代码可参考我的<a href="https://github.com/jinl1874/spider" target="_blank" rel="noopener">github 库</a></p>
 ]]></content>
       <categories>
         <category>Python</category>
@@ -492,8 +492,8 @@
       </tags>
   </entry>
   <entry>
-    <title>使用js编写自动填写问卷星的脚本</title>
-    <url>/2020/06/29/%E4%BD%BF%E7%94%A8js%E6%93%8D%E4%BD%9C%E9%97%AE%E5%8D%B7%E6%98%9F/</url>
+    <title>使用 javascript 编写自动填写问卷星的脚本</title>
+    <url>/2020/06/30/%E4%BD%BF%E7%94%A8js%E6%93%8D%E4%BD%9C%E9%97%AE%E5%8D%B7%E6%98%9F/</url>
     <content><![CDATA[<h5 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h5><p>最近闲来无事，想来做一个自动填写的问卷星 JS 脚本。</p>
 <h5 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h5><p>此脚本目前仅支持单选、多选以及填空题。<br>单选、多选采用随机选择的方法，而填空题则需要自己配置填写的内容。<br>具体配置方法为：<br>如果问卷里的第四题是填空题，那么在全局变量<code>config</code>加上一个键值，里面有 id 和 answer 两个键，填上相应的值（第四题即<code>id: 4</code>)即可。</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> config = [</span><br><span class="line">  &#123;</span><br><span class="line">    id: <span class="number">4</span>,</span><br><span class="line">    answer: [<span class="string">"不知道"</span>, <span class="string">"随便吧"</span>, <span class="string">"自学去"</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
@@ -542,6 +542,33 @@
       <tags>
         <tag>js</tag>
         <tag>script</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>图片转为PDF文件的几种方法</title>
+    <url>/2020/06/30/img-to-pdf/</url>
+    <content><![CDATA[<blockquote>
+<p>最近下载《Death Note》漫画，只是只有图片，想了想还转为 PDF 比较好看，经过一番查找，找到了几种方法。</p>
+</blockquote>
+<h4 id="1-系统自带的打印为-PDF-文件"><a href="#1-系统自带的打印为-PDF-文件" class="headerlink" title="1. 系统自带的打印为 PDF 文件"></a>1. 系统自带的打印为 PDF 文件</h4><p>具体操作：选择好图片 -&gt; 右键 -&gt; 打印 -&gt; 选择大小为 A4 纸 -&gt; 打印。<br>优点：简单，并且不用安装任何软件。<br>缺点：图片的大小会改变，不能展示原来的图片。</p>
+<h4 id="2-SanPDF"><a href="#2-SanPDF" class="headerlink" title="2. SanPDF"></a>2. SanPDF</h4><p>一个专业搞 PDF、WORD、EXCEL 之间转换以及操作的软件。<br>具体操作：去<a href="https://www.sanpdf.com/" target="_blank" rel="noopener">官网</a>下载安装，可以把安装目录放在 C 盘以外的盘。安装后打开，选择图片转 PDF，然后添加文件，再点击右上角的生成 pdf 即可在图片所在目录找到 PDF 文件。<br><img src="https://pic4.zhimg.com/80/v2-5d3facfd8a47d609b034dfb45649554b.png" alt="Image"><br>生成的 pdf 如图所示:<br><img src="https://pic4.zhimg.com/80/v2-dca7e5275bae0c6cb21925d34c92c604.png" alt="Image"><br>优点：图片是原生大小，亦是原生质量，比较清晰。此软件还可以操作其它诸如 word 与 pdf 互转、pdf 转图片等操作，是个难得的好软件。<br>缺点：是付费软件，不过可以绿色软件下载。</p>
+<h4 id="3-使用-python-里的-reportlab-生成-pdf"><a href="#3-使用-python-里的-reportlab-生成-pdf" class="headerlink" title="3. 使用 python 里的 reportlab 生成 pdf"></a>3. 使用 python 里的 <code>reportlab</code> 生成 pdf</h4><ul>
+<li>首先需要安装<code>reportlab</code>库，如果你的电脑已经安装了 pip，那么只需一条<code>pip install reportlab</code>命令即可。</li>
+<li>以下是 python 图片转为 pdf 的代码</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> reportlab.lib.pagesizes <span class="keyword">import</span> A4, portrait, landscape</span><br><span class="line"><span class="keyword">from</span> reportlab.pdfgen <span class="keyword">import</span> canvas</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">convert_images_to_pdf</span><span class="params">(img_path, pdf_path)</span>:</span></span><br><span class="line">    pages = <span class="number">0</span></span><br><span class="line">    (w, h) = portrait(A4)</span><br><span class="line">    c = canvas.Canvas(pdf_path, pagesize=portrait(A4))</span><br><span class="line">    l = os.listdir(img_path)</span><br><span class="line">    l.sort(key=<span class="keyword">lambda</span> x: int(x[:<span class="number">-4</span>]))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> l:</span><br><span class="line">        f = img_path + os.sep + str(i)</span><br><span class="line">        c.drawImage(f, <span class="number">0</span>, <span class="number">0</span>, w, h)</span><br><span class="line">        c.showPage()</span><br><span class="line">        pages = pages + <span class="number">1</span></span><br><span class="line">    c.save()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">path = <span class="string">r"D://web//script//pxtt-118"</span></span><br><span class="line">pdf_path = <span class="string">r"D://web//script//pdf//pxtt-118.pdf"</span></span><br><span class="line"></span><br><span class="line">convert_images_to_pdf(path, pdf_path)</span><br></pre></td></tr></table></figure>
+
+<p>将上面的 path 改为图片的目录路径，pdf_path 改为具体到文件名的路径。注意图片目录路径不能包含除图片外的文件，否则会报错。</p>
+<p>优点：同上面系统操作 pdf。<br>缺点：很麻烦。</p>
+<p>欢迎访问我的<a href="https://jinl1874.xyz">博客网站</a>。</p>
+]]></content>
+      <categories>
+        <category>Other</category>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>other</tag>
+        <tag>img</tag>
       </tags>
   </entry>
 </search>
