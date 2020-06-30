@@ -261,6 +261,20 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
             </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2020/06/30/%E4%BD%BF%E7%94%A8js%E6%93%8D%E4%BD%9C%E9%97%AE%E5%8D%B7%E6%98%9F/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/06/30/使用js操作问卷星/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -331,10 +345,13 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/06/30/img-to-pdf/" rel="prev" title="图片转为PDF文件的几种方法">
-      <i class="fa fa-chevron-left"></i> 图片转为PDF文件的几种方法
+    <a href="/2020/06/28/use-idm/" rel="prev" title="安装并使用IDM(Internet Download Manager)">
+      <i class="fa fa-chevron-left"></i> 安装并使用IDM(Internet Download Manager)
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/30/img-to-pdf/" rel="next" title="图片转为PDF文件的几种方法">
+      图片转为PDF文件的几种方法 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -347,6 +364,13 @@
 
           </div>
           
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -543,6 +567,37 @@
   
 
   
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://jinl1874.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://jinl1874.xyz/2020/06/30/%E4%BD%BF%E7%94%A8js%E6%93%8D%E4%BD%9C%E9%97%AE%E5%8D%B7%E6%98%9F/";
+    this.page.identifier = "2020/06/30/使用js操作问卷星/";
+    this.page.title = "使用 javascript 编写自动填写问卷星的脚本";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://jinl1874.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
 
 </body>
 </html>
