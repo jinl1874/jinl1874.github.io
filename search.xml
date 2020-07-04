@@ -571,4 +571,118 @@
         <tag>blog</tag>
       </tags>
   </entry>
+  <entry>
+    <title>JavaScript 学习笔记（1）：基本语法</title>
+    <url>/2020/07/03/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/</url>
+    <content><![CDATA[<h4 id="1-准备"><a href="#1-准备" class="headerlink" title="1. 准备"></a>1. 准备</h4><ol>
+<li><p>文本编辑器：VSCode<br>去(官网)[<a href="https://code.visualstudio.com/]下载" target="_blank" rel="noopener">https://code.visualstudio.com/]下载</a> vscode，安装时一路点 next，最后在应用商店选择下载一个 javascript 的插件，需要中文界面的话可以搜索安装”Chinese”插件。</p>
+</li>
+<li><p>浏览器：Firefox 浏览器（或者 Chrome）。</p>
+</li>
+<li><p>js 的位置：Html 的文档里的<code>&lt;script&gt;</code>标签里，或者是别起一个后缀名为”.js”的文件，再在<code>&lt;script&gt;</code>标签的<code>src</code>属性引用它。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"example.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>运行，打开浏览器的开发者模式，进入控制台，然后把代码放在输入框中，再点上面的<code>运行</code>即可运行代码，如图所示。<br><img src="https://pic4.zhimg.com/80/v2-6e5927f48e6c9f6eaac9ad93d2fa8767.png" alt="Image"></p>
+</li>
+</ol>
+<h4 id="2-语法"><a href="#2-语法" class="headerlink" title="2. 语法"></a>2. 语法</h4><ol>
+<li><p>语句结尾不需加上分号，但建议在末尾加上分号，这是一种良好的习惯。</p>
+</li>
+<li><p>注释：</p>
+<ul>
+<li>单句的注释是在语句前加上<code>//</code>，如<code>// console.log(&quot;Test&quot;);</code>；</li>
+<li>一段代码的注释是在代码前加上<code>/*</code>，在代码后加上 <code>/*</code>，如：<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">alert("document");</span></span><br><span class="line"><span class="comment">console.log("Daoli");</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>变量（variable）</p>
+<ul>
+<li>变量不需要提前声明，不过提前声明是个良好的编程习惯。下面的语句是声明。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> num;</span><br></pre></td></tr></table></figure>
+
+<p>亦可直接声明赋值</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>变量区分大小写；</li>
+<li>变量名不允许包含空格或标点符号（除了美元符号<code>$</code>）。</li>
+</ul>
+</li>
+<li><p>数据类型</p>
+<ul>
+<li>js 是一种弱类型语言，可以在任何时候改变变量的数据类型。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">1</span>;</span><br><span class="line">num = <span class="string">"jinl"</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>字符串：由零个或多个字符构成，字符包括但不限于字母、数字、标点符号和空格，字符串必需包括在引号里；</li>
+<li>数值：数值不限于是整数，js 可以使用带小数点的数值；</li>
+<li>布尔值：只有两种取值：<code>true</code> 或者 <code>false</code>。</li>
+</ul>
+</li>
+<li><p>数组</p>
+<ul>
+<li>声明：可选给定数组的长度；</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> array_0 = <span class="built_in">Array</span>(<span class="number">4</span>);</span><br><span class="line"><span class="keyword">var</span> array_1 = <span class="built_in">Array</span>();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>赋值：直接<code>array_0[index] = &quot;str&quot;</code>,或者：<code>var array_0 = new(&quot;str1&quot;, &quot;str2&quot;, &quot;str3&quot;, &quot;str4&quot;)</code>；</li>
+<li></li>
+</ul>
+</li>
+<li><p>对象</p>
+<ul>
+<li>与数组类似，对象也使用一个名字表示一组值。每个值是对象的一个属性。前面代表键，冒号后面代表值。</li>
+<li>创建方法：使用花括号语法：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">test_obj = &#123;</span><br><span class="line">  name: <span class="string">"apple"</span>,</span><br><span class="line">  year: <span class="number">1999</span>,</span><br><span class="line">  eat_or_not: <span class="literal">true</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>访问属性：取对象里的键。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> name = test_obj(<span class="string">"name"</span>);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="3-操作"><a href="#3-操作" class="headerlink" title="3. 操作"></a>3. 操作</h3><ol>
+<li>加减乘除的符咒分别是<code>+-*/</code>，用法与其它的语言一样。</li>
+<li>可以使用<code>i++</code>以用<code>i += 1</code>这种方式。</li>
+<li>js 的<code>+</code>可以将字符串与数值相连接，连接后是一个更长的字符串，如<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"101"</span> + <span class="number">11</span>;</span><br><span class="line"><span class="comment">// str === "10111"</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="4-条件语句"><a href="#4-条件语句" class="headerlink" title="4. 条件语句"></a>4. 条件语句</h3><ol>
+<li><p>与 C 语的中的用法一致，基本语法为：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (condition) &#123;</span><br><span class="line">  statement;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>比较操作符包括：大于(<code>&gt;</code>)、小于(<code>&lt;</code>)、大于等于(<code>&gt;=</code>)、小于等于(<code>&lt;=</code>)以及等于(<code>==</code>)与不等于(<code>!=</code>)。<br>其中要注意的是<code>==</code>不表示一定相等，比如下面的例子中，<code>a</code>与<code>b</code>是相等的。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (a == b) &#123;</span><br><span class="line">  alert(<span class="string">"true"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个时候就需要另一种等号(<code>===</code>)，这个等号会进行严格的比较，同理，不相等要比较需要使用(<code>!==</code>)来比较。<br>我个人的建议是，一律使用<code>===</code>与<code>!==</code>。</p>
+</li>
+<li><p>逻辑操作符<br>与<code>&amp;&amp;</code>，或<code>||</code>，非<code>！</code>。</p>
+</li>
+</ol>
+<h3 id="4-循环"><a href="#4-循环" class="headerlink" title="4. 循环"></a>4. 循环</h3><ol>
+<li>while 循环。<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span>(condition)&#123;</span><br><span class="line">   statement；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>do-while 循环。<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">  statement;</span><br><span class="line">&#125; <span class="keyword">while</span> (condition);</span><br></pre></td></tr></table></figure></li>
+<li>for 循环<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (initial condition; test condition; alter condition) &#123;</span><br><span class="line">    statement;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+实例：<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> index = <span class="number">0</span>; index &lt; <span class="number">10</span>; index++) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(index);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="5-函数"><a href="#5-函数" class="headerlink" title="5. 函数"></a>5. 函数</h3><ol>
+<li>定义示例函数：<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// test是函数名，params是参数，true是返回值。</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">  alert(params);</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>调用示例：<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">bool = test(<span class="string">"Test!"</span>);</span><br></pre></td></tr></table></figure></li>
+<li>变量作用域：如果函数内使用了 var 对象，那么就被视为局部变量，否则为全局变量。</li>
+</ol>
+<h3 id="6-对象"><a href="#6-对象" class="headerlink" title="6. 对象"></a>6. 对象</h3><ol>
+<li>对象是自包含的数据集合，包含在对象的数组可以通过属性(property)和方法(method)来访问。<br>js 里，属性和方法都使用“点”语法来访问。<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">object.property;</span><br><span class="line">object.method();</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
 </search>
