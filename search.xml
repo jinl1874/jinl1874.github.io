@@ -642,14 +642,14 @@
 
 </li>
 </ol>
-<h3 id="3-操作"><a href="#3-操作" class="headerlink" title="3. 操作"></a>3. 操作</h3><ol>
+<h4 id="3-操作"><a href="#3-操作" class="headerlink" title="3. 操作"></a>3. 操作</h4><ol>
 <li>加减乘除的符咒分别是<code>+-*/</code>，用法与其它的语言一样。</li>
 <li>可以使用<code>i++</code>以用<code>i += 1</code>这种方式。</li>
 <li>js 的<code>+</code>可以将字符串与数值相连接，连接后是一个更长的字符串，如<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"101"</span> + <span class="number">11</span>;</span><br><span class="line"><span class="comment">// str === "10111"</span></span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
-<h3 id="4-条件语句"><a href="#4-条件语句" class="headerlink" title="4. 条件语句"></a>4. 条件语句</h3><ol>
+<h4 id="4-条件语句"><a href="#4-条件语句" class="headerlink" title="4. 条件语句"></a>4. 条件语句</h4><ol>
 <li><p>与 C 语的中的用法一致，基本语法为：</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (condition) &#123;</span><br><span class="line">  statement;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li><p>比较操作符包括：大于(<code>&gt;</code>)、小于(<code>&lt;</code>)、大于等于(<code>&gt;=</code>)、小于等于(<code>&lt;=</code>)以及等于(<code>==</code>)与不等于(<code>!=</code>)。<br>其中要注意的是<code>==</code>不表示一定相等，比如下面的例子中，<code>a</code>与<code>b</code>是相等的。</p>
@@ -660,7 +660,7 @@
 <li><p>逻辑操作符<br>与<code>&amp;&amp;</code>，或<code>||</code>，非<code>！</code>。</p>
 </li>
 </ol>
-<h3 id="4-循环"><a href="#4-循环" class="headerlink" title="4. 循环"></a>4. 循环</h3><ol>
+<h4 id="5-循环"><a href="#5-循环" class="headerlink" title="5. 循环"></a>5. 循环</h4><ol>
 <li>while 循环。<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span>(condition)&#123;</span><br><span class="line">   statement；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li>do-while 循环。<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">  statement;</span><br><span class="line">&#125; <span class="keyword">while</span> (condition);</span><br></pre></td></tr></table></figure></li>
 <li>for 循环<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (initial condition; test condition; alter condition) &#123;</span><br><span class="line">    statement;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -668,15 +668,85 @@
 
 </li>
 </ol>
-<h3 id="5-函数"><a href="#5-函数" class="headerlink" title="5. 函数"></a>5. 函数</h3><ol>
+<h4 id="6-函数"><a href="#6-函数" class="headerlink" title="6. 函数"></a>6. 函数</h4><ol>
 <li>定义示例函数：<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// test是函数名，params是参数，true是返回值。</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">  alert(params);</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li>调用示例：<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">bool = test(<span class="string">"Test!"</span>);</span><br></pre></td></tr></table></figure></li>
 <li>变量作用域：如果函数内使用了 var 对象，那么就被视为局部变量，否则为全局变量。</li>
 </ol>
-<h3 id="6-对象"><a href="#6-对象" class="headerlink" title="6. 对象"></a>6. 对象</h3><ol>
-<li>对象是自包含的数据集合，包含在对象的数组可以通过属性(property)和方法(method)来访问。<br>js 里，属性和方法都使用“点”语法来访问。<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">object.property;</span><br><span class="line">object.method();</span><br></pre></td></tr></table></figure>
+<h4 id="7-对象"><a href="#7-对象" class="headerlink" title="7. 对象"></a>7. 对象</h4><ol>
+<li><p>对象是自包含的数据集合，包含在对象的数组可以通过属性(property)和方法(method)来访问。<br>js 里，属性和方法都使用“点”语法来访问。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">object.property;</span><br><span class="line">object.method();</span><br></pre></td></tr></table></figure></li>
+<li><p>内建对象：一般使用<code>new</code>的关键字去新建一个对象的实例。如新建一个数组对象：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> array = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br></pre></td></tr></table></figure>
+
 </li>
 </ol>
+<blockquote>
+<p>欢迎访问我的个人<a href="https://jinl1874.xyz">博客</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript 学习笔记（2）</title>
+    <url>/2020/07/05/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/</url>
+    <content><![CDATA[<h4 id="1-DOM"><a href="#1-DOM" class="headerlink" title="1. DOM"></a>1. DOM</h4><ol>
+<li><p>DOM 的 D 指的是<code>Document</code>（文档），O 指的<code>Object</code>（对象），M 指的是<code>Model</code>（模型）。</p>
+</li>
+<li><p>JS 的对象包括三种，分别是：</p>
+<ul>
+<li>用户定义对象，不过在这里很少用。</li>
+<li>内建对象，包括 Math、Array 等内建对象。</li>
+<li>宿主对象，由浏览器提供的对象。</li>
+</ul>
+</li>
+<li><p>模型，即将文档用“树”图表示出来，如例图所示：<br><img src="https://pic4.zhimg.com/80/v2-908a37eed3d355f8539d8552c8e725f6.png" alt="Image"><br>根元素是 html，有两个子分支 head 与 body，它们处于同一层次，属于兄弟关系，他们也分别有不同的子元素。</p>
+</li>
+</ol>
+<h4 id="4-节点node"><a href="#4-节点node" class="headerlink" title="4. 节点node"></a>4. 节点<code>node</code></h4><p>节点包括元素节点、文本节点和属性结点。</p>
+<ol>
+<li>元素节点：标签的名字即元素的名字，如文本段落元素的名字是“p”，列表项元素的名字是“li”。</li>
+<li>文本节点：<p>元素包含文本，它是一个文本节点。大多文本节点被包括在元素节点的内部。并非所有的元素节点都包含有文本节点，如<code>&lt;ul&gt;&lt;li&gt;Test&lt;/li&gt;&lt;/ul&gt;</code>中的<code>&lt;ul&gt;</code>没有直接包含文本节点，包括其它元素节点，后者即<code>&lt;li&gt;</code>包含文本节点。</li>
+<li>属性节点：用来对元素做出更具体的描述。例如几乎所有的元素都有一个 title 属性，可以利用这个属性对包含在元素里的东西做出准确详细的描述：<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">title</span>=<span class="string">"test"</span>&gt;</span>此处应有文本<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+里面的<code>title=&quot;test&quot;</code>是属性节点。</li>
+</ol>
+<h4 id="5-CSS"><a href="#5-CSS" class="headerlink" title="5. CSS"></a>5. CSS</h4><p>CSS 即层叠样式表，可以告诉浏览器该如何显示文档内容。</p>
+<ol>
+<li>样式的声明可放在文档中的<code>&lt;head&gt;</code>里，亦可另起一文件。</li>
+<li>语法：<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">selector</span> &#123;</span><br><span class="line">  <span class="attribute">property</span>: value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+例子：<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">18px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+这个会自动应用于文档里所有的 p 元素。</li>
+<li>id 属性：独一无二的标识符，只可用于一处。<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#id</span> &#123;</span><br><span class="line">  <span class="attribute">font-style</span>: italic;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+使用：<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"id"</span>&gt;</span>Test<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>class 属性：可应用于所有元素中。<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.class</span> &#123;</span><br><span class="line">  <span class="attribute">font-style</span>: italic;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+使用：<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"class"</span>&gt;</span>Test<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="6-获取节点"><a href="#6-获取节点" class="headerlink" title="6. 获取节点"></a>6. 获取节点</h4><ol>
+<li>getElementById，获取具体某个 id 的节点。<br>使用方法:<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> id_element = <span class="built_in">document</span>.getElementById(id_name);</span><br></pre></td></tr></table></figure></li>
+<li>getElementsByClassName，获取所有使用该 class 的节点，返回的是一个数组。注意<code>getElementsByClassName</code>中间的 <code>elements</code>有加<code>s</code>。<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> class_element = <span class="built_in">document</span>.getElementsByClassName(class_name);</span><br></pre></td></tr></table></figure></li>
+<li>getElementsByTagName，获取所有名为该 TagName 的节点，返回的是一个数组。注意<code>getElementsByTagName</code>中间的 <code>elements</code>有加<code>s</code>。<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> tag_element = <span class="built_in">document</span>.getElementsByTagName(tag_name);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="7-获取和设置属性"><a href="#7-获取和设置属性" class="headerlink" title="7. 获取和设置属性"></a>7. 获取和设置属性</h4><ol>
+<li><p>获取属性：<code>getAttribute</code>，获取想要查询的属性值，参数为查询属性的名字。<br><code>getAttribute</code>不能通过<code>document</code>节点调用，只用被元素节点调用。<br>使用方法：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 先得到节点值</span></span><br><span class="line"><span class="keyword">var</span> lis = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"li"</span>);</span><br><span class="line"><span class="comment">// 再获取其中的属性值</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; lis.length; i++) &#123;</span><br><span class="line">  alert(lis[i].getAttribute(<span class="string">"title"</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置属性：<code>setAttribute</code>，设置具体的属性值，参数为属性名字和属性值。同样只用被元素节点调用。<br>使用方法：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 先得到节点值</span></span><br><span class="line"><span class="keyword">var</span> lis = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"li"</span>);</span><br><span class="line"><span class="comment">// 再修改其中的属性值</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; lis.length; i++) &#123;</span><br><span class="line">  alert(lis[i].getAttribute(<span class="string">"title"</span>));</span><br><span class="line">  lis[i].setAttribute(<span class="string">"title"</span>, <span class="string">"li_tag"</span>);</span><br><span class="line">  alert(lis[i].getAttribute(<span class="string">"title"</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<blockquote>
+<p>欢迎访问我的个人<a href="https://jinl1874.xyz">博客</a></p>
+</blockquote>
 ]]></content>
       <categories>
         <category>JavaScript</category>
