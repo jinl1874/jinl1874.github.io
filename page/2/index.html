@@ -208,6 +208,147 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/06/15/sipder-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="道理">
+      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MyBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/15/sipder-1/" class="post-title-link" itemprop="url">爬取芝士漫画里的图片并转为pdf</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-15 19:40:38" itemprop="dateCreated datePublished" datetime="2020-06-15T19:40:38+08:00">2020-06-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-30 15:16:21" itemprop="dateModified" datetime="2020-06-30T15:16:21+08:00">2020-06-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2020/06/15/sipder-1/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/06/15/sipder-1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>最近想找点漫画看，发现<a href="https://manhua.zsh8.com/" target="_blank" rel="noopener">芝士漫画</a>这个平台不错，于是就想着下载来看。</p>
+</blockquote>
+<h3 id="安装-python"><a href="#安装-python" class="headerlink" title="安装 python"></a>安装 python</h3><p><a href="https://www.python.org/downloads/" target="_blank" rel="noopener">下载 python</a><br>下载好 python 安装包，安装时一路 next 过去，注意勾上“add to path”(一般是默认勾选的)。</p>
+<h3 id="安装所需的模块"><a href="#安装所需的模块" class="headerlink" title="安装所需的模块"></a>安装所需的模块</h3><p>本次的爬虫使用 requests 模块获取数据，再用 xpath 语法解析代码。<br>需要的模块包括 requests，lxml，reportlab。<br>使用 pip 安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install requests</span><br><span class="line">pip install lxml</span><br><span class="line">pip install reportlab</span><br></pre></td></tr></table></figure>
+
+<h3 id="写代码"><a href="#写代码" class="headerlink" title="写代码"></a>写代码</h3><ol>
+<li>新建一个 python 文件</li>
+<li>导入相应的模块</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import sys</span><br><span class="line">import io</span><br><span class="line">import os</span><br><span class="line">import re</span><br><span class="line">import time</span><br><span class="line">from lxml import etree</span><br><span class="line">from reportlab.lib.pagesizes import A4, portrait, landscape</span><br><span class="line">from reportlab.pdfgen import canvas</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>定义全局变量</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">headers &#x3D; &#123;</span><br><span class="line">    &quot;User-Agent&quot;: &quot;Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64; rv:76.0) Gecko&#x2F;20100101 Firefox&#x2F;76.0&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 默认url</span><br><span class="line">url &#x3D; &quot;https:&#x2F;&#x2F;manhua.zsh8.com&#x2F;pxtt&#x2F;pxtt-040&#x2F;91864.html&quot;</span><br><span class="line"></span><br><span class="line"># 解析出url中的章节名</span><br><span class="line">re_object &#x3D; re.match(</span><br><span class="line">    &quot;https:&#x2F;&#x2F;manhua.zsh8.com&#x2F;.*?&#x2F;(.*?)&#x2F;.*?html&quot;, url)</span><br><span class="line">chapter &#x3D; re_object.group(1)</span><br><span class="line"></span><br><span class="line"># 文件当前目录</span><br><span class="line">current_dir &#x3D; os.getcwd()</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><p>定义方法</p>
+<ul>
+<li>get_text()：得到访问返回的资源</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def get_text(url):</span><br><span class="line">    response &#x3D; requests.get(url, headers&#x3D;headers)</span><br><span class="line">    return response</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>parse_text(text)：分析文档，保存图片，并得到下一章的 url</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">def parse_text(text):</span><br><span class="line">    # 建立解析</span><br><span class="line">    html &#x3D; etree.HTML(text, etree.HTMLParser())</span><br><span class="line">    # 获取漫画图片所有的链接</span><br><span class="line">    links &#x3D; html.xpath(&quot;&#x2F;&#x2F;div[@id&#x3D;&#39;gallery-1&#39;]&#x2F;&#x2F;dt&#x2F;a&#x2F;@href&quot;)</span><br><span class="line">    for i, link in enumerate(links):</span><br><span class="line">        save_image(link, i)</span><br><span class="line">        # 降低访问的速度，防止被识别为机器人</span><br><span class="line">        time.sleep(15)</span><br><span class="line">        print(&quot;完成&quot;, i, &quot;个......&quot;)</span><br><span class="line">    print(&quot;已完成&quot;, chapter, &quot;的下载!&quot;)</span><br><span class="line"></span><br><span class="line">    #　在第一章的时候只有一个next_chapter链接</span><br><span class="line">    try:</span><br><span class="line">        next_chapter &#x3D; html.xpath(</span><br><span class="line">            &quot;&#x2F;&#x2F;div[@class&#x3D;&#39;fusion-single-navigation-wrapper&#39;]&#x2F;a&#x2F;@href&quot;)[1]</span><br><span class="line">    except Exception as e:</span><br><span class="line">        next_chapter &#x3D; html.xpath(</span><br><span class="line">            &quot;&#x2F;&#x2F;div[@class&#x3D;&#39;fusion-single-navigation-wrapper&#39;]&#x2F;a&#x2F;@href&quot;)[0]</span><br><span class="line">        return next_chapter</span><br><span class="line">    return next_chapter</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>save_image(link, index): 访问得到的图片链接，并保存在本地</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">def save_image(link, index):</span><br><span class="line">    read &#x3D; requests.get(link)</span><br><span class="line">    # 当前文件夹的加上章节名形成新的文件夹</span><br><span class="line">    dir_ &#x3D; current_dir + &#39;\\&#39; + chapter</span><br><span class="line">    # 创建文件夹</span><br><span class="line">    if not os.path.exists(dir_):</span><br><span class="line">        os.makedirs(dir_)</span><br><span class="line">    # 保存图片</span><br><span class="line">    with open(dir_ + &#39;\\&#123;&#125;&#39;.format(str(index)+&quot;.jpg&quot;), &#39;wb&#39;) as fp:</span><br><span class="line">        fp.write(read.content)</span><br><span class="line">        fp.close()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>convert_images_to_pdf(img_path, pdf_path)：根据图片的文件夹以及 pdf 文件夹加上文件名来生成 pdf 文件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def convert_images_to_pdf(img_path, pdf_path):</span><br><span class="line">    pages &#x3D; 0</span><br><span class="line">    (w, h) &#x3D; portrait(A4)</span><br><span class="line">    c &#x3D; canvas.Canvas(pdf_path, pagesize&#x3D;portrait(A4))</span><br><span class="line">    l &#x3D; os.listdir(img_path)</span><br><span class="line">    l.sort(key&#x3D;lambda x: int(x[:-4]))</span><br><span class="line">    for i in l:</span><br><span class="line">        f &#x3D; img_path + os.sep + str(i)</span><br><span class="line">        c.drawImage(f, 0, 0, w, h)</span><br><span class="line">        c.showPage()</span><br><span class="line">        pages &#x3D; pages + 1</span><br><span class="line">    c.save()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>begin()：开始，并更新全局变量名</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">def begin():</span><br><span class="line">    global url</span><br><span class="line">    global re_object</span><br><span class="line">    global chapter</span><br><span class="line">    local_url &#x3D; input(</span><br><span class="line">        &quot;输入要下载的章节url(例: https:&#x2F;&#x2F;manhua.zsh8.com&#x2F;pxtt&#x2F;pxtt-041&#x2F;93181.html)\n&gt;&gt;&gt;&quot;)</span><br><span class="line">    # 判断是否符合url格式</span><br><span class="line">    re_object &#x3D; re.match(</span><br><span class="line">        &quot;https:&#x2F;&#x2F;manhua.zsh8.com&#x2F;.*?&#x2F;(.*?)&#x2F;.*?html&quot;, local_url)</span><br><span class="line">    if (re_object):</span><br><span class="line">        url &#x3D; local_url</span><br><span class="line">        # 更新章节名</span><br><span class="line">        re_object &#x3D; re.match(</span><br><span class="line">            &quot;https:&#x2F;&#x2F;manhua.zsh8.com&#x2F;.*?&#x2F;(.*?)&#x2F;.*?html&quot;, url)</span><br><span class="line">        chapter &#x3D; re_object.group(1)</span><br><span class="line">        print(&quot;即将开始.....&quot;)</span><br><span class="line">    else:</span><br><span class="line">        print(&quot;输入错误！将使用默认链接！\n&quot;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>main()：主函数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">if __name__ &#x3D;&#x3D; &quot;__main__&quot;:</span><br><span class="line">    begin()</span><br><span class="line">    boolean &#x3D; &quot;y&quot;</span><br><span class="line">    count &#x3D; 0</span><br><span class="line">    # 保存pdf的文件夹</span><br><span class="line">    if not os.path.exists(current_dir + &#39;\\pdf\\&#39;):</span><br><span class="line">        os.makedirs(current_dir + &#39;\\pdf\\&#39;)</span><br><span class="line">    while(boolean &#x3D;&#x3D; &quot;y&quot;):</span><br><span class="line">        text &#x3D; get_text(url).text</span><br><span class="line">        next_chapter &#x3D; parse_text(text)</span><br><span class="line"></span><br><span class="line">        img_path &#x3D; current_dir + &#39;\\&#39; + chapter</span><br><span class="line">        pdf_path &#x3D; current_dir + &#39;\\pdf\\&#39; + chapter + &#39;.pdf&#39;</span><br><span class="line">        #　有些图片是错误，会导致无法生成pdf文件。</span><br><span class="line">        try:</span><br><span class="line">            convert_images_to_pdf(img_path, pdf_path)</span><br><span class="line">        except Exception as e:</span><br><span class="line">            print(e)</span><br><span class="line">        re_object &#x3D; re.match(</span><br><span class="line">            &quot;https:&#x2F;&#x2F;manhua.zsh8.com&#x2F;.*?&#x2F;(.*?)&#x2F;.*?html&quot;, next_chapter)</span><br><span class="line">        chapter &#x3D; re_object.group(1)</span><br><span class="line">        print(&quot;下一章节：&quot;, chapter)</span><br><span class="line">        count +&#x3D; 1</span><br><span class="line">        print(count)</span><br><span class="line">        #　下载章节的数目，可根据自己需要更改</span><br><span class="line">        if (count &gt; 37):</span><br><span class="line">            break</span><br><span class="line">        url &#x3D; next_chapter</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>直接在终端运行 python 文件，等待一段时间，就会在 python 文件的当前目录下生成文件。<br><img src="http://image.jinl1874.xyz/img/20200615222857.png" alt="文件夹"><br>文件夹里的图片：<br><img src="http://image.jinl1874.xyz/img/20200615222947.png" alt="图片"><br>pdf 文件：<br><img src="http://image.jinl1874.xyz/img/20200615223024.png" alt="pdf"></p>
+<p>完整代码可参考我的<a href="https://github.com/jinl1874/spider" target="_blank" rel="noopener">github 库</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/06/01/sipder/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1133,7 +1274,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
