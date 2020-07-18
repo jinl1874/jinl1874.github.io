@@ -1366,4 +1366,62 @@
         <tag>js</tag>
       </tags>
   </entry>
+  <entry>
+    <title>电脑有哪些可以提升体验的软件？</title>
+    <url>/2020/07/18/window-soft/</url>
+    <content><![CDATA[<p>以下这些都是可以提升电脑使用体验的 10 款软件。</p>
+<h4 id="1-截图软件：Snipaste"><a href="#1-截图软件：Snipaste" class="headerlink" title="1. 截图软件：Snipaste"></a>1. 截图软件：Snipaste</h4><p>曾经我是个手机拍屏党，后来被诸多表情大师教会截图后，毅然地转到截图派。<br><img src="https://pic4.zhimg.com/80/v2-a8e78bd7fd888e942cd369fa8128fdf5.jpg" alt="Image"></p>
+<p>一开始使用的是 QQ 截图以及微信截图，但是这两个截图方式都要事先打开这俩软件，并且也不够专业/好用，最后找到了这个截图软件——Snipaste。<br>这个号称最好用的的截图软件，目前已经有 win 版、mac beta 版。</p>
+<p>它好用在哪里呢？<br>第一，软件轻量，并且无广告。这个软件有免费版和专业版，免费版没有任何广告，提供的功能也足够个人用户使用；<br>第二，功能强：</p>
+<blockquote>
+<p>自动检测界面元素区域</p>
+<p>像素级的鼠标移动控制、截图范围控制</p>
+<p>取色器 (试试 F1, C, F3)</p>
+<p>历史记录回放 (,/.)</p>
+<p>支持多屏</p>
+<p>支持高分屏</p>
+</blockquote>
+<p>第三，无与伦与的贴图功能。当你写文档需要查资料时，把相关截图贴上屏幕后，体验瞬间上一档次；</p>
+<p><img src="https://pic4.zhimg.com/80/v2-170c49a04f7547fa4bb5c85fef5b147c.png" alt="Image"></p>
+<p>第四，更强的图像标注功能，基本一个常见图片编辑器有的，这个都有；</p>
+<p>第五，可自定义截图的分辨率。</p>
+<p>更多的功能可以去看<a href="https://docs.snipaste.com/zh-cn/" target="_blank" rel="noopener">官方文档</a>。<br>官网下载<a href="https://zh.snipaste.com/" target="_blank" rel="noopener">地址</a></p>
+<h4 id="2-文件查找——Everything"><a href="#2-文件查找——Everything" class="headerlink" title="2. 文件查找——Everything"></a>2. 文件查找——Everything</h4><p><img src="https://pic4.zhimg.com/80/v2-37f70af2050b2a4dab90016cf2eade08.png" alt="Image"></p>
+<p>一个轻量级的查找文件的软件，当做好索引后，查找文件的速度是秒计的。<br>不过这个是实在找不到文件时才用的，平时做好文件的分类索引后，就很少有它的用武之地。</p>
+<p><a href="https://www.voidtools.com/" target="_blank" rel="noopener">下载地址</a></p>
+<h4 id="3-解压缩软件——7z"><a href="#3-解压缩软件——7z" class="headerlink" title="3. 解压缩软件——7z"></a>3. 解压缩软件——7z</h4><p><img src="https://pic4.zhimg.com/80/v2-b8897b531c317f6d1180a27d4856cf95.png" alt="Image"></p>
+<p>解压缩软件是电脑里必备的软件之一了。<br>常见的解压缩软件有——winrar、360 压缩、bendzip 等。</p>
+<p>7Z 的优点是开源、免费、轻量（安装包仅 1.3Mb），压缩比也高，并且压缩软件该有的功能一个不少。缺点就是颜值一般般，追求这方面的话，推荐另一款同样优秀的压缩软件——Bendzip。</p>
+<p><a href="https://sparanoid.com/lab/7z/" target="_blank" rel="noopener">官网下载地址</a></p>
+<h4 id="4-阅读-PDF-文件——sumatra"><a href="#4-阅读-PDF-文件——sumatra" class="headerlink" title="4. 阅读 PDF 文件——sumatra"></a>4. 阅读 PDF 文件——sumatra</h4><p><img src="https://pic4.zhimg.com/80/v2-df0a829b4032f0226b887427a201798c.png" alt="Image"><br>说是阅读 PDF 软件，其实还支持 epub、mobi、CHM 等文件的阅读。</p>
+<blockquote>
+<p>Sumatra PDF is a PDF, ePub, MOBI, CHM, XPS, DjVu, CBZ, CBR reader for Windows.</p>
+</blockquote>
+<p>优点是轻量、占用内存小、简洁、开源。</p>
+<p><a href="https://www.sumatrapdfreader.org/download-free-pdf-viewer.html" target="_blank" rel="noopener">官网下载地址</a></p>
+<h4 id="5-下载软件——IDM"><a href="#5-下载软件——IDM" class="headerlink" title="5. 下载软件——IDM"></a>5. 下载软件——IDM</h4><p><img src="https://pic4.zhimg.com/80/v2-41146ab15375705b71f80c0ba4b59187.png" alt="Image"></p>
+<p>一个使用多线程的下载软件，可以接管浏览器里的下载，下载速度非常快。不仅如此，该软件还可以几乎所有网站上的视频，还可以下载百度网盘的文件不过需要一点配置。</p>
+<p>曾经写过一篇 IDM 下载的配置，里面有 IDM 的下载链接，<a href="https://jinl1874.xyz/2020/06/28/use-idm/">地址</a>。</p>
+<h4 id="6-视频软件——PotPlayer"><a href="#6-视频软件——PotPlayer" class="headerlink" title="6. 视频软件——PotPlayer"></a>6. 视频软件——PotPlayer</h4><p><img src="https://pic4.zhimg.com/80/v2-ee68e61b55fca6dcd2473d322f6f2df8.png" alt="Image"><br>大概是最优秀的视频播放器了，界面简洁美观，没有流氓软件有的一切行为，比如突然修改你的默认播放软件等。<br>功能多，录屏、截 gif 之类的不在话下，支持逐帧跳转，截图非常方便。总之一般视频播放软件有的，它也有；其它播放软件没有的，它也有，比如可以收看电视信号，看直播等，可以去网上搜一下教程。</p>
+<p><a href="http://www.potplayercn.com/" target="_blank" rel="noopener">官网下载链接</a></p>
+<h4 id="7-记事本替代——notepad3"><a href="#7-记事本替代——notepad3" class="headerlink" title="7. 记事本替代——notepad3"></a>7. 记事本替代——notepad3</h4><p><img src="https://pic4.zhimg.com/80/v2-23c994c8de63a39c0dca508da2e29a06.png" alt="Image"></p>
+<p>相信大家在写一些事情或者打开文本文件的时候经常会用到记事本，但是记事本的功能界面实在是太简陋了，比如常见的代码高亮、正则表达式、更改主题等全都没有。<br>然后就找到了这一款软件——notepad3，安装会自动替代系统的 notepad 软件，也就是说你打开 notepad 即是打开 notepad3。基本的使用方式是和 notepad 是一样的，但多了很多配置功能。</p>
+<p><a href="https://www.rizonesoft.com/downloads/notepad3/" target="_blank" rel="noopener">下载链接</a></p>
+<h4 id="8-window-任务栏透明小软件——TranslucentTB"><a href="#8-window-任务栏透明小软件——TranslucentTB" class="headerlink" title="8. window 任务栏透明小软件——TranslucentTB"></a>8. window 任务栏透明小软件——TranslucentTB</h4><p>任务栏默认是黑色的，有的会随主题颜色改变而改变，不过都不是透明的，并且有点显丑。TranslucentTB，可以使任务栏改变状态。一般有两种<br>模糊<br><img src="https://pic4.zhimg.com/80/v2-c52e293bb1f781b8980476c0961fb64c.png" alt="Image"><br>清晰<br><img src="https://pic4.zhimg.com/80/v2-a51aa1f41395567578f68cc5ea1815b1.png" alt="Image"></p>
+<p><a href="https://github.com/TranslucentTB/TranslucentTB" target="_blank" rel="noopener">github 地址</a></p>
+<p>该软件已上架微软商店，可以去<a href="https://www.microsoft.com/zh-cn/p/translucenttb/9pf4kz2vn4w9?rtc=1" target="_blank" rel="noopener">该处</a>下载安装。</p>
+<h4 id="9-浏览器——Firefox"><a href="#9-浏览器——Firefox" class="headerlink" title="9. 浏览器——Firefox"></a>9. 浏览器——Firefox</h4><p>火狐浏览器一款开源浏览器，可能是仅存的非 chomium 内核浏览器。<br>对比 chrome 的优点是，上扩展商店以及同步数据的时候不用特别的上网方式。</p>
+<p>注意下载浏览器的时候不要下载到国内特供版，看准网址，如果域名是(firefox.com.cn)的话，那就是国内特供的了，认准域名(mozilla.org)。国内特供版的数据无法与非国内版的同步，曾经我就是被这个坑过。</p>
+<p><a href="https://www.mozilla.org/en-US/firefox/new/" target="_blank" rel="noopener">下载地址</a></p>
+<h4 id="10-安全软件——火绒"><a href="#10-安全软件——火绒" class="headerlink" title="10. 安全软件——火绒"></a>10. 安全软件——火绒</h4><p>一个没有任何流氓行为的安全软件，不过我也就是用它来管管弹窗，以及开机自启动软件的，一般的安全问题有 window defense 就够了。<br>如果你的电脑安装有其它国产免费安全软件的话，早卸早安全。</p>
+]]></content>
+      <categories>
+        <category>Window</category>
+      </categories>
+      <tags>
+        <tag>other</tag>
+        <tag>soft</tag>
+        <tag>window</tag>
+      </tags>
+  </entry>
 </search>
