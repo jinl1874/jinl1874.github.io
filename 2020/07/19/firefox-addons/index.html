@@ -23,20 +23,28 @@
     var CONFIG = {"hostname":"jinl1874.xyz","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="笔记内容：  styele 属性 检索样式 改变样式  网页的结构 三位一体：  结构层：由 HTML 或 XHTML 之类的标记语言负责创建； 表示层：由 CSS 负责完成，CSS 描述页面内容应该如何呈现； 行为层：负责内容应该如何响应事件这一问题，js 和 DOM 主宰的领域。   分离：  使用（X）HTML 搭建文档的结构； 使用 CSS 去设置文档的呈现效果； 使用 DOM 脚本去实现">
+  <meta name="description" content="2020 年，主要就是使用下面这些扩展。 1. 去广告插件——uBlock Origin一般使用浏览器都需要一个去广告插件，否则浏览网页的体验太差了。这个插件比 Adblock 占用资源低，而且知名度也更低一点，没有那么多网站进行针对。不过一般网站要针对去广告插件的话也不会单针对某一款，除了某乎头上的那个显示。 地址 2. epub 阅读扩展——QiuReader在电脑上阅读 epub 文件的体验">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript-学习笔记（7）：CSS-DOM">
-<meta property="og:url" content="https://jinl1874.xyz/2020/07/18/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%887%EF%BC%89/index.html">
+<meta property="og:title" content="火狐上有哪些值得安装的扩展">
+<meta property="og:url" content="https://jinl1874.xyz/2020/07/19/firefox-addons/index.html">
 <meta property="og:site_name" content="MyBlog">
-<meta property="og:description" content="笔记内容：  styele 属性 检索样式 改变样式  网页的结构 三位一体：  结构层：由 HTML 或 XHTML 之类的标记语言负责创建； 表示层：由 CSS 负责完成，CSS 描述页面内容应该如何呈现； 行为层：负责内容应该如何响应事件这一问题，js 和 DOM 主宰的领域。   分离：  使用（X）HTML 搭建文档的结构； 使用 CSS 去设置文档的呈现效果； 使用 DOM 脚本去实现">
+<meta property="og:description" content="2020 年，主要就是使用下面这些扩展。 1. 去广告插件——uBlock Origin一般使用浏览器都需要一个去广告插件，否则浏览网页的体验太差了。这个插件比 Adblock 占用资源低，而且知名度也更低一点，没有那么多网站进行针对。不过一般网站要针对去广告插件的话也不会单针对某一款，除了某乎头上的那个显示。 地址 2. epub 阅读扩展——QiuReader在电脑上阅读 epub 文件的体验">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-07-18T14:06:59.000Z">
-<meta property="article:modified_time" content="2020-07-18T14:07:11.792Z">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-5422bca3ade0602e09d6a706cf82d9b0.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-d97182a8834c13b00952dfe7fddae58b.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-4e7e22ec7c3ed1beedd7b5cd34117fc6.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-f82e4543a1b75663cd246fd4b0d1cbcd.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-f98281f8034694dc1b84251328d0544b.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-9b7f5dabcf188b46e289a23aaf121b49.png">
+<meta property="article:published_time" content="2020-07-19T02:23:58.000Z">
+<meta property="article:modified_time" content="2020-07-19T02:23:58.468Z">
 <meta property="article:author" content="道理">
-<meta property="article:tag" content="js">
+<meta property="article:tag" content="firefox">
+<meta property="article:tag" content="addons">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic4.zhimg.com/80/v2-5422bca3ade0602e09d6a706cf82d9b0.png">
 
-<link rel="canonical" href="https://jinl1874.xyz/2020/07/18/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%887%EF%BC%89/">
+<link rel="canonical" href="https://jinl1874.xyz/2020/07/19/firefox-addons/">
 
 
 <script id="page-configurations">
@@ -49,7 +57,7 @@
   };
 </script>
 
-  <title>JavaScript-学习笔记（7）：CSS-DOM | MyBlog</title>
+  <title>火狐上有哪些值得安装的扩展 | MyBlog</title>
   
 
 
@@ -212,7 +220,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/07/18/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%887%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/07/19/firefox-addons/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.jpg">
@@ -225,7 +233,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          JavaScript-学习笔记（7）：CSS-DOM
+          火狐上有哪些值得安装的扩展
         </h1>
 
         <div class="post-meta">
@@ -234,9 +242,8 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-07-18 22:06:59 / 修改时间：22:07:11" itemprop="dateCreated datePublished" datetime="2020-07-18T22:06:59+08:00">2020-07-18</time>
+              <time title="创建时间：2020-07-19 10:23:58" itemprop="dateCreated datePublished" datetime="2020-07-19T10:23:58+08:00">2020-07-19</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -244,7 +251,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                  <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">浏览器</span></a>
                 </span>
             </span>
 
@@ -264,8 +271,8 @@
       </span>
       <span class="post-meta-item-text">Disqus：</span>
     
-    <a title="disqus" href="/2020/07/18/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%887%EF%BC%89/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/07/18/JavaScript-学习笔记（7）/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2020/07/19/firefox-addons/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/07/19/firefox-addons/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -280,65 +287,52 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>笔记内容：</p>
-<ul>
-<li>styele 属性</li>
-<li>检索样式</li>
-<li>改变样式</li>
-</ul>
-<h4 id="网页的结构"><a href="#网页的结构" class="headerlink" title="网页的结构"></a>网页的结构</h4><ul>
-<li><p>三位一体：</p>
-<ul>
-<li>结构层：由 HTML 或 XHTML 之类的标记语言负责创建；</li>
-<li>表示层：由 CSS 负责完成，CSS 描述页面内容应该如何呈现；</li>
-<li>行为层：负责内容应该如何响应事件这一问题，js 和 DOM 主宰的领域。</li>
-</ul>
-</li>
-<li><p>分离：</p>
-<ul>
-<li>使用（X）HTML 搭建文档的结构；</li>
-<li>使用 CSS 去设置文档的呈现效果；</li>
-<li>使用 DOM 脚本去实现文档的行为。</li>
-</ul>
-<p>这三种技术之间存在重叠区域。</p>
-</li>
-</ul>
-<h4 id="style"><a href="#style" class="headerlink" title="style"></a>style</h4><p>style 属性 包含元素的样式，查询该属性返蜀犬吠日的是一个对象而不是一个简单的字符串。样式存在对象的属性里：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.style.property;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>获取样式</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取 style 的 color 属性：</span></span><br><span class="line">element.style.color;</span><br><span class="line"><span class="comment">// 获取 style 的 font-family 属性：</span></span><br><span class="line">elements.style.fontFamily;</span><br></pre></td></tr></table></figure>
-
-<p>一般样式属性的返回值与它们的设置值都采用同样的计量单位。如果果 font-size 以 em 为单位，那么返回的值也是以 em 为单位。</p>
-<p>style 属性只能能过内嵌的方式来获取，一旦样式在外部，则获取不到。</p>
-</li>
-<li><p>设置样式<br>style 对象的名个属性是可以读写的，可以使用赋值操作来更新样式：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.style.property = value;</span><br></pre></td></tr></table></figure>
-<p>赋值操作符可以设置任何一种样式，比如 font 之类的速记属性：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">para.style.font = <span class="string">"2em 'times', serif"</span>;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h4 id="DOM-脚本设置样式"><a href="#DOM-脚本设置样式" class="headerlink" title="DOM 脚本设置样式"></a>DOM 脚本设置样式</h4><p>虽然 DOM 设置样式很容易，但是在大多数场合下，应该使用 CSS 去声明样式。</p>
-<ul>
-<li><p>根据元素的位置设置样式<br>找到该元素后，直接给该元素的 style 对应的属性赋值即可。</p>
-</li>
-<li><p>根据条件反复设置样式<br>找到元素后，根据条件设置样式。比如表格里隔一个行设置一个背景色，就需要根据条件设置值。</p>
-</li>
-<li><p>响应事件<br>一般最好使用 CSS 为文档设置样式，但也有一些 CSS 不能处理或者难以部署的情况，这时需要用上 DOM。比如浏览器不能识别伪类的时候，可以使用 js 来解决。</p>
-</li>
-<li><p>className 属性<br>之前的都是用 DOM 直接设置或修改样式，这是直接让“行为层”干“表示层”的活。<br>与其让 DOM 直接改变元素的样式，不如能过 js 更新元素的 classic 属性。</p>
-</li>
-</ul>
-<h4 id="对函数进行抽象"><a href="#对函数进行抽象" class="headerlink" title="对函数进行抽象"></a>对函数进行抽象</h4><p>一些函数可以做一些小小的改动可以变得更通用，这个过程叫抽象（abstraction）。<br>比如下面这个函数的对象仅适用于 h1 元素，以及 classname 的值为 intro 。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">styleHeaderSiblings</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementsByTagName) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> headers = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"h1"</span>);</span><br><span class="line">  <span class="keyword">var</span> elem;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; headers.length; i++) &#123;</span><br><span class="line">    <span class="comment">// 查找下一个元素节点</span></span><br><span class="line">    elem = getNextElement(headers[i].nextSibling);</span><br><span class="line">    elem.className += <span class="string">"intro"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>添加两个具体的参数，就可以使其成为更通用的函数：添加 tag 和 theclass 两个参数，并把 h1 改为 tag，intro 改为 theclass。为了增加可读性，把 headers 改为 elems.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">styleHeaderSiblings</span>(<span class="params">tag, theclass</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementsByTagName) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elems = <span class="built_in">document</span>.getElementsByTagName(tag);</span><br><span class="line">  alert(theclass);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; elems.length; i++) &#123;</span><br><span class="line">    <span class="comment">// 查找下一个元素节点</span></span><br><span class="line">    elem = getNextElement(elems[i].nextSibling);</span><br><span class="line">    elem.className += <span class="string">" "</span> + theclass;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样，函数的抽象化就完成了。<br>无论何时，发现函数可以抽象，都应该马上去做，这总是一个好主意。</p>
-<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>CSS-DOM 针对的是如何得到和设置 style 对象的各种属性。<br>style 属性不支持外部 css 设置的样式，不过仍然可以利用 style 属性去改变 html 元素的呈现效果。<br>不过一般都应该选择更新 classname 属性，而不是直接更新 style 对象的相关属性。<br>使用 js 干 css 的活无非就俩原因，一是 css 无法干这种活，二是一些残疾浏览器不支持最新属性。js 能够重复执行一组操作，这是 css 做不了的。</p>
+        <p>2020 年，主要就是使用下面这些扩展。</p>
+<h4 id="1-去广告插件——uBlock-Origin"><a href="#1-去广告插件——uBlock-Origin" class="headerlink" title="1. 去广告插件——uBlock Origin"></a>1. 去广告插件——uBlock Origin</h4><p>一般使用浏览器都需要一个去广告插件，否则浏览网页的体验太差了。<br>这个插件比 Adblock 占用资源低，而且知名度也更低一点，没有那么多网站进行针对。不过一般网站要针对去广告插件的话也不会单针对某一款，除了某乎头上的那个显示。</p>
+<p><a href="https://addons.mozilla.org/zh-CN/firefox/addon/ublock-origin/" target="_blank" rel="noopener">地址</a></p>
+<h4 id="2-epub-阅读扩展——QiuReader"><a href="#2-epub-阅读扩展——QiuReader" class="headerlink" title="2. epub 阅读扩展——QiuReader"></a>2. epub 阅读扩展——QiuReader</h4><p>在电脑上阅读 epub 文件的体验一直不算好，直到我找到了这款扩展。</p>
+<p>清爽的首页：<br><img src="https://pic4.zhimg.com/80/v2-5422bca3ade0602e09d6a706cf82d9b0.png" alt="Image"><br>舒服的界面：<br><img src="https://pic4.zhimg.com/80/v2-d97182a8834c13b00952dfe7fddae58b.png" alt="Image"></p>
+<p>配置选项：背景颜色、字体大小、阅读方式、空格等；<br>其它功能：添加书签、高亮某一段文字。<br>美中不足的是不能添加书注，不过也无伤大雅，单是这漂亮的 UI 就足够了。</p>
+<p>我单方面宣布这是 window 上最好用 epub 阅读器。</p>
+<p><a href="https://addons.mozilla.org/zh-CN/firefox/addon/qiureader/" target="_blank" rel="noopener">地址</a></p>
+<h4 id="3-美化网页——Stylus"><a href="#3-美化网页——Stylus" class="headerlink" title="3. 美化网页——Stylus"></a>3. 美化网页——Stylus</h4><p>官方网站上，由于种种限制，导致网站有很多广告和很多大多数人一辈子都用不上的功能，并且 UI 总是有点丑。这时就需要一个美化网页的插件了，把多余的东西去掉，留一个简洁干净的页面。一般有点流量的网站都有很人编写相对应的样式。<br>贴吧使用前：<br><img src="https://pic4.zhimg.com/80/v2-4e7e22ec7c3ed1beedd7b5cd34117fc6.png" alt="Image"><br>使用后：<br><img src="https://pic4.zhimg.com/80/v2-f82e4543a1b75663cd246fd4b0d1cbcd.png" alt="Image"></p>
+<p>页面干净了许多。</p>
+<p><a href="https://addons.mozilla.org/zh-CN/firefox/addon/styl-us/" target="_blank" rel="noopener">地址</a></p>
+<h4 id="4-脚本扩展——暴力猴"><a href="#4-脚本扩展——暴力猴" class="headerlink" title="4. 脚本扩展——暴力猴"></a>4. 脚本扩展——暴力猴</h4><p>脚本扩展在某种程度上也算是必装的一款插件了吧，已经有很多人在 Greasy Fork 等网站写了大量的脚本，有需要就下载安装即可。脚本可以解决相当多的问题，并且也不会占用很多内存。找脚本也很方便，直接点击相应的图标，即跳出一个“为此站点查找脚本”的选项。<br><img src="https://pic4.zhimg.com/80/v2-f98281f8034694dc1b84251328d0544b.png" alt="Image"><br>其它常见的脚本插件有油猴等，不过我还是更喜欢暴力猴，或许是更好看点吧。</p>
+<p><a href="https://addons.mozilla.org/zh-CN/firefox/addon/violentmonkey/" target="_blank" rel="noopener">地址</a></p>
+<h4 id="5-密码管理——LastPass"><a href="#5-密码管理——LastPass" class="headerlink" title="5. 密码管理——LastPass"></a>5. 密码管理——LastPass</h4><p>跨平台的的密码保存管理扩展，有了它，再也不用担心忘记密码了。<br>该扩展的主要功能是，输入一个新的账号密码时，会提示是否保存；若账号相同，则提示是否更新密码；会在账号密码自动填充最后使用的密码。<br>其它的功能还有生成随机密码之类的。</p>
+<p><a href="https://addons.mozilla.org/zh-CN/firefox/addon/lastpass-password-manager/" target="_blank" rel="noopener">地址</a></p>
+<h4 id="6-下载管理——IDM"><a href="#6-下载管理——IDM" class="headerlink" title="6. 下载管理——IDM"></a>6. 下载管理——IDM</h4><p>这个插件要搭配 IDM 下载器使用。该插件几乎可以下载所有的网页上的视频、图像等。<br>具体写过一篇文章专门介绍<a href="https://jinl1874.xyz/2020/06/28/use-idm/">如何配置使用 IDM</a>的。</p>
+<p><a href="https://addons.mozilla.org/zh-CN/firefox/addon/tonec-idm-integration-module/?src=search" target="_blank" rel="noopener">地址</a></p>
+<h4 id="7-操作网页——viumium"><a href="#7-操作网页——viumium" class="headerlink" title="7. 操作网页——viumium"></a>7. 操作网页——viumium</h4><p>不需要用鼠标，仅使用键盘能完成 90%的操作。<br>有很多类似的扩展，为什么推荐这个，只是使用习惯了。</p>
+<p>按键功能和 vim 有一定的相似之处。<br>上、下、左、右的移动分别是：k, j, h, l;</p>
+<p>向右切换标签页：g+t 或者 K;</p>
+<p>向左切换标签页：g+T 或者 J;</p>
+<p>跳到顶部：gg;</p>
+<p>跳到底部：G;</p>
+<p>向上、下翻半页分别是：d, u;</p>
+<p>网页前进：L;</p>
+<p>页面后退：H;</p>
+<p>显示点击链接：f;</p>
+<p>新建标签页显示点击链接：F;</p>
+<p>搜索：o;</p>
+<p>新建标签页搜索：O;</p>
+<p>新建空白标签页：t;</p>
+<p>新建空白标签页打开链接：T;</p>
+<p>关闭标签页：x;</p>
+<p>打开上一个关闭的标签页：X;</p>
+<p>焦点移到输入框：g+i;</p>
+<p>焦点从输入框移走：tab 或者 esc;</p>
+<p>值得注意的一点是，上述按键功能只能在常见的网页上生效，在系统标签页是用不了的。比如空白标签页、系统设置页，因此学一些默认的快捷键是有必要的，比如 ctrl + t 是新建空白标签页、ctrl + tab 是向右切换标签页、ctrl + shift + tab 是向左切换，一般加上个 shift 就是相反的功能。</p>
+<p>还有一些按键就不一一赘述了。</p>
+<p>使用该插件能解放你的鼠标，极大地提高阅读网页浏览体验。</p>
+<p><a href="https://addons.mozilla.org/zh-CN/firefox/addon/vimium-ff/?src=search" target="_blank" rel="noopener">地址</a></p>
+<h4 id="8-网盘助手——网盘助手"><a href="#8-网盘助手——网盘助手" class="headerlink" title="8. 网盘助手——网盘助手"></a>8. 网盘助手——网盘助手</h4><p>支持主流网盘，如百度网盘以及蓝奏云等。<br>可以自动提取 提取码 。<br><img src="https://pic4.zhimg.com/80/v2-9b7f5dabcf188b46e289a23aaf121b49.png" alt="Image"></p>
+<p>大概是最优雅好用的网盘助手了。<br>有使用网盘的都可以试试安装。</p>
+<p><a href="https://addons.mozilla.org/zh-CN/firefox/addon/wpzs/" target="_blank" rel="noopener">地址</a></p>
+<p>基本就这些比较实用的扩展。</p>
+<h4 id="9-切换浏览器头——User-Agent-Switcher-and-Manager"><a href="#9-切换浏览器头——User-Agent-Switcher-and-Manager" class="headerlink" title="9. 切换浏览器头——User-Agent Switcher and Manager"></a>9. 切换浏览器头——User-Agent Switcher and Manager</h4><p>当你需要访问移动版网页或者只有其它浏览器才能访问的网站时，可以用它切换相对应的浏览器头。</p>
+<p><a href="https://addons.mozilla.org/zh-CN/firefox/addon/user-agent-string-switcher/?src=search" target="_blank" rel="noopener">地址</a></p>
 
     </div>
 
@@ -348,7 +342,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/js/" rel="tag"># js</a>
+              <a href="/tags/firefox/" rel="tag"># firefox</a>
+              <a href="/tags/addons/" rel="tag"># addons</a>
           </div>
 
         
@@ -357,13 +352,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/07/18/window-soft/" rel="prev" title="电脑有哪些可以提升体验的软件？">
-      <i class="fa fa-chevron-left"></i> 电脑有哪些可以提升体验的软件？
+    <a href="/2020/07/18/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%887%EF%BC%89/" rel="prev" title="JavaScript-学习笔记（7）：CSS-DOM">
+      <i class="fa fa-chevron-left"></i> JavaScript-学习笔记（7）：CSS-DOM
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/07/19/firefox-addons/" rel="next" title="火狐上有哪些值得安装的扩展">
-      火狐上有哪些值得安装的扩展 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -429,7 +421,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#网页的结构"><span class="nav-number">1.</span> <span class="nav-text">网页的结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#style"><span class="nav-number">2.</span> <span class="nav-text">style</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DOM-脚本设置样式"><span class="nav-number">3.</span> <span class="nav-text">DOM 脚本设置样式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对函数进行抽象"><span class="nav-number">4.</span> <span class="nav-text">对函数进行抽象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小结"><span class="nav-number">5.</span> <span class="nav-text">小结</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-去广告插件——uBlock-Origin"><span class="nav-number">1.</span> <span class="nav-text">1. 去广告插件——uBlock Origin</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-epub-阅读扩展——QiuReader"><span class="nav-number">2.</span> <span class="nav-text">2. epub 阅读扩展——QiuReader</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-美化网页——Stylus"><span class="nav-number">3.</span> <span class="nav-text">3. 美化网页——Stylus</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-脚本扩展——暴力猴"><span class="nav-number">4.</span> <span class="nav-text">4. 脚本扩展——暴力猴</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-密码管理——LastPass"><span class="nav-number">5.</span> <span class="nav-text">5. 密码管理——LastPass</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-下载管理——IDM"><span class="nav-number">6.</span> <span class="nav-text">6. 下载管理——IDM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-操作网页——viumium"><span class="nav-number">7.</span> <span class="nav-text">7. 操作网页——viumium</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-网盘助手——网盘助手"><span class="nav-number">8.</span> <span class="nav-text">8. 网盘助手——网盘助手</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-切换浏览器头——User-Agent-Switcher-and-Manager"><span class="nav-number">9.</span> <span class="nav-text">9. 切换浏览器头——User-Agent Switcher and Manager</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -592,9 +584,9 @@
 </script>
 <script>
   var disqus_config = function() {
-    this.page.url = "https://jinl1874.xyz/2020/07/18/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%887%EF%BC%89/";
-    this.page.identifier = "2020/07/18/JavaScript-学习笔记（7）/";
-    this.page.title = "JavaScript-学习笔记（7）：CSS-DOM";
+    this.page.url = "https://jinl1874.xyz/2020/07/19/firefox-addons/";
+    this.page.identifier = "2020/07/19/firefox-addons/";
+    this.page.title = "火狐上有哪些值得安装的扩展";
     };
   NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
     if (window.DISQUS) {

@@ -208,6 +208,105 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/06/30/img-to-pdf/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="道理">
+      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MyBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/30/img-to-pdf/" class="post-title-link" itemprop="url">图片转为PDF文件的几种方法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-30 16:59:07 / 修改时间：21:51:27" itemprop="dateCreated datePublished" datetime="2020-06-30T16:59:07+08:00">2020-06-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Other/" itemprop="url" rel="index"><span itemprop="name">Other</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2020/06/30/img-to-pdf/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/06/30/img-to-pdf/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>最近下载《Death Note》漫画，只是只有图片，想了想还转为 PDF 比较好看，经过一番查找，找到了几种方法。</p>
+</blockquote>
+<h4 id="1-系统自带的打印为-PDF-文件"><a href="#1-系统自带的打印为-PDF-文件" class="headerlink" title="1. 系统自带的打印为 PDF 文件"></a>1. 系统自带的打印为 PDF 文件</h4><p>具体操作：选择好图片 -&gt; 右键 -&gt; 打印 -&gt; 选择大小为 A4 纸 -&gt; 打印。<br>优点：简单，并且不用安装任何软件。<br>缺点：图片的大小会改变，不能展示原来的图片。</p>
+<h4 id="2-SanPDF"><a href="#2-SanPDF" class="headerlink" title="2. SanPDF"></a>2. SanPDF</h4><p>一个专业搞 PDF、WORD、EXCEL 之间转换以及操作的软件。<br>具体操作：去<a href="https://www.sanpdf.com/" target="_blank" rel="noopener">官网</a>下载安装，可以把安装目录放在 C 盘以外的盘。安装后打开，选择图片转 PDF，然后添加文件，再点击右上角的生成 pdf 即可在图片所在目录找到 PDF 文件。<br><img src="https://pic4.zhimg.com/80/v2-5d3facfd8a47d609b034dfb45649554b.png" alt="Image"><br>生成的 pdf 如图所示:<br><img src="https://pic4.zhimg.com/80/v2-dca7e5275bae0c6cb21925d34c92c604.png" alt="Image"><br>优点：图片是原生大小，亦是原生质量，比较清晰。此软件还可以操作其它诸如 word 与 pdf 互转、pdf 转图片等操作，是个难得的好软件。<br>缺点：是付费软件，不过可以绿色软件下载。</p>
+<h4 id="3-使用-python-里的-reportlab-生成-pdf"><a href="#3-使用-python-里的-reportlab-生成-pdf" class="headerlink" title="3. 使用 python 里的 reportlab 生成 pdf"></a>3. 使用 python 里的 <code>reportlab</code> 生成 pdf</h4><ul>
+<li>首先需要安装<code>reportlab</code>库，如果你的电脑已经安装了 pip，那么只需一条<code>pip install reportlab</code>命令即可。</li>
+<li>以下是 python 图片转为 pdf 的代码</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> reportlab.lib.pagesizes <span class="keyword">import</span> A4, portrait, landscape</span><br><span class="line"><span class="keyword">from</span> reportlab.pdfgen <span class="keyword">import</span> canvas</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">convert_images_to_pdf</span><span class="params">(img_path, pdf_path)</span>:</span></span><br><span class="line">    pages = <span class="number">0</span></span><br><span class="line">    (w, h) = portrait(A4)</span><br><span class="line">    c = canvas.Canvas(pdf_path, pagesize=portrait(A4))</span><br><span class="line">    l = os.listdir(img_path)</span><br><span class="line">    l.sort(key=<span class="keyword">lambda</span> x: int(x[:<span class="number">-4</span>]))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> l:</span><br><span class="line">        f = img_path + os.sep + str(i)</span><br><span class="line">        c.drawImage(f, <span class="number">0</span>, <span class="number">0</span>, w, h)</span><br><span class="line">        c.showPage()</span><br><span class="line">        pages = pages + <span class="number">1</span></span><br><span class="line">    c.save()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">path = <span class="string">r"D://web//script//pxtt-118"</span></span><br><span class="line">pdf_path = <span class="string">r"D://web//script//pdf//pxtt-118.pdf"</span></span><br><span class="line"></span><br><span class="line">convert_images_to_pdf(path, pdf_path)</span><br></pre></td></tr></table></figure>
+
+<p>将上面的 path 改为图片的目录路径，pdf_path 改为具体到文件名的路径。注意图片目录路径不能包含除图片外的文件，否则会报错。</p>
+<p>优点：同上面系统操作 pdf。<br>缺点：很麻烦。</p>
+<p>欢迎访问我的<a href="https://jinl1874.xyz">博客网站</a>。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/06/30/%E4%BD%BF%E7%94%A8js%E6%93%8D%E4%BD%9C%E9%97%AE%E5%8D%B7%E6%98%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1386,95 +1485,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/05/20/Test-Article/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.jpg">
-      <meta itemprop="name" content="道理">
-      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MyBlog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/20/Test-Article/" class="post-title-link" itemprop="url">Test Article</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-20 17:32:13" itemprop="dateCreated datePublished" datetime="2020-05-20T17:32:13+08:00">2020-05-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-21 18:05:14" itemprop="dateModified" datetime="2020-05-21T18:05:14+08:00">2020-05-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Testing/" itemprop="url" rel="index"><span itemprop="name">Testing</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/2020/05/20/Test-Article/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/05/20/Test-Article/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>This is a test article, weclome subscribe “<a href="https://jinl1874.github.io&quot;" target="_blank" rel="noopener">https://jinl1874.github.io&quot;</a></p>
-<p>▶ hexo s<br>INFO Start processing<br>INFO Hexo is running at <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> . Press Ctrl+C to stop.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1546,20 +1556,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
