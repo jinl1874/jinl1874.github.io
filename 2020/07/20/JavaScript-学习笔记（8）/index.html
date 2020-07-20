@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="R2oAMB7LvFIsJi7IMB8It6i7HKdTfa1YRgm2K0phdyk">
+  <meta name="msvalidate.01" content="6334EAC73ED9572171FD69D21365060D">
+  <meta name="baidu-site-verification" content="ZXU3XgLWfh">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jinl1874.xyz","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="JavaScript-学习笔记（8）：动画效果动画是 CSS-DOM 最具动感的内容，让网页上的元素动起来。 基础知识js 可以按照预定的时间重复调用函数，，这意味着我们可以随着时间的失衡而不断改变某个元素的样式。  位置：网页元素在浏览器窗口里的位置是一种表示性信息，一般由 CSS 负责。例如： 12345element &amp;#123;  position: absolute;  top: 50p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript-学习笔记（8）：动画">
+<meta property="og:url" content="https://jinl1874.xyz/2020/07/20/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/index.html">
+<meta property="og:site_name" content="MyBlog">
+<meta property="og:description" content="JavaScript-学习笔记（8）：动画效果动画是 CSS-DOM 最具动感的内容，让网页上的元素动起来。 基础知识js 可以按照预定的时间重复调用函数，，这意味着我们可以随着时间的失衡而不断改变某个元素的样式。  位置：网页元素在浏览器窗口里的位置是一种表示性信息，一般由 CSS 负责。例如： 12345element &amp;#123;  position: absolute;  top: 50p">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-1e23b6fa027df6909b85e241f1859807.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-1e3e5ff744e8dfe2761e9107a0015e05.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-ca5004a8c28eeed4108b85f6fafd05ab.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-488b3f4eef617e261baf1f1d07cb26ce.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-86d44aa0dc6cffbe084a325a91092499.png">
+<meta property="article:published_time" content="2020-07-20T05:39:39.000Z">
+<meta property="article:modified_time" content="2020-07-20T05:39:39.958Z">
+<meta property="article:author" content="道理">
+<meta property="article:tag" content="js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic4.zhimg.com/80/v2-1e23b6fa027df6909b85e241f1859807.png">
+
+<link rel="canonical" href="https://jinl1874.xyz/2020/07/20/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>JavaScript-学习笔记（8）：动画 | MyBlog</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6e0d7c9a7d3673c17da082fa662c0ee4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MyBlog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">daoli</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/07/20/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="道理">
+      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MyBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaScript-学习笔记（8）：动画
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-20 13:39:39" itemprop="dateCreated datePublished" datetime="2020-07-20T13:39:39+08:00">2020-07-20</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2020/07/20/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/07/20/JavaScript-学习笔记（8）/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="JavaScript-学习笔记（8）：动画效果"><a href="#JavaScript-学习笔记（8）：动画效果" class="headerlink" title="JavaScript-学习笔记（8）：动画效果"></a>JavaScript-学习笔记（8）：动画效果</h1><p>动画是 CSS-DOM 最具动感的内容，让网页上的元素动起来。</p>
+<h4 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h4><p>js 可以按照预定的时间重复调用函数，，这意味着我们可以随着时间的失衡而不断改变某个元素的样式。</p>
+<ul>
+<li><p>位置：网页元素在浏览器窗口里的位置是一种表示性信息，一般由 CSS 负责。例如：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">element</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面的 DOM 代码实现了同样的效果：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">element.style.position = <span class="string">"absolute"</span>;</span><br><span class="line">element.style.top = <span class="string">"50px"</span>;</span><br><span class="line">element.style.left = <span class="string">"100px"</span>;</span><br></pre></td></tr></table></figure>
+
+<p>假设有这么一个元素：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"message"</span>&gt;</span>Wheel<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>再用 js 设置位置：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">positionMessage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(<span class="string">"message"</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elem = <span class="built_in">document</span>.getElementById(<span class="string">"message"</span>);</span><br><span class="line">  elem.style.position = <span class="string">"absolute"</span>;</span><br><span class="line">  elem.style.left = <span class="string">"50px"</span>;</span><br><span class="line">  elem.style.top = <span class="string">"100px"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>添加到<code>windows.onload</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addLoadEvent</span>(<span class="params">func</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> oldonload = <span class="built_in">window</span>.onload;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">window</span>.onload != <span class="string">"function"</span>) &#123;</span><br><span class="line">    <span class="built_in">window</span>.onload = func;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      oldonload();</span><br><span class="line">      func();</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">addLoadEvent(positionMessage);</span><br></pre></td></tr></table></figure>
+
+<p>结果：<br><img src="https://pic4.zhimg.com/80/v2-1e23b6fa027df6909b85e241f1859807.png" alt="Image"></p>
+<p>再编写一个移动的函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">moveMessage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(<span class="string">"message"</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elem = <span class="built_in">document</span>.getElementById(<span class="string">"message"</span>);</span><br><span class="line">  elem.style.left = <span class="string">"200px"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果：<br><img src="https://pic4.zhimg.com/80/v2-1e3e5ff744e8dfe2761e9107a0015e05.png" alt="Image"></p>
+<p>这是立即改变位置，要想获得动画效果，还要让位置随着时间的改变而不断改变。</p>
+</li>
+<li><p>时间</p>
+<p>js 的 setTimeout 能够让某个经过一段预定的时间后才开始执行。<br>用法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">variable = setTimeout(<span class="string">"function"</span>, interval);</span><br></pre></td></tr></table></figure>
+
+<p>可以用 clearTimeout 的函数来消 “等待执行”队列的某个函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clearTimeout(variable);</span><br></pre></td></tr></table></figure>
+
+<p>修改 postitonMessage 函数，让其在 5 秒后才调用 moveMessage 函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">positionMessage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(<span class="string">"message"</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elem = <span class="built_in">document</span>.getElementById(<span class="string">"message"</span>);</span><br><span class="line">  elem.style.position = <span class="string">"absolute"</span>;</span><br><span class="line">  elem.style.left = <span class="string">"50px"</span>;</span><br><span class="line">  elem.style.top = <span class="string">"100px"</span>;</span><br><span class="line">  movement = setTimeout(<span class="string">"moveMessage()"</span>, <span class="number">5000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>positionMessage 依旧在加载时调用。</p>
+</li>
+<li><p>时间递增量</p>
+<p>动画应该是一个渐变的过程，元素应该从出发点逐步移动到目的点，而不是一下子跳过去。</p>
+<p>更新 moveMessage 函数，让元素以逐渐移动的方式发生。步骤：</p>
+<ul>
+<li>获得元素的当前位置；</li>
+<li>如果元素已经到达目的地，则退出；</li>
+<li>如果元素尚未到达它的目的地，则把它向目的地移动；</li>
+<li>一段时间后重复上述步骤。</li>
+</ul>
+<p>获取位置的值：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xpos = <span class="built_in">parseInt</span>(elem.style.left);</span><br><span class="line"><span class="keyword">var</span> ypos = <span class="built_in">parseInt</span>(elem.style.top);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>只有使用 DOM 脚本或 style 属性分配位置后，这里的 parseInt 才起作用。</p>
+</blockquote>
+<p>编辑 moveMessage 函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">moveMessage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(<span class="string">"message"</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elem = <span class="built_in">document</span>.getElementById(<span class="string">"message"</span>);</span><br><span class="line">  <span class="keyword">var</span> xpos = <span class="built_in">parseInt</span>(elem.style.left);</span><br><span class="line">  <span class="keyword">var</span> ypos = <span class="built_in">parseInt</span>(elem.style.top);</span><br><span class="line">  <span class="comment">// 如果相等就退出递归</span></span><br><span class="line">  <span class="keyword">if</span> (xpos == <span class="number">200</span> &amp;&amp; ypos == <span class="number">100</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  <span class="comment">// 如果不相等就继续加减</span></span><br><span class="line">  <span class="keyword">if</span> (xpos &lt; <span class="number">200</span>) xpos++;</span><br><span class="line">  <span class="keyword">if</span> (xpos &gt; <span class="number">200</span>) xpos--;</span><br><span class="line">  <span class="keyword">if</span> (ypos &lt; <span class="number">100</span>) ypos++;</span><br><span class="line">  <span class="keyword">if</span> (ypos &gt; <span class="number">100</span>) ypos--;</span><br><span class="line">  elem.style.left = xpos + <span class="string">"px"</span>;</span><br><span class="line">  elem.style.top = ypos + <span class="string">"px"</span>;</span><br><span class="line">  <span class="comment">// 每隔10毫秒递归</span></span><br><span class="line">  movement = setTimeout(<span class="string">"moveMessage()"</span>, <span class="number">10</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>抽象</p>
+<p>上面的代码只能完成特定的函数，如果把里面的常数改为变量，那么就通用性就会大大提升。</p>
+<p>将移动元素的 ID、元素的目的地的位置，以及停顿间隔改为变量。<br>定义一个新的函数 <code>function moveElement(elementID, final_x, final_y, interval)</code>，具体代码为。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">moveElement</span>(<span class="params">elementID, final_x, final_y, interval</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(elementID)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elem = <span class="built_in">document</span>.getElementById(elementID);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> xpos = <span class="built_in">parseInt</span>(elem.style.left);</span><br><span class="line">  <span class="keyword">var</span> ypos = <span class="built_in">parseInt</span>(elem.style.top);</span><br><span class="line">  <span class="comment">// 如果相等就退出递归</span></span><br><span class="line">  <span class="keyword">if</span> (xpos == final_x &amp;&amp; ypos == final_y) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  <span class="comment">// 如果不相等就继续加减</span></span><br><span class="line">  <span class="keyword">if</span> (xpos &lt; final_x) xpos++;</span><br><span class="line">  <span class="keyword">if</span> (xpos &gt; final_x) xpos--;</span><br><span class="line">  <span class="keyword">if</span> (ypos &lt; final_y) ypos++;</span><br><span class="line">  <span class="keyword">if</span> (ypos &gt; final_y) ypos--;</span><br><span class="line">  elem.style.left = xpos + <span class="string">"px"</span>;</span><br><span class="line">  elem.style.top = ypos + <span class="string">"px"</span>;</span><br><span class="line">  <span class="comment">// 每隔 interval 毫秒递归</span></span><br><span class="line">  <span class="keyword">var</span> reqpeat =</span><br><span class="line">    <span class="string">"moveElement('"</span> +</span><br><span class="line">    elementID +</span><br><span class="line">    <span class="string">"',"</span> +</span><br><span class="line">    final_x +</span><br><span class="line">    <span class="string">","</span> +</span><br><span class="line">    final_y +</span><br><span class="line">    <span class="string">","</span> +</span><br><span class="line">    interval +</span><br><span class="line">    <span class="string">")"</span>;</span><br><span class="line">  movement = setTimeout(reqpeat, interval);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用 moveElement 函数。<br>创建一个名为 message.html 的文件，包含一个 <code>id=message</code> 的 p 元素：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Position<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"message"</span>&gt;</span>Wheel<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>再编写一个 positionMessage.js 的文件，添加 positionMessage() 函数：<br><code>id=message2</code> 的 p 元素，</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">positionMessage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(<span class="string">"message"</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elem = <span class="built_in">document</span>.getElementById(<span class="string">"message"</span>);</span><br><span class="line">  elem.style.position = <span class="string">"absolute"</span>;</span><br><span class="line">  elem.style.left = <span class="string">"50px"</span>;</span><br><span class="line">  elem.style.top = <span class="string">"100px"</span>;</span><br><span class="line">  moveElement(<span class="string">"message"</span>, <span class="number">200</span>, <span class="number">100</span>, <span class="number">10</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">addLoadEvent(positionMessage);</span><br></pre></td></tr></table></figure>
+
+<p>再在 HTML 文件上添加相对应的 js 文件，就可以显示出简单的动画效果。<br>改变 interval 的值即可改变动画的速度，改变 x 和 y 的值即可改变最终位置。</p>
+<p>添加一个 <code>id=message2</code> 的 p 元素，<code>&lt;p id=&quot;message2&quot;&gt;Whoal&lt;/p&gt;</code>，再在 positionMessage 函数中添加相对应的操作：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">positionMessage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(<span class="string">"message"</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elem = <span class="built_in">document</span>.getElementById(<span class="string">"message"</span>);</span><br><span class="line">  elem.style.position = <span class="string">"absolute"</span>;</span><br><span class="line">  elem.style.left = <span class="string">"50px"</span>;</span><br><span class="line">  elem.style.top = <span class="string">"100px"</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> elem_2 = <span class="built_in">document</span>.getElementById(<span class="string">"message2"</span>);</span><br><span class="line">  elem_2.style.position = <span class="string">"absolute"</span>;</span><br><span class="line">  elem_2.style.left = <span class="string">"50px"</span>;</span><br><span class="line">  elem_2.style.top = <span class="string">"50px"</span>;</span><br><span class="line"></span><br><span class="line">  moveElement(<span class="string">"message"</span>, <span class="number">125</span>, <span class="number">25</span>, <span class="number">10</span>);</span><br><span class="line">  moveElement(<span class="string">"message2"</span>, <span class="number">125</span>, <span class="number">125</span>, <span class="number">20</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果：<br><img src="https://pic4.zhimg.com/80/v2-ca5004a8c28eeed4108b85f6fafd05ab.png" alt="Image"></p>
+</li>
+</ul>
+<h4 id="实用的动画"><a href="#实用的动画" class="headerlink" title="实用的动画"></a>实用的动画</h4><p>上面的动画用处不大，还有可能使用户厌烦。</p>
+<ul>
+<li><p>提出问题：有一个怨念一系列链接的网页。当用用户的鼠标指针悬停在某个链接上时，展示预览一张图片。<br>添加一个文件 list.html，代码为：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Web Design<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Web Design<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>These are the things you should know:<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ol</span> <span class="attr">id</span>=<span class="string">"linklist"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"./structure.html"</span>&gt;</span>structure<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"./presentation.html"</span>&gt;</span>presentation<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"./behavior.html"</span>&gt;</span>behavior<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这次需要在 onmouseover 事件被触发时显示一张图片。</p>
+</li>
+<li><p>解决问题：</p>
+<ul>
+<li>为所有的预览图片生成一张“集体照”形式的图片；</li>
+<li>隐藏这张集体照图片的绝大部分。</li>
+<li>当用户把鼠标指针悬停在某个链接上方时，只显示这张“集体照”图片相应的部分。</li>
+</ul>
+<p>集体照：<br><img src="https://pic4.zhimg.com/80/v2-488b3f4eef617e261baf1f1d07cb26ce.png" alt="Image"><br>添加到 list.html 最后面：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"./topic.png"</span> <span class="attr">alt</span>=<span class="string">"building blocks of web Design"</span> <span class="attr">id</span>=<span class="string">"preview"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>CSS</p>
+<p>css 的 overflow 属性用来处理一个元素的尺寸超出其容器尺寸的情况。<br>overflow 属性有 4 种取值：visible（不作任何改动）、hidden（将溢出部分隐藏）、scroll（隐藏，但提供一个滚动条）和 auto（类似 scroll，但只有溢出时才显示滚动条）。</p>
+<p>这里选取 hidden 属性。</p>
+<p>添加 div，将 img 包进去，再添加对应的样式：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"slideshow"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"./topic.png"</span> <span class="attr">alt</span>=<span class="string">"building blocks of web Design"</span> <span class="attr">id</span>=<span class="string">"preview"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#slideshow</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">130px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来解决的时，让网页对用户的操作做出正确响应，当鼠标指针指在某个地方时，把对应的图片显示出来。</p>
+</li>
+<li><p>JavaScript</p>
+<p>编写一个 prepareSlideshow 来完成工作。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">prepareSlideshow</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementsByTagName) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(<span class="string">"linklist"</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(<span class="string">"preview"</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 为图片应用样式</span></span><br><span class="line">  <span class="keyword">var</span> preview = <span class="built_in">document</span>.getElementById(<span class="string">"preview"</span>);</span><br><span class="line">  preview.style.position = <span class="string">"absolute"</span>;</span><br><span class="line">  preview.style.left = <span class="string">"0px"</span>;</span><br><span class="line">  preview.style.top = <span class="string">"0px"</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> list = <span class="built_in">document</span>.getElementById(<span class="string">"linklist"</span>);</span><br><span class="line">  <span class="keyword">var</span> links = list.getElementsByTagName(<span class="string">"a"</span>);</span><br><span class="line"></span><br><span class="line">  links[<span class="number">0</span>].onmouseover = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    moveElement(<span class="string">"preview"</span>, <span class="number">-100</span>, <span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  links[<span class="number">1</span>].onmouseover = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    moveElement(<span class="string">"preview"</span>, <span class="number">-200</span>, <span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  links[<span class="number">2</span>].onmouseover = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    moveElement(<span class="string">"preview"</span>, <span class="number">-300</span>, <span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">addLoadEvent(prepareSlideshow);</span><br></pre></td></tr></table></figure>
+
+<p>将 js 文件添加到 html 文件，运行后将鼠标移到对应的链接上会出来动画效果：<br><img src="https://pic4.zhimg.com/80/v2-86d44aa0dc6cffbe084a325a91092499.png" alt="Image"></p>
+<p>但是来回移动时会出现混乱的情况。</p>
+</li>
+<li><p>变量的作用域</p>
+<p>动画效果出错是由全局变量引起的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">movement = setTimeout(reqpeat, interval);</span><br></pre></td></tr></table></figure>
+
+<p>但是直接使用局部变量也会出错，需要一种介乎二者之间的东西，也就是属性。<br>js 允许为元素创建属性：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.property = value;</span><br></pre></td></tr></table></figure>
+
+<p>所以更改为属性即可解决问题：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">elem.movement = setTimeout(reqpeat, interval);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>改进动画效果：<br>每次移动 1px，速度未免过慢。<br>可以设置每次前进这个距离的十分之一。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dist = (final_x - xpos) / <span class="number">10</span>;</span><br><span class="line">xpos = xpos + dist;</span><br></pre></td></tr></table></figure>
+
+<p>当差距小于 10 的时候，用这个差距除 10 的结果小于 1，将移动不了。<br>解决方法是使用 Math 对象的 ceil 函数，它可以返回一个不小于 dist 的值的一个整数，用法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.ceil(number);</span><br></pre></td></tr></table></figure>
+
+<p>最终代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">moveElement</span>(<span class="params">elementID, final_x, final_y, interval</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(elementID)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elem = <span class="built_in">document</span>.getElementById(elementID);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 声明 dist</span></span><br><span class="line">  <span class="keyword">var</span> dist = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">var</span> xpos = <span class="built_in">parseInt</span>(elem.style.left);</span><br><span class="line">  <span class="keyword">var</span> ypos = <span class="built_in">parseInt</span>(elem.style.top);</span><br><span class="line">  <span class="comment">// 如果相等就退出递归</span></span><br><span class="line">  <span class="keyword">if</span> (xpos == final_x &amp;&amp; ypos == final_y) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  <span class="comment">// 如果不相等就继续加减</span></span><br><span class="line">  <span class="keyword">if</span> (xpos &lt; final_x) &#123;</span><br><span class="line">    dist = <span class="built_in">Math</span>.ceil((final_x - xpos) / <span class="number">10</span>);</span><br><span class="line">    xpos = xpos + dist;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (xpos &gt; final_x) &#123;</span><br><span class="line">    dist = <span class="built_in">Math</span>.ceil((xpos - final_x) / <span class="number">10</span>);</span><br><span class="line">    xpos = xpos - dist;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (ypos &lt; final_y) &#123;</span><br><span class="line">    dist = <span class="built_in">Math</span>.ceil((final_y - ypos) / <span class="number">10</span>);</span><br><span class="line">    ypos = ypos + dist;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (ypos &gt; final_y) &#123;</span><br><span class="line">    dist = <span class="built_in">Math</span>.ceil((ypos - final_y) / <span class="number">10</span>);</span><br><span class="line">    ypos = ypos - dist;</span><br><span class="line">  &#125;</span><br><span class="line">  elem.style.left = xpos + <span class="string">"px"</span>;</span><br><span class="line">  elem.style.top = ypos + <span class="string">"px"</span>;</span><br><span class="line">  <span class="comment">// 每隔 interval 毫秒递归</span></span><br><span class="line">  <span class="keyword">var</span> reqpeat =</span><br><span class="line">    <span class="string">"moveElement('"</span> +</span><br><span class="line">    elementID +</span><br><span class="line">    <span class="string">"',"</span> +</span><br><span class="line">    final_x +</span><br><span class="line">    <span class="string">","</span> +</span><br><span class="line">    final_y +</span><br><span class="line">    <span class="string">","</span> +</span><br><span class="line">    interval +</span><br><span class="line">    <span class="string">")"</span>;</span><br><span class="line">  <span class="comment">// movement = setTimeout(reqpeat, interval);</span></span><br><span class="line">  elem.movement = setTimeout(reqpeat, interval);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加安全检查<br>诸如 elem.style.left 是否存在等。</p>
+</li>
+<li><p>生成 HTML 标记：<br>一些内容是为了存在动画效果而存在的，但是如果不支持 js，那么那些内容留在那里岂不是很尴尬，所以干脆让 js 来生成这些标记。</p>
+</li>
+</ul>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>实现动画效果并不难，问题是尖不应该使用动画。<br>动画技术可以让我们创建出很多非常酷的效果，但四处移动的元素用处不大。现在有一个通用性的函数，在有必要创建动画效果时帮上大忙。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/js/" rel="tag"># js</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/19/firefox-addons/" rel="prev" title="火狐上有哪些值得安装的扩展">
+      <i class="fa fa-chevron-left"></i> 火狐上有哪些值得安装的扩展
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScript-学习笔记（8）：动画效果"><span class="nav-number">1.</span> <span class="nav-text">JavaScript-学习笔记（8）：动画效果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基础知识"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">基础知识</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实用的动画"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">实用的动画</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小结"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="道理"
+      src="/images/head.jpg">
+  <p class="site-author-name" itemprop="name">道理</p>
+  <div class="site-description" itemprop="description">这个人很懒，什么也没有留下！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="mailto:jinl1874@foxmail.com" title="E-Mail → mailto:jinl1874@foxmail.com" rel="noopener" target="_blank"><i class="fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/jinl1874" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;jinl1874" rel="noopener" target="_blank"><i class="zhihu fa-fw"></i>Zhihu</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">粤ICP备19109479号 </a>
+      <img src="http://image.jinl1874.xyz/img/备案图标.png" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">道理</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://jinl1874.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://jinl1874.xyz/2020/07/20/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/";
+    this.page.identifier = "2020/07/20/JavaScript-学习笔记（8）/";
+    this.page.title = "JavaScript-学习笔记（8）：动画";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://jinl1874.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
