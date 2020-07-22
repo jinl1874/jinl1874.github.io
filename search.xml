@@ -1407,7 +1407,8 @@
 <h4 id="7-记事本替代——notepad3"><a href="#7-记事本替代——notepad3" class="headerlink" title="7. 记事本替代——notepad3"></a>7. 记事本替代——notepad3</h4><p><img src="https://pic4.zhimg.com/80/v2-23c994c8de63a39c0dca508da2e29a06.png" alt="Image"></p>
 <p>相信大家在写一些事情或者打开文本文件的时候经常会用到记事本，但是记事本的功能界面实在是太简陋了，比如常见的代码高亮、正则表达式、更改主题等全都没有。<br>然后就找到了这一款软件——notepad3，安装会自动替代系统的 notepad 软件，也就是说你打开 notepad 即是打开 notepad3。基本的使用方式是和 notepad 是一样的，但多了很多配置功能。</p>
 <p><a href="https://www.rizonesoft.com/downloads/notepad3/" target="_blank" rel="noopener">下载链接</a></p>
-<h4 id="8-window-任务栏透明小软件——TranslucentTB"><a href="#8-window-任务栏透明小软件——TranslucentTB" class="headerlink" title="8. window 任务栏透明小软件——TranslucentTB"></a>8. window 任务栏透明小软件——TranslucentTB</h4><p>任务栏默认是黑色的，有的会随主题颜色改变而改变，不过都不是透明的，并且有点显丑。TranslucentTB，可以使任务栏改变状态。一般有两种<br>模糊<br><img src="https://pic4.zhimg.com/80/v2-c52e293bb1f781b8980476c0961fb64c.png" alt="Image"><br>清晰<br><img src="https://pic4.zhimg.com/80/v2-a51aa1f41395567578f68cc5ea1815b1.png" alt="Image"></p>
+<h4 id="8-window-任务栏透明小软件——TranslucentTB"><a href="#8-window-任务栏透明小软件——TranslucentTB" class="headerlink" title="8. window 任务栏透明小软件——TranslucentTB"></a>8. window 任务栏透明小软件——TranslucentTB</h4><p>任务栏默认是黑色的，有的会随主题颜色改变而改变，不过都不是透明的，并且有点显丑。</p>
+<p>TranslucentTB，可以使任务栏改变状态。一般有两种<br>模糊<br><img src="https://pic4.zhimg.com/80/v2-c52e293bb1f781b8980476c0961fb64c.png" alt="Image"><br>清晰<br><img src="https://pic4.zhimg.com/80/v2-a51aa1f41395567578f68cc5ea1815b1.png" alt="Image"></p>
 <p><a href="https://github.com/TranslucentTB/TranslucentTB" target="_blank" rel="noopener">github 地址</a></p>
 <p>该软件已上架微软商店，可以去<a href="https://www.microsoft.com/zh-cn/p/translucenttb/9pf4kz2vn4w9?rtc=1" target="_blank" rel="noopener">该处</a>下载安装。</p>
 <h4 id="9-浏览器——Firefox"><a href="#9-浏览器——Firefox" class="headerlink" title="9. 浏览器——Firefox"></a>9. 浏览器——Firefox</h4><p>火狐浏览器一款开源浏览器，可能是仅存的非 chomium 内核浏览器。<br>对比 chrome 的优点是，上扩展商店以及同步数据的时候不用特别的上网方式。</p>
@@ -1813,6 +1814,42 @@ HTML5 提供了新的输入型表单：</p>
       <tags>
         <tag>js</tag>
         <tag>html</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>window-table-setting</title>
+    <url>/2020/07/22/window-table-setting/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>window 桌面最基本的一个需求——干净整洁。</p>
+<p>实现这一目标的最简单的方法，就是把桌面上所有的东西都删掉，效果显而易见，干净又整洁。</p>
+<p>清了桌面图标之后，启动应用有以下几种方式：</p>
+<h3 id="1-搜索"><a href="#1-搜索" class="headerlink" title="1. 搜索"></a>1. 搜索</h3><p>这个是比较常见的一种方式，先按 win 键，然后再键入需要搜索的软件名称。如果是使用拼音输入法，那么只需打上拼音，搜索栏就会显示要找的程序软件。<br>比如说找 TIM，直接键入 tim，再按回车即可。<br><img src="https://pic4.zhimg.com/80/v2-6ac2268f51f74a94e5b956024b420071.png" alt="Image"></p>
+<h3 id="2-开始屏幕"><a href="#2-开始屏幕" class="headerlink" title="2. 开始屏幕"></a>2. 开始屏幕</h3><p>不管常不常用，把图标固定在开始屏幕并分类好，使用的时候按 win 键，再点击所要打开的软件图标即可。<br><img src="https://pic4.zhimg.com/80/v2-497453142abdc45e2a4647bf522fa97b.png" alt="Image"></p>
+<h3 id="3-快捷键"><a href="#3-快捷键" class="headerlink" title="3. 快捷键"></a>3. 快捷键</h3><p>一些经常要用的软件，如 QQ、微信等，使用快捷键启动会更加方便快捷。</p>
+<p>设置方法：找到软件的快捷方式，右键再选择“打开文件位置”，<br><img src="https://pic4.zhimg.com/80/v2-30ab69193faa13057f8ff529da412f53.png" alt="Image"><br>打开所在的位置后，再右键该快捷方式，选择“属性”，<br><img src="https://pic4.zhimg.com/80/v2-4ef65ccec93f616fbabbd0746826bfe5.png" alt="Image"><br>设置快捷键后，点击确定即可：<br><img src="https://pic4.zhimg.com/80/v2-285d8de10140609d91c121fce45d5a5c.png" alt="Image"></p>
+<h3 id="4-win-r-启动"><a href="#4-win-r-启动" class="headerlink" title="4. win+r 启动"></a>4. win+r 启动</h3><p>设置太多快捷键会产生冲突，那么这时再启动另一方式—— win+r 启动程序。<br>按 win+r 后，会显示一个运行框，输入“notepad”，然后回车，即会启动记事本软件。<br><img src="https://pic4.zhimg.com/80/v2-9ec183b1bc2f13fc4ba3369ed0bd6c10.png" alt="Image"></p>
+<p>当然这只是一些系统软件才可以启动，要让第三方软件通过这种方式启动，只需做一些微小工作。</p>
+<ul>
+<li><p>新建文件夹：<br>先新建一个名为“WinR”的文件夹，放在一个容易找到的目录即可，并复制好“WinR”的所在目录。</p>
+</li>
+<li><p>设置环境变量：<br>在我的电脑里，右键此电脑打开“属性”选项，<br><img src="https://pic4.zhimg.com/80/v2-bb8e5add30182d04f79ff505485fe17b.png" alt="Image"><br>点击高级系统设置，再点击环境变量，<br><img src="https://pic4.zhimg.com/80/v2-bb84f6e99aa415f41ec61023f98f0a3c.png" alt="Image"><br>再点击系统变量里的 Path，点击编辑，<br><img src="https://pic4.zhimg.com/80/v2-8a8cb49f475f79a5ae662fc114d220ef.png" alt="Image"><br>再点击新建，再把 WinR 目录填进去，再一路确定到退出即可。<br><img src="https://pic4.zhimg.com/80/v2-f3582f691976a78767dc5708671a9c25.png" alt="Image"><br>注：若显示是下面这样的，在文本末尾分号后面填入目录，再在末尾加上分号（英文输入法的分号），再点击确定即可。若是文本末没有分号，要自已添加一个分号，再粘贴上目录。<br><img src="https://pic4.zhimg.com/80/v2-f05c4f68713e72807ee7d1c58e240a76.png" alt="Image"></p>
+</li>
+<li><p>放入快捷方式：<br>在 WinR 放入快捷方式，再改成一个比较简单好记的名字，比如微信改为 wx，记事本改为 np，虾米改为 xm 等。<br><img src="https://pic4.zhimg.com/80/v2-9b61c4872aa3f53b034974b8571fa6f4.png" alt="Image"></p>
+</li>
+</ul>
+<p>这样就设置好了，再使用 win+r，再键入 wx 回车即可打开微信。</p>
+<h3 id="5-任务栏"><a href="#5-任务栏" class="headerlink" title="5. 任务栏"></a>5. 任务栏</h3><p>默认的是黑色的，有点丑，<br><img src="https://pic4.zhimg.com/80/v2-f88a791e75eb8aed87162235489ef750.png" alt="Image"><br>使用 TranslucentTB 可使之透明化。<br>该软件的<a href="https://github.com/TranslucentTB/TranslucentTB" target="_blank" rel="noopener">github 地址</a>。</p>
+<p>已上架微软商店，可以去<a href="https://www.microsoft.com/zh-cn/p/translucenttb/9pf4kz2vn4w9?rtc=1" target="_blank" rel="noopener">该处</a>下载安装。</p>
+<p>一些常用的软件也可固定在任务，比如浏览器，而文件管理器可以用快捷键<br>win+e 打开，就不需要固定了。</p>
+<p>在任务栏右键可选择显示一些按钮与否，<br><img src="https://pic4.zhimg.com/80/v2-3dac6facfcc9be3c3d55bea05aac7ebf.png" alt="Image"><br>我感觉这些都有点多余，于是全部隐藏。</p>
+<h3 id="6-END"><a href="#6-END" class="headerlink" title="6. END"></a>6. END</h3><p>到这里，基本上一个整洁的桌面就完成了，没有什么特殊的效果，也不需要安装什么桌面软件，但干净就够了。</p>
+<p>最后晒一下我的桌面：<br><img src="https://pic4.zhimg.com/80/v2-f61899e001064a713ad0b50e867fd34f.png" alt="Image"></p>
+]]></content>
+      <categories>
+        <category>Window</category>
+      </categories>
+      <tags>
+        <tag>wp10</tag>
+        <tag>win</tag>
       </tags>
   </entry>
 </search>
