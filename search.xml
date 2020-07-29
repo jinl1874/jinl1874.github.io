@@ -1819,7 +1819,8 @@ HTML5 提供了新的输入型表单：</p>
   <entry>
     <title>window-table-setting</title>
     <url>/2020/07/22/window-table-setting/</url>
-    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>window 桌面最基本的一个需求——干净整洁。</p>
+    <content><![CDATA[<p><img src="https://pic4.zhimg.com/80/v2-2663a9d08b4c8eef6c69b3ca812bbd26.png" alt="Image"></p>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>window 桌面最基本的一个需求——干净整洁。</p>
 <p>实现这一目标的最简单的方法，就是把桌面上所有的东西都删掉，效果显而易见，干净又整洁。</p>
 <p>清了桌面图标之后，启动应用有以下几种方式：</p>
 <h3 id="1-搜索"><a href="#1-搜索" class="headerlink" title="1. 搜索"></a>1. 搜索</h3><p>这个是比较常见的一种方式，先按 win 键，然后再键入需要搜索的软件名称。如果是使用拼音输入法，那么只需打上拼音，搜索栏就会显示要找的程序软件。<br>比如说找 TIM，直接键入 tim，再按回车即可。<br><img src="https://pic4.zhimg.com/80/v2-6ac2268f51f74a94e5b956024b420071.png" alt="Image"></p>
@@ -1850,6 +1851,29 @@ HTML5 提供了新的输入型表单：</p>
       <tags>
         <tag>wp10</tag>
         <tag>win</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript-学习笔记（10）</title>
+    <url>/2020/07/22/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%8810%EF%BC%89/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>雾山五行-剧评</title>
+    <url>/2020/07/29/%E9%9B%BE%E5%B1%B1%E7%AC%AC%E4%B8%80%E9%9B%86/</url>
+    <content><![CDATA[<p>就第一集来看，是一部非常优秀的动画。</p>
+<h4 id="画面"><a href="#画面" class="headerlink" title="画面"></a>画面</h4><p>本片的风格是 2D 水墨画视频，第一感觉是惊艳，国产动画终于不是那种日式动画风了。粗线条的人物、水墨风的背景，这就是国产原汁原味的动画啊。<br>风景<br><img src="https://pic4.zhimg.com/80/v2-708c6c68cfd54a29681c1c8aa8f015a5.png" alt="Image"><br>屋子<br><img src="https://pic4.zhimg.com/80/v2-41e07649221ba1730cdf3b7fa266e746.png" alt="Image"><br>女主有点可爱啊<br><img src="https://pic4.zhimg.com/80/v2-24d5496376887ee539aac33f81302fc2.png" alt="Image"><br>颜艺<br><img src="https://pic4.zhimg.com/80/v2-4063a6cca45aafd5b1985f0b61deecf8.png" alt="Image"></p>
+<p>还有就是《雾山》的打斗十分精彩，开头的特效打斗固然好看，但精彩程度不如后面三个蒙面和那两位大叔的刀剑枪之间的战斗。动作流畅，作画张数多<br><img src="https://pic4.zhimg.com/80/v2-14c7b5720b3de9143bd6bd85edb62506.png" alt="Image"><br>还有后面的耍长枪的打斗，这么多年了，我终于看到耍枪的打斗了。<br><img src="https://pic4.zhimg.com/80/v2-bcdf61e84e92b6dea2ffd74e1069475b.png" alt="Image"></p>
+<h4 id="剧情"><a href="#剧情" class="headerlink" title="剧情"></a>剧情</h4><p>当前剧情还没展开，主要介绍了下背景以及一些人物。</p>
+<p>开场火娃放出了麒麟（这背后应该有故事），然后被吊打。接着其它五行都出来，逼退了麒麟，但是麒麟他爹出来，捉了两个人质，要他们把麒麟捉回来换。</p>
+<p>在后面还介绍了五行的作用（大概是这个词吧），是镇压雾山下的妖怪来着。酒鬼老头谈火娃的过错应该就是放出麒麟，之后火娃接受了某种约束，不能使用自己的能力之类，并且放一个鸭子身旁监视。<br><img src="https://pic4.zhimg.com/80/v2-a99eb7e3171eedcb2c68e25a8a587d67.png" alt="Image"></p>
+<p>主要挖了几个坑，麒麟去哪了，自那件事后过了多了多久，为什么火娃不去找麒麟，那两个人质在结界里待久了会不会出事？</p>
+<p>那三个小妖可以来到雾山，说明雾山很可能出现了问题。这个问题会不会与那个大哥有关？那些药师的大哥经常需要吃一个叫“聚仙丸”的药，感觉很有可能就是一个妖怪，就算不是妖怪，也应该和妖怪有一定的关系。</p>
+<p>当然，上面只是虾扯蛋，具体会发生什么，等剧情发展吧。</p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>光是这画面以及这打斗就值得一看了，剧情方面还没看出什么来，就是配音方面有点不自然，换句话说就是尴尬。</p>
+]]></content>
+      <tags>
+        <tag>anime</tag>
       </tags>
   </entry>
 </search>
