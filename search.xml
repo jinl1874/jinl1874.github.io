@@ -1915,4 +1915,100 @@ HTML5 提供了新的输入型表单：</p>
         <tag>book</tag>
       </tags>
   </entry>
+  <entry>
+    <title>JavaScript 高级程序设计（1）</title>
+    <url>/2020/08/01/JavaScript-%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%881%EF%BC%89/</url>
+    <content><![CDATA[<h4 id="1-元素"><a href="#1-元素" class="headerlink" title="1.  元素"></a>1. <script> 元素</h4><p>在 HTML 代码中插入 js 脚本，需要<code>script</code>元素，它有几个属性：</p>
+<ul>
+<li>async：可选，表示应该立即下载脚本。</li>
+<li>charset：可选，表示 src 属性指定代码的字符集，一般没人用。</li>
+<li>defer：可选，表示脚本延迟到文档完全解析后才执行。</li>
+<li>src：可选，执行的外部文件。</li>
+<li>type：可选是 language 的替代属性，表示编写代码使用的脚本语言的类型。默认值是 <code>text/javascript</code>。</li>
+</ul>
+<p>标签一般会放在<code>&lt;head&gt;</code>元素里，但是会出现延迟，所以可以选择放在 <code>&lt;body&gt;</code> 的底部。</p>
+<p>或者可以选择在 <code>&lt;script&gt;</code> 元素中添加 defer 属性。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">defer</span>=<span class="string">"defer"</span> <span class="attr">src</span>=<span class="string">"example.js"</span>&gt;</span> <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>asyn 属性与 defer 属性类似，用于改变处理脚本。async 只用于外部脚本文件，告诉浏览器立即下载，不保证顺序。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">"example.js"</span>&gt;</span> <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>因为当有些浏览器不支持的 js 的时候，导致 js 代码会显示在页面当中。</p>
+<h4 id="2-嵌入代码与外部文件"><a href="#2-嵌入代码与外部文件" class="headerlink" title="2. 嵌入代码与外部文件"></a>2. 嵌入代码与外部文件</h4><p>不推荐把 javascript 代码包在 HTML 中，如下面：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">  <span class="function"><span class="keyword">function</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">    <span class="comment">// statement</span></span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>一般选择外部文件更好，因为在外部文件更好维护，可缓存（两个页面使用同一个文件，那么只需要一次下载），适应未来。</p>
+<h4 id="3-文档模式"><a href="#3-文档模式" class="headerlink" title="3. 文档模式"></a>3. 文档模式</h4><p>通过文档类型（doctype）切换实现。</p>
+<h4 id="4-元素"><a href="#4-元素" class="headerlink" title="4.  元素"></a>4. <noscript> 元素</h4><p>当浏览器不支持脚本，或者浏览器支持脚本，但脚本被禁用的情况下，浏览器才会显示 <code>&lt;noscript&gt;</code> 的内容。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">noscript</span>&gt;</span> <span class="tag">&lt;<span class="name">p</span>&gt;</span>本页面需要浏览器支持（启用）JavaScript.<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">noscript</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript-高级程序设计（2）</title>
+    <url>/2020/08/01/JavaScript-%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%882%EF%BC%89/</url>
+    <content><![CDATA[<h4 id="1-数据类型"><a href="#1-数据类型" class="headerlink" title="1. 数据类型"></a>1. 数据类型</h4><p>有五种简单数据类型：Undefined、Null、Boolean、Number、String，一种复杂数据——Object。</p>
+<p>typeof 操作符，其返回值是一个字符串有：</p>
+<ul>
+<li>undefined：该值未定义；</li>
+<li>boolean：该值为布尔值；</li>
+<li>string：该值是字符串；</li>
+<li>number：该值是数值；</li>
+<li>object：该值为对象或者 null；</li>
+<li>function：该值为函数。</li>
+</ul>
+<p>使用方法：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">1</span>;</span><br><span class="line">alert(<span class="keyword">typeof</span> num); <span class="comment">// number</span></span><br><span class="line">alert(<span class="keyword">typeof</span> <span class="number">1</span>); <span class="comment">// number</span></span><br></pre></td></tr></table></figure>
+
+<p>变量没定义之前的值就是 Undefined：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> test_0;</span><br><span class="line">alert(test_0 == <span class="literal">undefined</span>); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> test_1 = <span class="literal">undefined</span>;</span><br><span class="line">alert(test_1 == <span class="literal">undefined</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>Null 类型也只有一个值，null，表示一个空指针对象。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> test = <span class="literal">null</span>;</span><br><span class="line">alert(<span class="keyword">typeof</span> test); <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
+
+<p>Number 有一个 NaN（Not a Number）值，用于表示一个返回数值的操作数值未返回数值的情况。比如 在其它语言里 数值除以 0 会报错，而在 js 会返回上面个个值。NaN 与其它值的相加相除等操作返回的值也是 NaN。</p>
+<p>Number 数值转换有三个函数：Number()、parseInt() 以及 parseFloat()。<br>Number() 可用于任何任何数据类型，其它两个是用于字符串的。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"11"</span>;</span><br><span class="line"><span class="keyword">var</span> str_num = <span class="built_in">Number</span>(str);</span><br></pre></td></tr></table></figure>
+
+<p>转换为字符串的方法有两种方式，第一个就是第个值都有的 toString() 方法。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">11</span>;</span><br><span class="line"><span class="keyword">var</span> num_str = num.toString();</span><br></pre></td></tr></table></figure>
+
+<p>toString 方法可传入基数，输入不同的值会有不同的返回不同的进制数。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">11</span>;</span><br><span class="line"><span class="keyword">var</span> num_str = num.toString(<span class="number">2</span>); <span class="comment">// 1011</span></span><br></pre></td></tr></table></figure>
+
+<p>亦可直接使用 String() ，使用方法与 Number() 类似。</p>
+<h4 id="2-操作符"><a href="#2-操作符" class="headerlink" title="2. 操作符"></a>2. 操作符</h4><p><code>+-*/&lt;&gt;=&amp;&amp;||</code> 与其它语言是类似的。</p>
+<p>有一点需要注意全等和不全等符，全等符由 3 个等号（===）表示，在两个操作数未经转换就相等的情况下返回 true，如下面</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result_0 = <span class="string">"55"</span> == <span class="number">55</span>; <span class="comment">// true 转换后相等</span></span><br><span class="line"><span class="keyword">var</span> result_1 = <span class="string">"55"</span> === <span class="number">55</span>; <span class="comment">// false 未转换后不等</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-语句"><a href="#3-语句" class="headerlink" title="3. 语句"></a>3. 语句</h4><p><code>if/else/while/for</code> 等语句与 C 语言类似。</p>
+<p>for-in 语句是一个精准的迭代语句，可以枚举对象的属性，与 python 的 for 语句类似。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (property <span class="keyword">in</span> expression) statement;</span><br></pre></td></tr></table></figure>
+
+<p>例子：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> proName <span class="keyword">in</span> <span class="built_in">window</span>) &#123;</span><br><span class="line">  <span class="built_in">document</span>.write(propName);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>label 语句可以在代码中添加标签，以便将来使用，用法：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">label: statement;</span><br></pre></td></tr></table></figure>
+
+<p>例子：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">start: <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  alert(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>with 语句的作用是将代码的作用域设置到一个特定的对象中，用法：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> (expression) statement;</span><br></pre></td></tr></table></figure>
+
+<p>with 语句的目的是为了简化多次编写同一个对象的工作，如例子示：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> qs = location.search.substring(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">var</span> hostName = location.hostname;</span><br><span class="line"><span class="keyword">var</span> url = location.href;</span><br></pre></td></tr></table></figure>
+
+<p>用 with 语句可改写为：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> (location) &#123;</span><br><span class="line">  <span class="keyword">var</span> qs = search.substring(<span class="number">1</span>);</span><br><span class="line">  <span class="keyword">var</span> hostName = hostname;</span><br><span class="line">  <span class="keyword">var</span> url = href;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-函数"><a href="#4-函数" class="headerlink" title="4. 函数"></a>4. 函数</h4><p>js 不像 java 那样可以实现重载，如相同的函数名接受不同参数的类型和数量，可定义不同的函数。<br>如果 js 定义两个相同的函数，那么名字只属于后定义的函数。</p>
+]]></content>
+      <tags>
+        <tag>-js</tag>
+      </tags>
+  </entry>
 </search>

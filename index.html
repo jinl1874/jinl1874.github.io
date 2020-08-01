@@ -208,6 +208,228 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/08/01/JavaScript-%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%882%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="道理">
+      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MyBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/01/JavaScript-%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%882%EF%BC%89/" class="post-title-link" itemprop="url">JavaScript-高级程序设计（2）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-01 12:09:03" itemprop="dateCreated datePublished" datetime="2020-08-01T12:09:03+08:00">2020-08-01</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2020/08/01/JavaScript-%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%882%EF%BC%89/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/08/01/JavaScript-高级程序设计（2）/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="1-数据类型"><a href="#1-数据类型" class="headerlink" title="1. 数据类型"></a>1. 数据类型</h4><p>有五种简单数据类型：Undefined、Null、Boolean、Number、String，一种复杂数据——Object。</p>
+<p>typeof 操作符，其返回值是一个字符串有：</p>
+<ul>
+<li>undefined：该值未定义；</li>
+<li>boolean：该值为布尔值；</li>
+<li>string：该值是字符串；</li>
+<li>number：该值是数值；</li>
+<li>object：该值为对象或者 null；</li>
+<li>function：该值为函数。</li>
+</ul>
+<p>使用方法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">1</span>;</span><br><span class="line">alert(<span class="keyword">typeof</span> num); <span class="comment">// number</span></span><br><span class="line">alert(<span class="keyword">typeof</span> <span class="number">1</span>); <span class="comment">// number</span></span><br></pre></td></tr></table></figure>
+
+<p>变量没定义之前的值就是 Undefined：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> test_0;</span><br><span class="line">alert(test_0 == <span class="literal">undefined</span>); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> test_1 = <span class="literal">undefined</span>;</span><br><span class="line">alert(test_1 == <span class="literal">undefined</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>Null 类型也只有一个值，null，表示一个空指针对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> test = <span class="literal">null</span>;</span><br><span class="line">alert(<span class="keyword">typeof</span> test); <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
+
+<p>Number 有一个 NaN（Not a Number）值，用于表示一个返回数值的操作数值未返回数值的情况。比如 在其它语言里 数值除以 0 会报错，而在 js 会返回上面个个值。NaN 与其它值的相加相除等操作返回的值也是 NaN。</p>
+<p>Number 数值转换有三个函数：Number()、parseInt() 以及 parseFloat()。<br>Number() 可用于任何任何数据类型，其它两个是用于字符串的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"11"</span>;</span><br><span class="line"><span class="keyword">var</span> str_num = <span class="built_in">Number</span>(str);</span><br></pre></td></tr></table></figure>
+
+<p>转换为字符串的方法有两种方式，第一个就是第个值都有的 toString() 方法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">11</span>;</span><br><span class="line"><span class="keyword">var</span> num_str = num.toString();</span><br></pre></td></tr></table></figure>
+
+<p>toString 方法可传入基数，输入不同的值会有不同的返回不同的进制数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">11</span>;</span><br><span class="line"><span class="keyword">var</span> num_str = num.toString(<span class="number">2</span>); <span class="comment">// 1011</span></span><br></pre></td></tr></table></figure>
+
+<p>亦可直接使用 String() ，使用方法与 Number() 类似。</p>
+<h4 id="2-操作符"><a href="#2-操作符" class="headerlink" title="2. 操作符"></a>2. 操作符</h4><p><code>+-*/&lt;&gt;=&amp;&amp;||</code> 与其它语言是类似的。</p>
+<p>有一点需要注意全等和不全等符，全等符由 3 个等号（===）表示，在两个操作数未经转换就相等的情况下返回 true，如下面</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result_0 = <span class="string">"55"</span> == <span class="number">55</span>; <span class="comment">// true 转换后相等</span></span><br><span class="line"><span class="keyword">var</span> result_1 = <span class="string">"55"</span> === <span class="number">55</span>; <span class="comment">// false 未转换后不等</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-语句"><a href="#3-语句" class="headerlink" title="3. 语句"></a>3. 语句</h4><p><code>if/else/while/for</code> 等语句与 C 语言类似。</p>
+<p>for-in 语句是一个精准的迭代语句，可以枚举对象的属性，与 python 的 for 语句类似。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (property <span class="keyword">in</span> expression) statement;</span><br></pre></td></tr></table></figure>
+
+<p>例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> proName <span class="keyword">in</span> <span class="built_in">window</span>) &#123;</span><br><span class="line">  <span class="built_in">document</span>.write(propName);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>label 语句可以在代码中添加标签，以便将来使用，用法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">label: statement;</span><br></pre></td></tr></table></figure>
+
+<p>例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">start: <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  alert(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>with 语句的作用是将代码的作用域设置到一个特定的对象中，用法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> (expression) statement;</span><br></pre></td></tr></table></figure>
+
+<p>with 语句的目的是为了简化多次编写同一个对象的工作，如例子示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> qs = location.search.substring(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">var</span> hostName = location.hostname;</span><br><span class="line"><span class="keyword">var</span> url = location.href;</span><br></pre></td></tr></table></figure>
+
+<p>用 with 语句可改写为：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> (location) &#123;</span><br><span class="line">  <span class="keyword">var</span> qs = search.substring(<span class="number">1</span>);</span><br><span class="line">  <span class="keyword">var</span> hostName = hostname;</span><br><span class="line">  <span class="keyword">var</span> url = href;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-函数"><a href="#4-函数" class="headerlink" title="4. 函数"></a>4. 函数</h4><p>js 不像 java 那样可以实现重载，如相同的函数名接受不同参数的类型和数量，可定义不同的函数。<br>如果 js 定义两个相同的函数，那么名字只属于后定义的函数。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/08/01/JavaScript-%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%881%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="道理">
+      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MyBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/01/JavaScript-%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%881%EF%BC%89/" class="post-title-link" itemprop="url">JavaScript 高级程序设计（1）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-01 12:08:56" itemprop="dateCreated datePublished" datetime="2020-08-01T12:08:56+08:00">2020-08-01</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2020/08/01/JavaScript-%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%881%EF%BC%89/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/08/01/JavaScript-高级程序设计（1）/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="1-元素"><a href="#1-元素" class="headerlink" title="1.  元素"></a>1. <script> 元素</h4><p>在 HTML 代码中插入 js 脚本，需要<code>script</code>元素，它有几个属性：</p>
+<ul>
+<li>async：可选，表示应该立即下载脚本。</li>
+<li>charset：可选，表示 src 属性指定代码的字符集，一般没人用。</li>
+<li>defer：可选，表示脚本延迟到文档完全解析后才执行。</li>
+<li>src：可选，执行的外部文件。</li>
+<li>type：可选是 language 的替代属性，表示编写代码使用的脚本语言的类型。默认值是 <code>text/javascript</code>。</li>
+</ul>
+<p>标签一般会放在<code>&lt;head&gt;</code>元素里，但是会出现延迟，所以可以选择放在 <code>&lt;body&gt;</code> 的底部。</p>
+<p>或者可以选择在 <code>&lt;script&gt;</code> 元素中添加 defer 属性。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">defer</span>=<span class="string">"defer"</span> <span class="attr">src</span>=<span class="string">"example.js"</span>&gt;</span> <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>asyn 属性与 defer 属性类似，用于改变处理脚本。async 只用于外部脚本文件，告诉浏览器立即下载，不保证顺序。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">"example.js"</span>&gt;</span> <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>因为当有些浏览器不支持的 js 的时候，导致 js 代码会显示在页面当中。</p>
+<h4 id="2-嵌入代码与外部文件"><a href="#2-嵌入代码与外部文件" class="headerlink" title="2. 嵌入代码与外部文件"></a>2. 嵌入代码与外部文件</h4><p>不推荐把 javascript 代码包在 HTML 中，如下面：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">  <span class="function"><span class="keyword">function</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">    <span class="comment">// statement</span></span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>一般选择外部文件更好，因为在外部文件更好维护，可缓存（两个页面使用同一个文件，那么只需要一次下载），适应未来。</p>
+<h4 id="3-文档模式"><a href="#3-文档模式" class="headerlink" title="3. 文档模式"></a>3. 文档模式</h4><p>通过文档类型（doctype）切换实现。</p>
+<h4 id="4-元素"><a href="#4-元素" class="headerlink" title="4.  元素"></a>4. <noscript> 元素</h4><p>当浏览器不支持脚本，或者浏览器支持脚本，但脚本被禁用的情况下，浏览器才会显示 <code>&lt;noscript&gt;</code> 的内容。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">noscript</span>&gt;</span> <span class="tag">&lt;<span class="name">p</span>&gt;</span>本页面需要浏览器支持（启用）JavaScript.<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">noscript</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/07/30/%E4%B9%A6%E8%AF%84-%E5%AF%BB%E7%8B%97%E4%BA%8B%E5%8A%A1%E6%89%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -231,8 +453,9 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-07-30 12:41:21" itemprop="dateCreated datePublished" datetime="2020-07-30T12:41:21+08:00">2020-07-30</time>
+              <time title="创建时间：2020-07-30 12:41:21 / 修改时间：21:01:05" itemprop="dateCreated datePublished" datetime="2020-07-30T12:41:21+08:00">2020-07-30</time>
             </span>
 
           
@@ -1226,382 +1449,6 @@ HTML5 提供了新的输入型表单：</p>
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/07/18/window-soft/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.jpg">
-      <meta itemprop="name" content="道理">
-      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MyBlog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/18/window-soft/" class="post-title-link" itemprop="url">电脑有哪些可以提升体验的软件？</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-07-18 12:52:28" itemprop="dateCreated datePublished" datetime="2020-07-18T12:52:28+08:00">2020-07-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-22 20:48:28" itemprop="dateModified" datetime="2020-07-22T20:48:28+08:00">2020-07-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Window/" itemprop="url" rel="index"><span itemprop="name">Window</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/2020/07/18/window-soft/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/07/18/window-soft/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>以下这些都是可以提升电脑使用体验的 10 款软件。</p>
-<h4 id="1-截图软件：Snipaste"><a href="#1-截图软件：Snipaste" class="headerlink" title="1. 截图软件：Snipaste"></a>1. 截图软件：Snipaste</h4><p>曾经我是个手机拍屏党，后来被诸多表情大师教会截图后，毅然地转到截图派。<br><img src="https://pic4.zhimg.com/80/v2-a8e78bd7fd888e942cd369fa8128fdf5.jpg" alt="Image"></p>
-<p>一开始使用的是 QQ 截图以及微信截图，但是这两个截图方式都要事先打开这俩软件，并且也不够专业/好用，最后找到了这个截图软件——Snipaste。<br>这个号称最好用的的截图软件，目前已经有 win 版、mac beta 版。</p>
-<p>它好用在哪里呢？<br>第一，软件轻量，并且无广告。这个软件有免费版和专业版，免费版没有任何广告，提供的功能也足够个人用户使用；<br>第二，功能强：</p>
-<blockquote>
-<p>自动检测界面元素区域</p>
-<p>像素级的鼠标移动控制、截图范围控制</p>
-<p>取色器 (试试 F1, C, F3)</p>
-<p>历史记录回放 (,/.)</p>
-<p>支持多屏</p>
-<p>支持高分屏</p>
-</blockquote>
-<p>第三，无与伦与的贴图功能。当你写文档需要查资料时，把相关截图贴上屏幕后，体验瞬间上一档次；</p>
-<p><img src="https://pic4.zhimg.com/80/v2-170c49a04f7547fa4bb5c85fef5b147c.png" alt="Image"></p>
-<p>第四，更强的图像标注功能，基本一个常见图片编辑器有的，这个都有；</p>
-<p>第五，可自定义截图的分辨率。</p>
-<p>更多的功能可以去看<a href="https://docs.snipaste.com/zh-cn/" target="_blank" rel="noopener">官方文档</a>。<br>官网下载<a href="https://zh.snipaste.com/" target="_blank" rel="noopener">地址</a></p>
-<h4 id="2-文件查找——Everything"><a href="#2-文件查找——Everything" class="headerlink" title="2. 文件查找——Everything"></a>2. 文件查找——Everything</h4><p><img src="https://pic4.zhimg.com/80/v2-37f70af2050b2a4dab90016cf2eade08.png" alt="Image"></p>
-<p>一个轻量级的查找文件的软件，当做好索引后，查找文件的速度是秒计的。<br>不过这个是实在找不到文件时才用的，平时做好文件的分类索引后，就很少有它的用武之地。</p>
-<p><a href="https://www.voidtools.com/" target="_blank" rel="noopener">下载地址</a></p>
-<h4 id="3-解压缩软件——7z"><a href="#3-解压缩软件——7z" class="headerlink" title="3. 解压缩软件——7z"></a>3. 解压缩软件——7z</h4><p><img src="https://pic4.zhimg.com/80/v2-b8897b531c317f6d1180a27d4856cf95.png" alt="Image"></p>
-<p>解压缩软件是电脑里必备的软件之一了。<br>常见的解压缩软件有——winrar、360 压缩、bendzip 等。</p>
-<p>7Z 的优点是开源、免费、轻量（安装包仅 1.3Mb），压缩比也高，并且压缩软件该有的功能一个不少。缺点就是颜值一般般，追求这方面的话，推荐另一款同样优秀的压缩软件——Bendzip。</p>
-<p><a href="https://sparanoid.com/lab/7z/" target="_blank" rel="noopener">官网下载地址</a></p>
-<h4 id="4-阅读-PDF-文件——sumatra"><a href="#4-阅读-PDF-文件——sumatra" class="headerlink" title="4. 阅读 PDF 文件——sumatra"></a>4. 阅读 PDF 文件——sumatra</h4><p><img src="https://pic4.zhimg.com/80/v2-df0a829b4032f0226b887427a201798c.png" alt="Image"><br>说是阅读 PDF 软件，其实还支持 epub、mobi、CHM 等文件的阅读。</p>
-<blockquote>
-<p>Sumatra PDF is a PDF, ePub, MOBI, CHM, XPS, DjVu, CBZ, CBR reader for Windows.</p>
-</blockquote>
-<p>优点是轻量、占用内存小、简洁、开源。</p>
-<p><a href="https://www.sumatrapdfreader.org/download-free-pdf-viewer.html" target="_blank" rel="noopener">官网下载地址</a></p>
-<h4 id="5-下载软件——IDM"><a href="#5-下载软件——IDM" class="headerlink" title="5. 下载软件——IDM"></a>5. 下载软件——IDM</h4><p><img src="https://pic4.zhimg.com/80/v2-41146ab15375705b71f80c0ba4b59187.png" alt="Image"></p>
-<p>一个使用多线程的下载软件，可以接管浏览器里的下载，下载速度非常快。不仅如此，该软件还可以几乎所有网站上的视频，还可以下载百度网盘的文件不过需要一点配置。</p>
-<p>曾经写过一篇 IDM 下载的配置，里面有 IDM 的下载链接，<a href="https://jinl1874.xyz/2020/06/28/use-idm/">地址</a>。</p>
-<h4 id="6-视频软件——PotPlayer"><a href="#6-视频软件——PotPlayer" class="headerlink" title="6. 视频软件——PotPlayer"></a>6. 视频软件——PotPlayer</h4><p><img src="https://pic4.zhimg.com/80/v2-ee68e61b55fca6dcd2473d322f6f2df8.png" alt="Image"><br>大概是最优秀的视频播放器了，界面简洁美观，没有流氓软件有的一切行为，比如突然修改你的默认播放软件等。<br>功能多，录屏、截 gif 之类的不在话下，支持逐帧跳转，截图非常方便。总之一般视频播放软件有的，它也有；其它播放软件没有的，它也有，比如可以收看电视信号，看直播等，可以去网上搜一下教程。</p>
-<p><a href="http://www.potplayercn.com/" target="_blank" rel="noopener">官网下载链接</a></p>
-<h4 id="7-记事本替代——notepad3"><a href="#7-记事本替代——notepad3" class="headerlink" title="7. 记事本替代——notepad3"></a>7. 记事本替代——notepad3</h4><p><img src="https://pic4.zhimg.com/80/v2-23c994c8de63a39c0dca508da2e29a06.png" alt="Image"></p>
-<p>相信大家在写一些事情或者打开文本文件的时候经常会用到记事本，但是记事本的功能界面实在是太简陋了，比如常见的代码高亮、正则表达式、更改主题等全都没有。<br>然后就找到了这一款软件——notepad3，安装会自动替代系统的 notepad 软件，也就是说你打开 notepad 即是打开 notepad3。基本的使用方式是和 notepad 是一样的，但多了很多配置功能。</p>
-<p><a href="https://www.rizonesoft.com/downloads/notepad3/" target="_blank" rel="noopener">下载链接</a></p>
-<h4 id="8-window-任务栏透明小软件——TranslucentTB"><a href="#8-window-任务栏透明小软件——TranslucentTB" class="headerlink" title="8. window 任务栏透明小软件——TranslucentTB"></a>8. window 任务栏透明小软件——TranslucentTB</h4><p>任务栏默认是黑色的，有的会随主题颜色改变而改变，不过都不是透明的，并且有点显丑。</p>
-<p>TranslucentTB，可以使任务栏改变状态。一般有两种<br>模糊<br><img src="https://pic4.zhimg.com/80/v2-c52e293bb1f781b8980476c0961fb64c.png" alt="Image"><br>清晰<br><img src="https://pic4.zhimg.com/80/v2-a51aa1f41395567578f68cc5ea1815b1.png" alt="Image"></p>
-<p><a href="https://github.com/TranslucentTB/TranslucentTB" target="_blank" rel="noopener">github 地址</a></p>
-<p>该软件已上架微软商店，可以去<a href="https://www.microsoft.com/zh-cn/p/translucenttb/9pf4kz2vn4w9?rtc=1" target="_blank" rel="noopener">该处</a>下载安装。</p>
-<h4 id="9-浏览器——Firefox"><a href="#9-浏览器——Firefox" class="headerlink" title="9. 浏览器——Firefox"></a>9. 浏览器——Firefox</h4><p>火狐浏览器一款开源浏览器，可能是仅存的非 chomium 内核浏览器。<br>对比 chrome 的优点是，上扩展商店以及同步数据的时候不用特别的上网方式。</p>
-<p>注意下载浏览器的时候不要下载到国内特供版，看准网址，如果域名是(firefox.com.cn)的话，那就是国内特供的了，认准域名(mozilla.org)。国内特供版的数据无法与非国内版的同步，曾经我就是被这个坑过。</p>
-<p><a href="https://www.mozilla.org/en-US/firefox/new/" target="_blank" rel="noopener">下载地址</a></p>
-<h4 id="10-安全软件——火绒"><a href="#10-安全软件——火绒" class="headerlink" title="10. 安全软件——火绒"></a>10. 安全软件——火绒</h4><p>一个没有任何流氓行为的安全软件，不过我也就是用它来管管弹窗，以及开机自启动软件的，一般的安全问题有 window defense 就够了。<br>如果你的电脑安装有其它国产免费安全软件的话，早卸早安全。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/07/13/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%886%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.jpg">
-      <meta itemprop="name" content="道理">
-      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MyBlog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/13/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%886%EF%BC%89/" class="post-title-link" itemprop="url">JavaScript-学习笔记（6）：动态创建标记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-07-13 23:55:58" itemprop="dateCreated datePublished" datetime="2020-07-13T23:55:58+08:00">2020-07-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-15 13:03:46" itemprop="dateModified" datetime="2020-07-15T13:03:46+08:00">2020-07-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/2020/07/13/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%886%EF%BC%89/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/07/13/JavaScript-学习笔记（6）/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>网页的结构由标记语言创建，js 可用来改变细节而不改变结构。<br>同样，js 也可用来改变网页的结构和内容。</p>
-<h4 id="传统方法"><a href="#传统方法" class="headerlink" title="传统方法"></a>传统方法</h4><ol>
-<li><p><code>document.write</code>：<br><code>write</code>方法可以把字符串插入到文档里。<br>使用方法，编辑 test.html 文件：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">document</span>.write(<span class="string">"&lt;p&gt; 这是一个段落 &lt;/p&gt;"</span>);</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>结果：<br><img src="https://pic4.zhimg.com/80/v2-4bd0170134f423a47cb3fe7ac79348e8.png" alt="Image"></p>
-<p>缺点：这样做会使得标记与 js 代码混杂在一起，代码即不容易理解，也无法享受代码与结构分离的好处。应避免<code>&lt;body&gt;</code>乱用<code>&lt;script&gt;</code>标签，尽量减少使用<code>document.write</code>。</p>
-</li>
-<li><p>innerHTML 属性<br>innerHTML 属性可以用来读写给定元素里的 HTML 内容。<br>读，编辑 test.html 文件：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"test"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is <span class="tag">&lt;<span class="name">em</span>&gt;</span>my<span class="tag">&lt;/<span class="name">em</span>&gt;</span> content!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>然后编写 example.js （记得把 example.js 文件加到 HTML 文件里面）：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> test = <span class="built_in">document</span>.getElementById(<span class="string">"test"</span>);</span><br><span class="line">  alert(test.innerHTML);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>结果：<br><img src="https://pic4.zhimg.com/80/v2-29ea46299e5678b96642faeb3e882c10.png" alt="Image"><br>结果显示，innerHTML 只是粗暴地把元素里面所有的代码找出来。当需要把插入大段的 HTML 文件时，它就有用武之地了。</p>
-<p>写：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> test = <span class="built_in">document</span>.getElementById(<span class="string">"test"</span>);</span><br><span class="line">  test.innerHTML = <span class="string">"&lt;p&gt; Insert in &lt;em&gt;innerHTML&lt;/em&gt; &lt;/p&gt;"</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>结果：<br><img src="https://pic4.zhimg.com/80/v2-0c88b799d4b1fd0fd6738b5d74f8adbe.png" alt="Image"><br>直接赋值对应的即可，赋值后会把原来的 html 代码覆盖掉。<br>这是 HTML 专有属性，不能用于其它标记语言文档，如 xhtml 文档。</p>
-</li>
-</ol>
-<h4 id="DOM-方法"><a href="#DOM-方法" class="headerlink" title="DOM 方法"></a>DOM 方法</h4><ol>
-<li><p>添加节点<br>编辑 test.html，让<code>id=test</code>的 div 标签内容为空。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"test"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>把一段文本插入到上面的 div 元素，用 DOM 的话来形容，添加一个 p 元素节点，再把这个节点作为 div 元素的子节点。<br>具体步骤：</p>
-<ol>
-<li>createElement 创建一个新元素:<br>语法：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.createElement(nodeName);</span><br></pre></td></tr></table></figure>
-创造一个 p 元素结点并赋值给一个变量：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> para = <span class="built_in">document</span>.createElement(<span class="string">"p"</span>);</span><br></pre></td></tr></table></figure></li>
-<li>appendChild 把新元素插入节点数：<br>使用 appendChild 方法。<br>语法：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parent.appendChild(child);</span><br></pre></td></tr></table></figure>
-例子：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> test = <span class="built_in">document</span>.getElementById(<span class="string">"test"</span>);</span><br><span class="line"><span class="keyword">var</span> para = <span class="built_in">document</span>.createElement(<span class="string">"p"</span>);</span><br><span class="line">test.appendChild(para);</span><br></pre></td></tr></table></figure>
-或者：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"test"</span>).appendChild(<span class="built_in">document</span>.createElement(<span class="string">"p"</span>));</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>添加文本节点<br>使用 crateTextNode 方法。<br>语法与 createElement 相似：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.createTextNode(text);</span><br></pre></td></tr></table></figure>
-
-<p>创建一个内容为 “test”的文本节点并赋值变量。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> txt = <span class="built_in">document</span>.createTextNode(<span class="string">"test"</span>);</span><br></pre></td></tr></table></figure>
-
-<p>使用 appendChild 添加到 p 元素结点：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">para.appendChild(txt);</span><br></pre></td></tr></table></figure>
-
-<p>最终代码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> test = <span class="built_in">document</span>.getElementById(<span class="string">"test"</span>);</span><br><span class="line">  <span class="keyword">var</span> para = <span class="built_in">document</span>.createElement(<span class="string">"p"</span>);</span><br><span class="line">  test.appendChild(para);</span><br><span class="line">  <span class="keyword">var</span> txt = <span class="built_in">document</span>.createTextNode(<span class="string">"test"</span>);</span><br><span class="line">  para.appendChild(txt);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>结果：<br><img src="https://pic4.zhimg.com/80/v2-e4775390176cc0a1ea597996f86e110c.png" alt="Image"></p>
-</li>
-<li><p>一个复杂的例子：<br>创建一个以下节点：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>This is <span class="tag">&lt;<span class="name">em</span>&gt;</span>my<span class="tag">&lt;/<span class="name">em</span>&gt;</span> content.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>这个 html 包含一个 p 元素节点，p 元素里又包含一个文本节点“This is”，一个 em 结点和一个文本节点“contents.”。<br>那么只要依次创建加入即可。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> test = <span class="built_in">document</span>.getElementById(<span class="string">"test"</span>);</span><br><span class="line">  <span class="keyword">var</span> para = <span class="built_in">document</span>.createElement(<span class="string">"p"</span>);</span><br><span class="line">  test.appendChild(para);</span><br><span class="line">  <span class="comment">// 添加第一个文本节点</span></span><br><span class="line">  <span class="keyword">var</span> txt_0 = <span class="built_in">document</span>.createTextNode(<span class="string">"This is "</span>);</span><br><span class="line">  para.appendChild(txt_0);</span><br><span class="line">  <span class="comment">// 添加em节点</span></span><br><span class="line">  <span class="keyword">var</span> em = <span class="built_in">document</span>.createElement(<span class="string">"em"</span>);</span><br><span class="line">  <span class="keyword">var</span> em_txt = <span class="built_in">document</span>.createTextNode(<span class="string">"my"</span>);</span><br><span class="line">  em.appendChild(em_txt);</span><br><span class="line">  para.appendChild(em);</span><br><span class="line">  <span class="comment">// 添加第三个节点</span></span><br><span class="line">  <span class="keyword">var</span> text_1 = <span class="built_in">document</span>.createTextNode(<span class="string">" content."</span>);</span><br><span class="line">  para.appendChild(text_1);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>结果：<br><img src="https://pic4.zhimg.com/80/v2-5d46cb4a7a2ddad1f8f81aac97231905.png" alt="Image"></p>
-</li>
-</ol>
-<h4 id="图片库"><a href="#图片库" class="headerlink" title="图片库"></a>图片库</h4><p>里面只有一个图片和一段文字是为<code>show_pic</code>服务，这很些元素的存在是为了让 DOM 处理它们，那么使用 DOM 来创建它们是最合适的。</p>
-<ol>
-<li><p>先把文档里的相关元素删掉。</p>
-</li>
-<li><p>先编写一个函数 <code>prepare_placeholder</code> 并把它放进 <code>show_pic.js</code>文件，然后在文档加载时调用此函数。</p>
-</li>
-<li><p>函数的任务：</p>
-<ol>
-<li>创建一个 img 元素节点；</li>
-<li>设置这个节点的 id 属性；</li>
-<li>设置这个节点的 src 属性；</li>
-<li>设置这个节点的 alt 属性；</li>
-<li>创建一个 p 元素节点；</li>
-<li>设置这个节点的 id 属性；</li>
-<li>创建一个文本节点；</li>
-<li>把这个文本节点追加到 p 元素上；</li>
-<li>把 p 元素和 img 元素插入到 gallery.html 文档里。</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建img元素</span></span><br><span class="line"><span class="keyword">var</span> placeholder = <span class="built_in">document</span>.createElement(<span class="string">"img"</span>);</span><br><span class="line">placeholder.setAttribute(<span class="string">"id"</span>, <span class="string">"default"</span>);</span><br><span class="line">placeholder.setAttribute(<span class="string">"src"</span>, <span class="string">"images/default.jpg"</span>);</span><br><span class="line">placeholder.setAttribute(<span class="string">"alt"</span>, <span class="string">"my image gallery"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建p元素</span></span><br><span class="line"><span class="keyword">var</span> description = <span class="built_in">document</span>.createElement(<span class="string">"p"</span>);</span><br><span class="line">description.setAttribute(<span class="string">"id"</span>, <span class="string">"description"</span>);</span><br><span class="line"><span class="keyword">var</span> txt = <span class="built_in">document</span>.createTextNode(<span class="string">"choose an image"</span>);</span><br><span class="line">description.appendChild(txt);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 插入到文档中</span></span><br><span class="line"><span class="keyword">var</span> body_element = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"body"</span>)[<span class="number">0</span>];</span><br><span class="line">body_element.appendChild(placeholder);</span><br><span class="line">body_element.appendChild(description);</span><br></pre></td></tr></table></figure>
-
-<p>上述代码有一个完成工作了，但是一切都是依赖于这些元素刚好在 body 标签的末尾。如果在中间的话，就需要用到其它方法了。</p>
-</li>
-<li><p>已有元素前插入元素<br>DOM 提供了名为 <code>insertBefore()</code> 方法。使用此方法时，必须告诉它三件事：</p>
-<ol>
-<li>新元素：你想插入的元素；</li>
-<li>目标元素：你想反把这个元素插入到哪个元素之前；</li>
-<li>父元素：目标元素的父元素。</li>
-</ol>
-<p>语法：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parentElement.insertBefore(newElement, targetElement);</span><br></pre></td></tr></table></figure>
-
-<p>例子：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gallery = <span class="built_in">document</span>.getElementById(<span class="string">"image_gallery"</span>);</span><br><span class="line">gallery.parentElement.insertBefore(placeholder, gallery);</span><br></pre></td></tr></table></figure>
-
-<p>这样就把元素插入到图片元素之前了。</p>
-</li>
-<li><p>元素后插入元素<br>DOM 没有提供这个方法，但是可以自己写一个 <code>insertAtfer</code> 方法：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertAfter</span>(<span class="params">newElement, targetElement</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 获取父元素</span></span><br><span class="line">  <span class="keyword">var</span> parent = targetElement.parentNode;</span><br><span class="line">  <span class="comment">// 如果最后一个结点元素与目标结点相同</span></span><br><span class="line">  <span class="keyword">if</span> (parent.lastChild == targetElement) &#123;</span><br><span class="line">    <span class="comment">// 直接加到末尾</span></span><br><span class="line">    parent.appendChild(newElement);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 找到目标结点的下一个结点，再插入到结点前</span></span><br><span class="line">    parent.insertBefore(newElement, targetElement.nextSibling);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用方法和<code>insertAfter</code>一样。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parentElement.insertAfter(newElement, targetElement);</span><br></pre></td></tr></table></figure>
-
-<p>还需要测试浏览器是否支持，所以最终代码清单为：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">prepare_placeholder</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.createElement) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.createTextNode) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(<span class="string">"image_gallery"</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 创建img元素</span></span><br><span class="line">  <span class="keyword">var</span> placeholder = <span class="built_in">document</span>.createElement(<span class="string">"img"</span>);</span><br><span class="line">  placeholder.setAttribute(<span class="string">"id"</span>, <span class="string">"default"</span>);</span><br><span class="line">  placeholder.setAttribute(<span class="string">"src"</span>, <span class="string">"images/default.jpg"</span>);</span><br><span class="line">  placeholder.setAttribute(<span class="string">"alt"</span>, <span class="string">"my image gallery"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 创建p元素</span></span><br><span class="line">  <span class="keyword">var</span> description = <span class="built_in">document</span>.createElement(<span class="string">"p"</span>);</span><br><span class="line">  description.setAttribute(<span class="string">"id"</span>, <span class="string">"description"</span>);</span><br><span class="line">  <span class="keyword">var</span> txt = <span class="built_in">document</span>.createTextNode(<span class="string">"choose an image"</span>);</span><br><span class="line">  description.appendChild(txt);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> gallery = <span class="built_in">document</span>.getElementById(<span class="string">"image_gallery"</span>);</span><br><span class="line">  insertAfter(placeholder, gallery);</span><br><span class="line">  insertAfter(description, placeholder);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>目前为止，创建的这些新内容对这个页面来说并不算是新的，比如，页面加载后，标记中就已经存在 title 属性了。通过<code>createElement</code>添加的新段落也是基于嵌入在脚本中的标记添加的，实际上，我们创建的所有一切都包含在初始页面。</p>
-</li>
-</ol>
-<p>那么怎么才能真正得到原来不存在初始页面的内容呢？</p>
-<h4 id="Ajax"><a href="#Ajax" class="headerlink" title="Ajax"></a>Ajax</h4><p>使用 Ajax 就可以做到只更新页面中的一小部分，其它内容都不需要重新加载。<br>Ajax 的主要优势是对页面的请求以异步方式发送到服务器。</p>
-<ol>
-<li><p>XMLHttpRequest 对象<br>将下面的代码放进 ajax.html。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Ajax<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"new"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./scripts/addLoadEvent.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./scripts/getHTTPObject.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./scripts/getNewContent.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>其中 addLoadEvent.js、getHTTPObject.js 和 getNewContent.js 都位于 scripts 的文件夹中。<br>为了模拟服务器响应，在 ajax.html 同目录下创建一个 example.txt 文件，包含以下内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">This was loaded as asynchronously!</span><br></pre></td></tr></table></figure>
-
-<p>该文件充当服务器的输出。</p>
-<p>为了兼容不同 IE 版本的浏览器，需要写很多兼容代码，不过 IE 早就应该扫进历史的垃圾堆里了，所以就不兼容了。<br>创建一个 XMLHttpRequest 对象：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getHTTPObject</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">  <span class="keyword">return</span> request;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> request = getHTTPObject();</span><br></pre></td></tr></table></figure>
-
-<p>XMLHttpRequest 对象有许多方法，其中最有用的是 open 方法，它用来指定服务器上将要访问的文件，指定请求的类型：GET、POST 或 SEND。该方法第三个参数用于指定请求是否以异步方式发送和处理。</p>
-<p>在 getNewContent.js 文件中添加以下代码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getNewContent</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> request = getHTTPObject();</span><br><span class="line">  <span class="keyword">if</span> (request) &#123;</span><br><span class="line">    <span class="comment">// 发起请求同一目录下的文件</span></span><br><span class="line">    request.open(<span class="string">"GET"</span>, <span class="string">"example.txt"</span>, <span class="literal">true</span>);</span><br><span class="line">    request.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (request.readyState === <span class="number">4</span>) &#123;</span><br><span class="line">        <span class="comment">// 取出并保存数据</span></span><br><span class="line">        <span class="keyword">var</span> para = <span class="built_in">document</span>.createElement(<span class="string">"p"</span>);</span><br><span class="line">        <span class="keyword">var</span> txt = <span class="built_in">document</span>.createTextNode(request.responseText);</span><br><span class="line">        para.appendChild(txt);</span><br><span class="line">        <span class="built_in">document</span>.getElementById(<span class="string">"new"</span>).appendChild(para);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">// 发送请求</span></span><br><span class="line">    request.send(<span class="literal">null</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    alert(<span class="string">"Sorry, your browser doesn't support XMLHttpRequest"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>request.readyState</code> 有 5 个可能的值：</p>
-<ul>
-<li>0 表示初始化</li>
-<li>1 表示正在加载</li>
-<li>2 表示加载完毕</li>
-<li>3 表示正在交互</li>
-<li>4 表示完成</li>
-</ul>
-<p>只要 readyState 属性的值变成了 4，就可以访问服务器发送回来的数据。<br>responseText 是保存文本字符串的数据，responseXML 属性是保存 Content-Type 头部中指定为“text/xml”的数据，一个是 DocumentFragment 对象。</p>
-<p>结果：<br><img src="https://pic4.zhimg.com/80/v2-199048ce82aa77a1efe6ff8bc57269c6.png" alt="Image"></p>
-<p>异步请求有一个异步性的问题，脚本发送 XMLHttpRequest 请求之后，仍会继续执行，不会等待响应返回。<br>可以试着加两个警告框，在函数结尾和 onreadystateChange 后添加。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getNewContent</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> request = getHTTPObject();</span><br><span class="line">  <span class="keyword">if</span> (request) &#123;</span><br><span class="line">    <span class="comment">// 发起请求同一目录下的文件</span></span><br><span class="line">    request.open(<span class="string">"GET"</span>, <span class="string">"example.txt"</span>, <span class="literal">true</span>);</span><br><span class="line">    request.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (request.readyState == <span class="number">4</span>) &#123;</span><br><span class="line">        alert(<span class="string">"respose received"</span>);</span><br><span class="line">        <span class="keyword">var</span> para = <span class="built_in">document</span>.createElement(<span class="string">"p"</span>);</span><br><span class="line">        <span class="keyword">var</span> txt = <span class="built_in">document</span>.createTextNode(request.responseText);</span><br><span class="line">        para.appendChild(txt);</span><br><span class="line">        <span class="built_in">document</span>.getElementById(<span class="string">"new"</span>).appendChild(para);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">// 发送请求</span></span><br><span class="line">    request.send(<span class="literal">null</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    alert(<span class="string">"Sorry, your browser doesn't support XMLHttpRequest"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  alert(<span class="string">"function done"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>结果显示在函数结尾处的弹窗更快。</p>
-</li>
-<li><p>Hijax，渐进增强地使用 Ajax。<br>登录表单添加 Ajax 功能，需要拦截提交表单的请求（Hijax），让 XMLHttpRequest 请求代为发送，再取消 onsubmit 的默认请求。这样登录就更方便，用户感觉就更快了。</p>
-</li>
-</ol>
-<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>本次学习了几种不同的向浏览器里的文档动态添加标记的方法。<br>传统：</p>
-<ul>
-<li>document.write 方法</li>
-<li>innerHTML 属性</li>
-</ul>
-<p>DOM 方法：</p>
-<ul>
-<li>createElement 方法</li>
-<li>createTextNode 方法</li>
-<li>appendChild 方法</li>
-<li>insertBefore 方法</li>
-</ul>
-<p>用 createElement 和 createTextNode 创造的只是孤儿，要用 appendChild 和 insertBefore 才能把这些孤儿插入到文档的节点树，呈现在浏览器的窗口。</p>
-<p>对图片库的改进和 insertAfter 方法的创建，还有 Ajax 和 异步请求。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1673,7 +1520,7 @@ HTML5 提供了新的输入型表单：</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1686,7 +1533,7 @@ HTML5 提供了新的输入型表单：</p>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
