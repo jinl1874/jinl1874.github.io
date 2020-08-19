@@ -1942,6 +1942,9 @@ HTML5 提供了新的输入型表单：</p>
 <h4 id="4-元素"><a href="#4-元素" class="headerlink" title="4.  元素"></a>4. <noscript> 元素</h4><p>当浏览器不支持脚本，或者浏览器支持脚本，但脚本被禁用的情况下，浏览器才会显示 <code>&lt;noscript&gt;</code> 的内容。</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">noscript</span>&gt;</span> <span class="tag">&lt;<span class="name">p</span>&gt;</span>本页面需要浏览器支持（启用）JavaScript.<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">noscript</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
 ]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
       <tags>
         <tag>js</tag>
       </tags>
@@ -2007,8 +2010,32 @@ HTML5 提供了新的输入型表单：</p>
 
 <h4 id="4-函数"><a href="#4-函数" class="headerlink" title="4. 函数"></a>4. 函数</h4><p>js 不像 java 那样可以实现重载，如相同的函数名接受不同参数的类型和数量，可定义不同的函数。<br>如果 js 定义两个相同的函数，那么名字只属于后定义的函数。</p>
 ]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
       <tags>
-        <tag>-js</tag>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《夏日重现》：孤岛轮回故事</title>
+    <url>/2020/08/19/%E6%BC%AB%E8%AF%84-%E3%80%8A%E5%A4%8F%E6%97%A5%E9%87%8D%E7%8E%B0%E3%80%8B/</url>
+    <content><![CDATA[<p><img src="https://pic4.zhimg.com/80/v2-bb93bd931cf296761d456b59563a998f.jpg" alt="Image"><br>先下结论，就目前来看，是一部优秀的悬疑轮回漫画。</p>
+<p>这是一部轮回悬疑漫画，就目前来讲，伏笔众多，回收合理，故事展开优秀。目前看到了一百多话，漫画有一个合理结尾不是太大问题。</p>
+<p>故事发生一个小岛上，这也是常用的场景了，与隔绝的农村、小镇的作用一样，用来隔绝外界。并且这些地方都有一些不为人知的背后。比如在一些 18 禁的作品里，村里只有一男村长，其它的都是女性，就给外来的人提供了一个舞台。而本作是属于有一段神奇的过去，有几个神奇的人(或者应该叫妖？)，并一直影响到现在。</p>
+<p>男主得知青梅竹马死去的消息，于是赶回小岛参加其葬礼。在船上做了一个有关死去的青梅竹马的梦，醒来后扑到一个女性的胸上……</p>
+<p>参加葬礼后，主角发现澪被杀，接着又发现船上的女性也被杀。这时又出现了第二个澪，然后被其杀死，轮回开始……</p>
+<p>去年发现这部漫画时只有四十多话，看第二遍时发现了很多剧情伏笔铺垫，作者大概已经想好整个故事了吧。</p>
+<p>令我印象深刻的还是开头不久，澪来接男主的时候，没刹住自行车跌到海底时露出了内裤被男主看到。这个场景在日本漫画里比比皆是，本以为是单纯的卖肉，但没想到后面男主确定她的身份时用到了这个。</p>
+<p>本漫画是一本悬疑漫画，在其基础上加入了轮回的设定，男主通过轮回来一点点地解开悬疑。并且作者也给男主的轮回添加了一些限制，每次轮回的时间都会向前走，让反派也可以继承轮回的记忆与数据。故事进行下去，越来越复杂，但是都有前面的铺垫一一对应。烂尾的可能性应该比较小，值得一看。</p>
+<p>吐槽一下动漫之家上的译名，或者说根本没译，直接把英文名搬过来了，导致贴吧上只有寥寥几人。</p>
+<p>目前连载在 jump + 平台上，漫画是优秀的，不知道未来有没有机会动画化。</p>
+]]></content>
+      <categories>
+        <category>读书</category>
+      </categories>
+      <tags>
+        <tag>manga</tag>
       </tags>
   </entry>
 </search>
