@@ -208,6 +208,199 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/07/22/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="道理">
+      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MyBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/22/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/" class="post-title-link" itemprop="url">JavaScript-学习笔记（9）：HTML5</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-07-22 19:25:32 / 修改时间：19:27:42" itemprop="dateCreated datePublished" datetime="2020-07-22T19:25:32+08:00">2020-07-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">-[JavaScript]</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2020/07/22/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/07/22/JavaScript-学习笔记（9）/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="https://pic4.zhimg.com/80/v2-806d2ac14c387bdd9db1b26b581320ec.jpg" alt="Image"></p>
+<h1>JavaScript-笔记（9）：HTML5</h1>
+<h4 id="HTML5-简介">HTML5 简介</h4>
+<p>HTML5 是 HTML 当前及未来的新标准。</p>
+<p>web 设计有三个层：结构层、样式层、行为层，这三个层分别使用 HTML、CSS 和 JavaScript 三个技术。HTML5 将上面三个层装入一个小集合，也仅仅只是一个集合。<br>
+HTML5 添加了很多新的标记元素，详情 <a href="http://www.w3.org/TR/html5" target="_blank" rel="noopener">http://www.w3.org/TR/html5</a>。<br>
+将文档“升级”到 HTML5，只需把文档类型声明改成<code>&lt;!DOCTYPE html&gt;</code>即可。</p>
+<p>HTML5 的兼容非常强，缺斤短两的 HTML5 文档都可以完美地通过验证。</p>
+<h4 id="忠告">忠告</h4>
+<p>一个工具：Modernizr（<a href="https://modernizr.com/" target="_blank" rel="noopener">https://modernizr.com/</a>），这是一个开源 js 库，利用其富特性检测功能，对 HTML5 文档进行更好的控制。</p>
+<p>在文档中嵌入 Modernizr 后，它会随着页面加载而变一些小戏法。</p>
+<p>首先，它会修改 <code>&lt;html&gt;</code> 的 class 属性，要使用它编写文档，通常要给<code>&lt;html&gt;</code>属性添加一个 no-js 类：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">class</span>=<span class="string">"no-js"</span>&gt;</span><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>利用这个类，可以浏览器不支持 JavaScript 的情况下应用 CSS 样式。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">;<span class="selector-class">.nojs</span> <span class="selector-tag">selector</span> &#123;</span><br><span class="line">    style properties;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后，它还会检测浏览器可以支持的各种特性，并添加相应的类名。<br>
+实际情况是浏览器会支持部分特性，不支持另一些特性，这时，类名中就会间或出现 features 和 no-feature。</p>
+<p>它还可以帮一些老旧浏览器处理 <code>&lt;section&gt;</code> 和 <code>&lt;article&gt;</code> 等新 HTML5 元素。</p>
+<p>使用它非常简单，从 <a href="http://www.modernizr.com/" target="_blank" rel="noopener">http://www.modernizr.com/</a> 下载它，然后在文档的<code>&lt;head&gt;</code>中添加该脚本：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"modernizr-1.5.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>一定要把这个脚本放在<head>元素中，因为放在文档开头，可以在加载其它标记之前先加载它，以便能更好地创建 HTML5 元素。</p>
+<h4 id="示例">示例</h4>
+<p>一些有关 Canvas、视频/音频以及表单的例子，需要以下浏览器：</p>
+<ul>
+<li>苹果 Safari 5+</li>
+<li>Chrome 6+</li>
+<li>Firefox 3.6+</li>
+<li>IE 9+</li>
+<li>opera 10.6+</li>
+</ul>
+<h5 id="1-Canvas">1. Canvas</h5>
+<p>浏览器一般只能显示静态图片，使用 GIF 或许可以实现一些动画，或者使用 CSS 加 JavaScript 也能变化一些样式。<br>
+但 HTML5 的<code>&lt;Canvas&gt;</code> 元素可以动态创建和操作图形图像。<br>
+支起一张“画布”：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"draw-in-me"</span> <span class="attr">width</span>=<span class="string">"120"</span> <span class="attr">height</span>=<span class="string">"40"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>Powered by HTML5 canvas！<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在上面作画需要了解详细的绘画方法，参考<code>&lt;canvas&gt;</code>元素规范(<a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html" target="_blank" rel="noopener">http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html</a>)</p>
+<p>用<code>&lt;Canvas&gt;</code> 画一个圆角小黑盒子，带有 2 像素宽的白色描边效果。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"draw-in-me"</span>);</span><br><span class="line">  <span class="keyword">if</span> (canvas.getContext) &#123;</span><br><span class="line">    <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.moveTo(<span class="number">120.0</span>, <span class="number">32.0</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">120.0</span>, <span class="number">36.4</span>, <span class="number">116.4</span>, <span class="number">40.0</span>, <span class="number">112.0</span>, <span class="number">40.0</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">8.0</span>, <span class="number">40.0</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">3.6</span>, <span class="number">40.0</span>, <span class="number">0.0</span>, <span class="number">36.4</span>, <span class="number">0.0</span>, <span class="number">32.0</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">0.0</span>, <span class="number">8.0</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">0.0</span>, <span class="number">3.6</span>, <span class="number">3.6</span>, <span class="number">0.0</span>, <span class="number">8.0</span>, <span class="number">0.0</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">112.0</span>, <span class="number">0.0</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">116.4</span>, <span class="number">0.0</span>, <span class="number">120.0</span>, <span class="number">3.6</span>, <span class="number">120.0</span>, <span class="number">8.0</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">120.0</span>, <span class="number">32.0</span>);</span><br><span class="line">    ctx.closePath();</span><br><span class="line">    ctx.fill();</span><br><span class="line">    ctx.lineWidth = <span class="number">2.0</span>;</span><br><span class="line">    ctx.strokeStyle = <span class="string">"rgb(255, 255, 255)"</span>;</span><br><span class="line">    ctx.stroke();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.onload = draw;</span><br></pre></td></tr></table></figure>
+<p>结果：<br>
+<img src="https://pic4.zhimg.com/80/v2-e1c8ba6c44d4a642fe4ee1e4df2dcad1.png" alt="Image"></p>
+<h5 id="2-音频和视频">2. 音频和视频</h5>
+<ul>
+<li>HTML 的 <code>&lt;video&gt;</code>元素在文档中嵌入影片以及影片交互定义了一种标准方式，同时也把嵌入操作简化成了一个标签：</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">src</span>=<span class="string">"movie.mp4"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 不支持 &lt;video&gt; 的替代内容  --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"movie.mp4"</span>&gt;</span>Download movie.mp4<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>同样，音频也是：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">src</span>=<span class="string">"audio.mp3"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"audio.mp3"</span>&gt;</span>Download audio.mp3<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>自定义控件<br>
+浏览器显示 <code>&lt;video&gt;</code>元素时，会为其添加一些与浏览器样式统一的标准播放控件，要想自定义这些控件的外观，或者添加新的控件，可以通过 DOM 属性来实现。主要有：</p>
+<ul>
+<li>currentTime，返回当前播放的位置，以秒表示；</li>
+<li>duration，返回媒体的总时长，以秒表示，对流媒体返回无穷大；</li>
+<li>paused，表示是否处于暂停；</li>
+<li>play，在媒体播放开始时发生；</li>
+<li>pause，在媒体暂停时发生；</li>
+<li>loadedata，在媒体可以从当前播放位置开始播放时发生；</li>
+<li>ended，在媒体已播放完成而停止时发生。</li>
+</ul>
+<p>记住，无论创建什么控件，都别忘了在<code>&lt;video&gt;</code>元素中添加 control 控件。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">src</span>=<span class="string">"movie.mp4"</span> <span class="attr">controls</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这样才会显示控制条：<br>
+<img src="https://pic4.zhimg.com/80/v2-827cdf4e9596f102b9f9a1609a839236.png" alt="Image"></p>
+</li>
+</ul>
+<h5 id="3-表单">3. 表单</h5>
+<p>传统的表单可用的输入控件类型很少，文本框、单选按钮、复选框对简单的表单是够了，但需要更多交互功能的时候，仍需要 DOM 上阵。<br>
+HTML5 提供了新的输入型表单：</p>
+<ul>
+<li>email，输入邮箱</li>
+<li>url，输入 url</li>
+<li>date，输入日期和时间</li>
+<li>number，输入数值</li>
+<li>range，用于生成滑动条</li>
+<li>search，用于搜索框</li>
+<li>tel，用于输入电话号码</li>
+<li>color，用于选择颜色</li>
+</ul>
+<p>新的属性：</p>
+<ul>
+<li>autocomplete，用于为文本（text）输入框添加一组建议的输入项；</li>
+<li>autofocus，用于让表单元素自动获得焦点；</li>
+<li>form，用于对<code>&lt;form&gt;</code>标签外部的表单元素分组；</li>
+<li>min、max 和 step，用在范围和数值输入框中；</li>
+<li>pattern，用于定义一个正则表达式，以便验证输入的值；</li>
+<li>placeholder，用于在文本输入框中显示临时性的提示信息；</li>
+<li>required，表示必填</li>
+</ul>
+<p>使用的时候要检测浏览器是否支持对应的控件，可以使用 inputtypes.type 属性，如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!Modernizr.inputtypes.date) &#123;</span><br><span class="line">  <span class="comment">// 生成日期选择器的脚本</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>检查属性，可以使用 input.attribute 属性，如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!Modernizr.input.placeholder) &#123;</span><br><span class="line">  <span class="comment">// 生成占位符提示信息的脚本</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果没有使用 Modernizr，可以使用 inputSupportType 函数来检查浏览器是否支持某种输入控件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inpurtSupportsType</span>(<span class="params">type</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!<span class="built_in">document</span>.createElement) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">var</span> input = <span class="built_in">document</span>.createElement(<span class="string">'input'</span>);</span><br><span class="line">    input.setAttribute(<span class="string">'type'</span>, type);</span><br><span class="line">    <span class="keyword">if</span>(input.type == <span class="string">'text &amp;&amp; type != '</span>text<span class="string">')&#123;</span></span><br><span class="line"><span class="string">        return false;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    else&#123;</span></span><br><span class="line"><span class="string">        return true;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>使用方式和 modernizr 一样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!inputSupportType(date)) &#123;</span><br><span class="line">  <span class="comment">// 生成日期选择器的脚本</span></span><br></pre></td></tr></table></figure>
+<p>检查特定的属性，可以使用这个 elementSupportsAttribute 函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">elementSupportsAttribute</span>(<span class="params">elementName, attribute</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.createElement) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> temp = <span class="built_in">document</span>.crateElement(elementName);</span><br><span class="line">  <span class="keyword">return</span> attribute <span class="keyword">in</span> test;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用方式和 modernizr 一样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!elementSupportType(<span class="string">'input'</span>, <span class="string">'placeholder'</span>)) &#123;</span><br><span class="line">  <span class="comment">// 生成提示占位符的脚本</span></span><br></pre></td></tr></table></figure>
+<h5 id="4-HTML5-的其它特性">4. HTML5 的其它特性</h5>
+<ul>
+<li>localStorage 和 sessionStorage 在客户存储大型和复杂数据集的更有效方案</li>
+<li>使用 WebSocket 与服务器端脚本进行开放的双向通信</li>
+<li>使用 Web Worker 在后台执行 JavaScript</li>
+<li>标准化的拖放实现</li>
+<li>在浏览器中实现地理位置服务<br>
+…………</li>
+</ul>
+<h4 id="小结">小结</h4>
+<p>了解了 HTML5 以及使用 Modernizr 等工具检测特性的重要性。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/07/20/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1795,145 +1988,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/07/05/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.jpg">
-      <meta itemprop="name" content="道理">
-      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MyBlog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/05/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/" class="post-title-link" itemprop="url">JavaScript 学习笔记（2）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-07-05 10:19:52" itemprop="dateCreated datePublished" datetime="2020-07-05T10:19:52+08:00">2020-07-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-07 00:28:22" itemprop="dateModified" datetime="2020-07-07T00:28:22+08:00">2020-07-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/2020/07/05/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/07/05/JavaScript-学习笔记（2）/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="1-DOM"><a href="#1-DOM" class="headerlink" title="1. DOM"></a>1. DOM</h4><ol>
-<li><p>DOM 的 D 指的是<code>Document</code>（文档），O 指的<code>Object</code>（对象），M 指的是<code>Model</code>（模型）。</p>
-</li>
-<li><p>JS 的对象包括三种，分别是：</p>
-<ul>
-<li>用户定义对象，不过在这里很少用。</li>
-<li>内建对象，包括 Math、Array 等内建对象。</li>
-<li>宿主对象，由浏览器提供的对象。</li>
-</ul>
-</li>
-<li><p>模型，即将文档用“树”图表示出来，如例图所示：<br><img src="https://pic4.zhimg.com/80/v2-908a37eed3d355f8539d8552c8e725f6.png" alt="Image"><br>根元素是 html，有两个子分支 head 与 body，它们处于同一层次，属于兄弟关系，他们也分别有不同的子元素。</p>
-</li>
-</ol>
-<h4 id="2-节点node"><a href="#2-节点node" class="headerlink" title="2. 节点node"></a>2. 节点<code>node</code></h4><p>节点包括元素节点、文本节点和属性结点。</p>
-<ol>
-<li>元素节点：标签的名字即元素的名字，如文本段落元素的名字是“p”，列表项元素的名字是“li”。</li>
-<li>文本节点：<p>元素包含文本，它是一个文本节点。大多文本节点被包括在元素节点的内部。并非所有的元素节点都包含有文本节点，如<code>&lt;ul&gt;&lt;li&gt;Test&lt;/li&gt;&lt;/ul&gt;</code>中的<code>&lt;ul&gt;</code>没有直接包含文本节点，包括其它元素节点，后者即<code>&lt;li&gt;</code>包含文本节点。</li>
-<li>属性节点：用来对元素做出更具体的描述。例如几乎所有的元素都有一个 title 属性，可以利用这个属性对包含在元素里的东西做出准确详细的描述：<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">title</span>=<span class="string">"test"</span>&gt;</span>此处应有文本<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
-里面的<code>title=&quot;test&quot;</code>是属性节点。</li>
-</ol>
-<h4 id="3-CSS"><a href="#3-CSS" class="headerlink" title="3. CSS"></a>3. CSS</h4><p>CSS 即层叠样式表，可以告诉浏览器该如何显示文档内容。</p>
-<ol>
-<li>样式的声明可放在文档中的<code>&lt;head&gt;</code>里，亦可另起一文件。</li>
-<li>语法：<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">selector</span> &#123;</span><br><span class="line">  <span class="attribute">property</span>: value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-例子：<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">18px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-这个会自动应用于文档里所有的 p 元素。</li>
-<li>id 属性：独一无二的标识符，只可用于一处。<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#id</span> &#123;</span><br><span class="line">  <span class="attribute">font-style</span>: italic;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-使用：<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"id"</span>&gt;</span>Test<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li>class 属性：可应用于所有元素中。<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.class</span> &#123;</span><br><span class="line">  <span class="attribute">font-style</span>: italic;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-使用：<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"class"</span>&gt;</span>Test<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h4 id="4-获取节点"><a href="#4-获取节点" class="headerlink" title="4. 获取节点"></a>4. 获取节点</h4><ol>
-<li>getElementById，获取具体某个 id 的节点。<br>使用方法:<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> id_element = <span class="built_in">document</span>.getElementById(id_name);</span><br></pre></td></tr></table></figure></li>
-<li>getElementsByClassName，获取所有使用该 class 的节点，返回的是一个数组。注意<code>getElementsByClassName</code>中间的 <code>elements</code>有加<code>s</code>。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> class_element = <span class="built_in">document</span>.getElementsByClassName(class_name);</span><br></pre></td></tr></table></figure></li>
-<li>getElementsByTagName，获取所有名为该 TagName 的节点，返回的是一个数组。注意<code>getElementsByTagName</code>中间的 <code>elements</code>有加<code>s</code>。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> tag_element = <span class="built_in">document</span>.getElementsByTagName(tag_name);</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h4 id="5-获取和设置属性"><a href="#5-获取和设置属性" class="headerlink" title="5. 获取和设置属性"></a>5. 获取和设置属性</h4><ol>
-<li><p>获取属性：<code>getAttribute</code>，获取想要查询的属性值，参数为查询属性的名字。<br><code>getAttribute</code>不能通过<code>document</code>节点调用，只用被元素节点调用。<br>使用方法：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先得到节点值</span></span><br><span class="line"><span class="keyword">var</span> lis = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"li"</span>);</span><br><span class="line"><span class="comment">// 再获取其中的属性值</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; lis.length; i++) &#123;</span><br><span class="line">  alert(lis[i].getAttribute(<span class="string">"title"</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>设置属性：<code>setAttribute</code>，设置具体的属性值，参数为属性名字和属性值。同样只用被元素节点调用。<br>使用方法：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先得到节点值</span></span><br><span class="line"><span class="keyword">var</span> lis = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"li"</span>);</span><br><span class="line"><span class="comment">// 再修改其中的属性值</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; lis.length; i++) &#123;</span><br><span class="line">  alert(lis[i].getAttribute(<span class="string">"title"</span>));</span><br><span class="line">  lis[i].setAttribute(<span class="string">"title"</span>, <span class="string">"li_tag"</span>);</span><br><span class="line">  alert(lis[i].getAttribute(<span class="string">"title"</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<blockquote>
-<p>欢迎访问我的个人<a href="https://jinl1874.xyz">博客</a></p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2005,20 +2059,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
