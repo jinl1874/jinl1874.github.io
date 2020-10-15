@@ -208,6 +208,165 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/07/07/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="道理">
+      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MyBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/07/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89/" class="post-title-link" itemprop="url">JavaScript 学习笔记（3）：图片库</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-07 18:33:38" itemprop="dateCreated datePublished" datetime="2020-07-07T18:33:38+08:00">2020-07-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-08 19:20:16" itemprop="dateModified" datetime="2020-07-08T19:20:16+08:00">2020-07-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2020/07/07/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/07/07/JavaScript-学习笔记（3）/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="1-为什么要使用图片库"><a href="#1-为什么要使用图片库" class="headerlink" title="1. 为什么要使用图片库"></a>1. 为什么要使用图片库</h4><p>可以把所有的图片都放到一个网页里，不过当图片过多时，会导致网页体积过大。<br>因此，为每张图片分别创建一个网页的解决方案。<br>使用 js 来伊娃衅片是最佳选择：把整个图片库的浏览链接集中在图片库主页里，当用户点击了这个主页里的某个 图片链接时，才把相应的图片传送过去。</p>
+<h4 id="2-准备"><a href="#2-准备" class="headerlink" title="2. 准备"></a>2. 准备</h4><ol>
+<li>文件：准备几张图片，放在一个 images 的目录里，再创建一个<code>gallery.html</code>文件，与 images 同目录。</li>
+<li>标记：使用无序列表<code>&lt;ul&gt;</code>来标记图片链接，<br>标记清单：</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Image Gallery<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Snapshots<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"images/dog.jpg"</span> <span class="attr">title</span>=<span class="string">"a dog east something"</span>&gt;</span> dog <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"images/follower.jpg"</span> <span class="attr">title</span>=<span class="string">"a follower "</span>&gt;</span>follower<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"images/part.jpg"</span> <span class="attr">title</span>=<span class="string">"a part here"</span>&gt;</span>part<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"images/sea.jpg"</span> <span class="attr">title</span>=<span class="string">"the sea "</span>&gt;</span>sea<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"images/star.jpg"</span> <span class="attr">title</span>=<span class="string">"water star"</span>&gt;</span>star<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-改进"><a href="#3-改进" class="headerlink" title="3. 改进"></a>3. 改进</h4><p>点击某个链接后可以留在当前页面；<br>点击链接后可以看到图片以及可以看到图片清单。</p>
+<p>方法：<br>增加一个占位符图片，当没有点时，显示一个默认图片，当点击图片的链接时，拦截网页的默认行为，将图片显示为所点击链接的图片。<br>将<code>&lt;img id=&quot;default&quot; src=&quot;images/default.jpg&quot; alt=&quot;My image gallery&quot;&gt;;</code>插入无序列表后。新建一个名为<code>default</code>的 id 样式表，样式可自定义。<br>显示结果：<br><img src="https://pic4.zhimg.com/80/v2-8a4beab26883ec8160922259ee3da143.png" alt="Image"></p>
+<h4 id="4-实现"><a href="#4-实现" class="headerlink" title="4. 实现"></a>4. 实现</h4><ol>
+<li><p>代码：要修改占位符的显示，只需将占位符的<code>src</code>属性修改为相对应的图片属性即可，需要使用的 js 方法有<code>getAttribute()</code>和<code>setAttribute()</code>。<br>具体代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// whic_pic 是元素结点</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">show_pic</span>(<span class="params">whic_pic</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 获取href属性</span></span><br><span class="line">  <span class="keyword">var</span> source = whic_pic.getAttribute(<span class="string">"href"</span>);</span><br><span class="line">  <span class="comment">// 获取默认结点</span></span><br><span class="line">  <span class="keyword">var</span> placeholder = <span class="built_in">document</span>.getElementById(<span class="string">"default"</span>);</span><br><span class="line">  <span class="comment">// 设置属性</span></span><br><span class="line">  placeholder.setAttribute(<span class="string">"src"</span>, source);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其它方法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置属性</span></span><br><span class="line">placeholder.src = source;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用：</p>
+<ul>
+<li>在同目录下创建一个名为<code>show_pic.js</code>的文件，将上述代码放进去，再在<code>gallery.html</code>的<code>&lt;head&gt;</code>标签里写入<code>&lt;script src=&quot;show_pic.js&quot;&gt;&lt;/script&gt;</code>。</li>
+<li>要点击某个链接触发事件时，需要使用<code>onclick</code>事件处理函数。添加事件处理函数的语法是<code>event=&quot;javaScript Statement(s)</code>，所以调用<code>show_pic</code>的方法是：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">onclick = <span class="string">"show_pic(this)"</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>拦截网页默认操作：当某个元素添加了事件处理函数后，如果那段 js 代码返回的值是 true，那么 onclick 事件处理函数就认为这个链接被点击了；如果返回的的 false，那么就认为没有被点击。例如<code>onclick=&quot;return false&quot;</code>这个事件处理函数就会被浏览器认为没有点击，那么也不会调用默认的函数了。所以具体的代码为：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">onclick = <span class="string">"show_pic(this); return false"</span>;</span><br></pre></td></tr></table></figure>
+
+<p>详细代码为：<br>// 目前只有手动添加</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span></span></span><br><span class="line"><span class="tag">    <span class="attr">onclick</span>=<span class="string">"show_pic(this); return false;"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">href</span>=<span class="string">"images/dog.jpg"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">title</span>=<span class="string">"a dog east something"</span></span></span><br><span class="line"><span class="tag">  &gt;</span></span><br><span class="line">    dog</span><br><span class="line">  <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span></span></span><br><span class="line"><span class="tag">    <span class="attr">onclick</span>=<span class="string">"show_pic(this); return false;"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">href</span>=<span class="string">"images/follower.jpg"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">title</span>=<span class="string">"a follower "</span></span></span><br><span class="line"><span class="tag">    &gt;</span>follower<span class="tag">&lt;/<span class="name">a</span></span></span><br><span class="line"><span class="tag">  &gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span></span></span><br><span class="line"><span class="tag">    <span class="attr">onclick</span>=<span class="string">"show_pic(this); return false;"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">href</span>=<span class="string">"images/part.jpg"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">title</span>=<span class="string">"a part here"</span></span></span><br><span class="line"><span class="tag">    &gt;</span>part<span class="tag">&lt;/<span class="name">a</span></span></span><br><span class="line"><span class="tag">  &gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span></span></span><br><span class="line"><span class="tag">    <span class="attr">onclick</span>=<span class="string">"show_pic(this); return false;"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">href</span>=<span class="string">"images/sea.jpg"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">title</span>=<span class="string">"the sea "</span></span></span><br><span class="line"><span class="tag">    &gt;</span>sea<span class="tag">&lt;/<span class="name">a</span></span></span><br><span class="line"><span class="tag">  &gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span></span></span><br><span class="line"><span class="tag">    <span class="attr">onclick</span>=<span class="string">"show_pic(this); return false;"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">href</span>=<span class="string">"images/star.jpg"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">title</span>=<span class="string">"water star"</span></span></span><br><span class="line"><span class="tag">    &gt;</span>star<span class="tag">&lt;/<span class="name">a</span></span></span><br><span class="line"><span class="tag">  &gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>现在已经完成了图片库，无论点击哪个都不会跳转了。<br><img src="https://pic4.zhimg.com/80/v2-a4bcfbfb4a0f1de277c6e4451b4bbbf9.png" alt="Image"></p>
+</li>
+</ol>
+<h4 id="5-扩展"><a href="#5-扩展" class="headerlink" title="5. 扩展"></a>5. 扩展</h4><blockquote>
+<p>添加切换图片时可以显示不同的文本功能。之前在每个 a 属性里都设置了 title 属性，只要用<code>getAttribute</code>函数就可以将其提取出来，然后可以插入到 HTML 文档中。<br>为此需要学习几个新的 Dom 属性。</p>
+</blockquote>
+<ol>
+<li><p>childNodes 属性：在节点树上，这个属性可以获取元素所有的子元素，是一个数组。使用方法：<code>var children = element.childNodes</code>，例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取body节点，因为一个文档只有一个body标签，所以只需取第一个元素即可</span></span><br><span class="line"><span class="keyword">var</span> body_element = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"body"</span>)[<span class="number">0</span>];</span><br><span class="line"><span class="comment">// 获取子元素</span></span><br><span class="line"><span class="keyword">var</span> body_children = body_element.childNodes;</span><br></pre></td></tr></table></figure>
+
+<p>实测：将以下代码放进<code>show_pic.js</code>里</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count_body</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> body_element = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"body"</span>)[<span class="number">0</span>];</span><br><span class="line">  <span class="keyword">var</span> num = body_element.childNodes.length;</span><br><span class="line">  alert(num);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为了使文档加载时使用，再添加<code>window.onload = count_body;</code>到 js 文件里，接着打开文档，弹出计算的所有的 body 子元素属性了。</p>
+</li>
+<li><p>nodeType 属性<br>body 应该只有 3 个子元素，但是显示的数字却比 3 大，只为文档树的节点类型并非只有元素节点一种。文档里几乎每一样东西都是一个节点，甚至连空格和换行符都是。<br>第一个节点都有 nodeType 属性，nodeType 的值并不是英文，元素节点的 nodeType 是 1，属性节点的值是 2，文本节点的是 3。<br>比如<code>body_elemnt.nodeType</code>的值是 1.</p>
+</li>
+<li><p>标记添加描述<br>在<code>&lt;img&gt;</code>下添加<code>&lt;p id=&quot;description&quot;&gt;Choose an image&lt;/p&gt;</code>这一段文本节点。</p>
+</li>
+<li><p>获取该结点</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取title属性</span></span><br><span class="line"><span class="keyword">var</span> title = whic_pic.getAttribute(<span class="string">"title"</span>);</span><br><span class="line"><span class="comment">// 获取p结点</span></span><br><span class="line"><span class="keyword">var</span> p_element = <span class="built_in">document</span>.getElementById(<span class="string">"description"</span>);</span><br></pre></td></tr></table></figure></li>
+<li><p>实现文本切换<br>使用 DOM 提供的<code>nodeValue</code>属性，它可以得到和设置节点的值。<br><code>&lt;p&gt;</code>元素本身是<code>nodeValue</code>是一个空值，需要的是<code>&lt;p&gt;</code>子元素包含的值。<br>因此使用方法为：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p_element.childNodes[<span class="number">0</span>].nodeValue;</span><br></pre></td></tr></table></figure></li>
+<li><p>firstChild 和 lastChild 属性<br>firstChild 是获取节点的第一个元素，lastChild 是获取最后一个元素。<br>即<code>node.childNodes[0] === node.firstChild</code>。<br>使用这两个元素更简洁了。</p>
+</li>
+<li><p>利用 nodeValue 刷新</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将p元素赋值给nodeValue</span></span><br><span class="line">p_element.firstChild.nodeValue = title;</span><br></pre></td></tr></table></figure>
+
+<p>最终代码为：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// whic_pic 是元素结点</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">show_pic</span>(<span class="params">whic_pic</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 获取href属性</span></span><br><span class="line">  <span class="keyword">var</span> source = whic_pic.getAttribute(<span class="string">"href"</span>);</span><br><span class="line">  <span class="comment">// 获取默认结点</span></span><br><span class="line">  <span class="keyword">var</span> placeholder = <span class="built_in">document</span>.getElementById(<span class="string">"default"</span>);</span><br><span class="line">  <span class="comment">// 设置属性</span></span><br><span class="line">  placeholder.setAttribute(<span class="string">"src"</span>, source);</span><br><span class="line">  <span class="comment">// 获取title属性</span></span><br><span class="line">  <span class="keyword">var</span> title = whic_pic.getAttribute(<span class="string">"title"</span>);</span><br><span class="line">  <span class="comment">// 获取p结点</span></span><br><span class="line">  <span class="keyword">var</span> p_element = <span class="built_in">document</span>.getElementById(<span class="string">"description"</span>);</span><br><span class="line">  <span class="comment">// 将p元素赋值给nodeValue</span></span><br><span class="line">  p_element.firstChild.nodeValue = title;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>几个新 DOM 属性：</p>
+<ul>
+<li>childNodes</li>
+<li>nodeType</li>
+<li>firstChild</li>
+<li>lastChild</li>
+</ul>
+<p>欢迎访问我的个人<a href="https://jinl1874.xyz">博客</a>。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/07/05/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1381,111 +1540,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/05/22/blog-problem-0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.jpg">
-      <meta itemprop="name" content="道理">
-      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MyBlog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/22/blog-problem-0/" class="post-title-link" itemprop="url">使用自定义域名后出现“404There isn't a GitHub Pages site here”解决方法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-22 23:43:03" itemprop="dateCreated datePublished" datetime="2020-05-22T23:43:03+08:00">2020-05-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-23 00:01:26" itemprop="dateModified" datetime="2020-05-23T00:01:26+08:00">2020-05-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Problem/" itemprop="url" rel="index"><span itemprop="name">Problem</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/2020/05/22/blog-problem-0/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/05/22/blog-problem-0/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><ul>
-<li>每次将新文章使用“hexo d”推送后，再打开浏览器就会显示“404There isn’t a GitHub Pages site here”这个错误。</li>
-</ul>
-<h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><ul>
-<li>我们在自定义域名之前会在下图里“Custom domain”，<br><img src="http://image.jinl1874.xyz/img/blog_problem.png" alt="setting"></li>
-<li>点击“save”后，仓库的根目录会生成一个“CNAME”文件，<br><img src="http://image.jinl1874.xyz/img/blog_problem_2.png" alt=""></li>
-<li>但是本地的“public”目录里面并没有这个文件，所以更新会删除这个文件，就会导致访问失败。</li>
-</ul>
-<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><ul>
-<li>在hexo的source文件夹下新建一个CNAME文件，内容如下。这样使用<code>hexo generate</code>就会在public目录生成CNAME文件了，这样推送过去后就不会删除了。<br><img src="http://image.jinl1874.xyz/img/20200522235649.png" alt="solve"></li>
-<li>添加文件后，重新生成推送后，问题就迎刃而解了。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-<blockquote>
-<p>欢迎访问个人博客主页 <a href="https://jinl1874.github.io" target="_blank" rel="noopener">jinl1874</a></p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1557,20 +1611,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
