@@ -562,448 +562,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JavaScript-学习笔记（7）：CSS-DOM</title>
-    <url>/2020/07/18/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%887%EF%BC%89/</url>
-    <content><![CDATA[<p>笔记内容：</p>
-<ul>
-<li>styele 属性</li>
-<li>检索样式</li>
-<li>改变样式</li>
-</ul>
-<h4 id="网页的结构"><a href="#网页的结构" class="headerlink" title="网页的结构"></a>网页的结构</h4><ul>
-<li><p>三位一体：</p>
-<ul>
-<li>结构层：由 HTML 或 XHTML 之类的标记语言负责创建；</li>
-<li>表示层：由 CSS 负责完成，CSS 描述页面内容应该如何呈现；</li>
-<li>行为层：负责内容应该如何响应事件这一问题，js 和 DOM 主宰的领域。</li>
-</ul>
-</li>
-<li><p>分离：</p>
-<ul>
-<li>使用（X）HTML 搭建文档的结构；</li>
-<li>使用 CSS 去设置文档的呈现效果；</li>
-<li>使用 DOM 脚本去实现文档的行为。</li>
-</ul>
-<p>这三种技术之间存在重叠区域。</p>
-</li>
-</ul>
-<h4 id="style"><a href="#style" class="headerlink" title="style"></a>style</h4><p>style 属性 包含元素的样式，查询该属性返蜀犬吠日的是一个对象而不是一个简单的字符串。样式存在对象的属性里：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">element.style.property;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>获取样式</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 获取 style 的 color 属性：</span></span><br><span class="line">element.style.color;</span><br><span class="line"><span class="comment">// 获取 style 的 font-family 属性：</span></span><br><span class="line">elements.style.fontFamily;</span><br></pre></td></tr></table></figure>
-
-<p>一般样式属性的返回值与它们的设置值都采用同样的计量单位。如果果 font-size 以 em 为单位，那么返回的值也是以 em 为单位。</p>
-<p>style 属性只能能过内嵌的方式来获取，一旦样式在外部，则获取不到。</p>
-</li>
-<li><p>设置样式<br>style 对象的名个属性是可以读写的，可以使用赋值操作来更新样式：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">element.style.property = value;</span><br></pre></td></tr></table></figure>
-<p>赋值操作符可以设置任何一种样式，比如 font 之类的速记属性：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">para.style.font = <span class="string">"2em 'times', serif"</span>;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h4 id="DOM-脚本设置样式"><a href="#DOM-脚本设置样式" class="headerlink" title="DOM 脚本设置样式"></a>DOM 脚本设置样式</h4><p>虽然 DOM 设置样式很容易，但是在大多数场合下，应该使用 CSS 去声明样式。</p>
-<ul>
-<li><p>根据元素的位置设置样式<br>找到该元素后，直接给该元素的 style 对应的属性赋值即可。</p>
-</li>
-<li><p>根据条件反复设置样式<br>找到元素后，根据条件设置样式。比如表格里隔一个行设置一个背景色，就需要根据条件设置值。</p>
-</li>
-<li><p>响应事件<br>一般最好使用 CSS 为文档设置样式，但也有一些 CSS 不能处理或者难以部署的情况，这时需要用上 DOM。比如浏览器不能识别伪类的时候，可以使用 js 来解决。</p>
-</li>
-<li><p>className 属性<br>之前的都是用 DOM 直接设置或修改样式，这是直接让“行为层”干“表示层”的活。<br>与其让 DOM 直接改变元素的样式，不如能过 js 更新元素的 classic 属性。</p>
-</li>
-</ul>
-<h4 id="对函数进行抽象"><a href="#对函数进行抽象" class="headerlink" title="对函数进行抽象"></a>对函数进行抽象</h4><p>一些函数可以做一些小小的改动可以变得更通用，这个过程叫抽象（abstraction）。<br>比如下面这个函数的对象仅适用于 h1 元素，以及 classname 的值为 intro 。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">styleHeaderSiblings</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementsByTagName) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> headers = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"h1"</span>);</span><br><span class="line">  <span class="keyword">var</span> elem;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; headers.length; i++) &#123;</span><br><span class="line">    <span class="comment">// 查找下一个元素节点</span></span><br><span class="line">    elem = getNextElement(headers[i].nextSibling);</span><br><span class="line">    elem.className += <span class="string">"intro"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>添加两个具体的参数，就可以使其成为更通用的函数：添加 tag 和 theclass 两个参数，并把 h1 改为 tag，intro 改为 theclass。为了增加可读性，把 headers 改为 elems.</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">styleHeaderSiblings</span>(<span class="params">tag, theclass</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementsByTagName) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elems = <span class="built_in">document</span>.getElementsByTagName(tag);</span><br><span class="line">  alert(theclass);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; elems.length; i++) &#123;</span><br><span class="line">    <span class="comment">// 查找下一个元素节点</span></span><br><span class="line">    elem = getNextElement(elems[i].nextSibling);</span><br><span class="line">    elem.className += <span class="string">" "</span> + theclass;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样，函数的抽象化就完成了。<br>无论何时，发现函数可以抽象，都应该马上去做，这总是一个好主意。</p>
-<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>CSS-DOM 针对的是如何得到和设置 style 对象的各种属性。<br>style 属性不支持外部 css 设置的样式，不过仍然可以利用 style 属性去改变 html 元素的呈现效果。<br>不过一般都应该选择更新 classname 属性，而不是直接更新 style 对象的相关属性。<br>使用 js 干 css 的活无非就俩原因，一是 css 无法干这种活，二是一些残疾浏览器不支持最新属性。js 能够重复执行一组操作，这是 css 做不了的。</p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript 高级程序设计（1）</title>
-    <url>/2020/08/01/JavaScript-%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%881%EF%BC%89/</url>
-    <content><![CDATA[<h4 id="1-元素"><a href="#1-元素" class="headerlink" title="1.  元素"></a>1. <script> 元素</h4><p>在 HTML 代码中插入 js 脚本，需要<code>script</code>元素，它有几个属性：</p>
-<ul>
-<li>async：可选，表示应该立即下载脚本。</li>
-<li>charset：可选，表示 src 属性指定代码的字符集，一般没人用。</li>
-<li>defer：可选，表示脚本延迟到文档完全解析后才执行。</li>
-<li>src：可选，执行的外部文件。</li>
-<li>type：可选是 language 的替代属性，表示编写代码使用的脚本语言的类型。默认值是 <code>text/javascript</code>。</li>
-</ul>
-<p>标签一般会放在<code>&lt;head&gt;</code>元素里，但是会出现延迟，所以可以选择放在 <code>&lt;body&gt;</code> 的底部。</p>
-<p>或者可以选择在 <code>&lt;script&gt;</code> 元素中添加 defer 属性。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">defer</span>=<span class="string">"defer"</span> <span class="attr">src</span>=<span class="string">"example.js"</span>&gt;</span> <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>asyn 属性与 defer 属性类似，用于改变处理脚本。async 只用于外部脚本文件，告诉浏览器立即下载，不保证顺序。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">"example.js"</span>&gt;</span> <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>因为当有些浏览器不支持的 js 的时候，导致 js 代码会显示在页面当中。</p>
-<h4 id="2-嵌入代码与外部文件"><a href="#2-嵌入代码与外部文件" class="headerlink" title="2. 嵌入代码与外部文件"></a>2. 嵌入代码与外部文件</h4><p>不推荐把 javascript 代码包在 HTML 中，如下面：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">  <span class="function"><span class="keyword">function</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">    <span class="comment">// statement</span></span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>一般选择外部文件更好，因为在外部文件更好维护，可缓存（两个页面使用同一个文件，那么只需要一次下载），适应未来。</p>
-<h4 id="3-文档模式"><a href="#3-文档模式" class="headerlink" title="3. 文档模式"></a>3. 文档模式</h4><p>通过文档类型（doctype）切换实现。</p>
-<h4 id="4-元素"><a href="#4-元素" class="headerlink" title="4.  元素"></a>4. <noscript> 元素</h4><p>当浏览器不支持脚本，或者浏览器支持脚本，但脚本被禁用的情况下，浏览器才会显示 <code>&lt;noscript&gt;</code> 的内容。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">noscript</span>&gt;</span> <span class="tag">&lt;<span class="name">p</span>&gt;</span>本页面需要浏览器支持（启用）JavaScript.<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">noscript</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript-高级程序设计（2）</title>
-    <url>/2020/08/01/JavaScript-%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%882%EF%BC%89/</url>
-    <content><![CDATA[<h4 id="1-数据类型"><a href="#1-数据类型" class="headerlink" title="1. 数据类型"></a>1. 数据类型</h4><p>有五种简单数据类型：Undefined、Null、Boolean、Number、String，一种复杂数据——Object。</p>
-<p>typeof 操作符，其返回值是一个字符串有：</p>
-<ul>
-<li>undefined：该值未定义；</li>
-<li>boolean：该值为布尔值；</li>
-<li>string：该值是字符串；</li>
-<li>number：该值是数值；</li>
-<li>object：该值为对象或者 null；</li>
-<li>function：该值为函数。</li>
-</ul>
-<p>使用方法：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">1</span>;</span><br><span class="line">alert(<span class="keyword">typeof</span> num); <span class="comment">// number</span></span><br><span class="line">alert(<span class="keyword">typeof</span> <span class="number">1</span>); <span class="comment">// number</span></span><br></pre></td></tr></table></figure>
-
-<p>变量没定义之前的值就是 Undefined：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> test_0;</span><br><span class="line">alert(test_0 == <span class="literal">undefined</span>); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> test_1 = <span class="literal">undefined</span>;</span><br><span class="line">alert(test_1 == <span class="literal">undefined</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
-<p>Null 类型也只有一个值，null，表示一个空指针对象。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> test = <span class="literal">null</span>;</span><br><span class="line">alert(<span class="keyword">typeof</span> test); <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
-
-<p>Number 有一个 NaN（Not a Number）值，用于表示一个返回数值的操作数值未返回数值的情况。比如 在其它语言里 数值除以 0 会报错，而在 js 会返回上面个个值。NaN 与其它值的相加相除等操作返回的值也是 NaN。</p>
-<p>Number 数值转换有三个函数：Number()、parseInt() 以及 parseFloat()。<br>Number() 可用于任何任何数据类型，其它两个是用于字符串的。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"11"</span>;</span><br><span class="line"><span class="keyword">var</span> str_num = <span class="built_in">Number</span>(str);</span><br></pre></td></tr></table></figure>
-
-<p>转换为字符串的方法有两种方式，第一个就是第个值都有的 toString() 方法。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">11</span>;</span><br><span class="line"><span class="keyword">var</span> num_str = num.toString();</span><br></pre></td></tr></table></figure>
-
-<p>toString 方法可传入基数，输入不同的值会有不同的返回不同的进制数。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">11</span>;</span><br><span class="line"><span class="keyword">var</span> num_str = num.toString(<span class="number">2</span>); <span class="comment">// 1011</span></span><br></pre></td></tr></table></figure>
-
-<p>亦可直接使用 String() ，使用方法与 Number() 类似。</p>
-<h4 id="2-操作符"><a href="#2-操作符" class="headerlink" title="2. 操作符"></a>2. 操作符</h4><p><code>+-*/&lt;&gt;=&amp;&amp;||</code> 与其它语言是类似的。</p>
-<p>有一点需要注意全等和不全等符，全等符由 3 个等号（===）表示，在两个操作数未经转换就相等的情况下返回 true，如下面</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result_0 = <span class="string">"55"</span> == <span class="number">55</span>; <span class="comment">// true 转换后相等</span></span><br><span class="line"><span class="keyword">var</span> result_1 = <span class="string">"55"</span> === <span class="number">55</span>; <span class="comment">// false 未转换后不等</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="3-语句"><a href="#3-语句" class="headerlink" title="3. 语句"></a>3. 语句</h4><p><code>if/else/while/for</code> 等语句与 C 语言类似。</p>
-<p>for-in 语句是一个精准的迭代语句，可以枚举对象的属性，与 python 的 for 语句类似。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (property <span class="keyword">in</span> expression) statement;</span><br></pre></td></tr></table></figure>
-
-<p>例子：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> proName <span class="keyword">in</span> <span class="built_in">window</span>) &#123;</span><br><span class="line">  <span class="built_in">document</span>.write(propName);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>label 语句可以在代码中添加标签，以便将来使用，用法：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">label: statement;</span><br></pre></td></tr></table></figure>
-
-<p>例子：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">start: <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  alert(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>with 语句的作用是将代码的作用域设置到一个特定的对象中，用法：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> (expression) statement;</span><br></pre></td></tr></table></figure>
-
-<p>with 语句的目的是为了简化多次编写同一个对象的工作，如例子示：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> qs = location.search.substring(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">var</span> hostName = location.hostname;</span><br><span class="line"><span class="keyword">var</span> url = location.href;</span><br></pre></td></tr></table></figure>
-
-<p>用 with 语句可改写为：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> (location) &#123;</span><br><span class="line">  <span class="keyword">var</span> qs = search.substring(<span class="number">1</span>);</span><br><span class="line">  <span class="keyword">var</span> hostName = hostname;</span><br><span class="line">  <span class="keyword">var</span> url = href;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="4-函数"><a href="#4-函数" class="headerlink" title="4. 函数"></a>4. 函数</h4><p>js 不像 java 那样可以实现重载，如相同的函数名接受不同参数的类型和数量，可定义不同的函数。<br>如果 js 定义两个相同的函数，那么名字只属于后定义的函数。</p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript-学习笔记（8）：动画</title>
-    <url>/2020/07/20/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/</url>
-    <content><![CDATA[<h1 id="JavaScript-学习笔记（8）：动画效果"><a href="#JavaScript-学习笔记（8）：动画效果" class="headerlink" title="JavaScript-学习笔记（8）：动画效果"></a>JavaScript-学习笔记（8）：动画效果</h1><p>动画是 CSS-DOM 最具动感的内容，让网页上的元素动起来。</p>
-<h4 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h4><p>js 可以按照预定的时间重复调用函数，，这意味着我们可以随着时间的失衡而不断改变某个元素的样式。</p>
-<ul>
-<li><p>位置：网页元素在浏览器窗口里的位置是一种表示性信息，一般由 CSS 负责。例如：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">element</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>下面的 DOM 代码实现了同样的效果：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">element.style.position = <span class="string">"absolute"</span>;</span><br><span class="line">element.style.top = <span class="string">"50px"</span>;</span><br><span class="line">element.style.left = <span class="string">"100px"</span>;</span><br></pre></td></tr></table></figure>
-
-<p>假设有这么一个元素：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"message"</span>&gt;</span>Wheel<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>再用 js 设置位置：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">positionMessage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(<span class="string">"message"</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elem = <span class="built_in">document</span>.getElementById(<span class="string">"message"</span>);</span><br><span class="line">  elem.style.position = <span class="string">"absolute"</span>;</span><br><span class="line">  elem.style.left = <span class="string">"50px"</span>;</span><br><span class="line">  elem.style.top = <span class="string">"100px"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>添加到<code>windows.onload</code>：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addLoadEvent</span>(<span class="params">func</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> oldonload = <span class="built_in">window</span>.onload;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">window</span>.onload != <span class="string">"function"</span>) &#123;</span><br><span class="line">    <span class="built_in">window</span>.onload = func;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      oldonload();</span><br><span class="line">      func();</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">addLoadEvent(positionMessage);</span><br></pre></td></tr></table></figure>
-
-<p>结果：<br><img src="https://pic4.zhimg.com/80/v2-1e23b6fa027df6909b85e241f1859807.png" alt="Image"></p>
-<p>再编写一个移动的函数：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">moveMessage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(<span class="string">"message"</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elem = <span class="built_in">document</span>.getElementById(<span class="string">"message"</span>);</span><br><span class="line">  elem.style.left = <span class="string">"200px"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>结果：<br><img src="https://pic4.zhimg.com/80/v2-1e3e5ff744e8dfe2761e9107a0015e05.png" alt="Image"></p>
-<p>这是立即改变位置，要想获得动画效果，还要让位置随着时间的改变而不断改变。</p>
-</li>
-<li><p>时间</p>
-<p>js 的 setTimeout 能够让某个经过一段预定的时间后才开始执行。<br>用法：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">variable = setTimeout(<span class="string">"function"</span>, interval);</span><br></pre></td></tr></table></figure>
-
-<p>可以用 clearTimeout 的函数来消 “等待执行”队列的某个函数。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">clearTimeout(variable);</span><br></pre></td></tr></table></figure>
-
-<p>修改 postitonMessage 函数，让其在 5 秒后才调用 moveMessage 函数。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">positionMessage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(<span class="string">"message"</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elem = <span class="built_in">document</span>.getElementById(<span class="string">"message"</span>);</span><br><span class="line">  elem.style.position = <span class="string">"absolute"</span>;</span><br><span class="line">  elem.style.left = <span class="string">"50px"</span>;</span><br><span class="line">  elem.style.top = <span class="string">"100px"</span>;</span><br><span class="line">  movement = setTimeout(<span class="string">"moveMessage()"</span>, <span class="number">5000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>positionMessage 依旧在加载时调用。</p>
-</li>
-<li><p>时间递增量</p>
-<p>动画应该是一个渐变的过程，元素应该从出发点逐步移动到目的点，而不是一下子跳过去。</p>
-<p>更新 moveMessage 函数，让元素以逐渐移动的方式发生。步骤：</p>
-<ul>
-<li>获得元素的当前位置；</li>
-<li>如果元素已经到达目的地，则退出；</li>
-<li>如果元素尚未到达它的目的地，则把它向目的地移动；</li>
-<li>一段时间后重复上述步骤。</li>
-</ul>
-<p>获取位置的值：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> xpos = <span class="built_in">parseInt</span>(elem.style.left);</span><br><span class="line"><span class="keyword">var</span> ypos = <span class="built_in">parseInt</span>(elem.style.top);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>只有使用 DOM 脚本或 style 属性分配位置后，这里的 parseInt 才起作用。</p>
-</blockquote>
-<p>编辑 moveMessage 函数：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">moveMessage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(<span class="string">"message"</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elem = <span class="built_in">document</span>.getElementById(<span class="string">"message"</span>);</span><br><span class="line">  <span class="keyword">var</span> xpos = <span class="built_in">parseInt</span>(elem.style.left);</span><br><span class="line">  <span class="keyword">var</span> ypos = <span class="built_in">parseInt</span>(elem.style.top);</span><br><span class="line">  <span class="comment">// 如果相等就退出递归</span></span><br><span class="line">  <span class="keyword">if</span> (xpos == <span class="number">200</span> &amp;&amp; ypos == <span class="number">100</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  <span class="comment">// 如果不相等就继续加减</span></span><br><span class="line">  <span class="keyword">if</span> (xpos &lt; <span class="number">200</span>) xpos++;</span><br><span class="line">  <span class="keyword">if</span> (xpos &gt; <span class="number">200</span>) xpos--;</span><br><span class="line">  <span class="keyword">if</span> (ypos &lt; <span class="number">100</span>) ypos++;</span><br><span class="line">  <span class="keyword">if</span> (ypos &gt; <span class="number">100</span>) ypos--;</span><br><span class="line">  elem.style.left = xpos + <span class="string">"px"</span>;</span><br><span class="line">  elem.style.top = ypos + <span class="string">"px"</span>;</span><br><span class="line">  <span class="comment">// 每隔10毫秒递归</span></span><br><span class="line">  movement = setTimeout(<span class="string">"moveMessage()"</span>, <span class="number">10</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>抽象</p>
-<p>上面的代码只能完成特定的函数，如果把里面的常数改为变量，那么就通用性就会大大提升。</p>
-<p>将移动元素的 ID、元素的目的地的位置，以及停顿间隔改为变量。<br>定义一个新的函数 <code>function moveElement(elementID, final_x, final_y, interval)</code>，具体代码为。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">moveElement</span>(<span class="params">elementID, final_x, final_y, interval</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(elementID)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elem = <span class="built_in">document</span>.getElementById(elementID);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> xpos = <span class="built_in">parseInt</span>(elem.style.left);</span><br><span class="line">  <span class="keyword">var</span> ypos = <span class="built_in">parseInt</span>(elem.style.top);</span><br><span class="line">  <span class="comment">// 如果相等就退出递归</span></span><br><span class="line">  <span class="keyword">if</span> (xpos == final_x &amp;&amp; ypos == final_y) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  <span class="comment">// 如果不相等就继续加减</span></span><br><span class="line">  <span class="keyword">if</span> (xpos &lt; final_x) xpos++;</span><br><span class="line">  <span class="keyword">if</span> (xpos &gt; final_x) xpos--;</span><br><span class="line">  <span class="keyword">if</span> (ypos &lt; final_y) ypos++;</span><br><span class="line">  <span class="keyword">if</span> (ypos &gt; final_y) ypos--;</span><br><span class="line">  elem.style.left = xpos + <span class="string">"px"</span>;</span><br><span class="line">  elem.style.top = ypos + <span class="string">"px"</span>;</span><br><span class="line">  <span class="comment">// 每隔 interval 毫秒递归</span></span><br><span class="line">  <span class="keyword">var</span> reqpeat =</span><br><span class="line">    <span class="string">"moveElement('"</span> +</span><br><span class="line">    elementID +</span><br><span class="line">    <span class="string">"',"</span> +</span><br><span class="line">    final_x +</span><br><span class="line">    <span class="string">","</span> +</span><br><span class="line">    final_y +</span><br><span class="line">    <span class="string">","</span> +</span><br><span class="line">    interval +</span><br><span class="line">    <span class="string">")"</span>;</span><br><span class="line">  movement = setTimeout(reqpeat, interval);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用 moveElement 函数。<br>创建一个名为 message.html 的文件，包含一个 <code>id=message</code> 的 p 元素：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Position<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"message"</span>&gt;</span>Wheel<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>再编写一个 positionMessage.js 的文件，添加 positionMessage() 函数：<br><code>id=message2</code> 的 p 元素，</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">positionMessage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(<span class="string">"message"</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elem = <span class="built_in">document</span>.getElementById(<span class="string">"message"</span>);</span><br><span class="line">  elem.style.position = <span class="string">"absolute"</span>;</span><br><span class="line">  elem.style.left = <span class="string">"50px"</span>;</span><br><span class="line">  elem.style.top = <span class="string">"100px"</span>;</span><br><span class="line">  moveElement(<span class="string">"message"</span>, <span class="number">200</span>, <span class="number">100</span>, <span class="number">10</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">addLoadEvent(positionMessage);</span><br></pre></td></tr></table></figure>
-
-<p>再在 HTML 文件上添加相对应的 js 文件，就可以显示出简单的动画效果。<br>改变 interval 的值即可改变动画的速度，改变 x 和 y 的值即可改变最终位置。</p>
-<p>添加一个 <code>id=message2</code> 的 p 元素，<code>&lt;p id=&quot;message2&quot;&gt;Whoal&lt;/p&gt;</code>，再在 positionMessage 函数中添加相对应的操作：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">positionMessage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(<span class="string">"message"</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elem = <span class="built_in">document</span>.getElementById(<span class="string">"message"</span>);</span><br><span class="line">  elem.style.position = <span class="string">"absolute"</span>;</span><br><span class="line">  elem.style.left = <span class="string">"50px"</span>;</span><br><span class="line">  elem.style.top = <span class="string">"100px"</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> elem_2 = <span class="built_in">document</span>.getElementById(<span class="string">"message2"</span>);</span><br><span class="line">  elem_2.style.position = <span class="string">"absolute"</span>;</span><br><span class="line">  elem_2.style.left = <span class="string">"50px"</span>;</span><br><span class="line">  elem_2.style.top = <span class="string">"50px"</span>;</span><br><span class="line"></span><br><span class="line">  moveElement(<span class="string">"message"</span>, <span class="number">125</span>, <span class="number">25</span>, <span class="number">10</span>);</span><br><span class="line">  moveElement(<span class="string">"message2"</span>, <span class="number">125</span>, <span class="number">125</span>, <span class="number">20</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>结果：<br><img src="https://pic4.zhimg.com/80/v2-ca5004a8c28eeed4108b85f6fafd05ab.png" alt="Image"></p>
-</li>
-</ul>
-<h4 id="实用的动画"><a href="#实用的动画" class="headerlink" title="实用的动画"></a>实用的动画</h4><p>上面的动画用处不大，还有可能使用户厌烦。</p>
-<ul>
-<li><p>提出问题：有一个怨念一系列链接的网页。当用用户的鼠标指针悬停在某个链接上时，展示预览一张图片。<br>添加一个文件 list.html，代码为：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Web Design<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Web Design<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>These are the things you should know:<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ol</span> <span class="attr">id</span>=<span class="string">"linklist"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"./structure.html"</span>&gt;</span>structure<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"./presentation.html"</span>&gt;</span>presentation<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"./behavior.html"</span>&gt;</span>behavior<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>这次需要在 onmouseover 事件被触发时显示一张图片。</p>
-</li>
-<li><p>解决问题：</p>
-<ul>
-<li>为所有的预览图片生成一张“集体照”形式的图片；</li>
-<li>隐藏这张集体照图片的绝大部分。</li>
-<li>当用户把鼠标指针悬停在某个链接上方时，只显示这张“集体照”图片相应的部分。</li>
-</ul>
-<p>集体照：<br><img src="https://pic4.zhimg.com/80/v2-488b3f4eef617e261baf1f1d07cb26ce.png" alt="Image"><br>添加到 list.html 最后面：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"./topic.png"</span> <span class="attr">alt</span>=<span class="string">"building blocks of web Design"</span> <span class="attr">id</span>=<span class="string">"preview"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>CSS</p>
-<p>css 的 overflow 属性用来处理一个元素的尺寸超出其容器尺寸的情况。<br>overflow 属性有 4 种取值：visible（不作任何改动）、hidden（将溢出部分隐藏）、scroll（隐藏，但提供一个滚动条）和 auto（类似 scroll，但只有溢出时才显示滚动条）。</p>
-<p>这里选取 hidden 属性。</p>
-<p>添加 div，将 img 包进去，再添加对应的样式：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"slideshow"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"./topic.png"</span> <span class="attr">alt</span>=<span class="string">"building blocks of web Design"</span> <span class="attr">id</span>=<span class="string">"preview"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#slideshow</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">130px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>接下来解决的时，让网页对用户的操作做出正确响应，当鼠标指针指在某个地方时，把对应的图片显示出来。</p>
-</li>
-<li><p>JavaScript</p>
-<p>编写一个 prepareSlideshow 来完成工作。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">prepareSlideshow</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementsByTagName) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(<span class="string">"linklist"</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(<span class="string">"preview"</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 为图片应用样式</span></span><br><span class="line">  <span class="keyword">var</span> preview = <span class="built_in">document</span>.getElementById(<span class="string">"preview"</span>);</span><br><span class="line">  preview.style.position = <span class="string">"absolute"</span>;</span><br><span class="line">  preview.style.left = <span class="string">"0px"</span>;</span><br><span class="line">  preview.style.top = <span class="string">"0px"</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> list = <span class="built_in">document</span>.getElementById(<span class="string">"linklist"</span>);</span><br><span class="line">  <span class="keyword">var</span> links = list.getElementsByTagName(<span class="string">"a"</span>);</span><br><span class="line"></span><br><span class="line">  links[<span class="number">0</span>].onmouseover = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    moveElement(<span class="string">"preview"</span>, <span class="number">-100</span>, <span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  links[<span class="number">1</span>].onmouseover = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    moveElement(<span class="string">"preview"</span>, <span class="number">-200</span>, <span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  links[<span class="number">2</span>].onmouseover = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    moveElement(<span class="string">"preview"</span>, <span class="number">-300</span>, <span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">addLoadEvent(prepareSlideshow);</span><br></pre></td></tr></table></figure>
-
-<p>将 js 文件添加到 html 文件，运行后将鼠标移到对应的链接上会出来动画效果：<br><img src="https://pic4.zhimg.com/80/v2-86d44aa0dc6cffbe084a325a91092499.png" alt="Image"></p>
-<p>但是来回移动时会出现混乱的情况。</p>
-</li>
-<li><p>变量的作用域</p>
-<p>动画效果出错是由全局变量引起的。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">movement = setTimeout(reqpeat, interval);</span><br></pre></td></tr></table></figure>
-
-<p>但是直接使用局部变量也会出错，需要一种介乎二者之间的东西，也就是属性。<br>js 允许为元素创建属性：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">element.property = value;</span><br></pre></td></tr></table></figure>
-
-<p>所以更改为属性即可解决问题：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">elem.movement = setTimeout(reqpeat, interval);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>改进动画效果：<br>每次移动 1px，速度未免过慢。<br>可以设置每次前进这个距离的十分之一。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dist = (final_x - xpos) / <span class="number">10</span>;</span><br><span class="line">xpos = xpos + dist;</span><br></pre></td></tr></table></figure>
-
-<p>当差距小于 10 的时候，用这个差距除 10 的结果小于 1，将移动不了。<br>解决方法是使用 Math 对象的 ceil 函数，它可以返回一个不小于 dist 的值的一个整数，用法：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Math</span>.ceil(number);</span><br></pre></td></tr></table></figure>
-
-<p>最终代码：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">moveElement</span>(<span class="params">elementID, final_x, final_y, interval</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(elementID)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elem = <span class="built_in">document</span>.getElementById(elementID);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 声明 dist</span></span><br><span class="line">  <span class="keyword">var</span> dist = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">var</span> xpos = <span class="built_in">parseInt</span>(elem.style.left);</span><br><span class="line">  <span class="keyword">var</span> ypos = <span class="built_in">parseInt</span>(elem.style.top);</span><br><span class="line">  <span class="comment">// 如果相等就退出递归</span></span><br><span class="line">  <span class="keyword">if</span> (xpos == final_x &amp;&amp; ypos == final_y) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  <span class="comment">// 如果不相等就继续加减</span></span><br><span class="line">  <span class="keyword">if</span> (xpos &lt; final_x) &#123;</span><br><span class="line">    dist = <span class="built_in">Math</span>.ceil((final_x - xpos) / <span class="number">10</span>);</span><br><span class="line">    xpos = xpos + dist;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (xpos &gt; final_x) &#123;</span><br><span class="line">    dist = <span class="built_in">Math</span>.ceil((xpos - final_x) / <span class="number">10</span>);</span><br><span class="line">    xpos = xpos - dist;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (ypos &lt; final_y) &#123;</span><br><span class="line">    dist = <span class="built_in">Math</span>.ceil((final_y - ypos) / <span class="number">10</span>);</span><br><span class="line">    ypos = ypos + dist;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (ypos &gt; final_y) &#123;</span><br><span class="line">    dist = <span class="built_in">Math</span>.ceil((ypos - final_y) / <span class="number">10</span>);</span><br><span class="line">    ypos = ypos - dist;</span><br><span class="line">  &#125;</span><br><span class="line">  elem.style.left = xpos + <span class="string">"px"</span>;</span><br><span class="line">  elem.style.top = ypos + <span class="string">"px"</span>;</span><br><span class="line">  <span class="comment">// 每隔 interval 毫秒递归</span></span><br><span class="line">  <span class="keyword">var</span> reqpeat =</span><br><span class="line">    <span class="string">"moveElement('"</span> +</span><br><span class="line">    elementID +</span><br><span class="line">    <span class="string">"',"</span> +</span><br><span class="line">    final_x +</span><br><span class="line">    <span class="string">","</span> +</span><br><span class="line">    final_y +</span><br><span class="line">    <span class="string">","</span> +</span><br><span class="line">    interval +</span><br><span class="line">    <span class="string">")"</span>;</span><br><span class="line">  <span class="comment">// movement = setTimeout(reqpeat, interval);</span></span><br><span class="line">  elem.movement = setTimeout(reqpeat, interval);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>添加安全检查<br>诸如 elem.style.left 是否存在等。</p>
-</li>
-<li><p>生成 HTML 标记：<br>一些内容是为了存在动画效果而存在的，但是如果不支持 js，那么那些内容留在那里岂不是很尴尬，所以干脆让 js 来生成这些标记。</p>
-</li>
-</ul>
-<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>实现动画效果并不难，问题是尖不应该使用动画。<br>动画技术可以让我们创建出很多非常酷的效果，但四处移动的元素用处不大。现在有一个通用性的函数，在有必要创建动画效果时帮上大忙。</p>
-]]></content>
-      <tags>
-        <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Test Article</title>
-    <url>/2020/05/20/Test-Article/</url>
-    <content><![CDATA[<p>This is a test article, weclome subscribe “<a href="https://jinl1874.github.io&quot;" target="_blank" rel="noopener">https://jinl1874.github.io&quot;</a></p>
-<p>▶ hexo s<br>INFO Start processing<br>INFO Hexo is running at <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> . Press Ctrl+C to stop.</p>
-]]></content>
-      <categories>
-        <category>Testing</category>
-      </categories>
-      <tags>
-        <tag>tags</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript-学习笔记（9）：HTML5</title>
-    <url>/2020/07/22/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/</url>
-    <content><![CDATA[<p><img src="https://pic4.zhimg.com/80/v2-806d2ac14c387bdd9db1b26b581320ec.jpg" alt="Image"></p>
-<h1 id="JavaScript-笔记（9）：HTML5"><a href="#JavaScript-笔记（9）：HTML5" class="headerlink" title="JavaScript-笔记（9）：HTML5"></a>JavaScript-笔记（9）：HTML5</h1><h4 id="HTML5-简介"><a href="#HTML5-简介" class="headerlink" title="HTML5 简介"></a>HTML5 简介</h4><p>HTML5 是 HTML 当前及未来的新标准。</p>
-<p>web 设计有三个层：结构层、样式层、行为层，这三个层分别使用 HTML、CSS 和 JavaScript 三个技术。HTML5 将上面三个层装入一个小集合，也仅仅只是一个集合。<br>HTML5 添加了很多新的标记元素，详情 <a href="http://www.w3.org/TR/html5" target="_blank" rel="noopener">http://www.w3.org/TR/html5</a>。<br>将文档“升级”到 HTML5，只需把文档类型声明改成<code>&lt;!DOCTYPE html&gt;</code>即可。</p>
-<p>HTML5 的兼容非常强，缺斤短两的 HTML5 文档都可以完美地通过验证。</p>
-<h4 id="忠告"><a href="#忠告" class="headerlink" title="忠告"></a>忠告</h4><p>一个工具：Modernizr（<a href="https://modernizr.com/" target="_blank" rel="noopener">https://modernizr.com/</a>），这是一个开源 js 库，利用其富特性检测功能，对 HTML5 文档进行更好的控制。</p>
-<p>在文档中嵌入 Modernizr 后，它会随着页面加载而变一些小戏法。</p>
-<p>首先，它会修改 <code>&lt;html&gt;</code> 的 class 属性，要使用它编写文档，通常要给<code>&lt;html&gt;</code>属性添加一个 no-js 类：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">class</span>=<span class="string">"no-js"</span>&gt;</span><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>利用这个类，可以浏览器不支持 JavaScript 的情况下应用 CSS 样式。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">;<span class="selector-class">.nojs</span> <span class="selector-tag">selector</span> &#123;</span><br><span class="line">    style properties;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后，它还会检测浏览器可以支持的各种特性，并添加相应的类名。<br>实际情况是浏览器会支持部分特性，不支持另一些特性，这时，类名中就会间或出现 features 和 no-feature。</p>
-<p>它还可以帮一些老旧浏览器处理 <code>&lt;section&gt;</code> 和 <code>&lt;article&gt;</code> 等新 HTML5 元素。</p>
-<p>使用它非常简单，从 <a href="http://www.modernizr.com/" target="_blank" rel="noopener">http://www.modernizr.com/</a> 下载它，然后在文档的<code>&lt;head&gt;</code>中添加该脚本：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"modernizr-1.5.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>一定要把这个脚本放在<head>元素中，因为放在文档开头，可以在加载其它标记之前先加载它，以便能更好地创建 HTML5 元素。</p>
-<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>一些有关 Canvas、视频/音频以及表单的例子，需要以下浏览器：</p>
-<ul>
-<li>苹果 Safari 5+</li>
-<li>Chrome 6+</li>
-<li>Firefox 3.6+</li>
-<li>IE 9+</li>
-<li>opera 10.6+</li>
-</ul>
-<h5 id="1-Canvas"><a href="#1-Canvas" class="headerlink" title="1. Canvas"></a>1. Canvas</h5><p>浏览器一般只能显示静态图片，使用 GIF 或许可以实现一些动画，或者使用 CSS 加 JavaScript 也能变化一些样式。<br>但 HTML5 的<code>&lt;Canvas&gt;</code> 元素可以动态创建和操作图形图像。<br>支起一张“画布”：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"draw-in-me"</span> <span class="attr">width</span>=<span class="string">"120"</span> <span class="attr">height</span>=<span class="string">"40"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>Powered by HTML5 canvas！<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>在上面作画需要了解详细的绘画方法，参考<code>&lt;canvas&gt;</code>元素规范(<a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html" target="_blank" rel="noopener">http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html</a>)</p>
-<p>用<code>&lt;Canvas&gt;</code> 画一个圆角小黑盒子，带有 2 像素宽的白色描边效果。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"draw-in-me"</span>);</span><br><span class="line">  <span class="keyword">if</span> (canvas.getContext) &#123;</span><br><span class="line">    <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.moveTo(<span class="number">120.0</span>, <span class="number">32.0</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">120.0</span>, <span class="number">36.4</span>, <span class="number">116.4</span>, <span class="number">40.0</span>, <span class="number">112.0</span>, <span class="number">40.0</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">8.0</span>, <span class="number">40.0</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">3.6</span>, <span class="number">40.0</span>, <span class="number">0.0</span>, <span class="number">36.4</span>, <span class="number">0.0</span>, <span class="number">32.0</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">0.0</span>, <span class="number">8.0</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">0.0</span>, <span class="number">3.6</span>, <span class="number">3.6</span>, <span class="number">0.0</span>, <span class="number">8.0</span>, <span class="number">0.0</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">112.0</span>, <span class="number">0.0</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">116.4</span>, <span class="number">0.0</span>, <span class="number">120.0</span>, <span class="number">3.6</span>, <span class="number">120.0</span>, <span class="number">8.0</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">120.0</span>, <span class="number">32.0</span>);</span><br><span class="line">    ctx.closePath();</span><br><span class="line">    ctx.fill();</span><br><span class="line">    ctx.lineWidth = <span class="number">2.0</span>;</span><br><span class="line">    ctx.strokeStyle = <span class="string">"rgb(255, 255, 255)"</span>;</span><br><span class="line">    ctx.stroke();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.onload = draw;</span><br></pre></td></tr></table></figure>
-
-<p>结果：<br><img src="https://pic4.zhimg.com/80/v2-e1c8ba6c44d4a642fe4ee1e4df2dcad1.png" alt="Image"></p>
-<h5 id="2-音频和视频"><a href="#2-音频和视频" class="headerlink" title="2. 音频和视频"></a>2. 音频和视频</h5><ul>
-<li>HTML 的 <code>&lt;video&gt;</code>元素在文档中嵌入影片以及影片交互定义了一种标准方式，同时也把嵌入操作简化成了一个标签：</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">src</span>=<span class="string">"movie.mp4"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 不支持 &lt;video&gt; 的替代内容  --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"movie.mp4"</span>&gt;</span>Download movie.mp4<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>同样，音频也是：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">src</span>=<span class="string">"audio.mp3"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"audio.mp3"</span>&gt;</span>Download audio.mp3<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>自定义控件<br>浏览器显示 <code>&lt;video&gt;</code>元素时，会为其添加一些与浏览器样式统一的标准播放控件，要想自定义这些控件的外观，或者添加新的控件，可以通过 DOM 属性来实现。主要有：</p>
-<ul>
-<li>currentTime，返回当前播放的位置，以秒表示；</li>
-<li>duration，返回媒体的总时长，以秒表示，对流媒体返回无穷大；</li>
-<li>paused，表示是否处于暂停；</li>
-<li>play，在媒体播放开始时发生；</li>
-<li>pause，在媒体暂停时发生；</li>
-<li>loadedata，在媒体可以从当前播放位置开始播放时发生；</li>
-<li>ended，在媒体已播放完成而停止时发生。</li>
-</ul>
-<p>记住，无论创建什么控件，都别忘了在<code>&lt;video&gt;</code>元素中添加 control 控件。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">src</span>=<span class="string">"movie.mp4"</span> <span class="attr">controls</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>这样才会显示控制条：<br><img src="https://pic4.zhimg.com/80/v2-827cdf4e9596f102b9f9a1609a839236.png" alt="Image"></p>
-</li>
-</ul>
-<h5 id="3-表单"><a href="#3-表单" class="headerlink" title="3. 表单"></a>3. 表单</h5><p>传统的表单可用的输入控件类型很少，文本框、单选按钮、复选框对简单的表单是够了，但需要更多交互功能的时候，仍需要 DOM 上阵。<br>HTML5 提供了新的输入型表单：</p>
-<ul>
-<li>email，输入邮箱</li>
-<li>url，输入 url</li>
-<li>date，输入日期和时间</li>
-<li>number，输入数值</li>
-<li>range，用于生成滑动条</li>
-<li>search，用于搜索框</li>
-<li>tel，用于输入电话号码</li>
-<li>color，用于选择颜色</li>
-</ul>
-<p>新的属性：</p>
-<ul>
-<li>autocomplete，用于为文本（text）输入框添加一组建议的输入项；</li>
-<li>autofocus，用于让表单元素自动获得焦点；</li>
-<li>form，用于对<code>&lt;form&gt;</code>标签外部的表单元素分组；</li>
-<li>min、max 和 step，用在范围和数值输入框中；</li>
-<li>pattern，用于定义一个正则表达式，以便验证输入的值；</li>
-<li>placeholder，用于在文本输入框中显示临时性的提示信息；</li>
-<li>required，表示必填</li>
-</ul>
-<p>使用的时候要检测浏览器是否支持对应的控件，可以使用 inputtypes.type 属性，如：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (!Modernizr.inputtypes.date) &#123;</span><br><span class="line">  <span class="comment">// 生成日期选择器的脚本</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>检查属性，可以使用 input.attribute 属性，如：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (!Modernizr.input.placeholder) &#123;</span><br><span class="line">  <span class="comment">// 生成占位符提示信息的脚本</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果没有使用 Modernizr，可以使用 inputSupportType 函数来检查浏览器是否支持某种输入控件。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inpurtSupportsType</span>(<span class="params">type</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!<span class="built_in">document</span>.createElement) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">var</span> input = <span class="built_in">document</span>.createElement(<span class="string">'input'</span>);</span><br><span class="line">    input.setAttribute(<span class="string">'type'</span>, type);</span><br><span class="line">    <span class="keyword">if</span>(input.type == <span class="string">'text &amp;&amp; type != '</span>text<span class="string">')&#123;</span></span><br><span class="line"><span class="string">        return false;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    else&#123;</span></span><br><span class="line"><span class="string">        return true;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>使用方式和 modernizr 一样：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (!inputSupportType(date)) &#123;</span><br><span class="line">  <span class="comment">// 生成日期选择器的脚本</span></span><br></pre></td></tr></table></figure>
-
-<p>检查特定的属性，可以使用这个 elementSupportsAttribute 函数：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">elementSupportsAttribute</span>(<span class="params">elementName, attribute</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.createElement) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> temp = <span class="built_in">document</span>.crateElement(elementName);</span><br><span class="line">  <span class="keyword">return</span> attribute <span class="keyword">in</span> test;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用方式和 modernizr 一样：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (!elementSupportType(<span class="string">'input'</span>, <span class="string">'placeholder'</span>)) &#123;</span><br><span class="line">  <span class="comment">// 生成提示占位符的脚本</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="4-HTML5-的其它特性"><a href="#4-HTML5-的其它特性" class="headerlink" title="4. HTML5 的其它特性"></a>4. HTML5 的其它特性</h5><ul>
-<li>localStorage 和 sessionStorage 在客户存储大型和复杂数据集的更有效方案</li>
-<li>使用 WebSocket 与服务器端脚本进行开放的双向通信</li>
-<li>使用 Web Worker 在后台执行 JavaScript</li>
-<li>标准化的拖放实现</li>
-<li>在浏览器中实现地理位置服务<br>…………</li>
-</ul>
-<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>了解了 HTML5 以及使用 Modernizr 等工具检测特性的重要性。</p>
-]]></content>
-      <categories>
-        <category>-[JavaScript]</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-        <tag>html</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JavaScript-学习笔记（6）：动态创建标记</title>
     <url>/2020/07/13/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%886%EF%BC%89/</url>
     <content><![CDATA[<p>网页的结构由标记语言创建，js 可用来改变细节而不改变结构。<br>同样，js 也可用来改变网页的结构和内容。</p>
@@ -1171,32 +729,377 @@
       </tags>
   </entry>
   <entry>
-    <title>使用自定义域名后出现“404There isn&#39;t a GitHub Pages site here”解决方法</title>
-    <url>/2020/05/22/blog-problem-0/</url>
-    <content><![CDATA[<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><ul>
-<li>每次将新文章使用“hexo d”推送后，再打开浏览器就会显示“404There isn’t a GitHub Pages site here”这个错误。</li>
+    <title>JavaScript-学习笔记（7）：CSS-DOM</title>
+    <url>/2020/07/18/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%887%EF%BC%89/</url>
+    <content><![CDATA[<p>笔记内容：</p>
+<ul>
+<li>styele 属性</li>
+<li>检索样式</li>
+<li>改变样式</li>
 </ul>
-<h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><ul>
-<li>我们在自定义域名之前会在下图里“Custom domain”，<br><img src="http://image.jinl1874.xyz/img/blog_problem.png" alt="setting"></li>
-<li>点击“save”后，仓库的根目录会生成一个“CNAME”文件，<br><img src="http://image.jinl1874.xyz/img/blog_problem_2.png" alt=""></li>
-<li>但是本地的“public”目录里面并没有这个文件，所以更新会删除这个文件，就会导致访问失败。</li>
+<h4 id="网页的结构"><a href="#网页的结构" class="headerlink" title="网页的结构"></a>网页的结构</h4><ul>
+<li><p>三位一体：</p>
+<ul>
+<li>结构层：由 HTML 或 XHTML 之类的标记语言负责创建；</li>
+<li>表示层：由 CSS 负责完成，CSS 描述页面内容应该如何呈现；</li>
+<li>行为层：负责内容应该如何响应事件这一问题，js 和 DOM 主宰的领域。</li>
 </ul>
-<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><ul>
-<li>在hexo的source文件夹下新建一个CNAME文件，内容如下。这样使用<code>hexo generate</code>就会在public目录生成CNAME文件了，这样推送过去后就不会删除了。<br><img src="http://image.jinl1874.xyz/img/20200522235649.png" alt="solve"></li>
-<li>添加文件后，重新生成推送后，问题就迎刃而解了。<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>分离：</p>
+<ul>
+<li>使用（X）HTML 搭建文档的结构；</li>
+<li>使用 CSS 去设置文档的呈现效果；</li>
+<li>使用 DOM 脚本去实现文档的行为。</li>
+</ul>
+<p>这三种技术之间存在重叠区域。</p>
+</li>
+</ul>
+<h4 id="style"><a href="#style" class="headerlink" title="style"></a>style</h4><p>style 属性 包含元素的样式，查询该属性返蜀犬吠日的是一个对象而不是一个简单的字符串。样式存在对象的属性里：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">element.style.property;</span><br></pre></td></tr></table></figure>
 
+<ul>
+<li><p>获取样式</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 获取 style 的 color 属性：</span></span><br><span class="line">element.style.color;</span><br><span class="line"><span class="comment">// 获取 style 的 font-family 属性：</span></span><br><span class="line">elements.style.fontFamily;</span><br></pre></td></tr></table></figure>
+
+<p>一般样式属性的返回值与它们的设置值都采用同样的计量单位。如果果 font-size 以 em 为单位，那么返回的值也是以 em 为单位。</p>
+<p>style 属性只能能过内嵌的方式来获取，一旦样式在外部，则获取不到。</p>
+</li>
+<li><p>设置样式<br>style 对象的名个属性是可以读写的，可以使用赋值操作来更新样式：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">element.style.property = value;</span><br></pre></td></tr></table></figure>
+<p>赋值操作符可以设置任何一种样式，比如 font 之类的速记属性：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">para.style.font = <span class="string">"2em 'times', serif"</span>;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<blockquote>
-<p>欢迎访问个人博客主页 <a href="https://jinl1874.github.io" target="_blank" rel="noopener">jinl1874</a></p>
-</blockquote>
+<h4 id="DOM-脚本设置样式"><a href="#DOM-脚本设置样式" class="headerlink" title="DOM 脚本设置样式"></a>DOM 脚本设置样式</h4><p>虽然 DOM 设置样式很容易，但是在大多数场合下，应该使用 CSS 去声明样式。</p>
+<ul>
+<li><p>根据元素的位置设置样式<br>找到该元素后，直接给该元素的 style 对应的属性赋值即可。</p>
+</li>
+<li><p>根据条件反复设置样式<br>找到元素后，根据条件设置样式。比如表格里隔一个行设置一个背景色，就需要根据条件设置值。</p>
+</li>
+<li><p>响应事件<br>一般最好使用 CSS 为文档设置样式，但也有一些 CSS 不能处理或者难以部署的情况，这时需要用上 DOM。比如浏览器不能识别伪类的时候，可以使用 js 来解决。</p>
+</li>
+<li><p>className 属性<br>之前的都是用 DOM 直接设置或修改样式，这是直接让“行为层”干“表示层”的活。<br>与其让 DOM 直接改变元素的样式，不如能过 js 更新元素的 classic 属性。</p>
+</li>
+</ul>
+<h4 id="对函数进行抽象"><a href="#对函数进行抽象" class="headerlink" title="对函数进行抽象"></a>对函数进行抽象</h4><p>一些函数可以做一些小小的改动可以变得更通用，这个过程叫抽象（abstraction）。<br>比如下面这个函数的对象仅适用于 h1 元素，以及 classname 的值为 intro 。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">styleHeaderSiblings</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementsByTagName) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> headers = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"h1"</span>);</span><br><span class="line">  <span class="keyword">var</span> elem;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; headers.length; i++) &#123;</span><br><span class="line">    <span class="comment">// 查找下一个元素节点</span></span><br><span class="line">    elem = getNextElement(headers[i].nextSibling);</span><br><span class="line">    elem.className += <span class="string">"intro"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>添加两个具体的参数，就可以使其成为更通用的函数：添加 tag 和 theclass 两个参数，并把 h1 改为 tag，intro 改为 theclass。为了增加可读性，把 headers 改为 elems.</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">styleHeaderSiblings</span>(<span class="params">tag, theclass</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementsByTagName) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elems = <span class="built_in">document</span>.getElementsByTagName(tag);</span><br><span class="line">  alert(theclass);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; elems.length; i++) &#123;</span><br><span class="line">    <span class="comment">// 查找下一个元素节点</span></span><br><span class="line">    elem = getNextElement(elems[i].nextSibling);</span><br><span class="line">    elem.className += <span class="string">" "</span> + theclass;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样，函数的抽象化就完成了。<br>无论何时，发现函数可以抽象，都应该马上去做，这总是一个好主意。</p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>CSS-DOM 针对的是如何得到和设置 style 对象的各种属性。<br>style 属性不支持外部 css 设置的样式，不过仍然可以利用 style 属性去改变 html 元素的呈现效果。<br>不过一般都应该选择更新 classname 属性，而不是直接更新 style 对象的相关属性。<br>使用 js 干 css 的活无非就俩原因，一是 css 无法干这种活，二是一些残疾浏览器不支持最新属性。js 能够重复执行一组操作，这是 css 做不了的。</p>
 ]]></content>
       <categories>
-        <category>Problem</category>
+        <category>JavaScript</category>
       </categories>
       <tags>
-        <tag>hexo, blog</tag>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript-学习笔记（8）：动画</title>
+    <url>/2020/07/20/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="JavaScript-学习笔记（8）：动画效果"><a href="#JavaScript-学习笔记（8）：动画效果" class="headerlink" title="JavaScript-学习笔记（8）：动画效果"></a>JavaScript-学习笔记（8）：动画效果</h1><p>动画是 CSS-DOM 最具动感的内容，让网页上的元素动起来。</p>
+<h4 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h4><p>js 可以按照预定的时间重复调用函数，，这意味着我们可以随着时间的失衡而不断改变某个元素的样式。</p>
+<ul>
+<li><p>位置：网页元素在浏览器窗口里的位置是一种表示性信息，一般由 CSS 负责。例如：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">element</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面的 DOM 代码实现了同样的效果：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">element.style.position = <span class="string">"absolute"</span>;</span><br><span class="line">element.style.top = <span class="string">"50px"</span>;</span><br><span class="line">element.style.left = <span class="string">"100px"</span>;</span><br></pre></td></tr></table></figure>
+
+<p>假设有这么一个元素：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"message"</span>&gt;</span>Wheel<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>再用 js 设置位置：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">positionMessage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(<span class="string">"message"</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elem = <span class="built_in">document</span>.getElementById(<span class="string">"message"</span>);</span><br><span class="line">  elem.style.position = <span class="string">"absolute"</span>;</span><br><span class="line">  elem.style.left = <span class="string">"50px"</span>;</span><br><span class="line">  elem.style.top = <span class="string">"100px"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>添加到<code>windows.onload</code>：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addLoadEvent</span>(<span class="params">func</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> oldonload = <span class="built_in">window</span>.onload;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">window</span>.onload != <span class="string">"function"</span>) &#123;</span><br><span class="line">    <span class="built_in">window</span>.onload = func;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      oldonload();</span><br><span class="line">      func();</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">addLoadEvent(positionMessage);</span><br></pre></td></tr></table></figure>
+
+<p>结果：<br><img src="https://pic4.zhimg.com/80/v2-1e23b6fa027df6909b85e241f1859807.png" alt="Image"></p>
+<p>再编写一个移动的函数：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">moveMessage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(<span class="string">"message"</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elem = <span class="built_in">document</span>.getElementById(<span class="string">"message"</span>);</span><br><span class="line">  elem.style.left = <span class="string">"200px"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果：<br><img src="https://pic4.zhimg.com/80/v2-1e3e5ff744e8dfe2761e9107a0015e05.png" alt="Image"></p>
+<p>这是立即改变位置，要想获得动画效果，还要让位置随着时间的改变而不断改变。</p>
+</li>
+<li><p>时间</p>
+<p>js 的 setTimeout 能够让某个经过一段预定的时间后才开始执行。<br>用法：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">variable = setTimeout(<span class="string">"function"</span>, interval);</span><br></pre></td></tr></table></figure>
+
+<p>可以用 clearTimeout 的函数来消 “等待执行”队列的某个函数。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">clearTimeout(variable);</span><br></pre></td></tr></table></figure>
+
+<p>修改 postitonMessage 函数，让其在 5 秒后才调用 moveMessage 函数。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">positionMessage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(<span class="string">"message"</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elem = <span class="built_in">document</span>.getElementById(<span class="string">"message"</span>);</span><br><span class="line">  elem.style.position = <span class="string">"absolute"</span>;</span><br><span class="line">  elem.style.left = <span class="string">"50px"</span>;</span><br><span class="line">  elem.style.top = <span class="string">"100px"</span>;</span><br><span class="line">  movement = setTimeout(<span class="string">"moveMessage()"</span>, <span class="number">5000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>positionMessage 依旧在加载时调用。</p>
+</li>
+<li><p>时间递增量</p>
+<p>动画应该是一个渐变的过程，元素应该从出发点逐步移动到目的点，而不是一下子跳过去。</p>
+<p>更新 moveMessage 函数，让元素以逐渐移动的方式发生。步骤：</p>
+<ul>
+<li>获得元素的当前位置；</li>
+<li>如果元素已经到达目的地，则退出；</li>
+<li>如果元素尚未到达它的目的地，则把它向目的地移动；</li>
+<li>一段时间后重复上述步骤。</li>
+</ul>
+<p>获取位置的值：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> xpos = <span class="built_in">parseInt</span>(elem.style.left);</span><br><span class="line"><span class="keyword">var</span> ypos = <span class="built_in">parseInt</span>(elem.style.top);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>只有使用 DOM 脚本或 style 属性分配位置后，这里的 parseInt 才起作用。</p>
+</blockquote>
+<p>编辑 moveMessage 函数：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">moveMessage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(<span class="string">"message"</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elem = <span class="built_in">document</span>.getElementById(<span class="string">"message"</span>);</span><br><span class="line">  <span class="keyword">var</span> xpos = <span class="built_in">parseInt</span>(elem.style.left);</span><br><span class="line">  <span class="keyword">var</span> ypos = <span class="built_in">parseInt</span>(elem.style.top);</span><br><span class="line">  <span class="comment">// 如果相等就退出递归</span></span><br><span class="line">  <span class="keyword">if</span> (xpos == <span class="number">200</span> &amp;&amp; ypos == <span class="number">100</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  <span class="comment">// 如果不相等就继续加减</span></span><br><span class="line">  <span class="keyword">if</span> (xpos &lt; <span class="number">200</span>) xpos++;</span><br><span class="line">  <span class="keyword">if</span> (xpos &gt; <span class="number">200</span>) xpos--;</span><br><span class="line">  <span class="keyword">if</span> (ypos &lt; <span class="number">100</span>) ypos++;</span><br><span class="line">  <span class="keyword">if</span> (ypos &gt; <span class="number">100</span>) ypos--;</span><br><span class="line">  elem.style.left = xpos + <span class="string">"px"</span>;</span><br><span class="line">  elem.style.top = ypos + <span class="string">"px"</span>;</span><br><span class="line">  <span class="comment">// 每隔10毫秒递归</span></span><br><span class="line">  movement = setTimeout(<span class="string">"moveMessage()"</span>, <span class="number">10</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>抽象</p>
+<p>上面的代码只能完成特定的函数，如果把里面的常数改为变量，那么就通用性就会大大提升。</p>
+<p>将移动元素的 ID、元素的目的地的位置，以及停顿间隔改为变量。<br>定义一个新的函数 <code>function moveElement(elementID, final_x, final_y, interval)</code>，具体代码为。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">moveElement</span>(<span class="params">elementID, final_x, final_y, interval</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(elementID)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elem = <span class="built_in">document</span>.getElementById(elementID);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> xpos = <span class="built_in">parseInt</span>(elem.style.left);</span><br><span class="line">  <span class="keyword">var</span> ypos = <span class="built_in">parseInt</span>(elem.style.top);</span><br><span class="line">  <span class="comment">// 如果相等就退出递归</span></span><br><span class="line">  <span class="keyword">if</span> (xpos == final_x &amp;&amp; ypos == final_y) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  <span class="comment">// 如果不相等就继续加减</span></span><br><span class="line">  <span class="keyword">if</span> (xpos &lt; final_x) xpos++;</span><br><span class="line">  <span class="keyword">if</span> (xpos &gt; final_x) xpos--;</span><br><span class="line">  <span class="keyword">if</span> (ypos &lt; final_y) ypos++;</span><br><span class="line">  <span class="keyword">if</span> (ypos &gt; final_y) ypos--;</span><br><span class="line">  elem.style.left = xpos + <span class="string">"px"</span>;</span><br><span class="line">  elem.style.top = ypos + <span class="string">"px"</span>;</span><br><span class="line">  <span class="comment">// 每隔 interval 毫秒递归</span></span><br><span class="line">  <span class="keyword">var</span> reqpeat =</span><br><span class="line">    <span class="string">"moveElement('"</span> +</span><br><span class="line">    elementID +</span><br><span class="line">    <span class="string">"',"</span> +</span><br><span class="line">    final_x +</span><br><span class="line">    <span class="string">","</span> +</span><br><span class="line">    final_y +</span><br><span class="line">    <span class="string">","</span> +</span><br><span class="line">    interval +</span><br><span class="line">    <span class="string">")"</span>;</span><br><span class="line">  movement = setTimeout(reqpeat, interval);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用 moveElement 函数。<br>创建一个名为 message.html 的文件，包含一个 <code>id=message</code> 的 p 元素：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Position<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"message"</span>&gt;</span>Wheel<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>再编写一个 positionMessage.js 的文件，添加 positionMessage() 函数：<br><code>id=message2</code> 的 p 元素，</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">positionMessage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(<span class="string">"message"</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elem = <span class="built_in">document</span>.getElementById(<span class="string">"message"</span>);</span><br><span class="line">  elem.style.position = <span class="string">"absolute"</span>;</span><br><span class="line">  elem.style.left = <span class="string">"50px"</span>;</span><br><span class="line">  elem.style.top = <span class="string">"100px"</span>;</span><br><span class="line">  moveElement(<span class="string">"message"</span>, <span class="number">200</span>, <span class="number">100</span>, <span class="number">10</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">addLoadEvent(positionMessage);</span><br></pre></td></tr></table></figure>
+
+<p>再在 HTML 文件上添加相对应的 js 文件，就可以显示出简单的动画效果。<br>改变 interval 的值即可改变动画的速度，改变 x 和 y 的值即可改变最终位置。</p>
+<p>添加一个 <code>id=message2</code> 的 p 元素，<code>&lt;p id=&quot;message2&quot;&gt;Whoal&lt;/p&gt;</code>，再在 positionMessage 函数中添加相对应的操作：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">positionMessage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(<span class="string">"message"</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elem = <span class="built_in">document</span>.getElementById(<span class="string">"message"</span>);</span><br><span class="line">  elem.style.position = <span class="string">"absolute"</span>;</span><br><span class="line">  elem.style.left = <span class="string">"50px"</span>;</span><br><span class="line">  elem.style.top = <span class="string">"100px"</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> elem_2 = <span class="built_in">document</span>.getElementById(<span class="string">"message2"</span>);</span><br><span class="line">  elem_2.style.position = <span class="string">"absolute"</span>;</span><br><span class="line">  elem_2.style.left = <span class="string">"50px"</span>;</span><br><span class="line">  elem_2.style.top = <span class="string">"50px"</span>;</span><br><span class="line"></span><br><span class="line">  moveElement(<span class="string">"message"</span>, <span class="number">125</span>, <span class="number">25</span>, <span class="number">10</span>);</span><br><span class="line">  moveElement(<span class="string">"message2"</span>, <span class="number">125</span>, <span class="number">125</span>, <span class="number">20</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果：<br><img src="https://pic4.zhimg.com/80/v2-ca5004a8c28eeed4108b85f6fafd05ab.png" alt="Image"></p>
+</li>
+</ul>
+<h4 id="实用的动画"><a href="#实用的动画" class="headerlink" title="实用的动画"></a>实用的动画</h4><p>上面的动画用处不大，还有可能使用户厌烦。</p>
+<ul>
+<li><p>提出问题：有一个怨念一系列链接的网页。当用用户的鼠标指针悬停在某个链接上时，展示预览一张图片。<br>添加一个文件 list.html，代码为：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Web Design<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Web Design<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>These are the things you should know:<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ol</span> <span class="attr">id</span>=<span class="string">"linklist"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"./structure.html"</span>&gt;</span>structure<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"./presentation.html"</span>&gt;</span>presentation<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"./behavior.html"</span>&gt;</span>behavior<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这次需要在 onmouseover 事件被触发时显示一张图片。</p>
+</li>
+<li><p>解决问题：</p>
+<ul>
+<li>为所有的预览图片生成一张“集体照”形式的图片；</li>
+<li>隐藏这张集体照图片的绝大部分。</li>
+<li>当用户把鼠标指针悬停在某个链接上方时，只显示这张“集体照”图片相应的部分。</li>
+</ul>
+<p>集体照：<br><img src="https://pic4.zhimg.com/80/v2-488b3f4eef617e261baf1f1d07cb26ce.png" alt="Image"><br>添加到 list.html 最后面：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"./topic.png"</span> <span class="attr">alt</span>=<span class="string">"building blocks of web Design"</span> <span class="attr">id</span>=<span class="string">"preview"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>CSS</p>
+<p>css 的 overflow 属性用来处理一个元素的尺寸超出其容器尺寸的情况。<br>overflow 属性有 4 种取值：visible（不作任何改动）、hidden（将溢出部分隐藏）、scroll（隐藏，但提供一个滚动条）和 auto（类似 scroll，但只有溢出时才显示滚动条）。</p>
+<p>这里选取 hidden 属性。</p>
+<p>添加 div，将 img 包进去，再添加对应的样式：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"slideshow"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"./topic.png"</span> <span class="attr">alt</span>=<span class="string">"building blocks of web Design"</span> <span class="attr">id</span>=<span class="string">"preview"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#slideshow</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">130px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来解决的时，让网页对用户的操作做出正确响应，当鼠标指针指在某个地方时，把对应的图片显示出来。</p>
+</li>
+<li><p>JavaScript</p>
+<p>编写一个 prepareSlideshow 来完成工作。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">prepareSlideshow</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementsByTagName) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(<span class="string">"linklist"</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(<span class="string">"preview"</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 为图片应用样式</span></span><br><span class="line">  <span class="keyword">var</span> preview = <span class="built_in">document</span>.getElementById(<span class="string">"preview"</span>);</span><br><span class="line">  preview.style.position = <span class="string">"absolute"</span>;</span><br><span class="line">  preview.style.left = <span class="string">"0px"</span>;</span><br><span class="line">  preview.style.top = <span class="string">"0px"</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> list = <span class="built_in">document</span>.getElementById(<span class="string">"linklist"</span>);</span><br><span class="line">  <span class="keyword">var</span> links = list.getElementsByTagName(<span class="string">"a"</span>);</span><br><span class="line"></span><br><span class="line">  links[<span class="number">0</span>].onmouseover = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    moveElement(<span class="string">"preview"</span>, <span class="number">-100</span>, <span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  links[<span class="number">1</span>].onmouseover = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    moveElement(<span class="string">"preview"</span>, <span class="number">-200</span>, <span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  links[<span class="number">2</span>].onmouseover = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    moveElement(<span class="string">"preview"</span>, <span class="number">-300</span>, <span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">addLoadEvent(prepareSlideshow);</span><br></pre></td></tr></table></figure>
+
+<p>将 js 文件添加到 html 文件，运行后将鼠标移到对应的链接上会出来动画效果：<br><img src="https://pic4.zhimg.com/80/v2-86d44aa0dc6cffbe084a325a91092499.png" alt="Image"></p>
+<p>但是来回移动时会出现混乱的情况。</p>
+</li>
+<li><p>变量的作用域</p>
+<p>动画效果出错是由全局变量引起的。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">movement = setTimeout(reqpeat, interval);</span><br></pre></td></tr></table></figure>
+
+<p>但是直接使用局部变量也会出错，需要一种介乎二者之间的东西，也就是属性。<br>js 允许为元素创建属性：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">element.property = value;</span><br></pre></td></tr></table></figure>
+
+<p>所以更改为属性即可解决问题：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">elem.movement = setTimeout(reqpeat, interval);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>改进动画效果：<br>每次移动 1px，速度未免过慢。<br>可以设置每次前进这个距离的十分之一。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dist = (final_x - xpos) / <span class="number">10</span>;</span><br><span class="line">xpos = xpos + dist;</span><br></pre></td></tr></table></figure>
+
+<p>当差距小于 10 的时候，用这个差距除 10 的结果小于 1，将移动不了。<br>解决方法是使用 Math 对象的 ceil 函数，它可以返回一个不小于 dist 的值的一个整数，用法：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Math</span>.ceil(number);</span><br></pre></td></tr></table></figure>
+
+<p>最终代码：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">moveElement</span>(<span class="params">elementID, final_x, final_y, interval</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementById(elementID)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elem = <span class="built_in">document</span>.getElementById(elementID);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 声明 dist</span></span><br><span class="line">  <span class="keyword">var</span> dist = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">var</span> xpos = <span class="built_in">parseInt</span>(elem.style.left);</span><br><span class="line">  <span class="keyword">var</span> ypos = <span class="built_in">parseInt</span>(elem.style.top);</span><br><span class="line">  <span class="comment">// 如果相等就退出递归</span></span><br><span class="line">  <span class="keyword">if</span> (xpos == final_x &amp;&amp; ypos == final_y) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  <span class="comment">// 如果不相等就继续加减</span></span><br><span class="line">  <span class="keyword">if</span> (xpos &lt; final_x) &#123;</span><br><span class="line">    dist = <span class="built_in">Math</span>.ceil((final_x - xpos) / <span class="number">10</span>);</span><br><span class="line">    xpos = xpos + dist;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (xpos &gt; final_x) &#123;</span><br><span class="line">    dist = <span class="built_in">Math</span>.ceil((xpos - final_x) / <span class="number">10</span>);</span><br><span class="line">    xpos = xpos - dist;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (ypos &lt; final_y) &#123;</span><br><span class="line">    dist = <span class="built_in">Math</span>.ceil((final_y - ypos) / <span class="number">10</span>);</span><br><span class="line">    ypos = ypos + dist;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (ypos &gt; final_y) &#123;</span><br><span class="line">    dist = <span class="built_in">Math</span>.ceil((ypos - final_y) / <span class="number">10</span>);</span><br><span class="line">    ypos = ypos - dist;</span><br><span class="line">  &#125;</span><br><span class="line">  elem.style.left = xpos + <span class="string">"px"</span>;</span><br><span class="line">  elem.style.top = ypos + <span class="string">"px"</span>;</span><br><span class="line">  <span class="comment">// 每隔 interval 毫秒递归</span></span><br><span class="line">  <span class="keyword">var</span> reqpeat =</span><br><span class="line">    <span class="string">"moveElement('"</span> +</span><br><span class="line">    elementID +</span><br><span class="line">    <span class="string">"',"</span> +</span><br><span class="line">    final_x +</span><br><span class="line">    <span class="string">","</span> +</span><br><span class="line">    final_y +</span><br><span class="line">    <span class="string">","</span> +</span><br><span class="line">    interval +</span><br><span class="line">    <span class="string">")"</span>;</span><br><span class="line">  <span class="comment">// movement = setTimeout(reqpeat, interval);</span></span><br><span class="line">  elem.movement = setTimeout(reqpeat, interval);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加安全检查<br>诸如 elem.style.left 是否存在等。</p>
+</li>
+<li><p>生成 HTML 标记：<br>一些内容是为了存在动画效果而存在的，但是如果不支持 js，那么那些内容留在那里岂不是很尴尬，所以干脆让 js 来生成这些标记。</p>
+</li>
+</ul>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>实现动画效果并不难，问题是尖不应该使用动画。<br>动画技术可以让我们创建出很多非常酷的效果，但四处移动的元素用处不大。现在有一个通用性的函数，在有必要创建动画效果时帮上大忙。</p>
+]]></content>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript-学习笔记（9）：HTML5</title>
+    <url>/2020/07/22/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/</url>
+    <content><![CDATA[<p><img src="https://pic4.zhimg.com/80/v2-806d2ac14c387bdd9db1b26b581320ec.jpg" alt="Image"></p>
+<h1 id="JavaScript-笔记（9）：HTML5"><a href="#JavaScript-笔记（9）：HTML5" class="headerlink" title="JavaScript-笔记（9）：HTML5"></a>JavaScript-笔记（9）：HTML5</h1><h4 id="HTML5-简介"><a href="#HTML5-简介" class="headerlink" title="HTML5 简介"></a>HTML5 简介</h4><p>HTML5 是 HTML 当前及未来的新标准。</p>
+<p>web 设计有三个层：结构层、样式层、行为层，这三个层分别使用 HTML、CSS 和 JavaScript 三个技术。HTML5 将上面三个层装入一个小集合，也仅仅只是一个集合。<br>HTML5 添加了很多新的标记元素，详情 <a href="http://www.w3.org/TR/html5" target="_blank" rel="noopener">http://www.w3.org/TR/html5</a>。<br>将文档“升级”到 HTML5，只需把文档类型声明改成<code>&lt;!DOCTYPE html&gt;</code>即可。</p>
+<p>HTML5 的兼容非常强，缺斤短两的 HTML5 文档都可以完美地通过验证。</p>
+<h4 id="忠告"><a href="#忠告" class="headerlink" title="忠告"></a>忠告</h4><p>一个工具：Modernizr（<a href="https://modernizr.com/" target="_blank" rel="noopener">https://modernizr.com/</a>），这是一个开源 js 库，利用其富特性检测功能，对 HTML5 文档进行更好的控制。</p>
+<p>在文档中嵌入 Modernizr 后，它会随着页面加载而变一些小戏法。</p>
+<p>首先，它会修改 <code>&lt;html&gt;</code> 的 class 属性，要使用它编写文档，通常要给<code>&lt;html&gt;</code>属性添加一个 no-js 类：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">class</span>=<span class="string">"no-js"</span>&gt;</span><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>利用这个类，可以浏览器不支持 JavaScript 的情况下应用 CSS 样式。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">;<span class="selector-class">.nojs</span> <span class="selector-tag">selector</span> &#123;</span><br><span class="line">    style properties;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后，它还会检测浏览器可以支持的各种特性，并添加相应的类名。<br>实际情况是浏览器会支持部分特性，不支持另一些特性，这时，类名中就会间或出现 features 和 no-feature。</p>
+<p>它还可以帮一些老旧浏览器处理 <code>&lt;section&gt;</code> 和 <code>&lt;article&gt;</code> 等新 HTML5 元素。</p>
+<p>使用它非常简单，从 <a href="http://www.modernizr.com/" target="_blank" rel="noopener">http://www.modernizr.com/</a> 下载它，然后在文档的<code>&lt;head&gt;</code>中添加该脚本：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"modernizr-1.5.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>一定要把这个脚本放在<head>元素中，因为放在文档开头，可以在加载其它标记之前先加载它，以便能更好地创建 HTML5 元素。</p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>一些有关 Canvas、视频/音频以及表单的例子，需要以下浏览器：</p>
+<ul>
+<li>苹果 Safari 5+</li>
+<li>Chrome 6+</li>
+<li>Firefox 3.6+</li>
+<li>IE 9+</li>
+<li>opera 10.6+</li>
+</ul>
+<h5 id="1-Canvas"><a href="#1-Canvas" class="headerlink" title="1. Canvas"></a>1. Canvas</h5><p>浏览器一般只能显示静态图片，使用 GIF 或许可以实现一些动画，或者使用 CSS 加 JavaScript 也能变化一些样式。<br>但 HTML5 的<code>&lt;Canvas&gt;</code> 元素可以动态创建和操作图形图像。<br>支起一张“画布”：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"draw-in-me"</span> <span class="attr">width</span>=<span class="string">"120"</span> <span class="attr">height</span>=<span class="string">"40"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>Powered by HTML5 canvas！<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在上面作画需要了解详细的绘画方法，参考<code>&lt;canvas&gt;</code>元素规范(<a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html" target="_blank" rel="noopener">http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html</a>)</p>
+<p>用<code>&lt;Canvas&gt;</code> 画一个圆角小黑盒子，带有 2 像素宽的白色描边效果。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"draw-in-me"</span>);</span><br><span class="line">  <span class="keyword">if</span> (canvas.getContext) &#123;</span><br><span class="line">    <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.moveTo(<span class="number">120.0</span>, <span class="number">32.0</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">120.0</span>, <span class="number">36.4</span>, <span class="number">116.4</span>, <span class="number">40.0</span>, <span class="number">112.0</span>, <span class="number">40.0</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">8.0</span>, <span class="number">40.0</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">3.6</span>, <span class="number">40.0</span>, <span class="number">0.0</span>, <span class="number">36.4</span>, <span class="number">0.0</span>, <span class="number">32.0</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">0.0</span>, <span class="number">8.0</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">0.0</span>, <span class="number">3.6</span>, <span class="number">3.6</span>, <span class="number">0.0</span>, <span class="number">8.0</span>, <span class="number">0.0</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">112.0</span>, <span class="number">0.0</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">116.4</span>, <span class="number">0.0</span>, <span class="number">120.0</span>, <span class="number">3.6</span>, <span class="number">120.0</span>, <span class="number">8.0</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">120.0</span>, <span class="number">32.0</span>);</span><br><span class="line">    ctx.closePath();</span><br><span class="line">    ctx.fill();</span><br><span class="line">    ctx.lineWidth = <span class="number">2.0</span>;</span><br><span class="line">    ctx.strokeStyle = <span class="string">"rgb(255, 255, 255)"</span>;</span><br><span class="line">    ctx.stroke();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.onload = draw;</span><br></pre></td></tr></table></figure>
+
+<p>结果：<br><img src="https://pic4.zhimg.com/80/v2-e1c8ba6c44d4a642fe4ee1e4df2dcad1.png" alt="Image"></p>
+<h5 id="2-音频和视频"><a href="#2-音频和视频" class="headerlink" title="2. 音频和视频"></a>2. 音频和视频</h5><ul>
+<li>HTML 的 <code>&lt;video&gt;</code>元素在文档中嵌入影片以及影片交互定义了一种标准方式，同时也把嵌入操作简化成了一个标签：</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">src</span>=<span class="string">"movie.mp4"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 不支持 &lt;video&gt; 的替代内容  --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"movie.mp4"</span>&gt;</span>Download movie.mp4<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>同样，音频也是：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">src</span>=<span class="string">"audio.mp3"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"audio.mp3"</span>&gt;</span>Download audio.mp3<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>自定义控件<br>浏览器显示 <code>&lt;video&gt;</code>元素时，会为其添加一些与浏览器样式统一的标准播放控件，要想自定义这些控件的外观，或者添加新的控件，可以通过 DOM 属性来实现。主要有：</p>
+<ul>
+<li>currentTime，返回当前播放的位置，以秒表示；</li>
+<li>duration，返回媒体的总时长，以秒表示，对流媒体返回无穷大；</li>
+<li>paused，表示是否处于暂停；</li>
+<li>play，在媒体播放开始时发生；</li>
+<li>pause，在媒体暂停时发生；</li>
+<li>loadedata，在媒体可以从当前播放位置开始播放时发生；</li>
+<li>ended，在媒体已播放完成而停止时发生。</li>
+</ul>
+<p>记住，无论创建什么控件，都别忘了在<code>&lt;video&gt;</code>元素中添加 control 控件。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">src</span>=<span class="string">"movie.mp4"</span> <span class="attr">controls</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样才会显示控制条：<br><img src="https://pic4.zhimg.com/80/v2-827cdf4e9596f102b9f9a1609a839236.png" alt="Image"></p>
+</li>
+</ul>
+<h5 id="3-表单"><a href="#3-表单" class="headerlink" title="3. 表单"></a>3. 表单</h5><p>传统的表单可用的输入控件类型很少，文本框、单选按钮、复选框对简单的表单是够了，但需要更多交互功能的时候，仍需要 DOM 上阵。<br>HTML5 提供了新的输入型表单：</p>
+<ul>
+<li>email，输入邮箱</li>
+<li>url，输入 url</li>
+<li>date，输入日期和时间</li>
+<li>number，输入数值</li>
+<li>range，用于生成滑动条</li>
+<li>search，用于搜索框</li>
+<li>tel，用于输入电话号码</li>
+<li>color，用于选择颜色</li>
+</ul>
+<p>新的属性：</p>
+<ul>
+<li>autocomplete，用于为文本（text）输入框添加一组建议的输入项；</li>
+<li>autofocus，用于让表单元素自动获得焦点；</li>
+<li>form，用于对<code>&lt;form&gt;</code>标签外部的表单元素分组；</li>
+<li>min、max 和 step，用在范围和数值输入框中；</li>
+<li>pattern，用于定义一个正则表达式，以便验证输入的值；</li>
+<li>placeholder，用于在文本输入框中显示临时性的提示信息；</li>
+<li>required，表示必填</li>
+</ul>
+<p>使用的时候要检测浏览器是否支持对应的控件，可以使用 inputtypes.type 属性，如：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (!Modernizr.inputtypes.date) &#123;</span><br><span class="line">  <span class="comment">// 生成日期选择器的脚本</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>检查属性，可以使用 input.attribute 属性，如：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (!Modernizr.input.placeholder) &#123;</span><br><span class="line">  <span class="comment">// 生成占位符提示信息的脚本</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果没有使用 Modernizr，可以使用 inputSupportType 函数来检查浏览器是否支持某种输入控件。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inpurtSupportsType</span>(<span class="params">type</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!<span class="built_in">document</span>.createElement) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">var</span> input = <span class="built_in">document</span>.createElement(<span class="string">'input'</span>);</span><br><span class="line">    input.setAttribute(<span class="string">'type'</span>, type);</span><br><span class="line">    <span class="keyword">if</span>(input.type == <span class="string">'text &amp;&amp; type != '</span>text<span class="string">')&#123;</span></span><br><span class="line"><span class="string">        return false;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    else&#123;</span></span><br><span class="line"><span class="string">        return true;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>使用方式和 modernizr 一样：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (!inputSupportType(date)) &#123;</span><br><span class="line">  <span class="comment">// 生成日期选择器的脚本</span></span><br></pre></td></tr></table></figure>
+
+<p>检查特定的属性，可以使用这个 elementSupportsAttribute 函数：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">elementSupportsAttribute</span>(<span class="params">elementName, attribute</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.createElement) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> temp = <span class="built_in">document</span>.crateElement(elementName);</span><br><span class="line">  <span class="keyword">return</span> attribute <span class="keyword">in</span> test;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用方式和 modernizr 一样：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (!elementSupportType(<span class="string">'input'</span>, <span class="string">'placeholder'</span>)) &#123;</span><br><span class="line">  <span class="comment">// 生成提示占位符的脚本</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="4-HTML5-的其它特性"><a href="#4-HTML5-的其它特性" class="headerlink" title="4. HTML5 的其它特性"></a>4. HTML5 的其它特性</h5><ul>
+<li>localStorage 和 sessionStorage 在客户存储大型和复杂数据集的更有效方案</li>
+<li>使用 WebSocket 与服务器端脚本进行开放的双向通信</li>
+<li>使用 Web Worker 在后台执行 JavaScript</li>
+<li>标准化的拖放实现</li>
+<li>在浏览器中实现地理位置服务<br>…………</li>
+</ul>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>了解了 HTML5 以及使用 Modernizr 等工具检测特性的重要性。</p>
+]]></content>
+      <categories>
+        <category>-[JavaScript]</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+        <tag>html</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Test Article</title>
+    <url>/2020/05/20/Test-Article/</url>
+    <content><![CDATA[<p>This is a test article, weclome subscribe “<a href="https://jinl1874.github.io&quot;" target="_blank" rel="noopener">https://jinl1874.github.io&quot;</a></p>
+<p>▶ hexo s<br>INFO Start processing<br>INFO Hexo is running at <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> . Press Ctrl+C to stop.</p>
+]]></content>
+      <categories>
+        <category>Testing</category>
+      </categories>
+      <tags>
+        <tag>tags</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript 高级程序设计（1）</title>
+    <url>/2020/08/01/JavaScript-%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%881%EF%BC%89/</url>
+    <content><![CDATA[<h4 id="1-元素"><a href="#1-元素" class="headerlink" title="1.  元素"></a>1. <script> 元素</h4><p>在 HTML 代码中插入 js 脚本，需要<code>script</code>元素，它有几个属性：</p>
+<ul>
+<li>async：可选，表示应该立即下载脚本。</li>
+<li>charset：可选，表示 src 属性指定代码的字符集，一般没人用。</li>
+<li>defer：可选，表示脚本延迟到文档完全解析后才执行。</li>
+<li>src：可选，执行的外部文件。</li>
+<li>type：可选是 language 的替代属性，表示编写代码使用的脚本语言的类型。默认值是 <code>text/javascript</code>。</li>
+</ul>
+<p>标签一般会放在<code>&lt;head&gt;</code>元素里，但是会出现延迟，所以可以选择放在 <code>&lt;body&gt;</code> 的底部。</p>
+<p>或者可以选择在 <code>&lt;script&gt;</code> 元素中添加 defer 属性。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">defer</span>=<span class="string">"defer"</span> <span class="attr">src</span>=<span class="string">"example.js"</span>&gt;</span> <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>asyn 属性与 defer 属性类似，用于改变处理脚本。async 只用于外部脚本文件，告诉浏览器立即下载，不保证顺序。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">"example.js"</span>&gt;</span> <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>因为当有些浏览器不支持的 js 的时候，导致 js 代码会显示在页面当中。</p>
+<h4 id="2-嵌入代码与外部文件"><a href="#2-嵌入代码与外部文件" class="headerlink" title="2. 嵌入代码与外部文件"></a>2. 嵌入代码与外部文件</h4><p>不推荐把 javascript 代码包在 HTML 中，如下面：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">  <span class="function"><span class="keyword">function</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">    <span class="comment">// statement</span></span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>一般选择外部文件更好，因为在外部文件更好维护，可缓存（两个页面使用同一个文件，那么只需要一次下载），适应未来。</p>
+<h4 id="3-文档模式"><a href="#3-文档模式" class="headerlink" title="3. 文档模式"></a>3. 文档模式</h4><p>通过文档类型（doctype）切换实现。</p>
+<h4 id="4-元素"><a href="#4-元素" class="headerlink" title="4.  元素"></a>4. <noscript> 元素</h4><p>当浏览器不支持脚本，或者浏览器支持脚本，但脚本被禁用的情况下，浏览器才会显示 <code>&lt;noscript&gt;</code> 的内容。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">noscript</span>&gt;</span> <span class="tag">&lt;<span class="name">p</span>&gt;</span>本页面需要浏览器支持（启用）JavaScript.<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">noscript</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
       </tags>
   </entry>
   <entry>
@@ -1233,61 +1136,100 @@
       </tags>
   </entry>
   <entry>
-    <title>火狐上有哪些值得安装的扩展</title>
-    <url>/2020/07/19/firefox-addons/</url>
-    <content><![CDATA[<p>2020 年，主要就是使用下面这些扩展。</p>
-<h4 id="1-去广告插件——uBlock-Origin"><a href="#1-去广告插件——uBlock-Origin" class="headerlink" title="1. 去广告插件——uBlock Origin"></a>1. 去广告插件——uBlock Origin</h4><p>一般使用浏览器都需要一个去广告插件，否则浏览网页的体验太差了。<br>这个插件比 Adblock 占用资源低，而且知名度也更低一点，没有那么多网站进行针对。不过一般网站要针对去广告插件的话也不会单针对某一款，除了某乎头上的那个显示。</p>
-<p><a href="https://addons.mozilla.org/zh-CN/firefox/addon/ublock-origin/" target="_blank" rel="noopener">地址</a></p>
-<h4 id="2-epub-阅读扩展——QiuReader"><a href="#2-epub-阅读扩展——QiuReader" class="headerlink" title="2. epub 阅读扩展——QiuReader"></a>2. epub 阅读扩展——QiuReader</h4><p>在电脑上阅读 epub 文件的体验一直不算好，直到我找到了这款扩展。</p>
-<p>清爽的首页：<br><img src="https://pic4.zhimg.com/80/v2-5422bca3ade0602e09d6a706cf82d9b0.png" alt="Image"><br>舒服的界面：<br><img src="https://pic4.zhimg.com/80/v2-d97182a8834c13b00952dfe7fddae58b.png" alt="Image"></p>
-<p>配置选项：背景颜色、字体大小、阅读方式、空格等；<br>其它功能：添加书签、高亮某一段文字。<br>美中不足的是不能添加书注，不过也无伤大雅，单是这漂亮的 UI 就足够了。</p>
-<p>我单方面宣布这是 window 上最好用 epub 阅读器。</p>
-<p><a href="https://addons.mozilla.org/zh-CN/firefox/addon/qiureader/" target="_blank" rel="noopener">地址</a></p>
-<h4 id="3-美化网页——Stylus"><a href="#3-美化网页——Stylus" class="headerlink" title="3. 美化网页——Stylus"></a>3. 美化网页——Stylus</h4><p>官方网站上，由于种种限制，导致网站有很多广告和很多大多数人一辈子都用不上的功能，并且 UI 总是有点丑。这时就需要一个美化网页的插件了，把多余的东西去掉，留一个简洁干净的页面。一般有点流量的网站都有很人编写相对应的样式。<br>贴吧使用前：<br><img src="https://pic4.zhimg.com/80/v2-4e7e22ec7c3ed1beedd7b5cd34117fc6.png" alt="Image"><br>使用后：<br><img src="https://pic4.zhimg.com/80/v2-f82e4543a1b75663cd246fd4b0d1cbcd.png" alt="Image"></p>
-<p>页面干净了许多。</p>
-<p><a href="https://addons.mozilla.org/zh-CN/firefox/addon/styl-us/" target="_blank" rel="noopener">地址</a></p>
-<h4 id="4-脚本扩展——暴力猴"><a href="#4-脚本扩展——暴力猴" class="headerlink" title="4. 脚本扩展——暴力猴"></a>4. 脚本扩展——暴力猴</h4><p>脚本扩展在某种程度上也算是必装的一款插件了吧，已经有很多人在 Greasy Fork 等网站写了大量的脚本，有需要就下载安装即可。脚本可以解决相当多的问题，并且也不会占用很多内存。找脚本也很方便，直接点击相应的图标，即跳出一个“为此站点查找脚本”的选项。<br><img src="https://pic4.zhimg.com/80/v2-f98281f8034694dc1b84251328d0544b.png" alt="Image"><br>其它常见的脚本插件有油猴等，不过我还是更喜欢暴力猴，或许是更好看点吧。</p>
-<p><a href="https://addons.mozilla.org/zh-CN/firefox/addon/violentmonkey/" target="_blank" rel="noopener">地址</a></p>
-<h4 id="5-密码管理——LastPass"><a href="#5-密码管理——LastPass" class="headerlink" title="5. 密码管理——LastPass"></a>5. 密码管理——LastPass</h4><p>跨平台的的密码保存管理扩展，有了它，再也不用担心忘记密码了。<br>该扩展的主要功能是，输入一个新的账号密码时，会提示是否保存；若账号相同，则提示是否更新密码；会在账号密码自动填充最后使用的密码。<br>其它的功能还有生成随机密码之类的。</p>
-<p><a href="https://addons.mozilla.org/zh-CN/firefox/addon/lastpass-password-manager/" target="_blank" rel="noopener">地址</a></p>
-<h4 id="6-下载管理——IDM"><a href="#6-下载管理——IDM" class="headerlink" title="6. 下载管理——IDM"></a>6. 下载管理——IDM</h4><p>这个插件要搭配 IDM 下载器使用。该插件几乎可以下载所有的网页上的视频、图像等。<br>具体写过一篇文章专门介绍<a href="https://jinl1874.xyz/2020/06/28/use-idm/">如何配置使用 IDM</a>的。</p>
-<p><a href="https://addons.mozilla.org/zh-CN/firefox/addon/tonec-idm-integration-module/?src=search" target="_blank" rel="noopener">地址</a></p>
-<h4 id="7-操作网页——viumium"><a href="#7-操作网页——viumium" class="headerlink" title="7. 操作网页——viumium"></a>7. 操作网页——viumium</h4><p>不需要用鼠标，仅使用键盘能完成 90%的操作。<br>有很多类似的扩展，为什么推荐这个，只是使用习惯了。</p>
-<p>按键功能和 vim 有一定的相似之处。<br>上、下、左、右的移动分别是：k, j, h, l;</p>
-<p>向右切换标签页：g+t 或者 K;</p>
-<p>向左切换标签页：g+T 或者 J;</p>
-<p>跳到顶部：gg;</p>
-<p>跳到底部：G;</p>
-<p>向上、下翻半页分别是：d, u;</p>
-<p>网页前进：L;</p>
-<p>页面后退：H;</p>
-<p>显示点击链接：f;</p>
-<p>新建标签页显示点击链接：F;</p>
-<p>搜索：o;</p>
-<p>新建标签页搜索：O;</p>
-<p>新建空白标签页：t;</p>
-<p>新建空白标签页打开链接：T;</p>
-<p>关闭标签页：x;</p>
-<p>打开上一个关闭的标签页：X;</p>
-<p>焦点移到输入框：g+i;</p>
-<p>焦点从输入框移走：tab 或者 esc;</p>
-<p>值得注意的一点是，上述按键功能只能在常见的网页上生效，在系统标签页是用不了的。比如空白标签页、系统设置页，因此学一些默认的快捷键是有必要的，比如 ctrl + t 是新建空白标签页、ctrl + tab 是向右切换标签页、ctrl + shift + tab 是向左切换，一般加上个 shift 就是相反的功能。</p>
-<p>还有一些按键就不一一赘述了。</p>
-<p>使用该插件能解放你的鼠标，极大地提高阅读网页浏览体验。</p>
-<p><a href="https://addons.mozilla.org/zh-CN/firefox/addon/vimium-ff/?src=search" target="_blank" rel="noopener">地址</a></p>
-<h4 id="8-网盘助手——网盘助手"><a href="#8-网盘助手——网盘助手" class="headerlink" title="8. 网盘助手——网盘助手"></a>8. 网盘助手——网盘助手</h4><p>支持主流网盘，如百度网盘以及蓝奏云等。<br>可以自动提取 提取码 。<br><img src="https://pic4.zhimg.com/80/v2-9b7f5dabcf188b46e289a23aaf121b49.png" alt="Image"></p>
-<p>大概是最优雅好用的网盘助手了。<br>有使用网盘的都可以试试安装。</p>
-<p><a href="https://addons.mozilla.org/zh-CN/firefox/addon/wpzs/" target="_blank" rel="noopener">地址</a></p>
-<p>基本就这些比较实用的扩展。</p>
-<h4 id="9-切换浏览器头——User-Agent-Switcher-and-Manager"><a href="#9-切换浏览器头——User-Agent-Switcher-and-Manager" class="headerlink" title="9. 切换浏览器头——User-Agent Switcher and Manager"></a>9. 切换浏览器头——User-Agent Switcher and Manager</h4><p>当你需要访问移动版网页或者只有其它浏览器才能访问的网站时，可以用它切换相对应的浏览器头。</p>
-<p><a href="https://addons.mozilla.org/zh-CN/firefox/addon/user-agent-string-switcher/?src=search" target="_blank" rel="noopener">地址</a></p>
+    <title>使用自定义域名后出现“404There isn&#39;t a GitHub Pages site here”解决方法</title>
+    <url>/2020/05/22/blog-problem-0/</url>
+    <content><![CDATA[<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><ul>
+<li>每次将新文章使用“hexo d”推送后，再打开浏览器就会显示“404There isn’t a GitHub Pages site here”这个错误。</li>
+</ul>
+<h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><ul>
+<li>我们在自定义域名之前会在下图里“Custom domain”，<br><img src="http://image.jinl1874.xyz/img/blog_problem.png" alt="setting"></li>
+<li>点击“save”后，仓库的根目录会生成一个“CNAME”文件，<br><img src="http://image.jinl1874.xyz/img/blog_problem_2.png" alt=""></li>
+<li>但是本地的“public”目录里面并没有这个文件，所以更新会删除这个文件，就会导致访问失败。</li>
+</ul>
+<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><ul>
+<li>在hexo的source文件夹下新建一个CNAME文件，内容如下。这样使用<code>hexo generate</code>就会在public目录生成CNAME文件了，这样推送过去后就不会删除了。<br><img src="http://image.jinl1874.xyz/img/20200522235649.png" alt="solve"></li>
+<li>添加文件后，重新生成推送后，问题就迎刃而解了。<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<blockquote>
+<p>欢迎访问个人博客主页 <a href="https://jinl1874.github.io" target="_blank" rel="noopener">jinl1874</a></p>
+</blockquote>
 ]]></content>
       <categories>
-        <category>浏览器</category>
+        <category>Problem</category>
       </categories>
       <tags>
-        <tag>firefox</tag>
-        <tag>addons</tag>
+        <tag>hexo, blog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript-高级程序设计（2）</title>
+    <url>/2020/08/01/JavaScript-%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%882%EF%BC%89/</url>
+    <content><![CDATA[<h4 id="1-数据类型"><a href="#1-数据类型" class="headerlink" title="1. 数据类型"></a>1. 数据类型</h4><p>有五种简单数据类型：Undefined、Null、Boolean、Number、String，一种复杂数据——Object。</p>
+<p>typeof 操作符，其返回值是一个字符串有：</p>
+<ul>
+<li>undefined：该值未定义；</li>
+<li>boolean：该值为布尔值；</li>
+<li>string：该值是字符串；</li>
+<li>number：该值是数值；</li>
+<li>object：该值为对象或者 null；</li>
+<li>function：该值为函数。</li>
+</ul>
+<p>使用方法：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">1</span>;</span><br><span class="line">alert(<span class="keyword">typeof</span> num); <span class="comment">// number</span></span><br><span class="line">alert(<span class="keyword">typeof</span> <span class="number">1</span>); <span class="comment">// number</span></span><br></pre></td></tr></table></figure>
+
+<p>变量没定义之前的值就是 Undefined：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> test_0;</span><br><span class="line">alert(test_0 == <span class="literal">undefined</span>); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> test_1 = <span class="literal">undefined</span>;</span><br><span class="line">alert(test_1 == <span class="literal">undefined</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>Null 类型也只有一个值，null，表示一个空指针对象。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> test = <span class="literal">null</span>;</span><br><span class="line">alert(<span class="keyword">typeof</span> test); <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
+
+<p>Number 有一个 NaN（Not a Number）值，用于表示一个返回数值的操作数值未返回数值的情况。比如 在其它语言里 数值除以 0 会报错，而在 js 会返回上面个个值。NaN 与其它值的相加相除等操作返回的值也是 NaN。</p>
+<p>Number 数值转换有三个函数：Number()、parseInt() 以及 parseFloat()。<br>Number() 可用于任何任何数据类型，其它两个是用于字符串的。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"11"</span>;</span><br><span class="line"><span class="keyword">var</span> str_num = <span class="built_in">Number</span>(str);</span><br></pre></td></tr></table></figure>
+
+<p>转换为字符串的方法有两种方式，第一个就是第个值都有的 toString() 方法。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">11</span>;</span><br><span class="line"><span class="keyword">var</span> num_str = num.toString();</span><br></pre></td></tr></table></figure>
+
+<p>toString 方法可传入基数，输入不同的值会有不同的返回不同的进制数。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">11</span>;</span><br><span class="line"><span class="keyword">var</span> num_str = num.toString(<span class="number">2</span>); <span class="comment">// 1011</span></span><br></pre></td></tr></table></figure>
+
+<p>亦可直接使用 String() ，使用方法与 Number() 类似。</p>
+<h4 id="2-操作符"><a href="#2-操作符" class="headerlink" title="2. 操作符"></a>2. 操作符</h4><p><code>+-*/&lt;&gt;=&amp;&amp;||</code> 与其它语言是类似的。</p>
+<p>有一点需要注意全等和不全等符，全等符由 3 个等号（===）表示，在两个操作数未经转换就相等的情况下返回 true，如下面</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result_0 = <span class="string">"55"</span> == <span class="number">55</span>; <span class="comment">// true 转换后相等</span></span><br><span class="line"><span class="keyword">var</span> result_1 = <span class="string">"55"</span> === <span class="number">55</span>; <span class="comment">// false 未转换后不等</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-语句"><a href="#3-语句" class="headerlink" title="3. 语句"></a>3. 语句</h4><p><code>if/else/while/for</code> 等语句与 C 语言类似。</p>
+<p>for-in 语句是一个精准的迭代语句，可以枚举对象的属性，与 python 的 for 语句类似。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (property <span class="keyword">in</span> expression) statement;</span><br></pre></td></tr></table></figure>
+
+<p>例子：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> proName <span class="keyword">in</span> <span class="built_in">window</span>) &#123;</span><br><span class="line">  <span class="built_in">document</span>.write(propName);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>label 语句可以在代码中添加标签，以便将来使用，用法：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">label: statement;</span><br></pre></td></tr></table></figure>
+
+<p>例子：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">start: <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  alert(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>with 语句的作用是将代码的作用域设置到一个特定的对象中，用法：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> (expression) statement;</span><br></pre></td></tr></table></figure>
+
+<p>with 语句的目的是为了简化多次编写同一个对象的工作，如例子示：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> qs = location.search.substring(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">var</span> hostName = location.hostname;</span><br><span class="line"><span class="keyword">var</span> url = location.href;</span><br></pre></td></tr></table></figure>
+
+<p>用 with 语句可改写为：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> (location) &#123;</span><br><span class="line">  <span class="keyword">var</span> qs = search.substring(<span class="number">1</span>);</span><br><span class="line">  <span class="keyword">var</span> hostName = hostname;</span><br><span class="line">  <span class="keyword">var</span> url = href;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-函数"><a href="#4-函数" class="headerlink" title="4. 函数"></a>4. 函数</h4><p>js 不像 java 那样可以实现重载，如相同的函数名接受不同参数的类型和数量，可定义不同的函数。<br>如果 js 定义两个相同的函数，那么名字只属于后定义的函数。</p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
       </tags>
   </entry>
   <entry>
@@ -1430,61 +1372,61 @@
       </tags>
   </entry>
   <entry>
-    <title>使用七牛云和PicGo来创建自己的图床</title>
-    <url>/2020/05/22/qiniuImage/</url>
-    <content><![CDATA[<blockquote>
-<p>最近搭了个博客，就有较大放置图片的需求，于是就想搭了个图床。<br>其它的图床不是要收费就是使用体验非常差，经常出现上传错误。而七牛云有10G的免费空间，对个人用户而言足够了。再加上PicGo的使用，能很方便能上传图户并获取链接。</p>
-</blockquote>
-<hr>
-<h3 id="所需工具"><a href="#所需工具" class="headerlink" title="所需工具"></a>所需工具</h3><p>七牛云，PicGo，备案好的域名。</p>
-<h4 id="1-注册七牛云"><a href="#1-注册七牛云" class="headerlink" title="1. 注册七牛云"></a>1. 注册七牛云</h4><ul>
-<li>打开<a href="https://www.qiniu.com/" target="_blank" rel="noopener">七牛云</a>注册账号，进行个人账号认证。需要上传身份，有了支付宝的认证也不需要人工审核了，上传身份后就认证成功了。<h4 id="2-创建空间"><a href="#2-创建空间" class="headerlink" title="2. 创建空间"></a>2. 创建空间</h4></li>
-<li>管理控制台 $\rightarrow$ 对象储存 $\rightarrow$ 空间管理 $\rightarrow$ 新建空间。</li>
-<li>空间名称随便填，储存区域也可以随便选，访问控制选择公开，点击确定创建。</li>
-</ul>
-<h4 id="3-注册2级域名"><a href="#3-注册2级域名" class="headerlink" title="3. 注册2级域名"></a>3. 注册2级域名</h4><ul>
-<li>域名控制台 $\rightarrow$ 解析 $\rightarrow$ 添加记录 $\rightarrow$<br><img src="http://image.jinl1874.xyz/img/%E6%8E%A7%E5%88%B6.png" alt="域名控制"></li>
-<li>记录类型选择CNAME，主机记录按自己喜好，记录值随便填一个能用的。<br><img src="http://image.jinl1874.xyz/img/add_sub_domain.png" alt="域名"></li>
-</ul>
-<h4 id="4-绑定二级域名"><a href="#4-绑定二级域名" class="headerlink" title="4. 绑定二级域名"></a>4. 绑定二级域名</h4><ul>
-<li><p>空间管理 $\rightarrow$ 域名管理 $\rightarrow$ 绑定域名 $\rightarrow$ 加速域名 $\rightarrow$填入子域名(如 &lt;image.jinl1874.xyz&gt;)。<br><img src="http://image.jinl1874.xyz/img/input_sub_domain.png" alt="填入子域名"></p>
-</li>
-<li><p>绑定成功后会跳转，复制CNAME的值。</p>
-</li>
-<li><p>回到域名控制台，修改刚才添加的记录，把CNAME的值放入放进记录值，然后保存。<br><img src="http://image.jinl1874.xyz/img/sub_domain_success.png" alt="成功"></p>
-</li>
-<li><p>可能会有一段时间的等待，回到域名管理，如果下图红圈出成功，那么七牛云已经创建并绑定成功了。<br><img src="http://image.jinl1874.xyz/img/success.png" alt="sucees"></p>
-</li>
-</ul>
-<h4 id="5-使用PicGO"><a href="#5-使用PicGO" class="headerlink" title="5. 使用PicGO"></a>5. 使用PicGO</h4><ul>
-<li><p>推荐下载<a href="https://github.com/Molunerfinn/PicGo/releases/tag/v2.2.2" target="_blank" rel="noopener">2.22版本</a></p>
-</li>
-<li><p>安装成功后，打开PicGo设置，拉到最下面，勾选“七牛图床”。</p>
-</li>
-<li><p>在图床设置，设置七牛图床。<br><img src="http://image.jinl1874.xyz/img/picgo_setting.png" alt="picGoSetting"></p>
-</li>
-<li><p>打开七牛云，进入密钥管理，复制AK和SK分别填到AccessKey和SecretKey；</p>
-</li>
-<li><p>存储空间名即是你创建的对象存储的名字</p>
-</li>
-<li><p>访问地址即你的http://+二级域名（如<a href="http://image.jinl1874.xyz" target="_blank" rel="noopener">http://image.jinl1874.xyz</a>)</p>
-</li>
-<li><p>存储区域根据下图而填，我的是华南区，所以填Z2。<br><img src="http://image.jinl1874.xyz/img/20200522225637.png" alt="area"></p>
-</li>
-<li><p>点击确定，建议设为默认图床。</p>
-</li>
-<li><p>此时已经设置成功，可以在“上传区”上传图片。</p>
-</li>
-</ul>
-<h4 id="到了此处，搭建图床的工作已经完成。"><a href="#到了此处，搭建图床的工作已经完成。" class="headerlink" title="到了此处，搭建图床的工作已经完成。"></a>到了此处，搭建图床的工作已经完成。</h4><p>欢迎访问个人博客主页<a href="jinl1874.github.io">jinl1874</a></p>
+    <title>火狐上有哪些值得安装的扩展</title>
+    <url>/2020/07/19/firefox-addons/</url>
+    <content><![CDATA[<p>2020 年，主要就是使用下面这些扩展。</p>
+<h4 id="1-去广告插件——uBlock-Origin"><a href="#1-去广告插件——uBlock-Origin" class="headerlink" title="1. 去广告插件——uBlock Origin"></a>1. 去广告插件——uBlock Origin</h4><p>一般使用浏览器都需要一个去广告插件，否则浏览网页的体验太差了。<br>这个插件比 Adblock 占用资源低，而且知名度也更低一点，没有那么多网站进行针对。不过一般网站要针对去广告插件的话也不会单针对某一款，除了某乎头上的那个显示。</p>
+<p><a href="https://addons.mozilla.org/zh-CN/firefox/addon/ublock-origin/" target="_blank" rel="noopener">地址</a></p>
+<h4 id="2-epub-阅读扩展——QiuReader"><a href="#2-epub-阅读扩展——QiuReader" class="headerlink" title="2. epub 阅读扩展——QiuReader"></a>2. epub 阅读扩展——QiuReader</h4><p>在电脑上阅读 epub 文件的体验一直不算好，直到我找到了这款扩展。</p>
+<p>清爽的首页：<br><img src="https://pic4.zhimg.com/80/v2-5422bca3ade0602e09d6a706cf82d9b0.png" alt="Image"><br>舒服的界面：<br><img src="https://pic4.zhimg.com/80/v2-d97182a8834c13b00952dfe7fddae58b.png" alt="Image"></p>
+<p>配置选项：背景颜色、字体大小、阅读方式、空格等；<br>其它功能：添加书签、高亮某一段文字。<br>美中不足的是不能添加书注，不过也无伤大雅，单是这漂亮的 UI 就足够了。</p>
+<p>我单方面宣布这是 window 上最好用 epub 阅读器。</p>
+<p><a href="https://addons.mozilla.org/zh-CN/firefox/addon/qiureader/" target="_blank" rel="noopener">地址</a></p>
+<h4 id="3-美化网页——Stylus"><a href="#3-美化网页——Stylus" class="headerlink" title="3. 美化网页——Stylus"></a>3. 美化网页——Stylus</h4><p>官方网站上，由于种种限制，导致网站有很多广告和很多大多数人一辈子都用不上的功能，并且 UI 总是有点丑。这时就需要一个美化网页的插件了，把多余的东西去掉，留一个简洁干净的页面。一般有点流量的网站都有很人编写相对应的样式。<br>贴吧使用前：<br><img src="https://pic4.zhimg.com/80/v2-4e7e22ec7c3ed1beedd7b5cd34117fc6.png" alt="Image"><br>使用后：<br><img src="https://pic4.zhimg.com/80/v2-f82e4543a1b75663cd246fd4b0d1cbcd.png" alt="Image"></p>
+<p>页面干净了许多。</p>
+<p><a href="https://addons.mozilla.org/zh-CN/firefox/addon/styl-us/" target="_blank" rel="noopener">地址</a></p>
+<h4 id="4-脚本扩展——暴力猴"><a href="#4-脚本扩展——暴力猴" class="headerlink" title="4. 脚本扩展——暴力猴"></a>4. 脚本扩展——暴力猴</h4><p>脚本扩展在某种程度上也算是必装的一款插件了吧，已经有很多人在 Greasy Fork 等网站写了大量的脚本，有需要就下载安装即可。脚本可以解决相当多的问题，并且也不会占用很多内存。找脚本也很方便，直接点击相应的图标，即跳出一个“为此站点查找脚本”的选项。<br><img src="https://pic4.zhimg.com/80/v2-f98281f8034694dc1b84251328d0544b.png" alt="Image"><br>其它常见的脚本插件有油猴等，不过我还是更喜欢暴力猴，或许是更好看点吧。</p>
+<p><a href="https://addons.mozilla.org/zh-CN/firefox/addon/violentmonkey/" target="_blank" rel="noopener">地址</a></p>
+<h4 id="5-密码管理——LastPass"><a href="#5-密码管理——LastPass" class="headerlink" title="5. 密码管理——LastPass"></a>5. 密码管理——LastPass</h4><p>跨平台的的密码保存管理扩展，有了它，再也不用担心忘记密码了。<br>该扩展的主要功能是，输入一个新的账号密码时，会提示是否保存；若账号相同，则提示是否更新密码；会在账号密码自动填充最后使用的密码。<br>其它的功能还有生成随机密码之类的。</p>
+<p><a href="https://addons.mozilla.org/zh-CN/firefox/addon/lastpass-password-manager/" target="_blank" rel="noopener">地址</a></p>
+<h4 id="6-下载管理——IDM"><a href="#6-下载管理——IDM" class="headerlink" title="6. 下载管理——IDM"></a>6. 下载管理——IDM</h4><p>这个插件要搭配 IDM 下载器使用。该插件几乎可以下载所有的网页上的视频、图像等。<br>具体写过一篇文章专门介绍<a href="https://jinl1874.xyz/2020/06/28/use-idm/">如何配置使用 IDM</a>的。</p>
+<p><a href="https://addons.mozilla.org/zh-CN/firefox/addon/tonec-idm-integration-module/?src=search" target="_blank" rel="noopener">地址</a></p>
+<h4 id="7-操作网页——viumium"><a href="#7-操作网页——viumium" class="headerlink" title="7. 操作网页——viumium"></a>7. 操作网页——viumium</h4><p>不需要用鼠标，仅使用键盘能完成 90%的操作。<br>有很多类似的扩展，为什么推荐这个，只是使用习惯了。</p>
+<p>按键功能和 vim 有一定的相似之处。<br>上、下、左、右的移动分别是：k, j, h, l;</p>
+<p>向右切换标签页：g+t 或者 K;</p>
+<p>向左切换标签页：g+T 或者 J;</p>
+<p>跳到顶部：gg;</p>
+<p>跳到底部：G;</p>
+<p>向上、下翻半页分别是：d, u;</p>
+<p>网页前进：L;</p>
+<p>页面后退：H;</p>
+<p>显示点击链接：f;</p>
+<p>新建标签页显示点击链接：F;</p>
+<p>搜索：o;</p>
+<p>新建标签页搜索：O;</p>
+<p>新建空白标签页：t;</p>
+<p>新建空白标签页打开链接：T;</p>
+<p>关闭标签页：x;</p>
+<p>打开上一个关闭的标签页：X;</p>
+<p>焦点移到输入框：g+i;</p>
+<p>焦点从输入框移走：tab 或者 esc;</p>
+<p>值得注意的一点是，上述按键功能只能在常见的网页上生效，在系统标签页是用不了的。比如空白标签页、系统设置页，因此学一些默认的快捷键是有必要的，比如 ctrl + t 是新建空白标签页、ctrl + tab 是向右切换标签页、ctrl + shift + tab 是向左切换，一般加上个 shift 就是相反的功能。</p>
+<p>还有一些按键就不一一赘述了。</p>
+<p>使用该插件能解放你的鼠标，极大地提高阅读网页浏览体验。</p>
+<p><a href="https://addons.mozilla.org/zh-CN/firefox/addon/vimium-ff/?src=search" target="_blank" rel="noopener">地址</a></p>
+<h4 id="8-网盘助手——网盘助手"><a href="#8-网盘助手——网盘助手" class="headerlink" title="8. 网盘助手——网盘助手"></a>8. 网盘助手——网盘助手</h4><p>支持主流网盘，如百度网盘以及蓝奏云等。<br>可以自动提取 提取码 。<br><img src="https://pic4.zhimg.com/80/v2-9b7f5dabcf188b46e289a23aaf121b49.png" alt="Image"></p>
+<p>大概是最优雅好用的网盘助手了。<br>有使用网盘的都可以试试安装。</p>
+<p><a href="https://addons.mozilla.org/zh-CN/firefox/addon/wpzs/" target="_blank" rel="noopener">地址</a></p>
+<p>基本就这些比较实用的扩展。</p>
+<h4 id="9-切换浏览器头——User-Agent-Switcher-and-Manager"><a href="#9-切换浏览器头——User-Agent-Switcher-and-Manager" class="headerlink" title="9. 切换浏览器头——User-Agent Switcher and Manager"></a>9. 切换浏览器头——User-Agent Switcher and Manager</h4><p>当你需要访问移动版网页或者只有其它浏览器才能访问的网站时，可以用它切换相对应的浏览器头。</p>
+<p><a href="https://addons.mozilla.org/zh-CN/firefox/addon/user-agent-string-switcher/?src=search" target="_blank" rel="noopener">地址</a></p>
 ]]></content>
       <categories>
-        <category>BlogBuild</category>
-        <category>Other</category>
+        <category>浏览器</category>
       </categories>
       <tags>
-        <tag>blog</tag>
-        <tag>image</tag>
+        <tag>firefox</tag>
+        <tag>addons</tag>
       </tags>
   </entry>
   <entry>
@@ -1506,8 +1448,8 @@
 <p>欢迎访问我的<a href="https://jinl1874.xyz">博客网站</a>。</p>
 ]]></content>
       <categories>
-        <category>Other</category>
         <category>Python</category>
+        <category>Other</category>
       </categories>
       <tags>
         <tag>img</tag>
@@ -1581,6 +1523,64 @@
       </tags>
   </entry>
   <entry>
+    <title>使用七牛云和PicGo来创建自己的图床</title>
+    <url>/2020/05/22/qiniuImage/</url>
+    <content><![CDATA[<blockquote>
+<p>最近搭了个博客，就有较大放置图片的需求，于是就想搭了个图床。<br>其它的图床不是要收费就是使用体验非常差，经常出现上传错误。而七牛云有10G的免费空间，对个人用户而言足够了。再加上PicGo的使用，能很方便能上传图户并获取链接。</p>
+</blockquote>
+<hr>
+<h3 id="所需工具"><a href="#所需工具" class="headerlink" title="所需工具"></a>所需工具</h3><p>七牛云，PicGo，备案好的域名。</p>
+<h4 id="1-注册七牛云"><a href="#1-注册七牛云" class="headerlink" title="1. 注册七牛云"></a>1. 注册七牛云</h4><ul>
+<li>打开<a href="https://www.qiniu.com/" target="_blank" rel="noopener">七牛云</a>注册账号，进行个人账号认证。需要上传身份，有了支付宝的认证也不需要人工审核了，上传身份后就认证成功了。<h4 id="2-创建空间"><a href="#2-创建空间" class="headerlink" title="2. 创建空间"></a>2. 创建空间</h4></li>
+<li>管理控制台 $\rightarrow$ 对象储存 $\rightarrow$ 空间管理 $\rightarrow$ 新建空间。</li>
+<li>空间名称随便填，储存区域也可以随便选，访问控制选择公开，点击确定创建。</li>
+</ul>
+<h4 id="3-注册2级域名"><a href="#3-注册2级域名" class="headerlink" title="3. 注册2级域名"></a>3. 注册2级域名</h4><ul>
+<li>域名控制台 $\rightarrow$ 解析 $\rightarrow$ 添加记录 $\rightarrow$<br><img src="http://image.jinl1874.xyz/img/%E6%8E%A7%E5%88%B6.png" alt="域名控制"></li>
+<li>记录类型选择CNAME，主机记录按自己喜好，记录值随便填一个能用的。<br><img src="http://image.jinl1874.xyz/img/add_sub_domain.png" alt="域名"></li>
+</ul>
+<h4 id="4-绑定二级域名"><a href="#4-绑定二级域名" class="headerlink" title="4. 绑定二级域名"></a>4. 绑定二级域名</h4><ul>
+<li><p>空间管理 $\rightarrow$ 域名管理 $\rightarrow$ 绑定域名 $\rightarrow$ 加速域名 $\rightarrow$填入子域名(如 &lt;image.jinl1874.xyz&gt;)。<br><img src="http://image.jinl1874.xyz/img/input_sub_domain.png" alt="填入子域名"></p>
+</li>
+<li><p>绑定成功后会跳转，复制CNAME的值。</p>
+</li>
+<li><p>回到域名控制台，修改刚才添加的记录，把CNAME的值放入放进记录值，然后保存。<br><img src="http://image.jinl1874.xyz/img/sub_domain_success.png" alt="成功"></p>
+</li>
+<li><p>可能会有一段时间的等待，回到域名管理，如果下图红圈出成功，那么七牛云已经创建并绑定成功了。<br><img src="http://image.jinl1874.xyz/img/success.png" alt="sucees"></p>
+</li>
+</ul>
+<h4 id="5-使用PicGO"><a href="#5-使用PicGO" class="headerlink" title="5. 使用PicGO"></a>5. 使用PicGO</h4><ul>
+<li><p>推荐下载<a href="https://github.com/Molunerfinn/PicGo/releases/tag/v2.2.2" target="_blank" rel="noopener">2.22版本</a></p>
+</li>
+<li><p>安装成功后，打开PicGo设置，拉到最下面，勾选“七牛图床”。</p>
+</li>
+<li><p>在图床设置，设置七牛图床。<br><img src="http://image.jinl1874.xyz/img/picgo_setting.png" alt="picGoSetting"></p>
+</li>
+<li><p>打开七牛云，进入密钥管理，复制AK和SK分别填到AccessKey和SecretKey；</p>
+</li>
+<li><p>存储空间名即是你创建的对象存储的名字</p>
+</li>
+<li><p>访问地址即你的http://+二级域名（如<a href="http://image.jinl1874.xyz" target="_blank" rel="noopener">http://image.jinl1874.xyz</a>)</p>
+</li>
+<li><p>存储区域根据下图而填，我的是华南区，所以填Z2。<br><img src="http://image.jinl1874.xyz/img/20200522225637.png" alt="area"></p>
+</li>
+<li><p>点击确定，建议设为默认图床。</p>
+</li>
+<li><p>此时已经设置成功，可以在“上传区”上传图片。</p>
+</li>
+</ul>
+<h4 id="到了此处，搭建图床的工作已经完成。"><a href="#到了此处，搭建图床的工作已经完成。" class="headerlink" title="到了此处，搭建图床的工作已经完成。"></a>到了此处，搭建图床的工作已经完成。</h4><p>欢迎访问个人博客主页<a href="jinl1874.github.io">jinl1874</a></p>
+]]></content>
+      <categories>
+        <category>BlogBuild</category>
+        <category>Other</category>
+      </categories>
+      <tags>
+        <tag>blog</tag>
+        <tag>image</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>获取必应首页的壁纸</title>
     <url>/2020/06/01/sipder/</url>
     <content><![CDATA[<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ol>
@@ -1616,66 +1616,58 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo 双线布置到2020新版 Coding 和 GithubPage</title>
-    <url>/2020/05/23/useCoding/</url>
-    <content><![CDATA[<h4 id="为什么使用-Coding"><a href="#为什么使用-Coding" class="headerlink" title="为什么使用 Coding"></a>为什么使用 Coding</h4><p>现在国内访问 github 的速度已经非常慢了，而且百度的爬虫也无法抓取到 github page 上面的内容。<br>而 Coding 类似于 github，也是一个免费的代码托管平台，随便一个仓库都可以用来做静态网页服务，访问速度也还可以。</p>
-<p>关于 github page 的使用可以参考我的上一篇博客<a href="https://jinl1874.xyz/2020/05/21/hexo-0/">使用 Hexo 和 GithubPage 免费搭建博客网站</a>。</p>
-<h4 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h4><ul>
-<li>打开<a href="https://coding.net/" target="_blank" rel="noopener">Coding</a>，注册账号。</li>
-<li>现在 Coding 只能注册团队了，不过五人以下是免费的。团队名称以及域名按自己喜好而填吧。</li>
-</ul>
-<h4 id="建仓"><a href="#建仓" class="headerlink" title="建仓"></a>建仓</h4><ul>
-<li>全部项目 $\rightarrow$ 新建项目 $\rightarrow$ 代码托管项目 $\rightarrow$ 填写名称、标识 $\rightarrow$ 勾选启用 Readme.md 及公开源代码 $\rightarrow$ 完成创建。</li>
-</ul>
-<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><ul>
-<li>项目设置 $\rightarrow$ 功能开关 $\rightarrow$ 打开持续部署和持续集成<br><img src="http://image.jinl1874.xyz/img/20200523233703.png" alt="项目设置"><br><img src="http://image.jinl1874.xyz/img/20200523233828.png" alt="功能"></li>
-<li>持续部署 $\rightarrow$ 静态网站 $\rightarrow$ 立即发布静态网站<br><img src="http://image.jinl1874.xyz/img/20200523234059.png" alt="部署"></li>
-<li>填写网站名字 $\rightarrow$ 保存<br><img src="http://image.jinl1874.xyz/img/20200523234300.png" alt="保存"></li>
-</ul>
-<h4 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h4><ul>
-<li><p>配置好后在静态网站选项里会有一个访问地址，先记好。<br><img src="http://image.jinl1874.xyz/img/20200523234509.png" alt="address"></p>
-</li>
-<li><p>域名解析控制台 $\rightarrow$ 解析 $\rightarrow$ 修改 github 记录 $\rightarrow$ 解析路线设为境外<br><img src="http://image.jinl1874.xyz/img/20200523235105.png" alt="github"></p>
-<blockquote>
-<p>两个都记录都要改</p>
+    <title>安装并使用IDM(Internet Download Manager)</title>
+    <url>/2020/06/28/use-idm/</url>
+    <content><![CDATA[<h4 id="IDM-是什么？"><a href="#IDM-是什么？" class="headerlink" title="IDM 是什么？"></a>IDM 是什么？</h4><blockquote>
+<p>Internet Download Manager（简称 IDM）是一个用于 Windows 系统的下载管理器。<br>IDM 可以让用户自动下载某些类型的文件，可将文件划分为多个下载点以更快下载，并列出最近的下载，方便存取文件。相对于其他下载管理器，具有独特的动态档案分割技术。<br>其优点在于，能分析下载地址中的实际地址，但若地址无效时则跳换成失效网页，当地址重新有效而无法恢复成原来的地址。<br>而缺点在于，必须设置分段的临时文件存放的磁盘位置，下载完成后再自动合并成一个完整的文件，同时删除临时文件（这种做法不同于其他下载软件预先分配一整块磁盘空间）。所以，下载的如果是机密文件，就容易被数据恢复软件恢复，造成安全隐患。<br>– 摘自<a href="https://zh.wikipedia.org/zh-hans/Internet_Download_Manager" target="_blank" rel="noopener">维基百科</a></p>
 </blockquote>
-</li>
-<li><p>如果你之前在 github 设置了强制 https，那么在修改后，先暂停使用两个 github 记录，否则之后 Coding 申请证书会失败。不过建议还是要暂停一下，免得后面出现问题。</p>
-</li>
-<li><p>添加两个记录，类型为 CNAME，主机记录分别为@和 www，记录值为刚才得到的访问地址。<br><img src="http://image.jinl1874.xyz/img/20200524000911.png" alt=""><br><img src="http://image.jinl1874.xyz/img/20200524000014.png" alt="添加记录"></p>
-</li>
-<li><p>回到 Coding，点击右上角的“齿轮设置”，拉到下面“自定义域名”，分别绑定两个域名，如“<a href="http://www.jinl1874.xyz”和“jinl1874.xyz”。" target="_blank" rel="noopener">www.jinl1874.xyz”和“jinl1874.xyz”。</a><br><img src="http://image.jinl1874.xyz/img/20200524000244.png" alt=""></p>
-</li>
-<li><p>可以选择首选域名，也可以勾选跳转到首先，这样打开网站时地址栏就会默认是那个域名了。</p>
-</li>
-<li><p>然后就默默地等申请证书成功，几分钟到十几分钟不等。最后显示证书状态为正常就算成功了。<br><img src="http://image.jinl1874.xyz/img/20200524000745.png" alt="证书"></p>
-</li>
-<li><p>回到域名解析器，恢复 github 的域名解析记录。</p>
-</li>
+<p>通俗来讲就是一个优秀的下载工具。</p>
+<h4 id="为什么使用-IDM"><a href="#为什么使用-IDM" class="headerlink" title="为什么使用 IDM"></a>为什么使用 IDM</h4><p>因为 IDM 使用的是多线程下载，所以比浏览器自带的下载要快很多。<br>并且 IDM 其它的功能：</p>
+<ul>
+<li>下载百度网盘；</li>
+<li>下载 BIliBili、Youtube 等主流视频网站以及几乎所有的盗版视频网站的视频。</li>
+<li>下载文件自动分类</li>
 </ul>
-<h4 id="绑定"><a href="#绑定" class="headerlink" title="绑定"></a>绑定</h4><ul>
-<li>进入你的主目录[C://Users//xxx]，勾选查看隐藏文件，找到<code>.ssh</code>目录，用记事本打开<code>id_rsa.pub</code>，复制全部内容。</li>
-<li>代码仓库 $\rightarrow$ 设置 $\rightarrow$ 部署公钥 $\rightarrow$ 新建部署公钥 $\rightarrow$ 粘贴到公钥内容 $\rightarrow$ 新建。</li>
+<h4 id="安装使用"><a href="#安装使用" class="headerlink" title="安装使用"></a>安装使用</h4><ol>
+<li>这是个收费软件，可以去<a href="https://www.internetdownloadmanager.com/" target="_blank" rel="noopener">官网</a>购买下载。</li>
+<li>也可使用绿色版：<br><a href="https://pan.baidu.com/s/1o_QEqKeSZLFKu9WQToo-8Q" target="_blank" rel="noopener">网盘地址</a><br>提取码：jinl<ul>
+<li>下载上述文件后，提取到一个纯英文目录（养好安装文件都放在纯英文目录的习惯）。</li>
+<li>打开其文件目录，点击<code>绿化.bat</code>文件。<small>// 不执行这一步的话浏览器无法调用 IDM 下载</small></li>
 </ul>
-<h4 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h4><ul>
-<li>复制 Coding 仓库地址。</li>
-<li>打开项目配置文件<code>_config.yml</code>，修改<code>deploy</code>内容。<br><img src="http://image.jinl1874.xyz/img/20200524001602.png" alt="项目"></li>
-<li>打开命令行进入 Hexo 所目录，输入<code>▶ hexo g -d</code>。不久会跳出来一个提示输入账号密码的窗口，输入 Coding 的邮箱与密码，无误后会上传代码至仓库。</li>
+</li>
+</ol>
+<h4 id="推荐配置"><a href="#推荐配置" class="headerlink" title="推荐配置"></a>推荐配置</h4><ul>
+<li>常规<br><img src="http://image.jinl1874.xyz/img/20200629000033.png" alt="image"></li>
+<li>连接<br>把最大连接数改为 32(虽然一般不会用到这么多）。</li>
+<li>代理服务器<br>如果你的电脑已经挂了代理，并希望下载 Youtube 等网站的东西，可选择切换为<code>使用系统代理</code>。</li>
+<li>其它的保持默认即可。</li>
 </ul>
-<h4 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h4><ul>
-<li>由于设置的是自动部署，代码上传后就会自动部署。</li>
-<li>可以打开浏览器，输入域名查看网站</li>
+<h4 id="配置浏览器"><a href="#配置浏览器" class="headerlink" title="配置浏览器"></a>配置浏览器</h4><ul>
+<li>Firefox：打开浏览器$\rightarrow$打开 Firefox 附加组件$\rightarrow$搜索 idm$\rightarrow$点进第一个搜索结果安装。</li>
+<li>Chrome：打开浏览器$\rightarrow$打开 Chrome 网上应用$\rightarrow$搜索 idm$\rightarrow$点进第一个搜索结果安装。<br><small>Chrome 需要额外配置：右上三点$\rightarrow$更多工具$\rightarrow$扩展$\rightarrow$<em>IDM Integration Module</em>$\rightarrow$详细信息$\rightarrow$打开允许访问文件网址。</small></li>
+<li>其它浏览器：同上</li>
 </ul>
-<p>至此，在 Coding 配置 Hexo 已经完成了。</p>
-<p>欢迎访问个人博客主页<a href="https://jinl1874.xyz">jinl1874</a></p>
+<p>配置好浏览器后，以后下载文件就是自动调用 IDM 下载了。</p>
+<h4 id="下载视频"><a href="#下载视频" class="headerlink" title="下载视频"></a>下载视频</h4><p>当浏览器开打含有视频播放的网页时，视视屏框的右上角会出现一个悬浮条，直接点击下载即可。<br><img src="http://image.jinl1874.xyz/img/20200629005318.png" alt=""><br>注意：</p>
+<ol>
+<li>下载优酷的官方上传的版权视频时，会下载到一个无法解析的.ts 文件。</li>
+<li>当 B 站的使用 HTML5 播放器时，下载的 B 站视频没有声音，此时使用 Flash 播放器即可。Flash 就要淘汰了怎么办？可以在 Chrome 浏览下载一款名为“B 站下载助手”的插件。</li>
+</ol>
+<h4 id="下载百度网盘的文件"><a href="#下载百度网盘的文件" class="headerlink" title="下载百度网盘的文件"></a>下载百度网盘的文件</h4><ol>
+<li>首先下载插件<a href="http://pan.newday.me/" target="_blank" rel="noopener">网盘助手</a>。<br>这个插件可以直接生成直链，而 IDM 需要直链才能下载。除此之外，此插件还有很多功能，如自动填充提取码等，就不一一赘述了。</li>
+<li>要下载网盘里的文件，首先需要将文件保存在自己的网盘里。在要下载的文件前打上勾，这时上方就会出现<code>生成链接</code>的选项$\downarrow$。<br><img src="http://image.jinl1874.xyz/img/20200629011751.png" alt="生成链接"></li>
+<li>点击后会出现下载直链$\downarrow$<br><img src="http://image.jinl1874.xyz/img/20200629012103.png" alt="直链"></li>
+<li>右键该链接，选择 IDM 下载。<br><img src="http://image.jinl1874.xyz/img/20200629012412.png" alt="idm"></li>
+</ol>
+<p>注意：如果出现 403、401 等错误，可以点击修改步骤三的里的应用 ID，一般改为<code>778750</code>即可。</p>
+<hr>
+<p>以上就是全部内容，欢迎访问个人<a href="https://jinl1874.xyz">博客</a>。</p>
 ]]></content>
       <categories>
-        <category>BlogBuild</category>
-        <category>HEXO</category>
+        <category>Other</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
-        <tag>blog</tag>
+        <tag>other</tag>
       </tags>
   </entry>
   <entry>
@@ -1775,6 +1767,69 @@
       </tags>
   </entry>
   <entry>
+    <title>Hexo 双线布置到2020新版 Coding 和 GithubPage</title>
+    <url>/2020/05/23/useCoding/</url>
+    <content><![CDATA[<h4 id="为什么使用-Coding"><a href="#为什么使用-Coding" class="headerlink" title="为什么使用 Coding"></a>为什么使用 Coding</h4><p>现在国内访问 github 的速度已经非常慢了，而且百度的爬虫也无法抓取到 github page 上面的内容。<br>而 Coding 类似于 github，也是一个免费的代码托管平台，随便一个仓库都可以用来做静态网页服务，访问速度也还可以。</p>
+<p>关于 github page 的使用可以参考我的上一篇博客<a href="https://jinl1874.xyz/2020/05/21/hexo-0/">使用 Hexo 和 GithubPage 免费搭建博客网站</a>。</p>
+<h4 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h4><ul>
+<li>打开<a href="https://coding.net/" target="_blank" rel="noopener">Coding</a>，注册账号。</li>
+<li>现在 Coding 只能注册团队了，不过五人以下是免费的。团队名称以及域名按自己喜好而填吧。</li>
+</ul>
+<h4 id="建仓"><a href="#建仓" class="headerlink" title="建仓"></a>建仓</h4><ul>
+<li>全部项目 $\rightarrow$ 新建项目 $\rightarrow$ 代码托管项目 $\rightarrow$ 填写名称、标识 $\rightarrow$ 勾选启用 Readme.md 及公开源代码 $\rightarrow$ 完成创建。</li>
+</ul>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><ul>
+<li>项目设置 $\rightarrow$ 功能开关 $\rightarrow$ 打开持续部署和持续集成<br><img src="http://image.jinl1874.xyz/img/20200523233703.png" alt="项目设置"><br><img src="http://image.jinl1874.xyz/img/20200523233828.png" alt="功能"></li>
+<li>持续部署 $\rightarrow$ 静态网站 $\rightarrow$ 立即发布静态网站<br><img src="http://image.jinl1874.xyz/img/20200523234059.png" alt="部署"></li>
+<li>填写网站名字 $\rightarrow$ 保存<br><img src="http://image.jinl1874.xyz/img/20200523234300.png" alt="保存"></li>
+</ul>
+<h4 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h4><ul>
+<li><p>配置好后在静态网站选项里会有一个访问地址，先记好。<br><img src="http://image.jinl1874.xyz/img/20200523234509.png" alt="address"></p>
+</li>
+<li><p>域名解析控制台 $\rightarrow$ 解析 $\rightarrow$ 修改 github 记录 $\rightarrow$ 解析路线设为境外<br><img src="http://image.jinl1874.xyz/img/20200523235105.png" alt="github"></p>
+<blockquote>
+<p>两个都记录都要改</p>
+</blockquote>
+</li>
+<li><p>如果你之前在 github 设置了强制 https，那么在修改后，先暂停使用两个 github 记录，否则之后 Coding 申请证书会失败。不过建议还是要暂停一下，免得后面出现问题。</p>
+</li>
+<li><p>添加两个记录，类型为 CNAME，主机记录分别为@和 www，记录值为刚才得到的访问地址。<br><img src="http://image.jinl1874.xyz/img/20200524000911.png" alt=""><br><img src="http://image.jinl1874.xyz/img/20200524000014.png" alt="添加记录"></p>
+</li>
+<li><p>回到 Coding，点击右上角的“齿轮设置”，拉到下面“自定义域名”，分别绑定两个域名，如“<a href="http://www.jinl1874.xyz”和“jinl1874.xyz”。" target="_blank" rel="noopener">www.jinl1874.xyz”和“jinl1874.xyz”。</a><br><img src="http://image.jinl1874.xyz/img/20200524000244.png" alt=""></p>
+</li>
+<li><p>可以选择首选域名，也可以勾选跳转到首先，这样打开网站时地址栏就会默认是那个域名了。</p>
+</li>
+<li><p>然后就默默地等申请证书成功，几分钟到十几分钟不等。最后显示证书状态为正常就算成功了。<br><img src="http://image.jinl1874.xyz/img/20200524000745.png" alt="证书"></p>
+</li>
+<li><p>回到域名解析器，恢复 github 的域名解析记录。</p>
+</li>
+</ul>
+<h4 id="绑定"><a href="#绑定" class="headerlink" title="绑定"></a>绑定</h4><ul>
+<li>进入你的主目录[C://Users//xxx]，勾选查看隐藏文件，找到<code>.ssh</code>目录，用记事本打开<code>id_rsa.pub</code>，复制全部内容。</li>
+<li>代码仓库 $\rightarrow$ 设置 $\rightarrow$ 部署公钥 $\rightarrow$ 新建部署公钥 $\rightarrow$ 粘贴到公钥内容 $\rightarrow$ 新建。</li>
+</ul>
+<h4 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h4><ul>
+<li>复制 Coding 仓库地址。</li>
+<li>打开项目配置文件<code>_config.yml</code>，修改<code>deploy</code>内容。<br><img src="http://image.jinl1874.xyz/img/20200524001602.png" alt="项目"></li>
+<li>打开命令行进入 Hexo 所目录，输入<code>▶ hexo g -d</code>。不久会跳出来一个提示输入账号密码的窗口，输入 Coding 的邮箱与密码，无误后会上传代码至仓库。</li>
+</ul>
+<h4 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h4><ul>
+<li>由于设置的是自动部署，代码上传后就会自动部署。</li>
+<li>可以打开浏览器，输入域名查看网站</li>
+</ul>
+<p>至此，在 Coding 配置 Hexo 已经完成了。</p>
+<p>欢迎访问个人博客主页<a href="https://jinl1874.xyz">jinl1874</a></p>
+]]></content>
+      <categories>
+        <category>BlogBuild</category>
+        <category>HEXO</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>blog</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>推理小说《寻狗事务所》-书评</title>
     <url>/2020/07/30/%E4%B9%A6%E8%AF%84-%E5%AF%BB%E7%8B%97%E4%BA%8B%E5%8A%A1%E6%89%80/</url>
     <content><![CDATA[<p>一言以蔽之，是一本有意思的小说。</p>
@@ -1811,135 +1866,6 @@
 ]]></content>
       <tags>
         <tag>book</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>安装并使用IDM(Internet Download Manager)</title>
-    <url>/2020/06/28/use-idm/</url>
-    <content><![CDATA[<h4 id="IDM-是什么？"><a href="#IDM-是什么？" class="headerlink" title="IDM 是什么？"></a>IDM 是什么？</h4><blockquote>
-<p>Internet Download Manager（简称 IDM）是一个用于 Windows 系统的下载管理器。<br>IDM 可以让用户自动下载某些类型的文件，可将文件划分为多个下载点以更快下载，并列出最近的下载，方便存取文件。相对于其他下载管理器，具有独特的动态档案分割技术。<br>其优点在于，能分析下载地址中的实际地址，但若地址无效时则跳换成失效网页，当地址重新有效而无法恢复成原来的地址。<br>而缺点在于，必须设置分段的临时文件存放的磁盘位置，下载完成后再自动合并成一个完整的文件，同时删除临时文件（这种做法不同于其他下载软件预先分配一整块磁盘空间）。所以，下载的如果是机密文件，就容易被数据恢复软件恢复，造成安全隐患。<br>– 摘自<a href="https://zh.wikipedia.org/zh-hans/Internet_Download_Manager" target="_blank" rel="noopener">维基百科</a></p>
-</blockquote>
-<p>通俗来讲就是一个优秀的下载工具。</p>
-<h4 id="为什么使用-IDM"><a href="#为什么使用-IDM" class="headerlink" title="为什么使用 IDM"></a>为什么使用 IDM</h4><p>因为 IDM 使用的是多线程下载，所以比浏览器自带的下载要快很多。<br>并且 IDM 其它的功能：</p>
-<ul>
-<li>下载百度网盘；</li>
-<li>下载 BIliBili、Youtube 等主流视频网站以及几乎所有的盗版视频网站的视频。</li>
-<li>下载文件自动分类</li>
-</ul>
-<h4 id="安装使用"><a href="#安装使用" class="headerlink" title="安装使用"></a>安装使用</h4><ol>
-<li>这是个收费软件，可以去<a href="https://www.internetdownloadmanager.com/" target="_blank" rel="noopener">官网</a>购买下载。</li>
-<li>也可使用绿色版：<br><a href="https://pan.baidu.com/s/1o_QEqKeSZLFKu9WQToo-8Q" target="_blank" rel="noopener">网盘地址</a><br>提取码：jinl<ul>
-<li>下载上述文件后，提取到一个纯英文目录（养好安装文件都放在纯英文目录的习惯）。</li>
-<li>打开其文件目录，点击<code>绿化.bat</code>文件。<small>// 不执行这一步的话浏览器无法调用 IDM 下载</small></li>
-</ul>
-</li>
-</ol>
-<h4 id="推荐配置"><a href="#推荐配置" class="headerlink" title="推荐配置"></a>推荐配置</h4><ul>
-<li>常规<br><img src="http://image.jinl1874.xyz/img/20200629000033.png" alt="image"></li>
-<li>连接<br>把最大连接数改为 32(虽然一般不会用到这么多）。</li>
-<li>代理服务器<br>如果你的电脑已经挂了代理，并希望下载 Youtube 等网站的东西，可选择切换为<code>使用系统代理</code>。</li>
-<li>其它的保持默认即可。</li>
-</ul>
-<h4 id="配置浏览器"><a href="#配置浏览器" class="headerlink" title="配置浏览器"></a>配置浏览器</h4><ul>
-<li>Firefox：打开浏览器$\rightarrow$打开 Firefox 附加组件$\rightarrow$搜索 idm$\rightarrow$点进第一个搜索结果安装。</li>
-<li>Chrome：打开浏览器$\rightarrow$打开 Chrome 网上应用$\rightarrow$搜索 idm$\rightarrow$点进第一个搜索结果安装。<br><small>Chrome 需要额外配置：右上三点$\rightarrow$更多工具$\rightarrow$扩展$\rightarrow$<em>IDM Integration Module</em>$\rightarrow$详细信息$\rightarrow$打开允许访问文件网址。</small></li>
-<li>其它浏览器：同上</li>
-</ul>
-<p>配置好浏览器后，以后下载文件就是自动调用 IDM 下载了。</p>
-<h4 id="下载视频"><a href="#下载视频" class="headerlink" title="下载视频"></a>下载视频</h4><p>当浏览器开打含有视频播放的网页时，视视屏框的右上角会出现一个悬浮条，直接点击下载即可。<br><img src="http://image.jinl1874.xyz/img/20200629005318.png" alt=""><br>注意：</p>
-<ol>
-<li>下载优酷的官方上传的版权视频时，会下载到一个无法解析的.ts 文件。</li>
-<li>当 B 站的使用 HTML5 播放器时，下载的 B 站视频没有声音，此时使用 Flash 播放器即可。Flash 就要淘汰了怎么办？可以在 Chrome 浏览下载一款名为“B 站下载助手”的插件。</li>
-</ol>
-<h4 id="下载百度网盘的文件"><a href="#下载百度网盘的文件" class="headerlink" title="下载百度网盘的文件"></a>下载百度网盘的文件</h4><ol>
-<li>首先下载插件<a href="http://pan.newday.me/" target="_blank" rel="noopener">网盘助手</a>。<br>这个插件可以直接生成直链，而 IDM 需要直链才能下载。除此之外，此插件还有很多功能，如自动填充提取码等，就不一一赘述了。</li>
-<li>要下载网盘里的文件，首先需要将文件保存在自己的网盘里。在要下载的文件前打上勾，这时上方就会出现<code>生成链接</code>的选项$\downarrow$。<br><img src="http://image.jinl1874.xyz/img/20200629011751.png" alt="生成链接"></li>
-<li>点击后会出现下载直链$\downarrow$<br><img src="http://image.jinl1874.xyz/img/20200629012103.png" alt="直链"></li>
-<li>右键该链接，选择 IDM 下载。<br><img src="http://image.jinl1874.xyz/img/20200629012412.png" alt="idm"></li>
-</ol>
-<p>注意：如果出现 403、401 等错误，可以点击修改步骤三的里的应用 ID，一般改为<code>778750</code>即可。</p>
-<hr>
-<p>以上就是全部内容，欢迎访问个人<a href="https://jinl1874.xyz">博客</a>。</p>
-]]></content>
-      <categories>
-        <category>Other</category>
-      </categories>
-      <tags>
-        <tag>other</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>寒蝉鸣泣之时-小说</title>
-    <url>/2020/10/06/%E5%AF%92%E8%9D%89%E9%B8%A3%E6%B3%A3%E4%B9%8B%E6%97%B6/</url>
-    <content><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>很久之前就听说过这个作品，前些天终于决定要看。本来是想直接看动画的，但是在知乎看到其动画的评价很低，并推荐去玩原作游戏。</p>
-<a id="more"></a>
-
-<p>于是我开启了寻找游戏的流程，去各大 Gal 网站都没找到资源，然后发现 steam 上有免费的鬼隐篇。但是发现仅支持日文以及英文。之后，我在本吧找到其汉化补丁。大概两三天的时间，就玩完了鬼隐篇。本来想在 steam 上买的，但是没找到汉化补丁。</p>
-<p>然后我又在贴吧找到了游戏资源，但是萌化版的画质、分辨率都太低了。然后继续找资源，发现还有小说。</p>
-<p>但是在老福特分享的小说都是 txt 文件，找了很久也没找到 EPUB 文件。所以就决定自己制作一份，毕竟对于我来说，没有排版的 TXT 文件是读不下去。<br>于是将其重新制作排版了一下（中间换了一个译本来源），我没找到本书的 epub 文件，于是就加了一些原作可能不存在的目录。</p>
-<p>还有就是一些原译本扫描过程中带来的错，一个对话分段，也已经尽可能修复了。（大部分都集中在第二篇中，因为这里的译本是从其它地方拿来的</p>
-<p>也就导致某些译名不一样，比如寒蝉会翻译成暮蝉）。推荐大家使用”多看阅读“来阅读，另外，排版就个人而言还是挺不错的，至少能看得下去。<br>最后就是，如果大家能接受小说的话，还是推荐大家去阅读一下的。</p>
-<h3 id="制作过程"><a href="#制作过程" class="headerlink" title="制作过程"></a>制作过程</h3><p>寒蝉有解题篇以及出题篇。解题篇还是比出题篇长的，没找到书本的封面，然后只能找漫画的封面来填。里面还插了几张漫画内容或者其它卷的封面。</p>
-<p>还有就是解题篇的目录实在是太难找了，在前面的目录是中文，但是在内容的标题却夹着日文，导致只能一个个对比加上。有的还找不到，只能靠感觉加上了，或许会有一些目录会出错吧。</p>
-<p>不过年代这么久远了，已经找不到这些书的 epub 文件了，也算是给补上了吧。但是寒蝉有游戏、漫画以及动画的情况下，阅读小说的人是非常少的。</p>
-<p>不过这也算是个人的偏执吧，小说只有文字，没有因年代留下的痕迹。而其动画以及游戏因年代过于久远，画质以及其它方面的制作都比较落后。现在就算看/玩的话，也很难看下去。</p>
-<p>如果有什么遗憾的话，就是小说的译本都很差（个人感觉），如果有正版的就好了（虽然是不可能的）。而且文本里太多省略号了，无论是什么样的语气都加个省略号。在省略号后加标点符号、在文本开始前加，无处不在的省略号使我发狂，于是我删去了大量的省略号，仅有一些表示无语以及是真的省略的省略号。不过只有在解题篇删了。</p>
-<p>重制版动画就要来了，期待新动画的表现。</p>
-<h3 id="简评（有小部分剧透）"><a href="#简评（有小部分剧透）" class="headerlink" title="简评（有小部分剧透）"></a>简评（有小部分剧透）</h3><p>有时候，一部作品没有看完，他人的玩梗式评价会导致很多人误解这部作品，或者说造成误解才是正常的，毕竟这个故事很多都是由误会引起的。</p>
-<p>《寒蝉》最出名的梗大概就是那句“蝉在叫，人坏掉”吧，还有各种论坛里时不时地来一句治愈番之类的话，再配上一张柴刀少女图，导致我对这部作品的印象是一部猎奇血腥动画。</p>
-<p>看完出题篇以及解题篇后，猎奇血腥固然有，不过仅在《目明篇》有较多描写，其它篇章的杀人都算是比较“正常”的杀人。或者说是每个篇章的侧重点都不一样，都有不同的元素，猎奇仅仅是其中一种，而出题篇前三篇注重恐怖气氛的渲染，由圭一的第一视角来认识雏见泽，第四篇《暇溃篇》更像是一个小外传；后面解题篇则是各有各的风格，《目明篇》是比较血腥，而《罪灭篇》以及《皆杀篇》的气氛则是比较紧张刺激，各方势力在明争暗斗，但最后都逃不过“大灾难”。至于最后的《祭囃篇》，是比较欢快的，最后的决战像小孩子过家家一样（虽然一方的年龄确实不怎么大），治愈番也许就是从最后一篇来的吧。对我而则是比较无趣的，不过前面的鹰野的故事以及中间的碎片整理是挺有意思的，把事件的原貌基本都展现了出来。</p>
-<p>总结一下，整部作品说的是一个误会的故事，这种误会有的是无意引起的，比如鬼隐篇里那个带“针”的饼，怜奈强大的推理能力导致圭一怀疑人生，以及最后的“针筒”恶作剧，还有《祟杀篇》里的圭一明明不现场，但是伙伴们却一口咬定圭一在绵流祭上，导致圭一开始怀疑人生，其中最大的误会是羽入时不时的灵异表现，这导致本来是正常发生的事，愣是加了一层不正常的面纱；有的是刻意造成的，比如圆崎家的祖训，魅音她们的隐瞒。单有误会其实还不算什么大事，但是这种误会遇到了一种病，叫雏见泽候群症，两者结合再加上第三方势力的插入（“东京”、沙都子的叔父、怜奈的“后妈”等）就会造成各个篇章里的悲剧。</p>
-<p>要破解这个局，需要解开这些误会，来获得朋友的帮助。因为个人的力量是有限的，梨花在《皆杀篇》之前一直不相信自己的朋友，没有将事情告诉她们。在《皆杀篇》里看到圭一联合众人救了沙都子，于是开始相信朋友，将事情告诉了她们。但在最后因为之前错信了人，导致功亏一篑，自己也同样的死法死去。到了最后一章，由于羽入的帮忙，梨花众人团结一心，再加上 bug 一样的赤坂，成功拯救自己以及整个雏见泽。</p>
-<p>我想整个故事想说的是，有困难要多和朋友沟通，多相信朋友，否则很容易出事。</p>
-<p>转自我的知乎回答 <a href="https://www.zhihu.com/question/276855671/answer/1503964672" target="_blank" rel="noopener">https://www.zhihu.com/question/276855671/answer/1503964672</a></p>
-<h3 id="文件地址"><a href="#文件地址" class="headerlink" title="文件地址"></a>文件地址</h3><p>Github 地址：<a href="https://github.com/jinl1874/e-book/，欢迎star。" target="_blank" rel="noopener">https://github.com/jinl1874/e-book/，欢迎star。</a></p>
-<p>蓝奏云地址： <a href="https://wwa.lanzous.com/b0cqj1kti" target="_blank" rel="noopener">https://wwa.lanzous.com/b0cqj1kti</a> 密码:achq</p>
-]]></content>
-      <categories>
-        <category>读书</category>
-      </categories>
-      <tags>
-        <tag>book</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>悠哉日常大王-不能说的秘密</title>
-    <url>/2020/10/15/%E6%82%A0%E5%93%89%E6%97%A5%E5%B8%B8%E5%A4%A7%E7%8E%8B-%E4%B8%8D%E8%83%BD%E8%AF%B4%E7%9A%84%E7%A7%98%E5%AF%86/</url>
-    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/jinl1874/image/master/%E6%A0%BC%E5%8A%A0%E5%B0%94%E5%BE%B7%E4%BF%AE%E9%81%93%E9%99%A2%EF%BC%8C%E4%BA%9A%E7%BE%8E%E5%B0%BC%E4%BA%9A.jpg" alt=""></p>
-<p>多年以后，面对升学考试时，越谷卓将会想起第一次备考时的紧张。</p>
-<p>旭东分校是个乡下的学校，已经有一百多期了，但由于日本少子化，导致整个学校在很长时间里仅有几个学校在学校上课，老师也只有一个。加上今年萤的转入学校，学校目前仅有五人，两个是越谷卓的妹妹，一个是新入学的莲华。老师是莲华的姐姐一穗，非常喜欢睡觉，但毕竟在这种学校里只能靠自学，老师也管不了这么多，越谷卓深深明白这一点。</p>
-<p>越谷卓的目标是市内的一所高中，前辈也是邻居的木实在那里读高三，这也是本地人经常去的高中，像光华那样去东京读书的反而是少数。虽说不是什么名校，但不也是随便就能进的，还是要一点成绩的。</p>
-<p>时间似乎过得快，三个学期很快就要过去了。还剩一周就要考试了，虽然知道没什么难度，但越谷卓的心总是难免紧张。越谷卓望向窗外，四个少女还是一直说说笑笑，在玩一个不知道是什么的游戏。越谷卓真的挺羡慕她们的，什么时候都能玩得很开心，什么时候都很悠哉。</p>
-<p>晚上，越谷卓睡着的时候，像是做了一个梦，梦见自己仿佛飘在空中，傍边的景物在飞速向后跑去。速度越来越快，直到越谷卓的大脑跟不上转速，逐渐头晕。突然，越谷卓睁开眼睛，坐起来，打开吊灯，并调到灰暗。转头看了一圈，发现还是在自己的房间，但总有一股说不出来的异样。卓摇了摇头，是自己太紧张了吗？随即关掉灯，躺下继续睡觉。</p>
-<p>清早，卓的母亲越谷雪子过来叫他起床，离去时还嘟囔着“怎么连哥哥也睡懒觉了”。卓望着妈妈的背影，不知怎么的想起了自己的父亲，一直都是妈妈在照顾他们三兄妹，一年下来都没看过他出现一次，是忘了这个家吗？卓抛开这些念头，起床刷牙洗脸，吃了妈妈准备的早饭后，找到自己的自行车，准备骑车去上学校。突然，他发现自行车有点新，或者说是没有那么旧了，是妈妈重新帮他清洗了一遍吗？但就算清洗了也不会这样啊，里面的很多磨损的痕迹都消失了。卓没有深思，骑着自行车去上学了。在学校的日子已经不多了，想到即将要离去，卓还是有点舍不得。</p>
-<p><img src="http://image.jinl1874.xyz/img/20201015114331.png" alt=""></p>
-<p>“今天的教室和昨天有些不一样。”莲华双手托腮露出沉思状的表情说道。</p>
-<p>夏海有点疑惑：“哪里？”</p>
-<p>虽然卓知道她总是发表一些奇奇怪怪的话，但是卓也感觉教室有点奇怪，萤的桌子是空的。一般来说，迟到的只有夏海以及整天睡觉的老师，但是萤迟到倒是有点不可思议，是出什么事了吗？卓正在想着时，老师拉开门，打了声招呼，带着萤进来了。沉默了一阵后，老师叫萤做自我介绍。萤拿起粉笔在黑板上写上自己的名字“一条萤”，随后介绍了下自己的情况，和底下两姐妹开始一问一答起来。莲华则突然起身，抬起手，面无表情地说了一句“喵帕斯”。而一旁的卓被震惊地说不出话，身体直直地定在那里……</p>
-<p>整个早上，卓都在想到底是怎么回事。是她们在搞恶作剧吗，等我信以为真后再掏出个“整人大成功”的牌子吗？还是自己的记忆错乱，知道了未来的事？还是在做梦？又或者之前的都是梦，现在才是真实的？紧接着，他又想起了他的自行车，想起了今天的天气没有那么凉了，明明昨天晚上还是要盖被子睡觉，还有早上的那门牌上没有“+小 5”，又想起昨晚的梦，再检查一下自己的书，明明已经做完的练习册，而现在却变得干干净净，种种迹象让卓怀疑自己是不是回到一年前了。</p>
-<p>下课铃响后，卓漫无目的地走在走廊上，他还没从整件事的震惊走出来。前面的夏海拿着球，准备和新来的萤去玩躲避球。走着走着，卓踩在因潮湿而腐烂的木板上，掉进了坑里。卓似乎听到远处的夏海在说至今没有哪个笨蛋会掉下去的，但他已无力再从坑里爬起。路过的老师见到他掉到坑时，才赶紧拉他上来。</p>
-<p>卓下意识地整理了一下自己的衣服，问:“今天是几年几号？”<br>老师懒懒地答道:“2013 年 4 月 13 号，怎么了？”<br>4 月 13 号，昨天明明才刚过三月，果然是时间变了吗。想到此处，卓再次向老师发问：“老师，我说我有可能会从未来穿越过来的，不对，是时间从 2014 年变成了 2013 年，你会觉得怎么样？”<br>老师再次发出庸懒的声音:“什么啊，你是不是摔坏脑袋了，快点回教室吧！”<br>卓知道这个整天睡觉的老师是完不全可靠的，于是什么也没说，默默地走回教室。</p>
-<p>放学后，卓匆匆地踩着自行车回家。回家后，他立马找到日历，发现日历上显示的 4 月 13 号。心中的最后一丝希望破灭，卓瘫倒在地上。<br>那一天，小鞠和夏海比平时更晚回来。<br>卓本来想和母亲谈及这件事，但一想到母亲整天操劳，父亲又长时间不在家，夏海也整天上房揭瓦，每天早起给三兄妹做完早饭就要去工作了，就打算不想再给母亲增添烦恼了。经过整晚的思考斗争，卓下了一个决定，决定看看这个 2013 和上个 2013 有什么区别，来知道自己是不是真的回到过去，时间是不是真的变了，自己现在到底在哪。自此，卓在此后一年基本都没说过什么话，但是去年发生的事在默默改变今年的他。</p>
-<p>周五，远足的那天，说是远足，但卓知道是老师带她们来插秧，也知道后来老师有机器可以插秧，就没有像去年那样下去插秧。他来到夏海旁，想听听她发的牢骚。但没想熊孩子上头的夏海把他做成一个稻草人。<br>周末傍晚，卓回到家时，发现家里什么人都没有，才想起“去年今天”夏海和小鞠离家出走了。他又想起小时候夏海和小鞠也曾离家出走过，最后在那条小道上他和妈妈找到她俩。想到此时，卓不由得露出一丝苦笑。他知道她们的秘密基本在哪里，于是他骑着自行车去找她们了。还是在那条路上，他又发现了她们。什么话也没有说，他让她俩坐上自行车，自己则推着车回家。<br>那一晚，夏海似乎睡得特别晚，第二天睡过头了没去学校 。</p>
-<p>暑假那天从海边回来，卓曾经和老师一样，没有上车，但是这一次已经提前准备好在车上了。</p>
-<p>还有那天，萤在村子里迷路了，事后她带他们来到迷路的地方。于是那天他来到，果然在附近被她的狗发现了。</p>
-<p>还有很多很多，起初卓只是想知道这一年和去年的差别，但最后却只是因为无聊，或者说是孤独。</p>
-<p>直到那一天的再次到来。</p>
-<p>在漫长的重复时间里，卓开始学习各种各样的技能。以前的他只会弹钢琴，在开学那天负责弹校歌的伴奏。后来他开始学习吉他、练习跑步、制作手办、用竹子编制家具，甚至连弹尺子也练得炉火纯青。</p>
-<p>卓独自坐在房间，喃喃道：“这是第三年了吧！“</p>
-<p>卓被困在这一年已经三次了，有时他也想像妹妹她们那样什么都不知道，可以无优无虑地玩耍。最近她们似乎又交了上个新朋友，是邻剧木实的学妹，”去年“她们还不认识来着，没想到今年居然经常来玩。是哪里出现分岔点了，卓已经无力追究，他只想跨过这一年，开启自己崭新的生活，或者说回到原来的生活。</p>
-<p>冥想之际，越谷雪子过来叫卓去帮忙做艾蒿饼，因为那四个少女带着艾蒿回来。</p>
-<p>小鞠和萤端着做好的艾蒿饼出来给莲华和夏海吃。突然，萤愣了一下。</p>
-<p>”怎么了？“旁边的小鞠问。</p>
-<p>”没什么，“萤说，”来这里都快一年了，没去的地方还有好多啊……“</p>
-<p>此后，完。</p>
-]]></content>
-      <categories>
-        <category>动漫</category>
-      </categories>
-      <tags>
-        <tag>脑洞</tag>
-        <tag>manga</tag>
       </tags>
   </entry>
   <entry>
@@ -1993,6 +1919,27 @@
       <tags>
         <tag>js</tag>
         <tag>script</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《夏日重现》：孤岛轮回故事</title>
+    <url>/2020/08/19/%E6%BC%AB%E8%AF%84-%E3%80%8A%E5%A4%8F%E6%97%A5%E9%87%8D%E7%8E%B0%E3%80%8B/</url>
+    <content><![CDATA[<p><img src="https://pic4.zhimg.com/80/v2-bb93bd931cf296761d456b59563a998f.jpg" alt="Image"><br>先下结论，就目前来看，是一部优秀的悬疑轮回漫画。</p>
+<p>这是一部轮回悬疑漫画，就目前来讲，伏笔众多，回收合理，故事展开优秀。目前看到了一百多话，漫画有一个合理结尾不是太大问题。</p>
+<p>故事发生一个小岛上，这也是常用的场景了，与隔绝的农村、小镇的作用一样，用来隔绝外界。并且这些地方都有一些不为人知的背后。比如在一些 18 禁的作品里，村里只有一男村长，其它的都是女性，就给外来的人提供了一个舞台。而本作是属于有一段神奇的过去，有几个神奇的人(或者应该叫妖？)，并一直影响到现在。</p>
+<p>男主得知青梅竹马死去的消息，于是赶回小岛参加其葬礼。在船上做了一个有关死去的青梅竹马的梦，醒来后扑到一个女性的胸上……</p>
+<p>参加葬礼后，主角发现澪被杀，接着又发现船上的女性也被杀。这时又出现了第二个澪，然后被其杀死，轮回开始……</p>
+<p>去年发现这部漫画时只有四十多话，看第二遍时发现了很多剧情伏笔铺垫，作者大概已经想好整个故事了吧。</p>
+<p>令我印象深刻的还是开头不久，澪来接男主的时候，没刹住自行车跌到海底时露出了内裤被男主看到。这个场景在日本漫画里比比皆是，本以为是单纯的卖肉，但没想到后面男主确定她的身份时用到了这个。</p>
+<p>本漫画是一本悬疑漫画，在其基础上加入了轮回的设定，男主通过轮回来一点点地解开悬疑。并且作者也给男主的轮回添加了一些限制，每次轮回的时间都会向前走，让反派也可以继承轮回的记忆与数据。故事进行下去，越来越复杂，但是都有前面的铺垫一一对应。烂尾的可能性应该比较小，值得一看。</p>
+<p>吐槽一下动漫之家上的译名，或者说根本没译，直接把英文名搬过来了，导致贴吧上只有寥寥几人。</p>
+<p>目前连载在 jump + 平台上，漫画是优秀的，不知道未来有没有机会动画化。</p>
+]]></content>
+      <categories>
+        <category>读书</category>
+      </categories>
+      <tags>
+        <tag>manga</tag>
       </tags>
   </entry>
   <entry>
@@ -2068,94 +2015,77 @@
       </tags>
   </entry>
   <entry>
-    <title>《夏日重现》：孤岛轮回故事</title>
-    <url>/2020/08/19/%E6%BC%AB%E8%AF%84-%E3%80%8A%E5%A4%8F%E6%97%A5%E9%87%8D%E7%8E%B0%E3%80%8B/</url>
-    <content><![CDATA[<p><img src="https://pic4.zhimg.com/80/v2-bb93bd931cf296761d456b59563a998f.jpg" alt="Image"><br>先下结论，就目前来看，是一部优秀的悬疑轮回漫画。</p>
-<p>这是一部轮回悬疑漫画，就目前来讲，伏笔众多，回收合理，故事展开优秀。目前看到了一百多话，漫画有一个合理结尾不是太大问题。</p>
-<p>故事发生一个小岛上，这也是常用的场景了，与隔绝的农村、小镇的作用一样，用来隔绝外界。并且这些地方都有一些不为人知的背后。比如在一些 18 禁的作品里，村里只有一男村长，其它的都是女性，就给外来的人提供了一个舞台。而本作是属于有一段神奇的过去，有几个神奇的人(或者应该叫妖？)，并一直影响到现在。</p>
-<p>男主得知青梅竹马死去的消息，于是赶回小岛参加其葬礼。在船上做了一个有关死去的青梅竹马的梦，醒来后扑到一个女性的胸上……</p>
-<p>参加葬礼后，主角发现澪被杀，接着又发现船上的女性也被杀。这时又出现了第二个澪，然后被其杀死，轮回开始……</p>
-<p>去年发现这部漫画时只有四十多话，看第二遍时发现了很多剧情伏笔铺垫，作者大概已经想好整个故事了吧。</p>
-<p>令我印象深刻的还是开头不久，澪来接男主的时候，没刹住自行车跌到海底时露出了内裤被男主看到。这个场景在日本漫画里比比皆是，本以为是单纯的卖肉，但没想到后面男主确定她的身份时用到了这个。</p>
-<p>本漫画是一本悬疑漫画，在其基础上加入了轮回的设定，男主通过轮回来一点点地解开悬疑。并且作者也给男主的轮回添加了一些限制，每次轮回的时间都会向前走，让反派也可以继承轮回的记忆与数据。故事进行下去，越来越复杂，但是都有前面的铺垫一一对应。烂尾的可能性应该比较小，值得一看。</p>
-<p>吐槽一下动漫之家上的译名，或者说根本没译，直接把英文名搬过来了，导致贴吧上只有寥寥几人。</p>
-<p>目前连载在 jump + 平台上，漫画是优秀的，不知道未来有没有机会动画化。</p>
-]]></content>
-      <categories>
-        <category>读书</category>
-      </categories>
-      <tags>
-        <tag>manga</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>百年孤独全人物</title>
-    <url>/2020/10/09/%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC%E5%85%A8%E4%BA%BA%E7%89%A9/</url>
-    <content><![CDATA[<h3 id="人物表"><a href="#人物表" class="headerlink" title="人物表"></a>人物表</h3><ul>
-<li>奥雷里亚诺·布恩迪亚上校：开头面对行刑队的人，最后在家中死去。</li>
-</ul>
+    <title>寒蝉鸣泣之时-小说</title>
+    <url>/2020/10/06/%E5%AF%92%E8%9D%89%E9%B8%A3%E6%B3%A3%E4%B9%8B%E6%97%B6/</url>
+    <content><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>很久之前就听说过这个作品，前些天终于决定要看。本来是想直接看动画的，但是在知乎看到其动画的评价很低，并推荐去玩原作游戏。</p>
 <a id="more"></a>
 
-<ul>
-<li>梅尔基亚德斯：身形肥大的吉卜赛人，一位炼金术师以及航海家，经常拿新奇的东西来马孔多，最后在新加坡的沙洲上死于热病，被丢到了爪哇海的最深处。但又重返人世，拯救了陷入失眠症的马孔多，最后死在马孔多。</li>
-<li>何塞·阿尔卡蒂奥·布恩迪亚：马孔多的族长，爱研究一些稀奇古怪的东西，上校的父亲。拥有传奇的一生，最后死在马孔多。</li>
-<li>何塞·阿尔卡蒂奥：上校的哥哥，貌似他们家喜欢用一样的名字，一开始我把哥哥和父亲混为同一个人了。长大后与庇拉尔·特尔内拉发生肉体关系，但是由于庇拉尔告知其怀孕后，开始逃避她。后来与吉卜赛女朗发生关系，并与其离开马孔多。在蕾梅黛丝死后回来，与丽贝卡发生关系，并结为夫妇，被乌尔苏拉逐出家门。最后在家中被枪杀。</li>
-<li>乌尔苏拉·伊瓜兰：何塞的妻子，寻找大儿子途中发现走得太远了，索性不再回头（当时我看到这里是极其懵逼的，这样就走了……）。直到五个月后才回来，并带来大沼泽另一边的人。那场四年的大雨过后，开始清除家里各种虫子，不久后死去，年龄在一百一十五到一百二十五里。</li>
-<li>弗朗西斯·德雷克：袭击里奥阿查的海盗，乌尔苏拉的曾祖母因其受到烫伤。并由此，乌尔苏拉的曾祖父与何塞·阿尔卡蒂奥·布恩迪亚的的曾祖父合作经营。这是为了促进他们之间联系而有的战斗。</li>
-<li>普鲁邓希奥·阿基拉尔：何塞的斗鸡对手，输了之后用鸡内涵何塞。而何塞与其决斗，最后被何塞用长矛刺死，何塞也由此于乌尔苏拉行夫妻之事。但最后何塞夫妻因良心烦扰（经常看到死去的他的出现）而决定离开原本的里奥阿查。在其死后经常去马孔多与已经发疯何塞谈话，最后拉何塞到另一个世界去。</li>
-<li>庇拉尔·特尔内拉：十四岁时强暴她的男人，因为外来户的关系直到二十二岁也没公开关系，被家人强迫离开来到马孔多。想一直等他，但已经厌倦了等待，于是转去勾引何塞·阿尔卡蒂奥（上校的哥哥），或者说与其发生肉体关系。告诉何塞·阿尔卡蒂奥怀孕的消息后不久，何塞·阿尔卡蒂奥同样走了。之后，她又与上校发生关系并生下一儿子。指导奥雷里亚诺后，在一个欢宴的夜晚中死在藤摇椅上。</li>
-<li>阿玛兰妲：何塞·阿尔卡蒂奥·布恩迪亚新出生的女儿，上校的妹妹，爱上了丽贝卡爱的男人，并阻止他们结婚，不幸下手毒死蕾梅黛丝。丽贝卡与何塞·阿尔卡蒂奥结婚后，阿玛兰妲与皮埃特罗相恋，但拒绝与其结婚。之后又与赫里内勒多·马尔克斯相恋，仍拒绝与其结婚。最后以一个老处女的身份在家死去。</li>
-<li>何塞·阿尔卡蒂奥：庇拉尔·特尔内拉与何塞·阿尔卡蒂奥的儿子，继承了何塞·阿尔卡蒂奥的名字，避免混淆，只叫阿尔卡蒂奥。长大后过于疯狂，面对保守派时执意抵抗，投降后被判处枪决。</li>
-<li>比西塔西翁：瓜希拉印第安人，为逃避部落的失眠症，放弃王位与弟弟来到此处，也是众多孩子的保姆。最后在马孔多安详离去。</li>
-<li>卡塔乌雷：比西塔西翁的弟弟，发现丽贝卡有其祖国的失眠症后，逃离马孔多。何塞·阿尔卡蒂奥·布恩迪亚死的那天回到马孔多，是为了“王的下葬”。</li>
-<li>丽贝卡·布恩迪亚：从马纳乌雷来马孔多投奔，是乌尔苏拉的远房表妹、何塞·阿尔卡蒂奥·布恩迪亚的亲人，尼卡诺尔·乌略亚和丽贝卡·蒙铁尔的女儿。因为对所有名字都没反应，所以就使用她母亲的名字作为其名字，姓是后来加上的。一到爱情烦恼的时候就爱吃土，并且容易出事。先是与皮埃特罗相爱订婚，但何塞·阿尔卡蒂奥回来后瞬间就抛弃了皮埃特罗，并与其结婚。何塞·阿尔卡蒂奥死后，将自己封闭起来，被镇人的人遗忘。最后在乌尔苏拉死的那年年底死去。</li>
-<li>好汉弗朗西斯科：两百岁的江湖艺人，常带来各地见闻。</li>
-<li>堂阿波利纳尔·摩斯科特：里正，政府人员，地方官 。</li>
-<li>安帕萝·摩斯科特：堂阿波利纳尔的女儿。</li>
-<li>蕾梅黛丝·摩斯科特：堂阿波利纳尔九岁的小女儿，被上校看上。后来过了青春后成为了上校的妻子，但在皮埃特罗与丽贝卡婚礼前的一星期里被阿玛兰妲下毒，导致内脏撕裂，三天后被自己的血毒死，双胞胎也胎死腹中。</li>
-<li>皮埃特罗·克雷斯皮：意大利技师，负责安装和调试自动钢琴，与丽贝卡订婚，但阿玛兰妲亦喜欢他，百般阻挠其婚礼。最后他与阿玛兰妲相恋，但是阿玛兰妲拒绝与其结婚，绝望之下割腕自杀。</li>
-<li>马格尼菲科·比斯马勒：上校最亲密的好友，建村元老的儿子，名字与其父亲相同。最后死在马孔多的暴徒手里。</li>
-<li>赫里内勒多·马尔克斯：上校最亲密的好友，建村元老的儿子，名字与其父亲相同。喜欢阿玛兰妲，但阿玛兰妲一直不肯与其结婚，被拒绝后发给上校一个电报“马孔多在下雨”。曾被俘，但是上校用战俘救他出来。晚年时拒绝了上校重新发起战争的请求，最后在那场四年多的大雨中死去。</li>
-<li>尼卡诺尔·雷伊纳：主持婚礼的神甫。</li>
-<li>奥雷里亚诺·何塞：奥雷里亚诺和庇拉尔·特尔内拉的儿子，长大后爱上自己的姑妈阿玛兰妲，想与其发生关系，但被拒绝。之后成为了一个浪荡人士，最后被阿基莱斯·里卡多上尉开枪打死。</li>
-<li>阿利黎奥·诺格拉：表面上是马孔多医生，实际上是自由党狂热人士。</li>
-<li>维多利奥·梅迪纳：上校投奔的革命军将领。</li>
-<li>桑塔索菲亚·德拉·彼达：阿尔卡蒂奥的情人。晚年时试图拯救被各种虫子侵蚀的家，但是失败了。最后离开了这个家。</li>
-<li>格雷戈·史蒂文森上校：受奥雷里亚诺之托向阿尔卡蒂奥报信，但阿尔卡蒂奥并不相信他，将其关押起来。最后保守派攻打马孔多时被放出来一起作战，被大炮轰死。</li>
-<li>罗格·卡尔尼塞罗：执行枪决奥雷里亚诺·布恩迪亚的上尉军官，但枪决被何塞·阿尔卡蒂奥阻止，叛变到奥雷里亚诺阵营。</li>
-<li>蕾梅黛丝：桑塔索菲亚·德拉·彼达与阿尔卡蒂奥的长女，被称为美 人儿蕾梅黛。最后连带着床单飞上天。·</li>
-<li>何塞·阿尔卡蒂奥第二：桑塔索菲亚·德拉·彼达与阿尔卡蒂奥的双胞胎儿子之一。长大后成为工会领导人，但是在一次活动中发生一个大屠杀，此后除他之外，领导人被官方全部杀死，官方宣传没发生任何事。他自己被一个年轻的军官放过。最后在梅尔基亚德斯的房间里与其孪生兄弟交谈中死去。</li>
-<li>奥雷里亚诺第二：桑塔索菲亚·德拉·彼达与阿尔卡蒂奥的双胞胎儿子之一。孪生兄弟死后不久，他也在妻子旁死去。在最后下葬时弄混了，把两人葬在各自的坟墓里。又或者是，这才是正确的坟墓呢。</li>
-<li>何塞·拉克尔·蒙卡达：保守党将军，战后马孔多的第一任市长。上校攻打马孔多时想逃走，但被捕了。最后判处死刑。</li>
-<li>奥雷里亚诺：上校的十七个儿子的名都是这样，姓随其母亲，后来被一一暗杀。</li>
-<li>阿基莱斯·里卡多：马孔多驻军首领，掌握马孔多的市政大权。开枪打奥雷里亚诺·何塞时，被两发来源不明的子弹打死。</li>
-<li>费尔南达·德尔·卡皮奥：奥雷里亚诺第二的妻子，外来的女王，马达加斯 加女王。最后她穿着她的女王衣服在床上死去。</li>
-<li>佩特拉·科特斯：曾与双胞胎一起睡觉的女人，后来成为奥雷里诺第二的情人。奥雷里亚诺第二因不满妻子的各种规矩以及所做之事，经常到她家里住。</li>
-<li>何塞·阿尔卡蒂奥：费尔南达·德尔·卡皮奥与奥雷里亚诺第二的长子。从小就被期望成为教皇，但是到罗马后就立即放弃了神学。费尔南达死后回到马孔多，发现了那些金币。最后，他在沐浴时，被他赶出去的四个孩子按死在水池里，连金币也被掳走。</li>
-<li>雷纳塔·蕾梅黛丝：费尔南达·德尔·卡皮奥与奥雷里亚诺第二的第一个女儿，昵称是梅梅。男友出事后终生一言不发，被母亲带到一个修道院，最后在克拉科夫一家阴森的医院衰老而死。</li>
-<li>奥雷里亚诺·特里斯特：黑白混血儿，上校的十七个儿子之一。曾到马孔多生活，最后被猎杀。</li>
-<li>奥雷里亚诺·森特诺：上校的十七个儿子之一。同样被猎杀。</li>
-<li>卡米拉·萨迦丝杜梅：以“母象”（即能吃）的美名享誉全球。在马孔多曾和奥雷里亚诺第二来过一场大胃王比赛。</li>
-<li>阿玛兰妲·乌尔苏拉：费尔南达·德尔·卡皮奥与奥雷里亚诺第二的第二个女儿。成年后带着丈夫回到马孔多，改变这个已经被虫蚁腐蚀得破旧无比的家。丈夫走后，与奥雷里亚诺过上了情欲泛滥的生活，造成的破坏却比虫蚁更大。不久家中也处于家居密林的深处，等到加泰罗尼亚智者最后的信到来后，他们已经与外界脱离一联系。生下一个有猪尾巴的儿子之后，因失血过多而死去。</li>
-<li>马乌里肖·巴比伦：梅梅的男朋友。潜入梅梅家中，正揭开屋瓦钻进浴室时，被守夜人当作偷鸡贼一枪放倒，此后卧床不起，孤独终老而死。</li>
-<li>奥雷里亚诺：梅梅与马乌里肖·马比伦的儿子，前三年一直被费尔南达关在上校的作坊里。长大后爱上了自己的姑姑阿玛兰妲·乌尔苏拉，受到庇拉尔的指导，没有像奥雷里亚诺·何塞一样听从姑姑的话离开，而是强行地与其发生关系 。加斯通走后，便与姑姑过上了纵欲的生活。姑姑和儿子死了之后，发现梅尔基亚德的羊皮卷记载着百年来他们家族所有的事，他也从其中找到了自己的身世。还没翻到自己的死期时，就明白自己不会走出这个房间以及整个家族的所有一世都从世人的记忆中抹去。</li>
-<li>洛化索·加比兰：墨西哥革命中的上校，流亡到马孔多。与何塞·阿尔卡蒂奥第二成为地下工会的领导人。最后被政府抹杀。</li>
-<li>奥雷里亚诺·阿玛多：上校十七个儿子里唯一的幸存者，在晚年时来到马孔多，被奥雷里亚诺以及何塞·阿尔卡蒂奥拒绝进屋，随后被多年来追踪的警察射穿他的前额的灰烬十字。</li>
-<li>加斯通：阿玛兰妲·乌尔苏拉四十多岁的丈夫。来到马孔多后计划建造一个飞机场，或者其目的是为了让阿玛兰妲·乌尔苏拉厌倦在这里的生活。但自己却厌倦了苦苦等待的飞机，回到了布鲁塞尔。之后表明要回来时，阿玛兰妲·乌尔共拉挑明了话题，而他也顺水推舟地祝他们幸福。</li>
-<li>尼格罗曼妲：奥雷里亚诺的朋友的曾孙女，亦是一个妓女。后来奥雷里亚诺因阿玛兰妲·乌尔苏拉产生了相思之情，想缓解这种感情，来找她睡觉，不久便与她成为情人。</li>
-<li>阿尔瓦罗、赫尔曼、阿尔丰索和加夫列尔：因争吵中世纪是如何杀来蟑螂而与奥雷里亚诺成为最初也是最后的朋友。阿尔瓦罗、赫尔曼和阿尔丰索相继离去马孔多，加夫列尔赢了大奖后也去了巴黎。</li>
-<li>罗德里戈/奥雷里亚诺：阿玛兰妲·乌尔苏拉与奥雷里亚诺的儿子，生下来有一条猪尾巴。母亲取名为罗德里戈，父亲取名为奥雷里亚诺。但奥雷里亚诺因失去了阿玛兰妲·乌尔苏拉的悲痛，没有管他，导致他被蚂蚁吃掉。</li>
-</ul>
-<h3 id="地名"><a href="#地名" class="headerlink" title="地名"></a>地名</h3><ul>
-<li>马孔多：一个小村落 ；</li>
-<li>里奥阿查：马孔多向东山脉一侧的古老城市；</li>
-</ul>
+<p>于是我开启了寻找游戏的流程，去各大 Gal 网站都没找到资源，然后发现 steam 上有免费的鬼隐篇。但是发现仅支持日文以及英文。之后，我在本吧找到其汉化补丁。大概两三天的时间，就玩完了鬼隐篇。本来想在 steam 上买的，但是没找到汉化补丁。</p>
+<p>然后我又在贴吧找到了游戏资源，但是萌化版的画质、分辨率都太低了。然后继续找资源，发现还有小说。</p>
+<p>但是在老福特分享的小说都是 txt 文件，找了很久也没找到 EPUB 文件。所以就决定自己制作一份，毕竟对于我来说，没有排版的 TXT 文件是读不下去。<br>于是将其重新制作排版了一下（中间换了一个译本来源），我没找到本书的 epub 文件，于是就加了一些原作可能不存在的目录。</p>
+<p>还有就是一些原译本扫描过程中带来的错，一个对话分段，也已经尽可能修复了。（大部分都集中在第二篇中，因为这里的译本是从其它地方拿来的</p>
+<p>也就导致某些译名不一样，比如寒蝉会翻译成暮蝉）。推荐大家使用”多看阅读“来阅读，另外，排版就个人而言还是挺不错的，至少能看得下去。<br>最后就是，如果大家能接受小说的话，还是推荐大家去阅读一下的。</p>
+<h3 id="制作过程"><a href="#制作过程" class="headerlink" title="制作过程"></a>制作过程</h3><p>寒蝉有解题篇以及出题篇。解题篇还是比出题篇长的，没找到书本的封面，然后只能找漫画的封面来填。里面还插了几张漫画内容或者其它卷的封面。</p>
+<p>还有就是解题篇的目录实在是太难找了，在前面的目录是中文，但是在内容的标题却夹着日文，导致只能一个个对比加上。有的还找不到，只能靠感觉加上了，或许会有一些目录会出错吧。</p>
+<p>不过年代这么久远了，已经找不到这些书的 epub 文件了，也算是给补上了吧。但是寒蝉有游戏、漫画以及动画的情况下，阅读小说的人是非常少的。</p>
+<p>不过这也算是个人的偏执吧，小说只有文字，没有因年代留下的痕迹。而其动画以及游戏因年代过于久远，画质以及其它方面的制作都比较落后。现在就算看/玩的话，也很难看下去。</p>
+<p>如果有什么遗憾的话，就是小说的译本都很差（个人感觉），如果有正版的就好了（虽然是不可能的）。而且文本里太多省略号了，无论是什么样的语气都加个省略号。在省略号后加标点符号、在文本开始前加，无处不在的省略号使我发狂，于是我删去了大量的省略号，仅有一些表示无语以及是真的省略的省略号。不过只有在解题篇删了。</p>
+<p>重制版动画就要来了，期待新动画的表现。</p>
+<h3 id="简评（有小部分剧透）"><a href="#简评（有小部分剧透）" class="headerlink" title="简评（有小部分剧透）"></a>简评（有小部分剧透）</h3><p>有时候，一部作品没有看完，他人的玩梗式评价会导致很多人误解这部作品，或者说造成误解才是正常的，毕竟这个故事很多都是由误会引起的。</p>
+<p>《寒蝉》最出名的梗大概就是那句“蝉在叫，人坏掉”吧，还有各种论坛里时不时地来一句治愈番之类的话，再配上一张柴刀少女图，导致我对这部作品的印象是一部猎奇血腥动画。</p>
+<p>看完出题篇以及解题篇后，猎奇血腥固然有，不过仅在《目明篇》有较多描写，其它篇章的杀人都算是比较“正常”的杀人。或者说是每个篇章的侧重点都不一样，都有不同的元素，猎奇仅仅是其中一种，而出题篇前三篇注重恐怖气氛的渲染，由圭一的第一视角来认识雏见泽，第四篇《暇溃篇》更像是一个小外传；后面解题篇则是各有各的风格，《目明篇》是比较血腥，而《罪灭篇》以及《皆杀篇》的气氛则是比较紧张刺激，各方势力在明争暗斗，但最后都逃不过“大灾难”。至于最后的《祭囃篇》，是比较欢快的，最后的决战像小孩子过家家一样（虽然一方的年龄确实不怎么大），治愈番也许就是从最后一篇来的吧。对我而则是比较无趣的，不过前面的鹰野的故事以及中间的碎片整理是挺有意思的，把事件的原貌基本都展现了出来。</p>
+<p>总结一下，整部作品说的是一个误会的故事，这种误会有的是无意引起的，比如鬼隐篇里那个带“针”的饼，怜奈强大的推理能力导致圭一怀疑人生，以及最后的“针筒”恶作剧，还有《祟杀篇》里的圭一明明不现场，但是伙伴们却一口咬定圭一在绵流祭上，导致圭一开始怀疑人生，其中最大的误会是羽入时不时的灵异表现，这导致本来是正常发生的事，愣是加了一层不正常的面纱；有的是刻意造成的，比如圆崎家的祖训，魅音她们的隐瞒。单有误会其实还不算什么大事，但是这种误会遇到了一种病，叫雏见泽候群症，两者结合再加上第三方势力的插入（“东京”、沙都子的叔父、怜奈的“后妈”等）就会造成各个篇章里的悲剧。</p>
+<p>要破解这个局，需要解开这些误会，来获得朋友的帮助。因为个人的力量是有限的，梨花在《皆杀篇》之前一直不相信自己的朋友，没有将事情告诉她们。在《皆杀篇》里看到圭一联合众人救了沙都子，于是开始相信朋友，将事情告诉了她们。但在最后因为之前错信了人，导致功亏一篑，自己也同样的死法死去。到了最后一章，由于羽入的帮忙，梨花众人团结一心，再加上 bug 一样的赤坂，成功拯救自己以及整个雏见泽。</p>
+<p>我想整个故事想说的是，有困难要多和朋友沟通，多相信朋友，否则很容易出事。</p>
+<p>转自我的知乎回答 <a href="https://www.zhihu.com/question/276855671/answer/1503964672" target="_blank" rel="noopener">https://www.zhihu.com/question/276855671/answer/1503964672</a></p>
+<h3 id="文件地址"><a href="#文件地址" class="headerlink" title="文件地址"></a>文件地址</h3><p>Github 地址：<a href="https://github.com/jinl1874/e-book/，欢迎star。" target="_blank" rel="noopener">https://github.com/jinl1874/e-book/，欢迎star。</a></p>
+<p>蓝奏云地址： <a href="https://wwa.lanzous.com/b0cqj1kti" target="_blank" rel="noopener">https://wwa.lanzous.com/b0cqj1kti</a> 密码:achq</p>
 ]]></content>
       <categories>
         <category>读书</category>
       </categories>
       <tags>
         <tag>book</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>悠哉日常大王-不能说的秘密</title>
+    <url>/2020/10/15/%E6%82%A0%E5%93%89%E6%97%A5%E5%B8%B8%E5%A4%A7%E7%8E%8B-%E4%B8%8D%E8%83%BD%E8%AF%B4%E7%9A%84%E7%A7%98%E5%AF%86/</url>
+    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/jinl1874/image/master/%E6%A0%BC%E5%8A%A0%E5%B0%94%E5%BE%B7%E4%BF%AE%E9%81%93%E9%99%A2%EF%BC%8C%E4%BA%9A%E7%BE%8E%E5%B0%BC%E4%BA%9A.jpg" alt=""></p>
+<p>多年以后，面对升学考试时，越谷卓将会想起第一次备考时的紧张。</p>
+<p>旭东分校是个乡下的学校，已经有一百多期了，但由于日本少子化，导致整个学校在很长时间里仅有几个学校在学校上课，老师也只有一个。加上今年萤的转入学校，学校目前仅有五人，两个是越谷卓的妹妹，一个是新入学的莲华。老师是莲华的姐姐一穗，非常喜欢睡觉，但毕竟在这种学校里只能靠自学，老师也管不了这么多，越谷卓深深明白这一点。</p>
+<p>越谷卓的目标是市内的一所高中，前辈也是邻居的木实在那里读高三，这也是本地人经常去的高中，像光华那样去东京读书的反而是少数。虽说不是什么名校，但不也是随便就能进的，还是要一点成绩的。</p>
+<p>时间似乎过得快，三个学期很快就要过去了。还剩一周就要考试了，虽然知道没什么难度，但越谷卓的心总是难免紧张。越谷卓望向窗外，四个少女还是一直说说笑笑，在玩一个不知道是什么的游戏。越谷卓真的挺羡慕她们的，什么时候都能玩得很开心，什么时候都很悠哉。</p>
+<p>晚上，越谷卓睡着的时候，像是做了一个梦，梦见自己仿佛飘在空中，傍边的景物在飞速向后跑去。速度越来越快，直到越谷卓的大脑跟不上转速，逐渐头晕。突然，越谷卓睁开眼睛，坐起来，打开吊灯，并调到灰暗。转头看了一圈，发现还是在自己的房间，但总有一股说不出来的异样。卓摇了摇头，是自己太紧张了吗？随即关掉灯，躺下继续睡觉。</p>
+<p>清早，卓的母亲越谷雪子过来叫他起床，离去时还嘟囔着“怎么连哥哥也睡懒觉了”。卓望着妈妈的背影，不知怎么的想起了自己的父亲，一直都是妈妈在照顾他们三兄妹，一年下来都没看过他出现一次，是忘了这个家吗？卓抛开这些念头，起床刷牙洗脸，吃了妈妈准备的早饭后，找到自己的自行车，准备骑车去上学校。突然，他发现自行车有点新，或者说是没有那么旧了，是妈妈重新帮他清洗了一遍吗？但就算清洗了也不会这样啊，里面的很多磨损的痕迹都消失了。卓没有深思，骑着自行车去上学了。在学校的日子已经不多了，想到即将要离去，卓还是有点舍不得。</p>
+<p><img src="http://image.jinl1874.xyz/img/20201015114331.png" alt=""></p>
+<p>“今天的教室和昨天有些不一样。”莲华双手托腮露出沉思状的表情说道。</p>
+<p>夏海有点疑惑：“哪里？”</p>
+<p>虽然卓知道她总是发表一些奇奇怪怪的话，但是卓也感觉教室有点奇怪，萤的桌子是空的。一般来说，迟到的只有夏海以及整天睡觉的老师，但是萤迟到倒是有点不可思议，是出什么事了吗？卓正在想着时，老师拉开门，打了声招呼，带着萤进来了。沉默了一阵后，老师叫萤做自我介绍。萤拿起粉笔在黑板上写上自己的名字“一条萤”，随后介绍了下自己的情况，和底下两姐妹开始一问一答起来。莲华则突然起身，抬起手，面无表情地说了一句“喵帕斯”。而一旁的卓被震惊地说不出话，身体直直地定在那里……</p>
+<p>整个早上，卓都在想到底是怎么回事。是她们在搞恶作剧吗，等我信以为真后再掏出个“整人大成功”的牌子吗？还是自己的记忆错乱，知道了未来的事？还是在做梦？又或者之前的都是梦，现在才是真实的？紧接着，他又想起了他的自行车，想起了今天的天气没有那么凉了，明明昨天晚上还是要盖被子睡觉，还有早上的那门牌上没有“+小 5”，又想起昨晚的梦，再检查一下自己的书，明明已经做完的练习册，而现在却变得干干净净，种种迹象让卓怀疑自己是不是回到一年前了。</p>
+<p>下课铃响后，卓漫无目的地走在走廊上，他还没从整件事的震惊走出来。前面的夏海拿着球，准备和新来的萤去玩躲避球。走着走着，卓踩在因潮湿而腐烂的木板上，掉进了坑里。卓似乎听到远处的夏海在说至今没有哪个笨蛋会掉下去的，但他已无力再从坑里爬起。路过的老师见到他掉到坑时，才赶紧拉他上来。</p>
+<p>卓下意识地整理了一下自己的衣服，问:“今天是几年几号？”<br>老师懒懒地答道:“2013 年 4 月 13 号，怎么了？”<br>4 月 13 号，昨天明明才刚过三月，果然是时间变了吗。想到此处，卓再次向老师发问：“老师，我说我有可能会从未来穿越过来的，不对，是时间从 2014 年变成了 2013 年，你会觉得怎么样？”<br>老师再次发出庸懒的声音:“什么啊，你是不是摔坏脑袋了，快点回教室吧！”<br>卓知道这个整天睡觉的老师是完不全可靠的，于是什么也没说，默默地走回教室。</p>
+<p>放学后，卓匆匆地踩着自行车回家。回家后，他立马找到日历，发现日历上显示的 4 月 13 号。心中的最后一丝希望破灭，卓瘫倒在地上。<br>那一天，小鞠和夏海比平时更晚回来。<br>卓本来想和母亲谈及这件事，但一想到母亲整天操劳，父亲又长时间不在家，夏海也整天上房揭瓦，每天早起给三兄妹做完早饭就要去工作了，就打算不想再给母亲增添烦恼了。经过整晚的思考斗争，卓下了一个决定，决定看看这个 2013 和上个 2013 有什么区别，来知道自己是不是真的回到过去，时间是不是真的变了，自己现在到底在哪。自此，卓在此后一年基本都没说过什么话，但是去年发生的事在默默改变今年的他。</p>
+<p>周五，远足的那天，说是远足，但卓知道是老师带她们来插秧，也知道后来老师有机器可以插秧，就没有像去年那样下去插秧。他来到夏海旁，想听听她发的牢骚。但没想熊孩子上头的夏海把他做成一个稻草人。<br>周末傍晚，卓回到家时，发现家里什么人都没有，才想起“去年今天”夏海和小鞠离家出走了。他又想起小时候夏海和小鞠也曾离家出走过，最后在那条小道上他和妈妈找到她俩。想到此时，卓不由得露出一丝苦笑。他知道她们的秘密基本在哪里，于是他骑着自行车去找她们了。还是在那条路上，他又发现了她们。什么话也没有说，他让她俩坐上自行车，自己则推着车回家。<br>那一晚，夏海似乎睡得特别晚，第二天睡过头了没去学校 。</p>
+<p>暑假那天从海边回来，卓曾经和老师一样，没有上车，但是这一次已经提前准备好在车上了。</p>
+<p>还有那天，萤在村子里迷路了，事后她带他们来到迷路的地方。于是那天他来到，果然在附近被她的狗发现了。</p>
+<p>还有很多很多，起初卓只是想知道这一年和去年的差别，但最后却只是因为无聊，或者说是孤独。</p>
+<p>直到那一天的再次到来。</p>
+<p>在漫长的重复时间里，卓开始学习各种各样的技能。以前的他只会弹钢琴，在开学那天负责弹校歌的伴奏。后来他开始学习吉他、练习跑步、制作手办、用竹子编制家具，甚至连弹尺子也练得炉火纯青。</p>
+<p>卓独自坐在房间，喃喃道：“这是第三年了吧！“</p>
+<p>卓被困在这一年已经三次了，有时他也想像妹妹她们那样什么都不知道，可以无优无虑地玩耍。最近她们似乎又交了上个新朋友，是邻剧木实的学妹，”去年“她们还不认识来着，没想到今年居然经常来玩。是哪里出现分岔点了，卓已经无力追究，他只想跨过这一年，开启自己崭新的生活，或者说回到原来的生活。</p>
+<p>冥想之际，越谷雪子过来叫卓去帮忙做艾蒿饼，因为那四个少女带着艾蒿回来。</p>
+<p>小鞠和萤端着做好的艾蒿饼出来给莲华和夏海吃。突然，萤愣了一下。</p>
+<p>”怎么了？“旁边的小鞠问。</p>
+<p>”没什么，“萤说，”来这里都快一年了，没去的地方还有好多啊……“</p>
+<p>此后，完。</p>
+]]></content>
+      <categories>
+        <category>动漫</category>
+      </categories>
+      <tags>
+        <tag>manga</tag>
+        <tag>脑洞</tag>
       </tags>
   </entry>
   <entry>
@@ -2243,6 +2173,76 @@
       </categories>
       <tags>
         <tag>life</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>百年孤独全人物</title>
+    <url>/2020/10/09/%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC%E5%85%A8%E4%BA%BA%E7%89%A9/</url>
+    <content><![CDATA[<h3 id="人物表"><a href="#人物表" class="headerlink" title="人物表"></a>人物表</h3><ul>
+<li>奥雷里亚诺·布恩迪亚上校：开头面对行刑队的人，最后在家中死去。</li>
+</ul>
+<a id="more"></a>
+
+<ul>
+<li>梅尔基亚德斯：身形肥大的吉卜赛人，一位炼金术师以及航海家，经常拿新奇的东西来马孔多，最后在新加坡的沙洲上死于热病，被丢到了爪哇海的最深处。但又重返人世，拯救了陷入失眠症的马孔多，最后死在马孔多。</li>
+<li>何塞·阿尔卡蒂奥·布恩迪亚：马孔多的族长，爱研究一些稀奇古怪的东西，上校的父亲。拥有传奇的一生，最后死在马孔多。</li>
+<li>何塞·阿尔卡蒂奥：上校的哥哥，貌似他们家喜欢用一样的名字，一开始我把哥哥和父亲混为同一个人了。长大后与庇拉尔·特尔内拉发生肉体关系，但是由于庇拉尔告知其怀孕后，开始逃避她。后来与吉卜赛女朗发生关系，并与其离开马孔多。在蕾梅黛丝死后回来，与丽贝卡发生关系，并结为夫妇，被乌尔苏拉逐出家门。最后在家中被枪杀。</li>
+<li>乌尔苏拉·伊瓜兰：何塞的妻子，寻找大儿子途中发现走得太远了，索性不再回头（当时我看到这里是极其懵逼的，这样就走了……）。直到五个月后才回来，并带来大沼泽另一边的人。那场四年的大雨过后，开始清除家里各种虫子，不久后死去，年龄在一百一十五到一百二十五里。</li>
+<li>弗朗西斯·德雷克：袭击里奥阿查的海盗，乌尔苏拉的曾祖母因其受到烫伤。并由此，乌尔苏拉的曾祖父与何塞·阿尔卡蒂奥·布恩迪亚的的曾祖父合作经营。这是为了促进他们之间联系而有的战斗。</li>
+<li>普鲁邓希奥·阿基拉尔：何塞的斗鸡对手，输了之后用鸡内涵何塞。而何塞与其决斗，最后被何塞用长矛刺死，何塞也由此于乌尔苏拉行夫妻之事。但最后何塞夫妻因良心烦扰（经常看到死去的他的出现）而决定离开原本的里奥阿查。在其死后经常去马孔多与已经发疯何塞谈话，最后拉何塞到另一个世界去。</li>
+<li>庇拉尔·特尔内拉：十四岁时强暴她的男人，因为外来户的关系直到二十二岁也没公开关系，被家人强迫离开来到马孔多。想一直等他，但已经厌倦了等待，于是转去勾引何塞·阿尔卡蒂奥（上校的哥哥），或者说与其发生肉体关系。告诉何塞·阿尔卡蒂奥怀孕的消息后不久，何塞·阿尔卡蒂奥同样走了。之后，她又与上校发生关系并生下一儿子。指导奥雷里亚诺后，在一个欢宴的夜晚中死在藤摇椅上。</li>
+<li>阿玛兰妲：何塞·阿尔卡蒂奥·布恩迪亚新出生的女儿，上校的妹妹，爱上了丽贝卡爱的男人，并阻止他们结婚，不幸下手毒死蕾梅黛丝。丽贝卡与何塞·阿尔卡蒂奥结婚后，阿玛兰妲与皮埃特罗相恋，但拒绝与其结婚。之后又与赫里内勒多·马尔克斯相恋，仍拒绝与其结婚。最后以一个老处女的身份在家死去。</li>
+<li>何塞·阿尔卡蒂奥：庇拉尔·特尔内拉与何塞·阿尔卡蒂奥的儿子，继承了何塞·阿尔卡蒂奥的名字，避免混淆，只叫阿尔卡蒂奥。长大后过于疯狂，面对保守派时执意抵抗，投降后被判处枪决。</li>
+<li>比西塔西翁：瓜希拉印第安人，为逃避部落的失眠症，放弃王位与弟弟来到此处，也是众多孩子的保姆。最后在马孔多安详离去。</li>
+<li>卡塔乌雷：比西塔西翁的弟弟，发现丽贝卡有其祖国的失眠症后，逃离马孔多。何塞·阿尔卡蒂奥·布恩迪亚死的那天回到马孔多，是为了“王的下葬”。</li>
+<li>丽贝卡·布恩迪亚：从马纳乌雷来马孔多投奔，是乌尔苏拉的远房表妹、何塞·阿尔卡蒂奥·布恩迪亚的亲人，尼卡诺尔·乌略亚和丽贝卡·蒙铁尔的女儿。因为对所有名字都没反应，所以就使用她母亲的名字作为其名字，姓是后来加上的。一到爱情烦恼的时候就爱吃土，并且容易出事。先是与皮埃特罗相爱订婚，但何塞·阿尔卡蒂奥回来后瞬间就抛弃了皮埃特罗，并与其结婚。何塞·阿尔卡蒂奥死后，将自己封闭起来，被镇人的人遗忘。最后在乌尔苏拉死的那年年底死去。</li>
+<li>好汉弗朗西斯科：两百岁的江湖艺人，常带来各地见闻。</li>
+<li>堂阿波利纳尔·摩斯科特：里正，政府人员，地方官 。</li>
+<li>安帕萝·摩斯科特：堂阿波利纳尔的女儿。</li>
+<li>蕾梅黛丝·摩斯科特：堂阿波利纳尔九岁的小女儿，被上校看上。后来过了青春后成为了上校的妻子，但在皮埃特罗与丽贝卡婚礼前的一星期里被阿玛兰妲下毒，导致内脏撕裂，三天后被自己的血毒死，双胞胎也胎死腹中。</li>
+<li>皮埃特罗·克雷斯皮：意大利技师，负责安装和调试自动钢琴，与丽贝卡订婚，但阿玛兰妲亦喜欢他，百般阻挠其婚礼。最后他与阿玛兰妲相恋，但是阿玛兰妲拒绝与其结婚，绝望之下割腕自杀。</li>
+<li>马格尼菲科·比斯马勒：上校最亲密的好友，建村元老的儿子，名字与其父亲相同。最后死在马孔多的暴徒手里。</li>
+<li>赫里内勒多·马尔克斯：上校最亲密的好友，建村元老的儿子，名字与其父亲相同。喜欢阿玛兰妲，但阿玛兰妲一直不肯与其结婚，被拒绝后发给上校一个电报“马孔多在下雨”。曾被俘，但是上校用战俘救他出来。晚年时拒绝了上校重新发起战争的请求，最后在那场四年多的大雨中死去。</li>
+<li>尼卡诺尔·雷伊纳：主持婚礼的神甫。</li>
+<li>奥雷里亚诺·何塞：奥雷里亚诺和庇拉尔·特尔内拉的儿子，长大后爱上自己的姑妈阿玛兰妲，想与其发生关系，但被拒绝。之后成为了一个浪荡人士，最后被阿基莱斯·里卡多上尉开枪打死。</li>
+<li>阿利黎奥·诺格拉：表面上是马孔多医生，实际上是自由党狂热人士。</li>
+<li>维多利奥·梅迪纳：上校投奔的革命军将领。</li>
+<li>桑塔索菲亚·德拉·彼达：阿尔卡蒂奥的情人。晚年时试图拯救被各种虫子侵蚀的家，但是失败了。最后离开了这个家。</li>
+<li>格雷戈·史蒂文森上校：受奥雷里亚诺之托向阿尔卡蒂奥报信，但阿尔卡蒂奥并不相信他，将其关押起来。最后保守派攻打马孔多时被放出来一起作战，被大炮轰死。</li>
+<li>罗格·卡尔尼塞罗：执行枪决奥雷里亚诺·布恩迪亚的上尉军官，但枪决被何塞·阿尔卡蒂奥阻止，叛变到奥雷里亚诺阵营。</li>
+<li>蕾梅黛丝：桑塔索菲亚·德拉·彼达与阿尔卡蒂奥的长女，被称为美 人儿蕾梅黛。最后连带着床单飞上天。·</li>
+<li>何塞·阿尔卡蒂奥第二：桑塔索菲亚·德拉·彼达与阿尔卡蒂奥的双胞胎儿子之一。长大后成为工会领导人，但是在一次活动中发生一个大屠杀，此后除他之外，领导人被官方全部杀死，官方宣传没发生任何事。他自己被一个年轻的军官放过。最后在梅尔基亚德斯的房间里与其孪生兄弟交谈中死去。</li>
+<li>奥雷里亚诺第二：桑塔索菲亚·德拉·彼达与阿尔卡蒂奥的双胞胎儿子之一。孪生兄弟死后不久，他也在妻子旁死去。在最后下葬时弄混了，把两人葬在各自的坟墓里。又或者是，这才是正确的坟墓呢。</li>
+<li>何塞·拉克尔·蒙卡达：保守党将军，战后马孔多的第一任市长。上校攻打马孔多时想逃走，但被捕了。最后判处死刑。</li>
+<li>奥雷里亚诺：上校的十七个儿子的名都是这样，姓随其母亲，后来被一一暗杀。</li>
+<li>阿基莱斯·里卡多：马孔多驻军首领，掌握马孔多的市政大权。开枪打奥雷里亚诺·何塞时，被两发来源不明的子弹打死。</li>
+<li>费尔南达·德尔·卡皮奥：奥雷里亚诺第二的妻子，外来的女王，马达加斯 加女王。最后她穿着她的女王衣服在床上死去。</li>
+<li>佩特拉·科特斯：曾与双胞胎一起睡觉的女人，后来成为奥雷里诺第二的情人。奥雷里亚诺第二因不满妻子的各种规矩以及所做之事，经常到她家里住。</li>
+<li>何塞·阿尔卡蒂奥：费尔南达·德尔·卡皮奥与奥雷里亚诺第二的长子。从小就被期望成为教皇，但是到罗马后就立即放弃了神学。费尔南达死后回到马孔多，发现了那些金币。最后，他在沐浴时，被他赶出去的四个孩子按死在水池里，连金币也被掳走。</li>
+<li>雷纳塔·蕾梅黛丝：费尔南达·德尔·卡皮奥与奥雷里亚诺第二的第一个女儿，昵称是梅梅。男友出事后终生一言不发，被母亲带到一个修道院，最后在克拉科夫一家阴森的医院衰老而死。</li>
+<li>奥雷里亚诺·特里斯特：黑白混血儿，上校的十七个儿子之一。曾到马孔多生活，最后被猎杀。</li>
+<li>奥雷里亚诺·森特诺：上校的十七个儿子之一。同样被猎杀。</li>
+<li>卡米拉·萨迦丝杜梅：以“母象”（即能吃）的美名享誉全球。在马孔多曾和奥雷里亚诺第二来过一场大胃王比赛。</li>
+<li>阿玛兰妲·乌尔苏拉：费尔南达·德尔·卡皮奥与奥雷里亚诺第二的第二个女儿。成年后带着丈夫回到马孔多，改变这个已经被虫蚁腐蚀得破旧无比的家。丈夫走后，与奥雷里亚诺过上了情欲泛滥的生活，造成的破坏却比虫蚁更大。不久家中也处于家居密林的深处，等到加泰罗尼亚智者最后的信到来后，他们已经与外界脱离一联系。生下一个有猪尾巴的儿子之后，因失血过多而死去。</li>
+<li>马乌里肖·巴比伦：梅梅的男朋友。潜入梅梅家中，正揭开屋瓦钻进浴室时，被守夜人当作偷鸡贼一枪放倒，此后卧床不起，孤独终老而死。</li>
+<li>奥雷里亚诺：梅梅与马乌里肖·马比伦的儿子，前三年一直被费尔南达关在上校的作坊里。长大后爱上了自己的姑姑阿玛兰妲·乌尔苏拉，受到庇拉尔的指导，没有像奥雷里亚诺·何塞一样听从姑姑的话离开，而是强行地与其发生关系 。加斯通走后，便与姑姑过上了纵欲的生活。姑姑和儿子死了之后，发现梅尔基亚德的羊皮卷记载着百年来他们家族所有的事，他也从其中找到了自己的身世。还没翻到自己的死期时，就明白自己不会走出这个房间以及整个家族的所有一世都从世人的记忆中抹去。</li>
+<li>洛化索·加比兰：墨西哥革命中的上校，流亡到马孔多。与何塞·阿尔卡蒂奥第二成为地下工会的领导人。最后被政府抹杀。</li>
+<li>奥雷里亚诺·阿玛多：上校十七个儿子里唯一的幸存者，在晚年时来到马孔多，被奥雷里亚诺以及何塞·阿尔卡蒂奥拒绝进屋，随后被多年来追踪的警察射穿他的前额的灰烬十字。</li>
+<li>加斯通：阿玛兰妲·乌尔苏拉四十多岁的丈夫。来到马孔多后计划建造一个飞机场，或者其目的是为了让阿玛兰妲·乌尔苏拉厌倦在这里的生活。但自己却厌倦了苦苦等待的飞机，回到了布鲁塞尔。之后表明要回来时，阿玛兰妲·乌尔共拉挑明了话题，而他也顺水推舟地祝他们幸福。</li>
+<li>尼格罗曼妲：奥雷里亚诺的朋友的曾孙女，亦是一个妓女。后来奥雷里亚诺因阿玛兰妲·乌尔苏拉产生了相思之情，想缓解这种感情，来找她睡觉，不久便与她成为情人。</li>
+<li>阿尔瓦罗、赫尔曼、阿尔丰索和加夫列尔：因争吵中世纪是如何杀来蟑螂而与奥雷里亚诺成为最初也是最后的朋友。阿尔瓦罗、赫尔曼和阿尔丰索相继离去马孔多，加夫列尔赢了大奖后也去了巴黎。</li>
+<li>罗德里戈/奥雷里亚诺：阿玛兰妲·乌尔苏拉与奥雷里亚诺的儿子，生下来有一条猪尾巴。母亲取名为罗德里戈，父亲取名为奥雷里亚诺。但奥雷里亚诺因失去了阿玛兰妲·乌尔苏拉的悲痛，没有管他，导致他被蚂蚁吃掉。</li>
+</ul>
+<h3 id="地名"><a href="#地名" class="headerlink" title="地名"></a>地名</h3><ul>
+<li>马孔多：一个小村落 ；</li>
+<li>里奥阿查：马孔多向东山脉一侧的古老城市；</li>
+</ul>
+]]></content>
+      <categories>
+        <category>读书</category>
+      </categories>
+      <tags>
+        <tag>book</tag>
       </tags>
   </entry>
   <entry>
