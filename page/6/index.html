@@ -208,6 +208,211 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/07/03/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="道理">
+      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="jinl's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/03/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/" class="post-title-link" itemprop="url">JavaScript 学习笔记（1）：基本语法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-03 20:35:47" itemprop="dateCreated datePublished" datetime="2020-07-03T20:35:47+08:00">2020-07-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-05 10:31:17" itemprop="dateModified" datetime="2020-07-05T10:31:17+08:00">2020-07-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/07/03/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="JavaScript 学习笔记（1）：基本语法" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/07/03/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/03/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="1-准备"><a href="#1-准备" class="headerlink" title="1. 准备"></a>1. 准备</h4><ol>
+<li><p>文本编辑器：VSCode<br>去(官网)[<a href="https://code.visualstudio.com/]下载" target="_blank" rel="noopener">https://code.visualstudio.com/]下载</a> vscode，安装时一路点 next，最后在应用商店选择下载一个 javascript 的插件，需要中文界面的话可以搜索安装”Chinese”插件。</p>
+</li>
+<li><p>浏览器：Firefox 浏览器（或者 Chrome）。</p>
+</li>
+<li><p>js 的位置：Html 的文档里的<code>&lt;script&gt;</code>标签里，或者是别起一个后缀名为”.js”的文件，再在<code>&lt;script&gt;</code>标签的<code>src</code>属性引用它。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"example.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>运行，打开浏览器的开发者模式，进入控制台，然后把代码放在输入框中，再点上面的<code>运行</code>即可运行代码，如图所示。<br><img src="https://pic4.zhimg.com/80/v2-6e5927f48e6c9f6eaac9ad93d2fa8767.png" alt="Image"></p>
+</li>
+</ol>
+<h4 id="2-语法"><a href="#2-语法" class="headerlink" title="2. 语法"></a>2. 语法</h4><ol>
+<li><p>语句结尾不需加上分号，但建议在末尾加上分号，这是一种良好的习惯。</p>
+</li>
+<li><p>注释：</p>
+<ul>
+<li>单句的注释是在语句前加上<code>//</code>，如<code>// console.log(&quot;Test&quot;);</code>；</li>
+<li>一段代码的注释是在代码前加上<code>/*</code>，在代码后加上 <code>/*</code>，如：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">alert("document");</span></span><br><span class="line"><span class="comment">console.log("Daoli");</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>变量（variable）</p>
+<ul>
+<li>变量不需要提前声明，不过提前声明是个良好的编程习惯。下面的语句是声明。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num;</span><br></pre></td></tr></table></figure>
+
+<p>亦可直接声明赋值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>变量区分大小写；</li>
+<li>变量名不允许包含空格或标点符号（除了美元符号<code>$</code>）。</li>
+</ul>
+</li>
+<li><p>数据类型</p>
+<ul>
+<li>js 是一种弱类型语言，可以在任何时候改变变量的数据类型。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">1</span>;</span><br><span class="line">num = <span class="string">"jinl"</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>字符串：由零个或多个字符构成，字符包括但不限于字母、数字、标点符号和空格，字符串必需包括在引号里；</li>
+<li>数值：数值不限于是整数，js 可以使用带小数点的数值；</li>
+<li>布尔值：只有两种取值：<code>true</code> 或者 <code>false</code>。</li>
+</ul>
+</li>
+<li><p>数组</p>
+<ul>
+<li>声明：可选给定数组的长度；</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> array_0 = <span class="built_in">Array</span>(<span class="number">4</span>);</span><br><span class="line"><span class="keyword">var</span> array_1 = <span class="built_in">Array</span>();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>赋值：直接<code>array_0[index] = &quot;str&quot;</code>,或者：<code>var array_0 = new(&quot;str1&quot;, &quot;str2&quot;, &quot;str3&quot;, &quot;str4&quot;)</code>；</li>
+<li></li>
+</ul>
+</li>
+<li><p>对象</p>
+<ul>
+<li>与数组类似，对象也使用一个名字表示一组值。每个值是对象的一个属性。前面代表键，冒号后面代表值。</li>
+<li>创建方法：使用花括号语法：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">test_obj = &#123;</span><br><span class="line">  name: <span class="string">"apple"</span>,</span><br><span class="line">  year: <span class="number">1999</span>,</span><br><span class="line">  eat_or_not: <span class="literal">true</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>访问属性：取对象里的键。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = test_obj(<span class="string">"name"</span>);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="3-操作"><a href="#3-操作" class="headerlink" title="3. 操作"></a>3. 操作</h4><ol>
+<li>加减乘除的符咒分别是<code>+-*/</code>，用法与其它的语言一样。</li>
+<li>可以使用<code>i++</code>以用<code>i += 1</code>这种方式。</li>
+<li>js 的<code>+</code>可以将字符串与数值相连接，连接后是一个更长的字符串，如<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"101"</span> + <span class="number">11</span>;</span><br><span class="line"><span class="comment">// str === "10111"</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="4-条件语句"><a href="#4-条件语句" class="headerlink" title="4. 条件语句"></a>4. 条件语句</h4><ol>
+<li><p>与 C 语的中的用法一致，基本语法为：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (condition) &#123;</span><br><span class="line">  statement;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>比较操作符包括：大于(<code>&gt;</code>)、小于(<code>&lt;</code>)、大于等于(<code>&gt;=</code>)、小于等于(<code>&lt;=</code>)以及等于(<code>==</code>)与不等于(<code>!=</code>)。<br>其中要注意的是<code>==</code>不表示一定相等，比如下面的例子中，<code>a</code>与<code>b</code>是相等的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (a == b) &#123;</span><br><span class="line">  alert(<span class="string">"true"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个时候就需要另一种等号(<code>===</code>)，这个等号会进行严格的比较，同理，不相等要比较需要使用(<code>!==</code>)来比较。<br>我个人的建议是，一律使用<code>===</code>与<code>!==</code>。</p>
+</li>
+<li><p>逻辑操作符<br>与<code>&amp;&amp;</code>，或<code>||</code>，非<code>！</code>。</p>
+</li>
+</ol>
+<h4 id="5-循环"><a href="#5-循环" class="headerlink" title="5. 循环"></a>5. 循环</h4><ol>
+<li>while 循环。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(condition)&#123;</span><br><span class="line">   statement；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>do-while 循环。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">  statement;</span><br><span class="line">&#125; <span class="keyword">while</span> (condition);</span><br></pre></td></tr></table></figure></li>
+<li>for 循环<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (initial condition; test condition; alter condition) &#123;</span><br><span class="line">    statement;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+实例：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> index = <span class="number">0</span>; index &lt; <span class="number">10</span>; index++) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(index);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="6-函数"><a href="#6-函数" class="headerlink" title="6. 函数"></a>6. 函数</h4><ol>
+<li>定义示例函数：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// test是函数名，params是参数，true是返回值。</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">  alert(params);</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>调用示例：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bool = test(<span class="string">"Test!"</span>);</span><br></pre></td></tr></table></figure></li>
+<li>变量作用域：如果函数内使用了 var 对象，那么就被视为局部变量，否则为全局变量。</li>
+</ol>
+<h4 id="7-对象"><a href="#7-对象" class="headerlink" title="7. 对象"></a>7. 对象</h4><ol>
+<li><p>对象是自包含的数据集合，包含在对象的数组可以通过属性(property)和方法(method)来访问。<br>js 里，属性和方法都使用“点”语法来访问。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">object.property;</span><br><span class="line">object.method();</span><br></pre></td></tr></table></figure></li>
+<li><p>内建对象：一般使用<code>new</code>的关键字去新建一个对象的实例。如新建一个数组对象：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> array = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<blockquote>
+<p>欢迎访问我的个人<a href="https://jinl1874.xyz">博客</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/06/30/img-to-pdf/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -691,155 +896,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/06/15/sipder-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.jpg">
-      <meta itemprop="name" content="道理">
-      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jinl's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/15/sipder-1/" class="post-title-link" itemprop="url">爬取芝士漫画里的图片并转为pdf</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-15 19:40:38" itemprop="dateCreated datePublished" datetime="2020-06-15T19:40:38+08:00">2020-06-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-30 15:16:21" itemprop="dateModified" datetime="2020-06-30T15:16:21+08:00">2020-06-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/06/15/sipder-1/" class="post-meta-item leancloud_visitors" data-flag-title="爬取芝士漫画里的图片并转为pdf" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/06/15/sipder-1/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/15/sipder-1/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>最近想找点漫画看，发现<a href="https://manhua.zsh8.com/" target="_blank" rel="noopener">芝士漫画</a>这个平台不错，于是就想着下载来看。</p>
-</blockquote>
-<h3 id="安装-python"><a href="#安装-python" class="headerlink" title="安装 python"></a>安装 python</h3><p><a href="https://www.python.org/downloads/" target="_blank" rel="noopener">下载 python</a><br>下载好 python 安装包，安装时一路 next 过去，注意勾上“add to path”(一般是默认勾选的)。</p>
-<h3 id="安装所需的模块"><a href="#安装所需的模块" class="headerlink" title="安装所需的模块"></a>安装所需的模块</h3><p>本次的爬虫使用 requests 模块获取数据，再用 xpath 语法解析代码。<br>需要的模块包括 requests，lxml，reportlab。<br>使用 pip 安装</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install requests</span><br><span class="line">pip install lxml</span><br><span class="line">pip install reportlab</span><br></pre></td></tr></table></figure>
-
-<h3 id="写代码"><a href="#写代码" class="headerlink" title="写代码"></a>写代码</h3><ol>
-<li>新建一个 python 文件</li>
-<li>导入相应的模块</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import sys</span><br><span class="line">import io</span><br><span class="line">import os</span><br><span class="line">import re</span><br><span class="line">import time</span><br><span class="line">from lxml import etree</span><br><span class="line">from reportlab.lib.pagesizes import A4, portrait, landscape</span><br><span class="line">from reportlab.pdfgen import canvas</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>定义全局变量</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">headers &#x3D; &#123;</span><br><span class="line">    &quot;User-Agent&quot;: &quot;Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64; rv:76.0) Gecko&#x2F;20100101 Firefox&#x2F;76.0&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 默认url</span><br><span class="line">url &#x3D; &quot;https:&#x2F;&#x2F;manhua.zsh8.com&#x2F;pxtt&#x2F;pxtt-040&#x2F;91864.html&quot;</span><br><span class="line"></span><br><span class="line"># 解析出url中的章节名</span><br><span class="line">re_object &#x3D; re.match(</span><br><span class="line">    &quot;https:&#x2F;&#x2F;manhua.zsh8.com&#x2F;.*?&#x2F;(.*?)&#x2F;.*?html&quot;, url)</span><br><span class="line">chapter &#x3D; re_object.group(1)</span><br><span class="line"></span><br><span class="line"># 文件当前目录</span><br><span class="line">current_dir &#x3D; os.getcwd()</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li><p>定义方法</p>
-<ul>
-<li>get_text()：得到访问返回的资源</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def get_text(url):</span><br><span class="line">    response &#x3D; requests.get(url, headers&#x3D;headers)</span><br><span class="line">    return response</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>parse_text(text)：分析文档，保存图片，并得到下一章的 url</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">def parse_text(text):</span><br><span class="line">    # 建立解析</span><br><span class="line">    html &#x3D; etree.HTML(text, etree.HTMLParser())</span><br><span class="line">    # 获取漫画图片所有的链接</span><br><span class="line">    links &#x3D; html.xpath(&quot;&#x2F;&#x2F;div[@id&#x3D;&#39;gallery-1&#39;]&#x2F;&#x2F;dt&#x2F;a&#x2F;@href&quot;)</span><br><span class="line">    for i, link in enumerate(links):</span><br><span class="line">        save_image(link, i)</span><br><span class="line">        # 降低访问的速度，防止被识别为机器人</span><br><span class="line">        time.sleep(15)</span><br><span class="line">        print(&quot;完成&quot;, i, &quot;个......&quot;)</span><br><span class="line">    print(&quot;已完成&quot;, chapter, &quot;的下载!&quot;)</span><br><span class="line"></span><br><span class="line">    #　在第一章的时候只有一个next_chapter链接</span><br><span class="line">    try:</span><br><span class="line">        next_chapter &#x3D; html.xpath(</span><br><span class="line">            &quot;&#x2F;&#x2F;div[@class&#x3D;&#39;fusion-single-navigation-wrapper&#39;]&#x2F;a&#x2F;@href&quot;)[1]</span><br><span class="line">    except Exception as e:</span><br><span class="line">        next_chapter &#x3D; html.xpath(</span><br><span class="line">            &quot;&#x2F;&#x2F;div[@class&#x3D;&#39;fusion-single-navigation-wrapper&#39;]&#x2F;a&#x2F;@href&quot;)[0]</span><br><span class="line">        return next_chapter</span><br><span class="line">    return next_chapter</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>save_image(link, index): 访问得到的图片链接，并保存在本地</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">def save_image(link, index):</span><br><span class="line">    read &#x3D; requests.get(link)</span><br><span class="line">    # 当前文件夹的加上章节名形成新的文件夹</span><br><span class="line">    dir_ &#x3D; current_dir + &#39;\\&#39; + chapter</span><br><span class="line">    # 创建文件夹</span><br><span class="line">    if not os.path.exists(dir_):</span><br><span class="line">        os.makedirs(dir_)</span><br><span class="line">    # 保存图片</span><br><span class="line">    with open(dir_ + &#39;\\&#123;&#125;&#39;.format(str(index)+&quot;.jpg&quot;), &#39;wb&#39;) as fp:</span><br><span class="line">        fp.write(read.content)</span><br><span class="line">        fp.close()</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>convert_images_to_pdf(img_path, pdf_path)：根据图片的文件夹以及 pdf 文件夹加上文件名来生成 pdf 文件</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def convert_images_to_pdf(img_path, pdf_path):</span><br><span class="line">    pages &#x3D; 0</span><br><span class="line">    (w, h) &#x3D; portrait(A4)</span><br><span class="line">    c &#x3D; canvas.Canvas(pdf_path, pagesize&#x3D;portrait(A4))</span><br><span class="line">    l &#x3D; os.listdir(img_path)</span><br><span class="line">    l.sort(key&#x3D;lambda x: int(x[:-4]))</span><br><span class="line">    for i in l:</span><br><span class="line">        f &#x3D; img_path + os.sep + str(i)</span><br><span class="line">        c.drawImage(f, 0, 0, w, h)</span><br><span class="line">        c.showPage()</span><br><span class="line">        pages &#x3D; pages + 1</span><br><span class="line">    c.save()</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>begin()：开始，并更新全局变量名</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">def begin():</span><br><span class="line">    global url</span><br><span class="line">    global re_object</span><br><span class="line">    global chapter</span><br><span class="line">    local_url &#x3D; input(</span><br><span class="line">        &quot;输入要下载的章节url(例: https:&#x2F;&#x2F;manhua.zsh8.com&#x2F;pxtt&#x2F;pxtt-041&#x2F;93181.html)\n&gt;&gt;&gt;&quot;)</span><br><span class="line">    # 判断是否符合url格式</span><br><span class="line">    re_object &#x3D; re.match(</span><br><span class="line">        &quot;https:&#x2F;&#x2F;manhua.zsh8.com&#x2F;.*?&#x2F;(.*?)&#x2F;.*?html&quot;, local_url)</span><br><span class="line">    if (re_object):</span><br><span class="line">        url &#x3D; local_url</span><br><span class="line">        # 更新章节名</span><br><span class="line">        re_object &#x3D; re.match(</span><br><span class="line">            &quot;https:&#x2F;&#x2F;manhua.zsh8.com&#x2F;.*?&#x2F;(.*?)&#x2F;.*?html&quot;, url)</span><br><span class="line">        chapter &#x3D; re_object.group(1)</span><br><span class="line">        print(&quot;即将开始.....&quot;)</span><br><span class="line">    else:</span><br><span class="line">        print(&quot;输入错误！将使用默认链接！\n&quot;)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>main()：主函数</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">if __name__ &#x3D;&#x3D; &quot;__main__&quot;:</span><br><span class="line">    begin()</span><br><span class="line">    boolean &#x3D; &quot;y&quot;</span><br><span class="line">    count &#x3D; 0</span><br><span class="line">    # 保存pdf的文件夹</span><br><span class="line">    if not os.path.exists(current_dir + &#39;\\pdf\\&#39;):</span><br><span class="line">        os.makedirs(current_dir + &#39;\\pdf\\&#39;)</span><br><span class="line">    while(boolean &#x3D;&#x3D; &quot;y&quot;):</span><br><span class="line">        text &#x3D; get_text(url).text</span><br><span class="line">        next_chapter &#x3D; parse_text(text)</span><br><span class="line"></span><br><span class="line">        img_path &#x3D; current_dir + &#39;\\&#39; + chapter</span><br><span class="line">        pdf_path &#x3D; current_dir + &#39;\\pdf\\&#39; + chapter + &#39;.pdf&#39;</span><br><span class="line">        #　有些图片是错误，会导致无法生成pdf文件。</span><br><span class="line">        try:</span><br><span class="line">            convert_images_to_pdf(img_path, pdf_path)</span><br><span class="line">        except Exception as e:</span><br><span class="line">            print(e)</span><br><span class="line">        re_object &#x3D; re.match(</span><br><span class="line">            &quot;https:&#x2F;&#x2F;manhua.zsh8.com&#x2F;.*?&#x2F;(.*?)&#x2F;.*?html&quot;, next_chapter)</span><br><span class="line">        chapter &#x3D; re_object.group(1)</span><br><span class="line">        print(&quot;下一章节：&quot;, chapter)</span><br><span class="line">        count +&#x3D; 1</span><br><span class="line">        print(count)</span><br><span class="line">        #　下载章节的数目，可根据自己需要更改</span><br><span class="line">        if (count &gt; 37):</span><br><span class="line">            break</span><br><span class="line">        url &#x3D; next_chapter</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>直接在终端运行 python 文件，等待一段时间，就会在 python 文件的当前目录下生成文件。<br><img src="http://image.jinl1874.xyz/img/20200615222857.png" alt="文件夹"><br>文件夹里的图片：<br><img src="http://image.jinl1874.xyz/img/20200615222947.png" alt="图片"><br>pdf 文件：<br><img src="http://image.jinl1874.xyz/img/20200615223024.png" alt="pdf"></p>
-<p>完整代码可参考我的<a href="https://github.com/jinl1874/spider" target="_blank" rel="noopener">github 库</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -911,7 +967,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
