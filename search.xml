@@ -562,6 +562,76 @@
       </tags>
   </entry>
   <entry>
+    <title>JavaScript-学习笔记（7）：CSS-DOM</title>
+    <url>/2020/07/18/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%887%EF%BC%89/</url>
+    <content><![CDATA[<p>笔记内容：</p>
+<ul>
+<li>styele 属性</li>
+<li>检索样式</li>
+<li>改变样式</li>
+</ul>
+<h4 id="网页的结构"><a href="#网页的结构" class="headerlink" title="网页的结构"></a>网页的结构</h4><ul>
+<li><p>三位一体：</p>
+<ul>
+<li>结构层：由 HTML 或 XHTML 之类的标记语言负责创建；</li>
+<li>表示层：由 CSS 负责完成，CSS 描述页面内容应该如何呈现；</li>
+<li>行为层：负责内容应该如何响应事件这一问题，js 和 DOM 主宰的领域。</li>
+</ul>
+</li>
+<li><p>分离：</p>
+<ul>
+<li>使用（X）HTML 搭建文档的结构；</li>
+<li>使用 CSS 去设置文档的呈现效果；</li>
+<li>使用 DOM 脚本去实现文档的行为。</li>
+</ul>
+<p>这三种技术之间存在重叠区域。</p>
+</li>
+</ul>
+<h4 id="style"><a href="#style" class="headerlink" title="style"></a>style</h4><p>style 属性 包含元素的样式，查询该属性返蜀犬吠日的是一个对象而不是一个简单的字符串。样式存在对象的属性里：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">element.style.property;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>获取样式</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 获取 style 的 color 属性：</span></span><br><span class="line">element.style.color;</span><br><span class="line"><span class="comment">// 获取 style 的 font-family 属性：</span></span><br><span class="line">elements.style.fontFamily;</span><br></pre></td></tr></table></figure>
+
+<p>一般样式属性的返回值与它们的设置值都采用同样的计量单位。如果果 font-size 以 em 为单位，那么返回的值也是以 em 为单位。</p>
+<p>style 属性只能能过内嵌的方式来获取，一旦样式在外部，则获取不到。</p>
+</li>
+<li><p>设置样式<br>style 对象的名个属性是可以读写的，可以使用赋值操作来更新样式：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">element.style.property = value;</span><br></pre></td></tr></table></figure>
+<p>赋值操作符可以设置任何一种样式，比如 font 之类的速记属性：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">para.style.font = <span class="string">"2em 'times', serif"</span>;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="DOM-脚本设置样式"><a href="#DOM-脚本设置样式" class="headerlink" title="DOM 脚本设置样式"></a>DOM 脚本设置样式</h4><p>虽然 DOM 设置样式很容易，但是在大多数场合下，应该使用 CSS 去声明样式。</p>
+<ul>
+<li><p>根据元素的位置设置样式<br>找到该元素后，直接给该元素的 style 对应的属性赋值即可。</p>
+</li>
+<li><p>根据条件反复设置样式<br>找到元素后，根据条件设置样式。比如表格里隔一个行设置一个背景色，就需要根据条件设置值。</p>
+</li>
+<li><p>响应事件<br>一般最好使用 CSS 为文档设置样式，但也有一些 CSS 不能处理或者难以部署的情况，这时需要用上 DOM。比如浏览器不能识别伪类的时候，可以使用 js 来解决。</p>
+</li>
+<li><p>className 属性<br>之前的都是用 DOM 直接设置或修改样式，这是直接让“行为层”干“表示层”的活。<br>与其让 DOM 直接改变元素的样式，不如能过 js 更新元素的 classic 属性。</p>
+</li>
+</ul>
+<h4 id="对函数进行抽象"><a href="#对函数进行抽象" class="headerlink" title="对函数进行抽象"></a>对函数进行抽象</h4><p>一些函数可以做一些小小的改动可以变得更通用，这个过程叫抽象（abstraction）。<br>比如下面这个函数的对象仅适用于 h1 元素，以及 classname 的值为 intro 。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">styleHeaderSiblings</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementsByTagName) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> headers = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"h1"</span>);</span><br><span class="line">  <span class="keyword">var</span> elem;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; headers.length; i++) &#123;</span><br><span class="line">    <span class="comment">// 查找下一个元素节点</span></span><br><span class="line">    elem = getNextElement(headers[i].nextSibling);</span><br><span class="line">    elem.className += <span class="string">"intro"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>添加两个具体的参数，就可以使其成为更通用的函数：添加 tag 和 theclass 两个参数，并把 h1 改为 tag，intro 改为 theclass。为了增加可读性，把 headers 改为 elems.</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">styleHeaderSiblings</span>(<span class="params">tag, theclass</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementsByTagName) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elems = <span class="built_in">document</span>.getElementsByTagName(tag);</span><br><span class="line">  alert(theclass);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; elems.length; i++) &#123;</span><br><span class="line">    <span class="comment">// 查找下一个元素节点</span></span><br><span class="line">    elem = getNextElement(elems[i].nextSibling);</span><br><span class="line">    elem.className += <span class="string">" "</span> + theclass;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样，函数的抽象化就完成了。<br>无论何时，发现函数可以抽象，都应该马上去做，这总是一个好主意。</p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>CSS-DOM 针对的是如何得到和设置 style 对象的各种属性。<br>style 属性不支持外部 css 设置的样式，不过仍然可以利用 style 属性去改变 html 元素的呈现效果。<br>不过一般都应该选择更新 classname 属性，而不是直接更新 style 对象的相关属性。<br>使用 js 干 css 的活无非就俩原因，一是 css 无法干这种活，二是一些残疾浏览器不支持最新属性。js 能够重复执行一组操作，这是 css 做不了的。</p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaScript-学习笔记（6）：动态创建标记</title>
     <url>/2020/07/13/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%886%EF%BC%89/</url>
     <content><![CDATA[<p>网页的结构由标记语言创建，js 可用来改变细节而不改变结构。<br>同样，js 也可用来改变网页的结构和内容。</p>
@@ -720,76 +790,6 @@
 </ul>
 <p>用 createElement 和 createTextNode 创造的只是孤儿，要用 appendChild 和 insertBefore 才能把这些孤儿插入到文档的节点树，呈现在浏览器的窗口。</p>
 <p>对图片库的改进和 insertAfter 方法的创建，还有 Ajax 和 异步请求。</p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript-学习笔记（7）：CSS-DOM</title>
-    <url>/2020/07/18/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%887%EF%BC%89/</url>
-    <content><![CDATA[<p>笔记内容：</p>
-<ul>
-<li>styele 属性</li>
-<li>检索样式</li>
-<li>改变样式</li>
-</ul>
-<h4 id="网页的结构"><a href="#网页的结构" class="headerlink" title="网页的结构"></a>网页的结构</h4><ul>
-<li><p>三位一体：</p>
-<ul>
-<li>结构层：由 HTML 或 XHTML 之类的标记语言负责创建；</li>
-<li>表示层：由 CSS 负责完成，CSS 描述页面内容应该如何呈现；</li>
-<li>行为层：负责内容应该如何响应事件这一问题，js 和 DOM 主宰的领域。</li>
-</ul>
-</li>
-<li><p>分离：</p>
-<ul>
-<li>使用（X）HTML 搭建文档的结构；</li>
-<li>使用 CSS 去设置文档的呈现效果；</li>
-<li>使用 DOM 脚本去实现文档的行为。</li>
-</ul>
-<p>这三种技术之间存在重叠区域。</p>
-</li>
-</ul>
-<h4 id="style"><a href="#style" class="headerlink" title="style"></a>style</h4><p>style 属性 包含元素的样式，查询该属性返蜀犬吠日的是一个对象而不是一个简单的字符串。样式存在对象的属性里：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">element.style.property;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>获取样式</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 获取 style 的 color 属性：</span></span><br><span class="line">element.style.color;</span><br><span class="line"><span class="comment">// 获取 style 的 font-family 属性：</span></span><br><span class="line">elements.style.fontFamily;</span><br></pre></td></tr></table></figure>
-
-<p>一般样式属性的返回值与它们的设置值都采用同样的计量单位。如果果 font-size 以 em 为单位，那么返回的值也是以 em 为单位。</p>
-<p>style 属性只能能过内嵌的方式来获取，一旦样式在外部，则获取不到。</p>
-</li>
-<li><p>设置样式<br>style 对象的名个属性是可以读写的，可以使用赋值操作来更新样式：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">element.style.property = value;</span><br></pre></td></tr></table></figure>
-<p>赋值操作符可以设置任何一种样式，比如 font 之类的速记属性：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">para.style.font = <span class="string">"2em 'times', serif"</span>;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h4 id="DOM-脚本设置样式"><a href="#DOM-脚本设置样式" class="headerlink" title="DOM 脚本设置样式"></a>DOM 脚本设置样式</h4><p>虽然 DOM 设置样式很容易，但是在大多数场合下，应该使用 CSS 去声明样式。</p>
-<ul>
-<li><p>根据元素的位置设置样式<br>找到该元素后，直接给该元素的 style 对应的属性赋值即可。</p>
-</li>
-<li><p>根据条件反复设置样式<br>找到元素后，根据条件设置样式。比如表格里隔一个行设置一个背景色，就需要根据条件设置值。</p>
-</li>
-<li><p>响应事件<br>一般最好使用 CSS 为文档设置样式，但也有一些 CSS 不能处理或者难以部署的情况，这时需要用上 DOM。比如浏览器不能识别伪类的时候，可以使用 js 来解决。</p>
-</li>
-<li><p>className 属性<br>之前的都是用 DOM 直接设置或修改样式，这是直接让“行为层”干“表示层”的活。<br>与其让 DOM 直接改变元素的样式，不如能过 js 更新元素的 classic 属性。</p>
-</li>
-</ul>
-<h4 id="对函数进行抽象"><a href="#对函数进行抽象" class="headerlink" title="对函数进行抽象"></a>对函数进行抽象</h4><p>一些函数可以做一些小小的改动可以变得更通用，这个过程叫抽象（abstraction）。<br>比如下面这个函数的对象仅适用于 h1 元素，以及 classname 的值为 intro 。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">styleHeaderSiblings</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementsByTagName) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> headers = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"h1"</span>);</span><br><span class="line">  <span class="keyword">var</span> elem;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; headers.length; i++) &#123;</span><br><span class="line">    <span class="comment">// 查找下一个元素节点</span></span><br><span class="line">    elem = getNextElement(headers[i].nextSibling);</span><br><span class="line">    elem.className += <span class="string">"intro"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>添加两个具体的参数，就可以使其成为更通用的函数：添加 tag 和 theclass 两个参数，并把 h1 改为 tag，intro 改为 theclass。为了增加可读性，把 headers 改为 elems.</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">styleHeaderSiblings</span>(<span class="params">tag, theclass</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementsByTagName) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> elems = <span class="built_in">document</span>.getElementsByTagName(tag);</span><br><span class="line">  alert(theclass);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; elems.length; i++) &#123;</span><br><span class="line">    <span class="comment">// 查找下一个元素节点</span></span><br><span class="line">    elem = getNextElement(elems[i].nextSibling);</span><br><span class="line">    elem.className += <span class="string">" "</span> + theclass;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样，函数的抽象化就完成了。<br>无论何时，发现函数可以抽象，都应该马上去做，这总是一个好主意。</p>
-<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>CSS-DOM 针对的是如何得到和设置 style 对象的各种属性。<br>style 属性不支持外部 css 设置的样式，不过仍然可以利用 style 属性去改变 html 元素的呈现效果。<br>不过一般都应该选择更新 classname 属性，而不是直接更新 style 对象的相关属性。<br>使用 js 干 css 的活无非就俩原因，一是 css 无法干这种活，二是一些残疾浏览器不支持最新属性。js 能够重复执行一组操作，这是 css 做不了的。</p>
 ]]></content>
       <categories>
         <category>JavaScript</category>
@@ -1069,6 +1069,39 @@
       </tags>
   </entry>
   <entry>
+    <title>Jmeter 使用简介</title>
+    <url>/2020/06/21/Jmeter/</url>
+    <content><![CDATA[<h4 id="使用Jmeter测试网页的性能"><a href="#使用Jmeter测试网页的性能" class="headerlink" title="使用Jmeter测试网页的性能"></a>使用Jmeter测试网页的性能</h4><ol>
+<li><p>打开Jmeter</p>
+</li>
+<li><p>添加测试线程组<br>右键 <code>Test Plan</code> $\rightarrow$ <code>Add</code> $\rightarrow$ <code>Threads(Users)</code> $\rightarrow$ <code>Thread Group</code>。</p>
+<p> <img src="http://image.jinl1874.xyz/img/20200621101959.png" alt="添加测试线程组"></p>
+</li>
+<li><p>添加Http请求<br>右键<code>Thread Group</code> $\rightarrow$ <code>Add</code> $\rightarrow$ <code>Samper</code> $\rightarrow$ <code>HTTP Request</code>。</p>
+<p><img src="http://image.jinl1874.xyz/img/20200621102456.png" alt="添加http request"></p>
+<p>结果：<br><img src="http://image.jinl1874.xyz/img/20200621102807.png" alt="result"></p>
+</li>
+<li><p>添加观察树<br>右键 <code>Test Plan</code> $\rightarrow$ <code>Add</code> $\rightarrow$ <code>Listener</code> $\rightarrow$ <code>View Result Tree</code>。<br><img src="http://image.jinl1874.xyz/img/20200621110646.png" alt="观察树"></p>
+</li>
+<li><p>测试<br>点击<code>HTTP Request</code>，在<code>path</code>项输入一个网址，例如 <a href="https://www.zhihu.com/" target="_blank" rel="noopener">https://www.zhihu.com/</a> ，然后点击<code>run</code>。<br> 然后点击<code>View Result Tree</code>，就会出现以下结果：<br> <img src="http://image.jinl1874.xyz/img/20200621140400.png" alt=""></p>
+</li>
+<li><p>集合点<br>右键<code>Thread Group</code> $\rightarrow$ <code>Add</code> $\rightarrow$ <code>Timer</code> $\rightarrow$ <code>Synchronizing Timer</code>。<br>第一个变量代表的是线程数量。<br>第二个变量代表的是结束的时间，当时间达到一个段后，所有的线程都会被释放。</p>
+</li>
+</ol>
+<h3 id="Thread-Group变量"><a href="#Thread-Group变量" class="headerlink" title="Thread Group变量"></a>Thread Group变量</h3><ol>
+<li>Number of Thread(users):  指模拟的用户数。<br>例子：如果要模拟一百个人，那么输入一百即可。</li>
+<li>Ramp-Up Period(in seconds)：虚拟用户增长时长。<br> 例子：测试一个考勤系统，登录的时候不是所有人一起登陆，而是有一个时间点是大家一起登陆的。比如是八点到九点这一段时间登录的，时长就是3600秒。但不需要设置这么大的数</li>
+<li>Loop Count：一个虚拟用户所需要做的测试数。如果把<code>Infinite</code>勾上的话，那么运行的时候是永不停止的，除非手动强制停止。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>JAVA</category>
+      </categories>
+      <tags>
+        <tag>jmeter</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaScript 高级程序设计（1）</title>
     <url>/2020/08/01/JavaScript-%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%881%EF%BC%89/</url>
     <content><![CDATA[<h4 id="1-元素"><a href="#1-元素" class="headerlink" title="1.  元素"></a>1. <script> 元素</h4><p>在 HTML 代码中插入 js 脚本，需要<code>script</code>元素，它有几个属性：</p>
@@ -1103,65 +1136,56 @@
       </tags>
   </entry>
   <entry>
-    <title>Jmeter 使用简介</title>
-    <url>/2020/06/21/Jmeter/</url>
-    <content><![CDATA[<h4 id="使用Jmeter测试网页的性能"><a href="#使用Jmeter测试网页的性能" class="headerlink" title="使用Jmeter测试网页的性能"></a>使用Jmeter测试网页的性能</h4><ol>
-<li><p>打开Jmeter</p>
-</li>
-<li><p>添加测试线程组<br>右键 <code>Test Plan</code> $\rightarrow$ <code>Add</code> $\rightarrow$ <code>Threads(Users)</code> $\rightarrow$ <code>Thread Group</code>。</p>
-<p> <img src="http://image.jinl1874.xyz/img/20200621101959.png" alt="添加测试线程组"></p>
-</li>
-<li><p>添加Http请求<br>右键<code>Thread Group</code> $\rightarrow$ <code>Add</code> $\rightarrow$ <code>Samper</code> $\rightarrow$ <code>HTTP Request</code>。</p>
-<p><img src="http://image.jinl1874.xyz/img/20200621102456.png" alt="添加http request"></p>
-<p>结果：<br><img src="http://image.jinl1874.xyz/img/20200621102807.png" alt="result"></p>
-</li>
-<li><p>添加观察树<br>右键 <code>Test Plan</code> $\rightarrow$ <code>Add</code> $\rightarrow$ <code>Listener</code> $\rightarrow$ <code>View Result Tree</code>。<br><img src="http://image.jinl1874.xyz/img/20200621110646.png" alt="观察树"></p>
-</li>
-<li><p>测试<br>点击<code>HTTP Request</code>，在<code>path</code>项输入一个网址，例如 <a href="https://www.zhihu.com/" target="_blank" rel="noopener">https://www.zhihu.com/</a> ，然后点击<code>run</code>。<br> 然后点击<code>View Result Tree</code>，就会出现以下结果：<br> <img src="http://image.jinl1874.xyz/img/20200621140400.png" alt=""></p>
-</li>
-<li><p>集合点<br>右键<code>Thread Group</code> $\rightarrow$ <code>Add</code> $\rightarrow$ <code>Timer</code> $\rightarrow$ <code>Synchronizing Timer</code>。<br>第一个变量代表的是线程数量。<br>第二个变量代表的是结束的时间，当时间达到一个段后，所有的线程都会被释放。</p>
-</li>
-</ol>
-<h3 id="Thread-Group变量"><a href="#Thread-Group变量" class="headerlink" title="Thread Group变量"></a>Thread Group变量</h3><ol>
-<li>Number of Thread(users):  指模拟的用户数。<br>例子：如果要模拟一百个人，那么输入一百即可。</li>
-<li>Ramp-Up Period(in seconds)：虚拟用户增长时长。<br> 例子：测试一个考勤系统，登录的时候不是所有人一起登陆，而是有一个时间点是大家一起登陆的。比如是八点到九点这一段时间登录的，时长就是3600秒。但不需要设置这么大的数</li>
-<li>Loop Count：一个虚拟用户所需要做的测试数。如果把<code>Infinite</code>勾上的话，那么运行的时候是永不停止的，除非手动强制停止。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>JAVA</category>
-      </categories>
-      <tags>
-        <tag>jmeter</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用自定义域名后出现“404There isn&#39;t a GitHub Pages site here”解决方法</title>
-    <url>/2020/05/22/blog-problem-0/</url>
-    <content><![CDATA[<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><ul>
-<li>每次将新文章使用“hexo d”推送后，再打开浏览器就会显示“404There isn’t a GitHub Pages site here”这个错误。</li>
-</ul>
-<h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><ul>
-<li>我们在自定义域名之前会在下图里“Custom domain”，<br><img src="http://image.jinl1874.xyz/img/blog_problem.png" alt="setting"></li>
-<li>点击“save”后，仓库的根目录会生成一个“CNAME”文件，<br><img src="http://image.jinl1874.xyz/img/blog_problem_2.png" alt=""></li>
-<li>但是本地的“public”目录里面并没有这个文件，所以更新会删除这个文件，就会导致访问失败。</li>
-</ul>
-<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><ul>
-<li>在hexo的source文件夹下新建一个CNAME文件，内容如下。这样使用<code>hexo generate</code>就会在public目录生成CNAME文件了，这样推送过去后就不会删除了。<br><img src="http://image.jinl1874.xyz/img/20200522235649.png" alt="solve"></li>
-<li>添加文件后，重新生成推送后，问题就迎刃而解了。<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
+    <title>生日快乐</title>
+    <url>/2020/11/01/curry-happy-birthday/</url>
+    <content><![CDATA[<p>在我的眼里，咖喱的形象已经变了三次，一次是由物变为人，一次是由北方汉子变成了一个小女生，最后一次是由虚拟人物形象变成了实实在在的人。</p>
+<a id="more"></a>
 
-
-</li>
-</ul>
+<h2 id="惜"><a href="#惜" class="headerlink" title="惜"></a>惜</h2><p>2018 年以前，咖喱一种多个香料配成的酱料，金鱼还是在鱼缸里的观赏鱼。</p>
+<p>2018 年到十月份之前，咖喱变成了一个北方汉子。“金鱼”，这个跟我毫无联系的词，在 17 年暑假时和我加入群时，海螺给我取了这么一个昵称，但是等到用这个词时还要等到 18 年春。</p>
+<p>2018 年春，我开始在群里发言，或许是想知道也想认识一直“活着”的群(当时其它 QQ 群已经死了），里面的人会是怎么样的，又或者是该群的生活气息吸引了我。记得当时，我还没在群里发言，有个人在群里吐槽同学使用图书馆打印机时还在修改文档，导致速度极慢，下面其它人的回复也很正常，都在附合。他们的群昵称里顶着各种奇奇怪怪的名字，这在 QQ 群里是很常见的，但总是有一种不协调感。</p>
+<p>在那之后，我开始在群里水，那时有人还讲过一句，“怎么之前没见过这条鱼”。群里水多了，也认识了很多网友，其中包括“北方汉子”咖喱。</p>
+<p>为什么咖喱在我眼里是北方汉子的形象呢？我离上次与网友长时间群聊时间太久了，上一次是在初三时加入的火影群，之后的群聊全是和基本认识的同学一起的，忘了网络的虚拟性。在我的认知里咖喱是男性，因为他在群里说他是男性。当然，这还不是最重要的，有一次不知道是谁提起了广东人称呼外地人的方式，我说广东人往广东以北的男性都叫“北佬”，记得咖喱在群里的发言特别激动，大意最如果有谁敢这么叫他就会非常生气的。我当时的脑回路是这样的，不想被叫-&gt;觉得有侮辱性-&gt;他就是高大的汉子。</p>
+<p>自那时起，一个高大的北方汉子形象被我套在咖喱身上。不过到现在我也没想明白为什么咖喱会有那种反应，也许这不是咖喱的发言，被我自顾自地安给了咖喱。</p>
+<p>2018 年 10 月 27 号，我第一次和网友面基。是的，之前都是和社团什么之类的面基，并且本来我也只想和他们保持纯洁的网友关系，但一切都在那天改变了。</p>
+<p>记得那天，他们在群上约好了见面，刚好我也在水群，于是他们也邀请我一起去。那时刚好没什么事，于是就去了。</p>
+<p>他们的形象也在那天发生了翻天覆地的变化，当然，一个知心大姐姐怎么就变成了一个男的。他们在跟志斌姐说话的时候，我还在往四处看，“志斌姐在哪”，又去翻其朋友圈，发现里面有几个全是男性合照，还有个人挺像面前的人。</p>
+<p>然后，当他们把一个脸圆圆的女生叫咖喱的时候，受到志斌姐冲击的我心里在想着，怎么你也是这样啊……</p>
+<p>此后，我根据各种群聊信息一步步地完善（脑补）咖喱的形象：</p>
+<ol>
+<li>爱喝酒，喝的还不是啤酒，像什么白酒葡萄酒都不在话下；</li>
+<li>喜欢去酒吧喝酒；</li>
+<li>爱到处去玩；</li>
+<li>精力特别多；</li>
+<li>喜欢二刺元；</li>
+</ol>
+<p>上面的信息也不一定正确，毕竟是捕风捉影来的。然后咖喱在我眼里就是一个自由的“不良少女”。这个“不良少女”是日本冻鳗里的形象，于是就用中国特色的“社会”代替了，所以这就是“社会女孩”的由来。</p>
+<p>当然，说社会也不正确，更准确的说法是与众不同。</p>
+<p>2020 年 10 月，再次见到咖喱时，她说了句“真的好久不见了，鱼哥哥”，当时我有点奇怪，去年不是才刚见过吗，怎么说好久不见。这里就暴露出我不察“时事”的特点了，以前我刷朋友圈的时候，还没加好友，后来加了好友，我把朋友圈的入口关了，所以在朋友圈发布的信息基本全都不知道，像什么官宣啊小长文之类，还是得自己专门点进个人主页才知道。不点不知道，一看吓一跳，好家伙，三天一小聚，五天一大聚。</p>
+<p>周一去玩的时候，认识到了一个新的咖喱，一个会笑会哭会害怕会生气的咖喱， 以前的咖喱总是笑嘻嘻的，那时我才意识到，咖喱也是一个大学女孩啊。</p>
+<h2 id="今"><a href="#今" class="headerlink" title="今"></a>今</h2><p>我不怎么会表达自己的感情，每次用文字表达出来都不满意，强行发出去但后面看总是会感到尴尬。</p>
+<p>真的挺羡慕能在朋友圈/QQ 空间把自己的感情表达出来的，我每次想表达自己的感情总是来来回回那么几个词，以前写推文时经常在这里卡住，有时干脆就不表达了。因为不管怎么表达都会感到尴尬，做一名记叙者对我来说更有意思。也有可能是忘了怎么表达了。</p>
+<p>于是我把朋友圈里所有表达感情的内容都隐藏了，发表内容也不再发表在朋友圈，直到现在还有一股冲动，想把 QQ 那篇日志隐藏掉。因此，发在知乎以及个人博客里。即使是这样，也很少有抒情的内容，尽量写事。说起来，大家还是我的第一批博客读者呢（笑），阿波哥还说这是流水账（不是）。</p>
+<p>或者换种说法，其实是表达能力差，是中文词汇量比较少，别人经常会误解。比如上次回校时，我问咖喱是不是回宿舍，产生这种疑问的直接原因是上次国庆假期时，大家都要休息了，她还这么有精神去到处逛，所以即使是晚上十点的时候，我还有一种她会走到下一个目的地继续玩的感觉。但是措词不当，咖喱表示深深地伤害到她了，这里再次向咖喱表示道歉。语言是一门艺术，而我经常用它伤害朋友。</p>
+<p>想了很久，还是不知道该说什么。</p>
+<p>想用第二视角写，但是又不习惯，所以还是用回第三视角。</p>
+<p>当初的不协调感觉，到现在终于明白了，那种现象可以出现在游戏群里，出现在贴吧群里，又或者是动漫群里，但是在一个新生群感觉特别突兀（当时的名字还是 2017 新生群），这种群不是过了招生季就会沉寂的吗？而且明明是互相认识的，为什么要叫网名呢？也许是习惯了吧，也许是像我一样根本不知道名字吧。</p>
+<p>如果当初我嫌 QQ 群有点吵，然后退了，又或者我一直把其留在那里，不管不顾，又会怎么样。我不知道，但我知道的是肯定不会比现在好。因为在那里我认识了咖喱，认识了大家。</p>
+<p>不管大家怎么想，对我而言，咖喱，还有大家，早就是我最好的朋友了。</p>
+<p>今天是 11 月 1 日，是星期天，也是咖喱的生日，</p>
 <blockquote>
-<p>欢迎访问个人博客主页 <a href="https://jinl1874.github.io" target="_blank" rel="noopener">jinl1874</a></p>
+<p>愿你有一个灿烂的前程</p>
+<p>愿你有情人终成眷属，</p>
+<p>愿你在尘世获得幸福。</p>
 </blockquote>
+<p>自由的少女要永远自由下去。</p>
+<p>生日快乐，<strong>咖喱</strong>。</p>
 ]]></content>
       <categories>
-        <category>Problem</category>
+        <category>生活</category>
       </categories>
       <tags>
-        <tag>hexo, blog</tag>
+        <tag>life</tag>
       </tags>
   </entry>
   <entry>
@@ -1230,6 +1254,82 @@
       </categories>
       <tags>
         <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用自定义域名后出现“404There isn&#39;t a GitHub Pages site here”解决方法</title>
+    <url>/2020/05/22/blog-problem-0/</url>
+    <content><![CDATA[<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><ul>
+<li>每次将新文章使用“hexo d”推送后，再打开浏览器就会显示“404There isn’t a GitHub Pages site here”这个错误。</li>
+</ul>
+<h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><ul>
+<li>我们在自定义域名之前会在下图里“Custom domain”，<br><img src="http://image.jinl1874.xyz/img/blog_problem.png" alt="setting"></li>
+<li>点击“save”后，仓库的根目录会生成一个“CNAME”文件，<br><img src="http://image.jinl1874.xyz/img/blog_problem_2.png" alt=""></li>
+<li>但是本地的“public”目录里面并没有这个文件，所以更新会删除这个文件，就会导致访问失败。</li>
+</ul>
+<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><ul>
+<li>在hexo的source文件夹下新建一个CNAME文件，内容如下。这样使用<code>hexo generate</code>就会在public目录生成CNAME文件了，这样推送过去后就不会删除了。<br><img src="http://image.jinl1874.xyz/img/20200522235649.png" alt="solve"></li>
+<li>添加文件后，重新生成推送后，问题就迎刃而解了。<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<blockquote>
+<p>欢迎访问个人博客主页 <a href="https://jinl1874.github.io" target="_blank" rel="noopener">jinl1874</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Problem</category>
+      </categories>
+      <tags>
+        <tag>hexo, blog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【流水账】生日聚会</title>
+    <url>/2020/11/03/birthday-day/</url>
+    <content><![CDATA[<h2 id="起"><a href="#起" class="headerlink" title="起"></a>起</h2><p>此处删去。</p>
+<h2 id="时"><a href="#时" class="headerlink" title="时"></a>时</h2><p>11 月 1 号晚上七点多，按照计划，虾带着咖喱出来，鱼、猫、瓜风、薯在操场早己等候多时。</p>
+<a id="more"></a>
+
+<p>大家和咖喱在有说有笑着。</p>
+<p>突然，有人要去上厕所。不久之后，他带着个人回来，手里还捧着东西，定睛一看，原来是阿波哥带着生日蛋糕过来了。</p>
+<p>咖喱似乎有点惊讶。</p>
+<p>计划在完美地执行，</p>
+<p>……</p>
+<p>……</p>
+<p>才怪。<br>这里面出了一个计划最大的变数，或者说虾就是变数本身。所以说根本没有计划（其实我什么都不知道，只负责到场），要说有计划的是，就是虾负责把咖喱拖出来。</p>
+<p>十一月的广东，秋天似乎真的要来了，傍晚时分没有闷热，没有严寒，时不时有一点小风吹过，全部的感觉都是舒服。月亮在一边挂着，似乎比平时更底，发出的光线也蒙着淡淡的黄色，为今晚笼照出奇特的气氛。</p>
+<p>当晚七点多，波仔带好蛋糕、花以及大小兔子匆匆打车过来，来到主席台对面的操场与大家汇合。</p>
+<p>之后要干什么？不知道，虾说得模棱两可，听者亦一头雾水。所以大家只好整理整理现场，先把蛋糕放好，再摆上小兔纸。</p>
+<p><img src="http://image.jinl1874.xyz/img/20201102194659.png" alt="image-20201102194653882"></p>
+<p>不一会儿，虾借口上厕所离开咖喱来到现场，经过一番沟通后，终于明确了该怎么做。全员背向咖喱方向，将蜡烛点起，等虾将其带来。说是带，但其实并不是带，而是做个大冒险，带咖喱环绕操场一圈，因为她当天穿着一件豹皮（还是虎皮？）衣服（后来还问我胖不胖，其实当时胖只是句玩笑话而己啦）。为免起疑心，虾也分别用约会、宅家、睡觉、回家交待五人的行踪，波仔则没有提。</p>
+<p>虾离去不久，大家就在收拾东西，并插上两根蜡烛蛋糕上。然后再叫波仔去另一边藏起来。那时，在夜晚中昏暗的灯光照下，五个人低头面对两根正在燃烧的蜡烛，蜡烛发出暗淡的红光，一言不发的我们营造出一种诡异的气氛，宛如宗教场景一般。还听到旁边路过的人说了一句”他们在干嘛“。（不知道咖喱看到我们时是什么感觉）</p>
+<p>蜡烛续了一根后，虾终于来到了。咖喱的声音在背后慢慢靠近，走过之后也没有发现我们。然后虾突然把咖喱（硬生生）转过来……看到我们的咖喱还处于惊讶之中时，背后的波仔抱着花出现并祝其生日快乐……</p>
+<p>风哥有一幅画，里面有三个人，我根据特征猜出了猫猫和咖喱，却没猜出瓜姐。因为咖喱和猫猫的特征都比较明显，一眼就能看出来，但是中间的瓜姐却感觉不到明显什么特征（也许那个发型是？）。说起来，其实我对瓜姐印象最深的还是在打狼人杀时，那双在浓浓夜色下也遮不住的熊猫眼。</p>
+<p>生日歌、礼物、许愿、吹蜡烛、切蛋糕、吃蛋糕、抹蛋糕、洗脸。</p>
+<h2 id="转"><a href="#转" class="headerlink" title="转"></a>转</h2><p>吃完蛋糕后，风哥去虾的宿舍拿三国杀（虽然最后也没用上），在一顿收拾后转移阵地，来到了”老地方“（大概就是靠宿舍半场球场的禁区附近）。猫和瓜去买饮料后归来后，失踪人口虾又不知道去哪了。</p>
+<p>大家到齐后，失踪人口虾带着另一只猫来了。小黑猫来的时候带着个礼物，虽然把薯仔认成咖喱的时候有些许搞笑。</p>
+<p>狼人杀，有所耳闻过，毕竟有太多梗了，比如刀了预言家，狼人自爆等，但却没亲自玩过。</p>
+<p>那天玩了三局，当时的内心活动如下：</p>
+<p>第一局：我是谁？他们在干什么？我在干什么？</p>
+<p>第二局：我要干什么？</p>
+<p>第三局：预言家知道身份要干什么？</p>
+<p>玩之前，虾给我科普了下阵营划分，狼、神、民，神和民是好人阵营，狼是坏人阵营。最后狼比人神多就是恶人赢，反之神与民杀光狼即好人赢（第一局还不知道输赢规则）。</p>
+<p>第一局我是预言家。预预言家是干什么的，不知道。晚上我验明了虾的身份，然后呢？也不知道。于是在当晚用手机打开知乎，搜索有关狼人杀预言家的内容，然后里面是什么警徽一阶之类的术语，还说要做一个工具人，加上断断续续地看，导致还是不明白要做什么，发什么言。<br>第一轮要指谁时，我指向了波仔，你要问原因，我也不知道有什么原因，也分析不出什么来，<br>然后就在不知不觉中结束了，大概理清了逻辑，是根据大家的发言来怀疑分析出谁是狼谁是人神。</p>
+<p>第二局，我抽到了狼。狼要干什么呢？上一局有听他们说过要带什么节奏来着。于是一开始就先带个波仔的节奏，然后波仔就出局了。然后就莫名其妙地赢了。</p>
+<p>第三局，我还是成了预言家，预言家要不要说出来？不知道，所以我就选择了沉默。然后我就被刀了，这真是个悲伤的故事。虾坑了我两把，第一把是他让我误解波仔是好人，在我阵亡后告诉我真相。第二把是我问他遗言可以说什么的时候，他表示除了他刚才所说的，其它的都可以说。那时我以为他刚才所说指的就是波仔是狼这件事不能说，所以我只表明了自己的身份，没有说波仔的事。后来想想，应该指的他弄错好人坏人的事？</p>
+<p>总而言之，感觉狼人杀还是个挺有意思的游戏，我大概只知道到个皮毛 ，不对，连皮毛都不知道，大概就是个凑数的。</p>
+<h2 id="结"><a href="#结" class="headerlink" title="结"></a>结</h2><p>之后，小黑猫要去锻炼身体，波仔要回校了。本来想来一局久违的三国杀，但好像还有哆啦 A 梦的万圣节特辑没看，于是就在足球场上面对着 iPad 来了一次更久违的哆啦 A 梦，上次看的时候还是几年前。</p>
+<p>之后，送完波仔的虾和咖喱回来了，也将近十一点了。天下无不散的宴席，不久与众人分别。</p>
+<h2 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h2><p>由于写的另一篇挤尽了想要说的话，导致这篇感觉写的有点无力，就是货真价实的流水账了，不过还是先暂且记下来吧。<br>波仔似乎出了点什么事，有点不开心，希望他能好好渡过吧。<br>瓜仔的名也懒得改了。</p>
+<p>时 11 月 3 日。</p>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>life</tag>
       </tags>
   </entry>
   <entry>
@@ -1372,6 +1472,115 @@
       </tags>
   </entry>
   <entry>
+    <title>跨越两座城市的距离只为遇见她</title>
+    <url>/2020/11/01/only-for-she/</url>
+    <content><![CDATA[<h1 id="跨两城只为见她"><a href="#跨两城只为见她" class="headerlink" title="跨两城只为见她"></a>跨两城只为见她</h1><h2 id="启程"><a href="#启程" class="headerlink" title="启程"></a>启程</h2><p>傍晚六点开始坐车，晚吗？<br>晚，但是只要她在那里，这一切都值得。</p>
+<h2 id="遇见"><a href="#遇见" class="headerlink" title="遇见"></a>遇见</h2><p>走进东门，还是熟悉的车道，熟悉的灯光，熟悉的行政楼，熟悉的花草，还有熟悉的树木。深吸一口气，感受到的是大自然带来的清新，同时夜晚的校区还有一丝丝沁凉。走过那条连通行政楼与实验楼的小桥，流水从桥下缓缓走过，桥下荷叶应犹在，不见当年小荷花。</p>
+<p>走过实验楼，一年未见，校内的主流共享单车-哈罗单车不知何时被青桔电动车取代，只剩下形单影只的自行车留在那里。伴着轻快的音乐，中厅练舞人群依然坚守那里。</p>
+<p>路过图书馆，图书馆阶梯前仍排满了一排共享电动车，依旧有一些人在此处练习滑板与轮鞋。七点多的图书馆夜晚，正是最年轻的时候。而图书馆下的湖泊则因秋季到来，水位不断下降，桥下水浅处生满了水草。环顾四周，却没找到鸭子的踪迹，不知道是不是又被二饭的阿姨捉去做烧鸭了呢。但鸭子是湖面的点缀，嘎嘎嘎的声音彰显着湖泊的生命力，没见到总有些许遗憾。</p>
+<p>穿过一教时，回来了，全都回来了，记忆中的场景全都回来了。耳边响起的喧嚣声，走过有些崎岖的路面。再跨过没几步的阶梯走上走廊，里面的教室永远都会有几个女生。下一个转角会出现什么东西，皆与记忆中的场景吻合。不过那个草丛堆里的蘑菇倒是不见了。</p>
+<p>走下李园，门后的小道上飘着一点桂花香。在其路上时，有一种自己仍住在那里的感觉。继续往左边的小径走，最后来到一饭。一饭旁的“披头士”鸡排店不知什么时候关闭了，曾经闪闪发光的招牌被拆掉了，只剩下除却装修的店面，以及边上褪色的海报。</p>
+<p>进入一饭，扑面而来的是一股饭堂的味道，感觉并不好闻。里面的服装颜色不知何时已经变成了深灰，有一个阿姨，虽然我已经忘了具体的样子（话说应该是从没见过吧），但其身形以及声音仍印在脑海里。几年过去了，仍留在这里。</p>
+<p>走出一饭，角落里的师兄奶茶店悄悄地换成了更换成另一个品牌“三口井”（怪怪的名字），可能是师兄没钱了。学而优商品旁不知何时又多了个蜜雪冰城，闪闪发光的招牌使得旁边的学而优黯然失色，让我差点以为学而优又倒闭了。不过学而优也变成了天猫小店，里面从一个小卖部模样变成了有点精致的商店。七喜则搬到那栋屋子的另一侧，其面积也少了这么多。</p>
+<p>一路上，在校道上慢慢走着，最后来到西门，鼓捣一番后出示报备信息出到西门。</p>
+<h2 id="凌晨"><a href="#凌晨" class="headerlink" title="凌晨"></a>凌晨</h2><p>凌晨将近五点时醒来，无论如何再也睡不下去。于是在各个地方走来走去，最后拿了一个垫子，坐在窗边。天已泛白，微弱的光线走进并未完全封闭的窗户的里面，外边时常传来汽车的轰鸣，身上吹过早晨的秋风，还感到有些许冷感。</p>
+<h2 id="上午"><a href="#上午" class="headerlink" title="上午"></a>上午</h2><p>之后在床上躺了一会儿，本来不想睡的，明明将手机的声音调到最小但声音依旧很大，较以前似乎有一股催眠魔力，眼皮逐渐地沉重了起来。</p>
+<h2 id="中午"><a href="#中午" class="headerlink" title="中午"></a>中午</h2><p>吃完饭后，去散了散步。</p>
+<h2 id="下午"><a href="#下午" class="headerlink" title="下午"></a>下午</h2><p>校运会结束的学校，是冷清的。空无一人的大操场，学院的所有营地、校运会的横幅、旗帜，仿佛人间蒸发一般，再不能寻其踪影。唯有球场旁阿姨拆解其材料时，才能找到其存在的足迹。</p>
+<p><img src="http://image.jinl1874.xyz/img/20201106220151.jpg" alt="img"></p>
+<p>排球，一个从没接触过的球类运动，在今天接触上了。踏入校门的那刻起，目标只有一个，那就是风雨球场。风雨球场，一个奇怪到不能再奇怪的名字。明明有盖子为遮风挡雨，在里面见不到任何风雨，为何偏偏要叫风雨球场呢？难道是想说，风里雨里，只有风雨球场在等你？</p>
+<p>以前的涂鸦仍留在上面。</p>
+<p><img src="http://image.jinl1874.xyz/img/20201107175500.png" alt="image-20201107175457490"></p>
+<p>风雨球场有排球场，它在大棚的外面。其中的一个排球架子上，夹着一个比较破烂的球。岁月给其留下了痕迹，它也在记录着时间。</p>
+<p><img src="https://raw.githubusercontent.com/jinl1874/image/master/20201106220059.jpg" alt="img"></p>
+<blockquote>
+<p>即左边架上的球</p>
+</blockquote>
+<h3 id="雅食园"><a href="#雅食园" class="headerlink" title="雅食园"></a>雅食园</h3><p>离开风雨球场后，向二饭进发。传闻中进宿舍都需要刷脸，所以选择绕道，由风雨球场转向杏园，再经由中心花园，路过一教，到达二饭。</p>
+<p>校门通往中心花园的小道一侧，隔一段距离摆着一张沾满灰尘，并且满是锈迹的金属椅子，还有几片落叶落在其上面。杏园停车场，在将近两年前早已经决定拆除，建立新的“有为书院”。多年过去，路过杏园时却没发现其入口，而有为书院的大门则抢尽风头。传统园区与其相比，稍显落后，无论是设备还是外观。而中心花园正中间，则摆着一张庆祝 37 周年的宣传牌。</p>
+<p>一教与二饭的幽静小道里，两旁是山，阳光透过路边茂密的树木里洒下稀稀疏疏斑照。在有阳光照过的光束中，有一些微小的粒子在绕来绕去，似是灰尘，又似是花粉。走进一看，却是蜂，却不知是何品种。</p>
+<p>二饭，即雅食园。以前雅食园这个名字，与第一饭堂“恰”膳园一样，意义不明，只是个名字罢了，里面的环境也与一般饭堂无异。那年暑假，二饭经过一轮更新装修，桌子椅子全部更换。让二饭不再是那种单调一条金属桌加上一条塑料横杠椅子的构成，而是全部换成了木制的桌椅，还有各种款式。其内部环境还有各种装饰品，那一年过后，二饭不再是像普通的饭堂，而像一个小餐厅。而二楼的桌椅则由一饭接收（老接盘侠了），成为了一饭二楼的桌椅。</p>
+<p>再次踏入雅食园时，印入眼帘的是书。</p>
+<p>是摆在左边架子上的书，那一瞬间我仿佛以为我进错地方了。而进去的左边各类棋以及各种桌游，包括象棋围棋，狼人杀扑克牌等等。更有趣的是，一部分桌子上印着围棋的棋盘，而有一部分则印着中国象棋的棋盘。</p>
+<p>桌椅再一次发生改变，内部也再次变化，但这次不再是浮于表面的改变，而是能过书本围棋等来增加自身的气质，雅食园已不愧为名副其实的雅食园。</p>
+<h2 id="傍晚"><a href="#傍晚" class="headerlink" title="傍晚"></a>傍晚</h2><p>从二饭出来后，已经接近校车返校时间，就决定从网球场那边走到东门。因为三个分岔口中，只有这一条还没走过。一路上，感觉园区周围的树似乎少了许多，似乎有准备要做种其它的树了。鞋底踩过夹杂着树叶的草地，伴随窸窸窣窣的声音。但是鞋踩过的声音，并不会发出这么大和这种类型的声音，再定睛一瞧，当然在路灯的的光线不足以瞧出来什么来。但这么晚了还在钻来钻去的，除了老鼠也没其它东西了。</p>
+<p>行政楼的厕所，总是那么地难找。先是走到右边尽头，再回来走到左边尽头都没能发现，之后才想起在这里上课时，是走出来往中间进的。</p>
+<p>而在外面的地板上，有一只黑色的蝴蝶倒在上面，似是已死。黑色的翅膀融入夜色中，若不是无意中蹲下来，是决然看不到的。</p>
+<p><img src="http://image.jinl1874.xyz/img/20201107094820.jpg" alt="IMG_20201106_182543"></p>
+<blockquote>
+<p>又是什么让它倒在这里的呢</p>
+</blockquote>
+<h2 id="归程"><a href="#归程" class="headerlink" title="归程"></a>归程</h2><p>走出校门后，来到大门前，想拍一张好看的照片作为其终点，但是相机的素质太差，照出来的照片噪点太多，逐止。</p>
+<p>要上车之际，回头望了一眼，再见了。</p>
+<p>最后踏上回校的车。</p>
+<h2 id="她"><a href="#她" class="headerlink" title="她"></a>她</h2><p>再次踏上满是森林的校园时，心情有一点小激动，也有一点小怀念。一年多了，她变了，她似乎也没变。变了的不仅仅是她，也有自己。也许她一直变，但又一直保持不变。又或者是谁都没有变，但是变不变又有何分别。</p>
+<blockquote>
+<p>好风景多的是，夕阳平常事，然而每天眼见的，永不相似。<a href="#refer"><sup>[1]</sup></a></p>
+</blockquote>
+<hr>
+<a id="more"></a>
+
+<h1 id="不仅仅只为见她"><a href="#不仅仅只为见她" class="headerlink" title="不仅仅只为见她"></a>不仅仅只为见她</h1><h2 id="他们"><a href="#他们" class="headerlink" title="他们"></a>他们</h2><p>她们、他们，还有未曾谋面的她们和他们。</p>
+<h2 id="启程-1"><a href="#启程-1" class="headerlink" title="启程"></a>启程</h2><blockquote>
+<p>若天气良好，我会去见你们。 ——瓜 <a href="#refer"><sup>[2]</sup></a></p>
+</blockquote>
+<p>乘兴而去，随即踏上人生的第一辆（不要问为什么这么多第一次）校巴。</p>
+<h2 id="遇见-1"><a href="#遇见-1" class="headerlink" title="遇见"></a>遇见</h2><p><img src="http://image.jinl1874.xyz/img/20201107163134.png" alt="image-20201107163132232"></p>
+<p>西门口处不知何时树立了一块防疫宣传牌，而牌后面传出一个大声说话的声音，那个咋咋呼呼的声音，那个再熟悉不过的声音，那是虾的声音。</p>
+<p>我快步走到后面，发现了众人的影子。</p>
+<p>此时的他们都非常漂亮，俗说认真的人最美丽，因为拍照的他们无比认真，沉浸在拍照的结界里。</p>
+<p>拍照，出门在外必做的流程之一。曾经的我也很喜欢拍照，不知道什么时候 起，拍照频率已经下降了很多。</p>
+<p>第一个见到的是志斌姐，她戴着一个帽子，似乎是在掩饰其日益增高的发际线。只见她睁大了眼睛，问我为什么会在来？不是说不来吗。其实几天前我是不想来的，但是今天恰好想来了，想见你们，想来说一句好久不见（虽然没说）。之后众人陆陆续续地发现了我。那时，我问虾蹲在地上的 2<sup>33</sup>是谁时，由于志斌姐遮住了他，让我以为他也戴帽子，就讲了戴帽子的那个。没想虾竟然以为我认不出志斌姐。志斌姐曾给我带了这么大的阴影，使我在冲浪不再对表面信息简单地加以相信，所以忘记是不是可能忘记的，这辈子都不可能的。</p>
+<p>虾旁边站着个之前从没见过的女孩子，是志愿者毛毛。说实话，见到她在这还是挺奇怪，毕竟今天做志愿者跑来跑去确实挺累的，而且明天还有长跑比赛，这时不是应该在宿舍里舒服地泡泡脚，休养生息吗。不过，也挺好的。</p>
+<p>拍完照后，分为两路，一批人去环学校游，而我和志斌姐薯仔猫猫毛毛去一饭坐坐。一路上，志斌姐不断地在吐槽以及模仿我发出的那个语气词“啊~”，此时的他，或许还没想到他模仿之后带来的影响。</p>
+<p><img src="http://image.jinl1874.xyz/img/20201107163048.png" alt="image-20201107163044069"></p>
+<p>在一饭时，上完厕所的志斌姐带了臭 dd 过来，一起唠嗑了一阵后，再度与众人在一饭前会和，然后往下一目的地出发。<del>炮姐</del>秋秋过来了，身为龙王的她竟然有点安静，还是有点出乎意料的。在唠嗑期间，猫猫提出要我去认人，其实也不是特别难，一般而言，他们越是着重形容和描述哪点，这点是假的概率就特大，比如华稽。而鸡腿倒是如（网络）印象中一般，话唠属性一览无余。后来，鸡腿说我像他见过的人，其实我也感觉他很眼熟，在哪见过来着。<br>路上遇到了嘟嘟，差指一算，上次见面还是两年前呢，这次是真的好久不见。</p>
+<h2 id="凌晨-1"><a href="#凌晨-1" class="headerlink" title="凌晨"></a>凌晨</h2><p>来到目的地后，如果说之前的是麻雀五脏俱全，那这个算是房厅吧，也找不到形容词了，不过好在便宜。劳累的毛毛在车上就在秋秋的怀抱中睡去，不得不说，女生之间的感情太好嗑了。</p>
+<p>之后在里面来了几局狼人杀，平时看起来没什么话的森罗在其游戏上突然强势起来，劳劳地掌控着局势的发展。而鸡腿的话唠属性在此刻派上大用处，新手在第一次玩就说得头头是道，倒是我到现在还不知道怎么发言。贴心的薯仔还给输了的人涂上指甲油，当晚有两局，我的两个手指甲也上了色。</p>
+<p>凌晨中最难受的事是什么？是明明已经两点多了，但是亢奋的大脑却没有任何困意，同时白晃晃的石灰墙壁在不段地刺痛眼睛。无奈之下，只好退出，强迫自己去睡觉。睡之前，先把瓜姐充满的手机拔下，再插上快没电的充电宝，没想到我那个续航血崩的手机一直在上车之前都没用上，倒是意外地在拔下的手机派上用场。</p>
+<h2 id="上午-1"><a href="#上午-1" class="headerlink" title="上午"></a>上午</h2><p>七点多，我回到那个带镜子的舞蹈室里，新面孔在七点多就全部回去了。</p>
+<p>经过昨晚志斌姐不间段地发出那个语气词，便有一种席卷之势，谁都要来一句。声音由”啊“发展过来，发音变成了”嗯”，只是用于表达惊讶和掩饰尴尬来着。一直以来听起来都很正常，然后志斌姐带起了这个头，导到变得非常不正常，以至于到后来瓜表示烦的情况下风哥还拿手机录下来……</p>
+<p>所以说罪魁祸首是志斌姐。</p>
+<h2 id="中午-1"><a href="#中午-1" class="headerlink" title="中午"></a>中午</h2><p>咖喱再次起床时，已经接近中午，全员都起床后徒步去吃早餐——牛杂煲以及榴芒煲。说起早餐，早上还是第一次吃冰冷的粽子，味道说得上是难吃，最后想带其到一饭热一热，吃上一口热粽子，但在散步时被扔掉了，甚是可惜。</p>
+<p>牛杂煲，顾名思义，即牛杂做的煲，精髓在其牛杂上。</p>
+<p><img src="http://image.jinl1874.xyz/img/20201107173128.png" alt="image-20201107173123837"></p>
+<p>榴芒煲，也顾名思义，里面包括榴莲和芒果，再用鸡肉汤做其汤底，精髓在其汤上，鸡肉有点柴，味道尚不及汤里的胡萝卜；而榴莲则稍有过甜，一个还行，两个容易腻；芒果则是如平常熟透的芒果味道一般，虽在煲里，但没有沾上过多味道，应是后加上的；而汤的味道带着榴莲的甜，又夹着鸡肉的鲜，味道可算不错。</p>
+<p><img src="http://image.jinl1874.xyz/img/20201107173525.png" alt="image-20201107173521906"></p>
+<blockquote>
+<p>黑暗料理是也</p>
+</blockquote>
+<p>吃完饭后，薯仔和森罗提前坐车回家了，而大家则向北江大提出发。广东的 11 月下午，烈阳高照，却阻挡了不钓鱼佬钓鱼的决心。一人一伞一凳一杆，在河边静静地等待着鱼儿的上钩，而在其一旁的虾似乎在思考，或许是在想会不会有虾上钩吧。</p>
+<p><img src="http://image.jinl1874.xyz/img/20201107181509.png" alt="image-20201107181505558"></p>
+<h2 id="下午-1"><a href="#下午-1" class="headerlink" title="下午"></a>下午</h2><p>到学校时，与嘟嘟分别。</p>
+<p>排球场上，与众人来了一段连菜鸡都打不出的排球。老旧的排球拍的时候感觉很轻，但是真正拍出去的时候感觉特别重，拍得也很低，发了好几次球仅有一次过网，排球也砸在手里的时候也感觉有点痛。而咖喱貌似没把球弄过网过，猫猫也能时不时来个好球。倒是风哥似乎上手极快，发球接球都挺顺利。不过正要大展身手之时，排球部的人来训练了，这时大家忙把球放回原位，悻悻地收拾收拾之后就跑路了。</p>
+<p>雅食园中，与大家来了几局棋。</p>
+<p><img src="http://image.jinl1874.xyz/img/20201107181420.png" alt="image-20201107181418134"></p>
+<p>先是和猫猫来一局象棋，然后与咖喱先来几局五子棋，再来一局围棋。五子棋被完虐，经志斌姐解释一波玩法后，局势先处下风，再扳回一点局势，最后被志斌姐虐杀。</p>
+<p>为找回场子，我换了象棋与志斌姐再战一盘，最后在送了一个车的情况下实现绝杀。那时我好像想起了大二那年曾参加校内棋协办的比赛，最后得了第二名，这么多年了，我还是没得过一次第一名。</p>
+<h2 id="傍晚-1"><a href="#傍晚-1" class="headerlink" title="傍晚"></a>傍晚</h2><p>出到甜密密买了蛋糕之后，与志斌姐分别。</p>
+<p>慢悠悠走在那条小路上的时候，后来者咖喱、猫猫和虾骑着电动车居上了。越过我时，虾在前面停下，表示时间不多了，并示意我站上共享电动车与其一起前进。犹豫了一下，便站上车轮边上的横杠，双手紧紧地抱着虾，肩膀还是那么温暖，那么有安全感。</p>
+<h2 id="归程-1"><a href="#归程-1" class="headerlink" title="归程"></a>归程</h2><p>来到东门时，虾正和门卫大爷唠嗑，而我则是到处走走。</p>
+<p>回到门口时，瓜仔和风哥还没到，却意外发现毛毛和鸡腿出现了。是啊，他俩来送我们了。</p>
+<p>在那里，与鸡腿毛毛挥手告别，再见了。</p>
+<h2 id="他们-1"><a href="#他们-1" class="headerlink" title="他们"></a>他们</h2><p>他们，包括了他们和她们，还有未曾谋面的他们和她们。他们里面有给我造成心理阴影的他，疯颠的他，甜甜的他俩，圆圆的她，瘦瘦的她，高大的他，爸爸的他，累累的她，令我印象深刻的她，印象较少的他，话唠的他，安静的他，不知道怎么形容的他。</p>
+<p>他们，以及她，都是我想见的。</p>
+<blockquote>
+<p>遇见你的注定，她会有多幸运。<a href="#refer"><sup>[3]</sup></a></p>
+</blockquote>
+<div id="refer"> </div>
+
+<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><p>[1]：<a href="https://www.bilibili.com/video/BV1p7411u7M4" target="_blank" rel="noopener">陈奕迅：夕阳无限好</a></p>
+<p>[2]： <a href="https://mp.weixin.qq.com/s/53l79kW5eomkcI35mjYp8Q" target="_blank" rel="noopener">西瓜瓜 CH：No.78</a></p>
+<p>[3]：<a href="https://www.bilibili.com/video/BV1BW411h7rp" target="_blank" rel="noopener">田馥甄：小幸运</a></p>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>life</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>火狐上有哪些值得安装的扩展</title>
     <url>/2020/07/19/firefox-addons/</url>
     <content><![CDATA[<p>2020 年，主要就是使用下面这些扩展。</p>
@@ -1427,33 +1636,6 @@
       <tags>
         <tag>firefox</tag>
         <tag>addons</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>图片转为PDF文件的几种方法</title>
-    <url>/2020/06/30/img-to-pdf/</url>
-    <content><![CDATA[<blockquote>
-<p>最近下载《Death Note》漫画，只是只有图片，想了想还转为 PDF 比较好看，经过一番查找，找到了几种方法。</p>
-</blockquote>
-<h4 id="1-系统自带的打印为-PDF-文件"><a href="#1-系统自带的打印为-PDF-文件" class="headerlink" title="1. 系统自带的打印为 PDF 文件"></a>1. 系统自带的打印为 PDF 文件</h4><p>具体操作：选择好图片 -&gt; 右键 -&gt; 打印 -&gt; 选择大小为 A4 纸 -&gt; 打印。<br>优点：简单，并且不用安装任何软件。<br>缺点：图片的大小会改变，不能展示原来的图片。</p>
-<h4 id="2-SanPDF"><a href="#2-SanPDF" class="headerlink" title="2. SanPDF"></a>2. SanPDF</h4><p>一个专业搞 PDF、WORD、EXCEL 之间转换以及操作的软件。<br>具体操作：去<a href="https://www.sanpdf.com/" target="_blank" rel="noopener">官网</a>下载安装，可以把安装目录放在 C 盘以外的盘。安装后打开，选择图片转 PDF，然后添加文件，再点击右上角的生成 pdf 即可在图片所在目录找到 PDF 文件。<br><img src="https://pic4.zhimg.com/80/v2-5d3facfd8a47d609b034dfb45649554b.png" alt="Image"><br>生成的 pdf 如图所示:<br><img src="https://pic4.zhimg.com/80/v2-dca7e5275bae0c6cb21925d34c92c604.png" alt="Image"><br>优点：图片是原生大小，亦是原生质量，比较清晰。此软件还可以操作其它诸如 word 与 pdf 互转、pdf 转图片等操作，是个难得的好软件。<br>缺点：是付费软件，不过可以绿色软件下载。</p>
-<h4 id="3-使用-python-里的-reportlab-生成-pdf"><a href="#3-使用-python-里的-reportlab-生成-pdf" class="headerlink" title="3. 使用 python 里的 reportlab 生成 pdf"></a>3. 使用 python 里的 <code>reportlab</code> 生成 pdf</h4><ul>
-<li>首先需要安装<code>reportlab</code>库，如果你的电脑已经安装了 pip，那么只需一条<code>pip install reportlab</code>命令即可。</li>
-<li>以下是 python 图片转为 pdf 的代码</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> reportlab.lib.pagesizes <span class="keyword">import</span> A4, portrait, landscape</span><br><span class="line"><span class="keyword">from</span> reportlab.pdfgen <span class="keyword">import</span> canvas</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">convert_images_to_pdf</span><span class="params">(img_path, pdf_path)</span>:</span></span><br><span class="line">    pages = <span class="number">0</span></span><br><span class="line">    (w, h) = portrait(A4)</span><br><span class="line">    c = canvas.Canvas(pdf_path, pagesize=portrait(A4))</span><br><span class="line">    l = os.listdir(img_path)</span><br><span class="line">    l.sort(key=<span class="keyword">lambda</span> x: int(x[:<span class="number">-4</span>]))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> l:</span><br><span class="line">        f = img_path + os.sep + str(i)</span><br><span class="line">        c.drawImage(f, <span class="number">0</span>, <span class="number">0</span>, w, h)</span><br><span class="line">        c.showPage()</span><br><span class="line">        pages = pages + <span class="number">1</span></span><br><span class="line">    c.save()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">path = <span class="string">r"D://web//script//pxtt-118"</span></span><br><span class="line">pdf_path = <span class="string">r"D://web//script//pdf//pxtt-118.pdf"</span></span><br><span class="line"></span><br><span class="line">convert_images_to_pdf(path, pdf_path)</span><br></pre></td></tr></table></figure>
-
-<p>将上面的 path 改为图片的目录路径，pdf_path 改为具体到文件名的路径。注意图片目录路径不能包含除图片外的文件，否则会报错。</p>
-<p>优点：同上面系统操作 pdf。<br>缺点：很麻烦。</p>
-<p>欢迎访问我的<a href="https://jinl1874.xyz">博客网站</a>。</p>
-]]></content>
-      <categories>
-        <category>Python</category>
-        <category>Other</category>
-      </categories>
-      <tags>
-        <tag>img</tag>
-        <tag>other</tag>
       </tags>
   </entry>
   <entry>
@@ -1523,6 +1705,41 @@
       </tags>
   </entry>
   <entry>
+    <title>获取必应首页的壁纸</title>
+    <url>/2020/06/01/sipder/</url>
+    <content><![CDATA[<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ol>
+<li><p>安装python3</p>
+</li>
+<li><p>安装 requests、lxml库</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pip install requests</span><br><span class="line">pip install lxml</span><br></pre></td></tr></table></figure>
+<h3 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h3></li>
+<li><p>导入模块和设置变量</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line"><span class="keyword">import</span> io</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">url = <span class="string">'https://cn.bing.com/'</span></span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">"User-Agent"</span>: <span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537."</span></span><br><span class="line">    <span class="string">"36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用requests库请求必应首页的资源</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">response = requests.get(url, headers=headers)</span><br></pre></td></tr></table></figure></li>
+<li><p>使用xpath解析出图片的名字与链接</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 使用xpath解析得到数据</span></span><br><span class="line">html = etree.HTML(response.text, etree.HTMLParser())</span><br><span class="line"><span class="comment"># 得到图片链接</span></span><br><span class="line">image_url = html.xpath(<span class="string">"//head//link[@id='bgLink']/@href"</span>)[<span class="number">0</span>]</span><br><span class="line"><span class="comment"># 得到一个名字与版权的字符串</span></span><br><span class="line">filename = html.xpath(<span class="string">"//a[@id='sh_cp']/@title"</span>)[<span class="number">0</span>]</span><br><span class="line"><span class="comment"># 使用正则表达式去年版权商</span></span><br><span class="line">re_object = re.match(<span class="string">'(.*?)\s.*?\\)'</span>, filename)</span><br><span class="line">filename = re_object[<span class="number">1</span>]</span><br><span class="line"><span class="comment"># 因为得到 image_url 是没网址前缀的，所以需要加上</span></span><br><span class="line">pic_url = url + image_url</span><br><span class="line">filename = filename + <span class="string">".jpg"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成一个文件夹放置图片</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 当前的文件目录</span></span><br><span class="line">current_dir = os.getcwd()</span><br><span class="line">img_dir = current_dir + <span class="string">"\\bing_img"</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(img_dir):</span><br><span class="line">    os.makedirs(img_dir)</span><br></pre></td></tr></table></figure></li>
+<li><p>保存图片</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">read = requests.get(pic_url)</span><br><span class="line"><span class="comment"># 保存图片</span></span><br><span class="line"><span class="keyword">with</span> open(img_dir + <span class="string">'\\&#123;&#125;'</span>.format(filename), <span class="string">'wb'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">    fp.write(read.content)</span><br><span class="line">    fp.close()</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>在命令行下运行该文件，会得到一个文件夹，图片就放在里面。</p>
+<p><a href="https://github.com/jinl1874/spider" target="_blank" rel="noopener">github地址</a></p>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>spider</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用七牛云和PicGo来创建自己的图床</title>
     <url>/2020/05/22/qiniuImage/</url>
     <content><![CDATA[<blockquote>
@@ -1581,38 +1798,30 @@
       </tags>
   </entry>
   <entry>
-    <title>获取必应首页的壁纸</title>
-    <url>/2020/06/01/sipder/</url>
-    <content><![CDATA[<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ol>
-<li><p>安装python3</p>
-</li>
-<li><p>安装 requests、lxml库</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pip install requests</span><br><span class="line">pip install lxml</span><br></pre></td></tr></table></figure>
-<h3 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h3></li>
-<li><p>导入模块和设置变量</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line"><span class="keyword">import</span> io</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">url = <span class="string">'https://cn.bing.com/'</span></span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">"User-Agent"</span>: <span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537."</span></span><br><span class="line">    <span class="string">"36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用requests库请求必应首页的资源</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">response = requests.get(url, headers=headers)</span><br></pre></td></tr></table></figure></li>
-<li><p>使用xpath解析出图片的名字与链接</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 使用xpath解析得到数据</span></span><br><span class="line">html = etree.HTML(response.text, etree.HTMLParser())</span><br><span class="line"><span class="comment"># 得到图片链接</span></span><br><span class="line">image_url = html.xpath(<span class="string">"//head//link[@id='bgLink']/@href"</span>)[<span class="number">0</span>]</span><br><span class="line"><span class="comment"># 得到一个名字与版权的字符串</span></span><br><span class="line">filename = html.xpath(<span class="string">"//a[@id='sh_cp']/@title"</span>)[<span class="number">0</span>]</span><br><span class="line"><span class="comment"># 使用正则表达式去年版权商</span></span><br><span class="line">re_object = re.match(<span class="string">'(.*?)\s.*?\\)'</span>, filename)</span><br><span class="line">filename = re_object[<span class="number">1</span>]</span><br><span class="line"><span class="comment"># 因为得到 image_url 是没网址前缀的，所以需要加上</span></span><br><span class="line">pic_url = url + image_url</span><br><span class="line">filename = filename + <span class="string">".jpg"</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>生成一个文件夹放置图片</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 当前的文件目录</span></span><br><span class="line">current_dir = os.getcwd()</span><br><span class="line">img_dir = current_dir + <span class="string">"\\bing_img"</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(img_dir):</span><br><span class="line">    os.makedirs(img_dir)</span><br></pre></td></tr></table></figure></li>
-<li><p>保存图片</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">read = requests.get(pic_url)</span><br><span class="line"><span class="comment"># 保存图片</span></span><br><span class="line"><span class="keyword">with</span> open(img_dir + <span class="string">'\\&#123;&#125;'</span>.format(filename), <span class="string">'wb'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">    fp.write(read.content)</span><br><span class="line">    fp.close()</span><br></pre></td></tr></table></figure>
+    <title>图片转为PDF文件的几种方法</title>
+    <url>/2020/06/30/img-to-pdf/</url>
+    <content><![CDATA[<blockquote>
+<p>最近下载《Death Note》漫画，只是只有图片，想了想还转为 PDF 比较好看，经过一番查找，找到了几种方法。</p>
+</blockquote>
+<h4 id="1-系统自带的打印为-PDF-文件"><a href="#1-系统自带的打印为-PDF-文件" class="headerlink" title="1. 系统自带的打印为 PDF 文件"></a>1. 系统自带的打印为 PDF 文件</h4><p>具体操作：选择好图片 -&gt; 右键 -&gt; 打印 -&gt; 选择大小为 A4 纸 -&gt; 打印。<br>优点：简单，并且不用安装任何软件。<br>缺点：图片的大小会改变，不能展示原来的图片。</p>
+<h4 id="2-SanPDF"><a href="#2-SanPDF" class="headerlink" title="2. SanPDF"></a>2. SanPDF</h4><p>一个专业搞 PDF、WORD、EXCEL 之间转换以及操作的软件。<br>具体操作：去<a href="https://www.sanpdf.com/" target="_blank" rel="noopener">官网</a>下载安装，可以把安装目录放在 C 盘以外的盘。安装后打开，选择图片转 PDF，然后添加文件，再点击右上角的生成 pdf 即可在图片所在目录找到 PDF 文件。<br><img src="https://pic4.zhimg.com/80/v2-5d3facfd8a47d609b034dfb45649554b.png" alt="Image"><br>生成的 pdf 如图所示:<br><img src="https://pic4.zhimg.com/80/v2-dca7e5275bae0c6cb21925d34c92c604.png" alt="Image"><br>优点：图片是原生大小，亦是原生质量，比较清晰。此软件还可以操作其它诸如 word 与 pdf 互转、pdf 转图片等操作，是个难得的好软件。<br>缺点：是付费软件，不过可以绿色软件下载。</p>
+<h4 id="3-使用-python-里的-reportlab-生成-pdf"><a href="#3-使用-python-里的-reportlab-生成-pdf" class="headerlink" title="3. 使用 python 里的 reportlab 生成 pdf"></a>3. 使用 python 里的 <code>reportlab</code> 生成 pdf</h4><ul>
+<li>首先需要安装<code>reportlab</code>库，如果你的电脑已经安装了 pip，那么只需一条<code>pip install reportlab</code>命令即可。</li>
+<li>以下是 python 图片转为 pdf 的代码</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> reportlab.lib.pagesizes <span class="keyword">import</span> A4, portrait, landscape</span><br><span class="line"><span class="keyword">from</span> reportlab.pdfgen <span class="keyword">import</span> canvas</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">convert_images_to_pdf</span><span class="params">(img_path, pdf_path)</span>:</span></span><br><span class="line">    pages = <span class="number">0</span></span><br><span class="line">    (w, h) = portrait(A4)</span><br><span class="line">    c = canvas.Canvas(pdf_path, pagesize=portrait(A4))</span><br><span class="line">    l = os.listdir(img_path)</span><br><span class="line">    l.sort(key=<span class="keyword">lambda</span> x: int(x[:<span class="number">-4</span>]))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> l:</span><br><span class="line">        f = img_path + os.sep + str(i)</span><br><span class="line">        c.drawImage(f, <span class="number">0</span>, <span class="number">0</span>, w, h)</span><br><span class="line">        c.showPage()</span><br><span class="line">        pages = pages + <span class="number">1</span></span><br><span class="line">    c.save()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">path = <span class="string">r"D://web//script//pxtt-118"</span></span><br><span class="line">pdf_path = <span class="string">r"D://web//script//pdf//pxtt-118.pdf"</span></span><br><span class="line"></span><br><span class="line">convert_images_to_pdf(path, pdf_path)</span><br></pre></td></tr></table></figure>
 
-</li>
-</ol>
-<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>在命令行下运行该文件，会得到一个文件夹，图片就放在里面。</p>
-<p><a href="https://github.com/jinl1874/spider" target="_blank" rel="noopener">github地址</a></p>
+<p>将上面的 path 改为图片的目录路径，pdf_path 改为具体到文件名的路径。注意图片目录路径不能包含除图片外的文件，否则会报错。</p>
+<p>优点：同上面系统操作 pdf。<br>缺点：很麻烦。</p>
+<p>欢迎访问我的<a href="https://jinl1874.xyz">博客网站</a>。</p>
 ]]></content>
       <categories>
         <category>Python</category>
+        <category>Other</category>
       </categories>
       <tags>
-        <tag>python</tag>
-        <tag>spider</tag>
+        <tag>img</tag>
+        <tag>other</tag>
       </tags>
   </entry>
   <entry>
@@ -1767,6 +1976,45 @@
       </tags>
   </entry>
   <entry>
+    <title>推理小说《寻狗事务所》-书评</title>
+    <url>/2020/07/30/%E4%B9%A6%E8%AF%84-%E5%AF%BB%E7%8B%97%E4%BA%8B%E5%8A%A1%E6%89%80/</url>
+    <content><![CDATA[<p>一言以蔽之，是一本有意思的小说。</p>
+<p>寻狗事务所一本推理小说，作者是米泽穗信。说起米泽穗信，大概率想起的作品是《冰菓》。《冰菓》由于京都动画出色的改编，导致这本冷门小众的日常推理题材得以被大家得知。我看过几本他的书，如《冰菓》《寻狗事务所》《再见妖精》以及《羔羊的盛宴》，题材各有不同，但是有一个相同的特点，就是灰暗。《冰菓》在京都的改编下，添加了些许温暖的情节，如在第七集《初见真身》的最后，加上了一段姐姐背着妹妹的情节，故事变得温暖多了。</p>
+<p>本书的类型是本格推理，从书名得知，事务所就是侦探所，是侦探接收委托的地方。</p>
+<p>主角是一个常见的日式作品主角，不是很温柔，不是很暴力，个性中规中矩。他在大城市工作，不久患了异位性皮肤炎，在城里治不好，不得已回到乡下。<br>病治好后做在附近开了一个事务所，本意寻找丢失的狗，奈何推荐来的人没有一个是寻狗的。或者说本书除了那次在大街上保护小学生被狗咬之外，就跟狗没什么关系了。</p>
+<p>事务所除主角外还有一人，名叫半田半平，人设是没头脑，是主角的以前的同学。由于一直想成为侦探，就来前应聘。</p>
+<p>主角一开始接了一个找失踪孙女佐久良桐子的委托，然后又接了一个搞明白古文里的信息，这个任务由半平完成。两个人分别执行两个任务，一小节换一个第一视角（这算是日本小说的常态了吧，第一视角随便换，个人不太喜欢这种作品。第三人称可以随便换，但第一人称换的话，看着会有点别扭）。</p>
+<h4 id="以下有剧透"><a href="#以下有剧透" class="headerlink" title="以下有剧透"></a>以下有剧透</h4><p>主角从各种方面去找该失踪女性。在本市里发现了很多有关于她的踪迹。又发现了桐子做了个网站，并喜欢在该网站发布自己的日记。并在在朋友的帮助下，找到了相关的网站内容。，但是被一个网名为螳螂的人缠上了，不断地在网上骚扰她。桐子不堪其扰，关闭了网站，但一个月后又重新开启，螳螂又开始在留言里骚扰她。三个月后，桐子又关闭了网站，并且已经迁移了户藉。</p>
+<p>在另一条线里，半平从一个地方查找另一个地方，发现要解开古文的内容，需要一本书。而那本书比较少，半平要借的时候发现已经没了，只得预约。发现还有一个人也是要借该书，并答应给书到了借给他看。</p>
+<p>在另一边，主角发现了桐子失踪的原因。螳螂通过一些蛛丝马迹找到了其本人姓名住处，简单来说就是人肉，而且与她直接接触过了。并分析出她现在最有可能在地方是在共爷爷奶奶家。果不其然在其家中的隐秘位置发现了生活过的踪迹，还发现了一本日记，讲述了她的心理历程，以及现在躲在一个“谷中城”的地方，但并没有人知道这个“谷中城”在哪。</p>
+<p>回到事务所后，半平带了一个曾被桐子委托过的保镖。了解到了一部分情况，那个人叫间壁良太郎，曾两次去桐子家。第一次做了什么在书中并没有透露。</p>
+<blockquote>
+<p>我仔细地想了想“第二次”这三个字所代表的意思。</p>
+<p>“第一次是在她找上你们‘阿部调查事务所’之前发生的，对吧？”</p>
+<p>“是的。”</p>
+<p>“当时间壁对佐久良小姐做了什么？”</p>
+<p>“……这我不能说。”</p>
+<p>田中的脸上写着“敬请见谅”四个大字。<br>“没有报警吗？”</p>
+<p>“因为这是自诉罪。一想到提出告诉可能会对她造成很大的伤害，我们怎么样也没办法大力鼓吹。”</p>
+<p>我大概可以猜得出来到底发生什么事了。</p>
+</blockquote>
+<p>这里是书中暧昧的对话，到底是什么事才会导致桐子雇保镖，报警又会对自身造成比较大的伤害。我查了下百科，里面讲日本没有自诉，也许百度百科是错的吧。不过到现在我也没有猜出到底发生事。</p>
+<p>第二次在去桐子的家中被桐子刺伤过，不过他并没有追究什么事。并表明出院后会去找桐子。</p>
+<p>第二天，主角看半平写的有关古文的报告里，得知了谷中城的位置，而该位置是由那本书提供，也就说，只要找到了那本书，即可找到桐子的位置。这时候，主角得知了另一个着急用此书的人，推断此人即为螳螂。</p>
+<p>之后，主角在赶往谷中城的过程中突然意识到，一切没有那么简单。桐子回到本市后做的事太明显了太暴露了，尤其是那本笔记，仿佛是在刻意告诉她的位置。此时，终于发现桐子与螳螂的关系转变，“他是猎物，我才是猎人”。引诱其来到一处几乎没人知道的谷中城，再了结此事，一切都是桐子的计划。</p>
+<p>最后，主角来了谷中城，大喊之后桐子现身。此时主角必需装作什么事都不知道的样子，否则主角也会出事。与桐子谈了自己出现在这里的原因是她爷爷的委托，并简单说了几句之后就回去。</p>
+<p>结尾处，主角在口袋里装着一把小刀。</p>
+<hr>
+<p>本书有着本格推理的很多要素，如侦探、助手、案子、寻找线索、推理以及反转等。<br>叙事方式是双线叙事，就个人感受而言，助手线略无趣些，无论是事件的内容，还是具体寻找的内容，就如流水账一般，主角线稍好看些。<br>本书的剧情方面中规中矩，没有什么太亮眼的地方，讨论了一些网络里的人肉搜索吧。本书的年代是 2004 年，那时的日本都已经有了人肉搜索了吗。或者说这说的是跟踪狂吧，从网络一直追到现实里去。诡计也还行，猎物变为猎人，猜出来的难度也比较低（虽然我没猜出来），大部分人看到在桐子家日记的时候，就感觉到非常不对劲了吧。</p>
+<p>桐子的后续结局会怎么样呢？我觉得大概率会被查到。首先螳螂被杀后导致失踪了很久，自然会有人报案。并且会检查螳螂相对应的行踪、电脑、以及盘问身边的人。并且他之前受了伤，虽然填的是自己导致受伤的，但是很可能会按这里往下查，或许会查到桐子吧。不过找不找得到证剧又是另一回事了。</p>
+<p>本书的结局算一个亮点吧，侦探发现了事情的真相，加害人成了受害者。但是侦探并没有解决事情，并且凶手也依然逍遥法外，还在侦探的身边。侦探在整件事情过后，每天都过着瑟瑟发抖的生活。不过最多也是一个有趣的点吧。</p>
+<p>本书值不值得看呢，说值也值，说不值也行，一本中规中矩的推理小说吧。</p>
+]]></content>
+      <tags>
+        <tag>book</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo 双线布置到2020新版 Coding 和 GithubPage</title>
     <url>/2020/05/23/useCoding/</url>
     <content><![CDATA[<h4 id="为什么使用-Coding"><a href="#为什么使用-Coding" class="headerlink" title="为什么使用 Coding"></a>为什么使用 Coding</h4><p>现在国内访问 github 的速度已经非常慢了，而且百度的爬虫也无法抓取到 github page 上面的内容。<br>而 Coding 类似于 github，也是一个免费的代码托管平台，随便一个仓库都可以用来做静态网页服务，访问速度也还可以。</p>
@@ -1830,45 +2078,6 @@
       </tags>
   </entry>
   <entry>
-    <title>推理小说《寻狗事务所》-书评</title>
-    <url>/2020/07/30/%E4%B9%A6%E8%AF%84-%E5%AF%BB%E7%8B%97%E4%BA%8B%E5%8A%A1%E6%89%80/</url>
-    <content><![CDATA[<p>一言以蔽之，是一本有意思的小说。</p>
-<p>寻狗事务所一本推理小说，作者是米泽穗信。说起米泽穗信，大概率想起的作品是《冰菓》。《冰菓》由于京都动画出色的改编，导致这本冷门小众的日常推理题材得以被大家得知。我看过几本他的书，如《冰菓》《寻狗事务所》《再见妖精》以及《羔羊的盛宴》，题材各有不同，但是有一个相同的特点，就是灰暗。《冰菓》在京都的改编下，添加了些许温暖的情节，如在第七集《初见真身》的最后，加上了一段姐姐背着妹妹的情节，故事变得温暖多了。</p>
-<p>本书的类型是本格推理，从书名得知，事务所就是侦探所，是侦探接收委托的地方。</p>
-<p>主角是一个常见的日式作品主角，不是很温柔，不是很暴力，个性中规中矩。他在大城市工作，不久患了异位性皮肤炎，在城里治不好，不得已回到乡下。<br>病治好后做在附近开了一个事务所，本意寻找丢失的狗，奈何推荐来的人没有一个是寻狗的。或者说本书除了那次在大街上保护小学生被狗咬之外，就跟狗没什么关系了。</p>
-<p>事务所除主角外还有一人，名叫半田半平，人设是没头脑，是主角的以前的同学。由于一直想成为侦探，就来前应聘。</p>
-<p>主角一开始接了一个找失踪孙女佐久良桐子的委托，然后又接了一个搞明白古文里的信息，这个任务由半平完成。两个人分别执行两个任务，一小节换一个第一视角（这算是日本小说的常态了吧，第一视角随便换，个人不太喜欢这种作品。第三人称可以随便换，但第一人称换的话，看着会有点别扭）。</p>
-<h4 id="以下有剧透"><a href="#以下有剧透" class="headerlink" title="以下有剧透"></a>以下有剧透</h4><p>主角从各种方面去找该失踪女性。在本市里发现了很多有关于她的踪迹。又发现了桐子做了个网站，并喜欢在该网站发布自己的日记。并在在朋友的帮助下，找到了相关的网站内容。，但是被一个网名为螳螂的人缠上了，不断地在网上骚扰她。桐子不堪其扰，关闭了网站，但一个月后又重新开启，螳螂又开始在留言里骚扰她。三个月后，桐子又关闭了网站，并且已经迁移了户藉。</p>
-<p>在另一条线里，半平从一个地方查找另一个地方，发现要解开古文的内容，需要一本书。而那本书比较少，半平要借的时候发现已经没了，只得预约。发现还有一个人也是要借该书，并答应给书到了借给他看。</p>
-<p>在另一边，主角发现了桐子失踪的原因。螳螂通过一些蛛丝马迹找到了其本人姓名住处，简单来说就是人肉，而且与她直接接触过了。并分析出她现在最有可能在地方是在共爷爷奶奶家。果不其然在其家中的隐秘位置发现了生活过的踪迹，还发现了一本日记，讲述了她的心理历程，以及现在躲在一个“谷中城”的地方，但并没有人知道这个“谷中城”在哪。</p>
-<p>回到事务所后，半平带了一个曾被桐子委托过的保镖。了解到了一部分情况，那个人叫间壁良太郎，曾两次去桐子家。第一次做了什么在书中并没有透露。</p>
-<blockquote>
-<p>我仔细地想了想“第二次”这三个字所代表的意思。</p>
-<p>“第一次是在她找上你们‘阿部调查事务所’之前发生的，对吧？”</p>
-<p>“是的。”</p>
-<p>“当时间壁对佐久良小姐做了什么？”</p>
-<p>“……这我不能说。”</p>
-<p>田中的脸上写着“敬请见谅”四个大字。<br>“没有报警吗？”</p>
-<p>“因为这是自诉罪。一想到提出告诉可能会对她造成很大的伤害，我们怎么样也没办法大力鼓吹。”</p>
-<p>我大概可以猜得出来到底发生什么事了。</p>
-</blockquote>
-<p>这里是书中暧昧的对话，到底是什么事才会导致桐子雇保镖，报警又会对自身造成比较大的伤害。我查了下百科，里面讲日本没有自诉，也许百度百科是错的吧。不过到现在我也没有猜出到底发生事。</p>
-<p>第二次在去桐子的家中被桐子刺伤过，不过他并没有追究什么事。并表明出院后会去找桐子。</p>
-<p>第二天，主角看半平写的有关古文的报告里，得知了谷中城的位置，而该位置是由那本书提供，也就说，只要找到了那本书，即可找到桐子的位置。这时候，主角得知了另一个着急用此书的人，推断此人即为螳螂。</p>
-<p>之后，主角在赶往谷中城的过程中突然意识到，一切没有那么简单。桐子回到本市后做的事太明显了太暴露了，尤其是那本笔记，仿佛是在刻意告诉她的位置。此时，终于发现桐子与螳螂的关系转变，“他是猎物，我才是猎人”。引诱其来到一处几乎没人知道的谷中城，再了结此事，一切都是桐子的计划。</p>
-<p>最后，主角来了谷中城，大喊之后桐子现身。此时主角必需装作什么事都不知道的样子，否则主角也会出事。与桐子谈了自己出现在这里的原因是她爷爷的委托，并简单说了几句之后就回去。</p>
-<p>结尾处，主角在口袋里装着一把小刀。</p>
-<hr>
-<p>本书有着本格推理的很多要素，如侦探、助手、案子、寻找线索、推理以及反转等。<br>叙事方式是双线叙事，就个人感受而言，助手线略无趣些，无论是事件的内容，还是具体寻找的内容，就如流水账一般，主角线稍好看些。<br>本书的剧情方面中规中矩，没有什么太亮眼的地方，讨论了一些网络里的人肉搜索吧。本书的年代是 2004 年，那时的日本都已经有了人肉搜索了吗。或者说这说的是跟踪狂吧，从网络一直追到现实里去。诡计也还行，猎物变为猎人，猜出来的难度也比较低（虽然我没猜出来），大部分人看到在桐子家日记的时候，就感觉到非常不对劲了吧。</p>
-<p>桐子的后续结局会怎么样呢？我觉得大概率会被查到。首先螳螂被杀后导致失踪了很久，自然会有人报案。并且会检查螳螂相对应的行踪、电脑、以及盘问身边的人。并且他之前受了伤，虽然填的是自己导致受伤的，但是很可能会按这里往下查，或许会查到桐子吧。不过找不找得到证剧又是另一回事了。</p>
-<p>本书的结局算一个亮点吧，侦探发现了事情的真相，加害人成了受害者。但是侦探并没有解决事情，并且凶手也依然逍遥法外，还在侦探的身边。侦探在整件事情过后，每天都过着瑟瑟发抖的生活。不过最多也是一个有趣的点吧。</p>
-<p>本书值不值得看呢，说值也值，说不值也行，一本中规中矩的推理小说吧。</p>
-]]></content>
-      <tags>
-        <tag>book</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用 javascript 编写自动填写问卷星的脚本</title>
     <url>/2020/06/30/%E4%BD%BF%E7%94%A8js%E6%93%8D%E4%BD%9C%E9%97%AE%E5%8D%B7%E6%98%9F/</url>
     <content><![CDATA[<h5 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h5><p>最近闲来无事，想来做一个自动填写的问卷星 JS 脚本。</p>
@@ -1922,24 +2131,37 @@
       </tags>
   </entry>
   <entry>
-    <title>《夏日重现》：孤岛轮回故事</title>
-    <url>/2020/08/19/%E6%BC%AB%E8%AF%84-%E3%80%8A%E5%A4%8F%E6%97%A5%E9%87%8D%E7%8E%B0%E3%80%8B/</url>
-    <content><![CDATA[<p><img src="https://pic4.zhimg.com/80/v2-bb93bd931cf296761d456b59563a998f.jpg" alt="Image"><br>先下结论，就目前来看，是一部优秀的悬疑轮回漫画。</p>
-<p>这是一部轮回悬疑漫画，就目前来讲，伏笔众多，回收合理，故事展开优秀。目前看到了一百多话，漫画有一个合理结尾不是太大问题。</p>
-<p>故事发生一个小岛上，这也是常用的场景了，与隔绝的农村、小镇的作用一样，用来隔绝外界。并且这些地方都有一些不为人知的背后。比如在一些 18 禁的作品里，村里只有一男村长，其它的都是女性，就给外来的人提供了一个舞台。而本作是属于有一段神奇的过去，有几个神奇的人(或者应该叫妖？)，并一直影响到现在。</p>
-<p>男主得知青梅竹马死去的消息，于是赶回小岛参加其葬礼。在船上做了一个有关死去的青梅竹马的梦，醒来后扑到一个女性的胸上……</p>
-<p>参加葬礼后，主角发现澪被杀，接着又发现船上的女性也被杀。这时又出现了第二个澪，然后被其杀死，轮回开始……</p>
-<p>去年发现这部漫画时只有四十多话，看第二遍时发现了很多剧情伏笔铺垫，作者大概已经想好整个故事了吧。</p>
-<p>令我印象深刻的还是开头不久，澪来接男主的时候，没刹住自行车跌到海底时露出了内裤被男主看到。这个场景在日本漫画里比比皆是，本以为是单纯的卖肉，但没想到后面男主确定她的身份时用到了这个。</p>
-<p>本漫画是一本悬疑漫画，在其基础上加入了轮回的设定，男主通过轮回来一点点地解开悬疑。并且作者也给男主的轮回添加了一些限制，每次轮回的时间都会向前走，让反派也可以继承轮回的记忆与数据。故事进行下去，越来越复杂，但是都有前面的铺垫一一对应。烂尾的可能性应该比较小，值得一看。</p>
-<p>吐槽一下动漫之家上的译名，或者说根本没译，直接把英文名搬过来了，导致贴吧上只有寥寥几人。</p>
-<p>目前连载在 jump + 平台上，漫画是优秀的，不知道未来有没有机会动画化。</p>
+    <title>寒蝉鸣泣之时-小说</title>
+    <url>/2020/10/06/%E5%AF%92%E8%9D%89%E9%B8%A3%E6%B3%A3%E4%B9%8B%E6%97%B6/</url>
+    <content><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>很久之前就听说过这个作品，前些天终于决定要看。本来是想直接看动画的，但是在知乎看到其动画的评价很低，并推荐去玩原作游戏。</p>
+<a id="more"></a>
+
+<p>于是我开启了寻找游戏的流程，去各大 Gal 网站都没找到资源，然后发现 steam 上有免费的鬼隐篇。但是发现仅支持日文以及英文。之后，我在本吧找到其汉化补丁。大概两三天的时间，就玩完了鬼隐篇。本来想在 steam 上买的，但是没找到汉化补丁。</p>
+<p>然后我又在贴吧找到了游戏资源，但是萌化版的画质、分辨率都太低了。然后继续找资源，发现还有小说。</p>
+<p>但是在老福特分享的小说都是 txt 文件，找了很久也没找到 EPUB 文件。所以就决定自己制作一份，毕竟对于我来说，没有排版的 TXT 文件是读不下去。<br>于是将其重新制作排版了一下（中间换了一个译本来源），我没找到本书的 epub 文件，于是就加了一些原作可能不存在的目录。</p>
+<p>还有就是一些原译本扫描过程中带来的错，一个对话分段，也已经尽可能修复了。（大部分都集中在第二篇中，因为这里的译本是从其它地方拿来的</p>
+<p>也就导致某些译名不一样，比如寒蝉会翻译成暮蝉）。推荐大家使用”多看阅读“来阅读，另外，排版就个人而言还是挺不错的，至少能看得下去。<br>最后就是，如果大家能接受小说的话，还是推荐大家去阅读一下的。</p>
+<h3 id="制作过程"><a href="#制作过程" class="headerlink" title="制作过程"></a>制作过程</h3><p>寒蝉有解题篇以及出题篇。解题篇还是比出题篇长的，没找到书本的封面，然后只能找漫画的封面来填。里面还插了几张漫画内容或者其它卷的封面。</p>
+<p>还有就是解题篇的目录实在是太难找了，在前面的目录是中文，但是在内容的标题却夹着日文，导致只能一个个对比加上。有的还找不到，只能靠感觉加上了，或许会有一些目录会出错吧。</p>
+<p>不过年代这么久远了，已经找不到这些书的 epub 文件了，也算是给补上了吧。但是寒蝉有游戏、漫画以及动画的情况下，阅读小说的人是非常少的。</p>
+<p>不过这也算是个人的偏执吧，小说只有文字，没有因年代留下的痕迹。而其动画以及游戏因年代过于久远，画质以及其它方面的制作都比较落后。现在就算看/玩的话，也很难看下去。</p>
+<p>如果有什么遗憾的话，就是小说的译本都很差（个人感觉），如果有正版的就好了（虽然是不可能的）。而且文本里太多省略号了，无论是什么样的语气都加个省略号。在省略号后加标点符号、在文本开始前加，无处不在的省略号使我发狂，于是我删去了大量的省略号，仅有一些表示无语以及是真的省略的省略号。不过只有在解题篇删了。</p>
+<p>重制版动画就要来了，期待新动画的表现。</p>
+<h3 id="简评（有小部分剧透）"><a href="#简评（有小部分剧透）" class="headerlink" title="简评（有小部分剧透）"></a>简评（有小部分剧透）</h3><p>有时候，一部作品没有看完，他人的玩梗式评价会导致很多人误解这部作品，或者说造成误解才是正常的，毕竟这个故事很多都是由误会引起的。</p>
+<p>《寒蝉》最出名的梗大概就是那句“蝉在叫，人坏掉”吧，还有各种论坛里时不时地来一句治愈番之类的话，再配上一张柴刀少女图，导致我对这部作品的印象是一部猎奇血腥动画。</p>
+<p>看完出题篇以及解题篇后，猎奇血腥固然有，不过仅在《目明篇》有较多描写，其它篇章的杀人都算是比较“正常”的杀人。或者说是每个篇章的侧重点都不一样，都有不同的元素，猎奇仅仅是其中一种，而出题篇前三篇注重恐怖气氛的渲染，由圭一的第一视角来认识雏见泽，第四篇《暇溃篇》更像是一个小外传；后面解题篇则是各有各的风格，《目明篇》是比较血腥，而《罪灭篇》以及《皆杀篇》的气氛则是比较紧张刺激，各方势力在明争暗斗，但最后都逃不过“大灾难”。至于最后的《祭囃篇》，是比较欢快的，最后的决战像小孩子过家家一样（虽然一方的年龄确实不怎么大），治愈番也许就是从最后一篇来的吧。对我而则是比较无趣的，不过前面的鹰野的故事以及中间的碎片整理是挺有意思的，把事件的原貌基本都展现了出来。</p>
+<p>总结一下，整部作品说的是一个误会的故事，这种误会有的是无意引起的，比如鬼隐篇里那个带“针”的饼，怜奈强大的推理能力导致圭一怀疑人生，以及最后的“针筒”恶作剧，还有《祟杀篇》里的圭一明明不现场，但是伙伴们却一口咬定圭一在绵流祭上，导致圭一开始怀疑人生，其中最大的误会是羽入时不时的灵异表现，这导致本来是正常发生的事，愣是加了一层不正常的面纱；有的是刻意造成的，比如圆崎家的祖训，魅音她们的隐瞒。单有误会其实还不算什么大事，但是这种误会遇到了一种病，叫雏见泽候群症，两者结合再加上第三方势力的插入（“东京”、沙都子的叔父、怜奈的“后妈”等）就会造成各个篇章里的悲剧。</p>
+<p>要破解这个局，需要解开这些误会，来获得朋友的帮助。因为个人的力量是有限的，梨花在《皆杀篇》之前一直不相信自己的朋友，没有将事情告诉她们。在《皆杀篇》里看到圭一联合众人救了沙都子，于是开始相信朋友，将事情告诉了她们。但在最后因为之前错信了人，导致功亏一篑，自己也同样的死法死去。到了最后一章，由于羽入的帮忙，梨花众人团结一心，再加上 bug 一样的赤坂，成功拯救自己以及整个雏见泽。</p>
+<p>我想整个故事想说的是，有困难要多和朋友沟通，多相信朋友，否则很容易出事。</p>
+<p>转自我的知乎回答 <a href="https://www.zhihu.com/question/276855671/answer/1503964672" target="_blank" rel="noopener">https://www.zhihu.com/question/276855671/answer/1503964672</a></p>
+<h3 id="文件地址"><a href="#文件地址" class="headerlink" title="文件地址"></a>文件地址</h3><p>Github 地址：<a href="https://github.com/jinl1874/e-book/，欢迎star。" target="_blank" rel="noopener">https://github.com/jinl1874/e-book/，欢迎star。</a></p>
+<p>蓝奏云地址： <a href="https://wwa.lanzous.com/b0cqj1kti" target="_blank" rel="noopener">https://wwa.lanzous.com/b0cqj1kti</a> 密码:achq</p>
 ]]></content>
       <categories>
         <category>读书</category>
       </categories>
       <tags>
-        <tag>manga</tag>
+        <tag>book</tag>
       </tags>
   </entry>
   <entry>
@@ -2015,37 +2237,86 @@
       </tags>
   </entry>
   <entry>
-    <title>寒蝉鸣泣之时-小说</title>
-    <url>/2020/10/06/%E5%AF%92%E8%9D%89%E9%B8%A3%E6%B3%A3%E4%B9%8B%E6%97%B6/</url>
-    <content><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>很久之前就听说过这个作品，前些天终于决定要看。本来是想直接看动画的，但是在知乎看到其动画的评价很低，并推荐去玩原作游戏。</p>
-<a id="more"></a>
-
-<p>于是我开启了寻找游戏的流程，去各大 Gal 网站都没找到资源，然后发现 steam 上有免费的鬼隐篇。但是发现仅支持日文以及英文。之后，我在本吧找到其汉化补丁。大概两三天的时间，就玩完了鬼隐篇。本来想在 steam 上买的，但是没找到汉化补丁。</p>
-<p>然后我又在贴吧找到了游戏资源，但是萌化版的画质、分辨率都太低了。然后继续找资源，发现还有小说。</p>
-<p>但是在老福特分享的小说都是 txt 文件，找了很久也没找到 EPUB 文件。所以就决定自己制作一份，毕竟对于我来说，没有排版的 TXT 文件是读不下去。<br>于是将其重新制作排版了一下（中间换了一个译本来源），我没找到本书的 epub 文件，于是就加了一些原作可能不存在的目录。</p>
-<p>还有就是一些原译本扫描过程中带来的错，一个对话分段，也已经尽可能修复了。（大部分都集中在第二篇中，因为这里的译本是从其它地方拿来的</p>
-<p>也就导致某些译名不一样，比如寒蝉会翻译成暮蝉）。推荐大家使用”多看阅读“来阅读，另外，排版就个人而言还是挺不错的，至少能看得下去。<br>最后就是，如果大家能接受小说的话，还是推荐大家去阅读一下的。</p>
-<h3 id="制作过程"><a href="#制作过程" class="headerlink" title="制作过程"></a>制作过程</h3><p>寒蝉有解题篇以及出题篇。解题篇还是比出题篇长的，没找到书本的封面，然后只能找漫画的封面来填。里面还插了几张漫画内容或者其它卷的封面。</p>
-<p>还有就是解题篇的目录实在是太难找了，在前面的目录是中文，但是在内容的标题却夹着日文，导致只能一个个对比加上。有的还找不到，只能靠感觉加上了，或许会有一些目录会出错吧。</p>
-<p>不过年代这么久远了，已经找不到这些书的 epub 文件了，也算是给补上了吧。但是寒蝉有游戏、漫画以及动画的情况下，阅读小说的人是非常少的。</p>
-<p>不过这也算是个人的偏执吧，小说只有文字，没有因年代留下的痕迹。而其动画以及游戏因年代过于久远，画质以及其它方面的制作都比较落后。现在就算看/玩的话，也很难看下去。</p>
-<p>如果有什么遗憾的话，就是小说的译本都很差（个人感觉），如果有正版的就好了（虽然是不可能的）。而且文本里太多省略号了，无论是什么样的语气都加个省略号。在省略号后加标点符号、在文本开始前加，无处不在的省略号使我发狂，于是我删去了大量的省略号，仅有一些表示无语以及是真的省略的省略号。不过只有在解题篇删了。</p>
-<p>重制版动画就要来了，期待新动画的表现。</p>
-<h3 id="简评（有小部分剧透）"><a href="#简评（有小部分剧透）" class="headerlink" title="简评（有小部分剧透）"></a>简评（有小部分剧透）</h3><p>有时候，一部作品没有看完，他人的玩梗式评价会导致很多人误解这部作品，或者说造成误解才是正常的，毕竟这个故事很多都是由误会引起的。</p>
-<p>《寒蝉》最出名的梗大概就是那句“蝉在叫，人坏掉”吧，还有各种论坛里时不时地来一句治愈番之类的话，再配上一张柴刀少女图，导致我对这部作品的印象是一部猎奇血腥动画。</p>
-<p>看完出题篇以及解题篇后，猎奇血腥固然有，不过仅在《目明篇》有较多描写，其它篇章的杀人都算是比较“正常”的杀人。或者说是每个篇章的侧重点都不一样，都有不同的元素，猎奇仅仅是其中一种，而出题篇前三篇注重恐怖气氛的渲染，由圭一的第一视角来认识雏见泽，第四篇《暇溃篇》更像是一个小外传；后面解题篇则是各有各的风格，《目明篇》是比较血腥，而《罪灭篇》以及《皆杀篇》的气氛则是比较紧张刺激，各方势力在明争暗斗，但最后都逃不过“大灾难”。至于最后的《祭囃篇》，是比较欢快的，最后的决战像小孩子过家家一样（虽然一方的年龄确实不怎么大），治愈番也许就是从最后一篇来的吧。对我而则是比较无趣的，不过前面的鹰野的故事以及中间的碎片整理是挺有意思的，把事件的原貌基本都展现了出来。</p>
-<p>总结一下，整部作品说的是一个误会的故事，这种误会有的是无意引起的，比如鬼隐篇里那个带“针”的饼，怜奈强大的推理能力导致圭一怀疑人生，以及最后的“针筒”恶作剧，还有《祟杀篇》里的圭一明明不现场，但是伙伴们却一口咬定圭一在绵流祭上，导致圭一开始怀疑人生，其中最大的误会是羽入时不时的灵异表现，这导致本来是正常发生的事，愣是加了一层不正常的面纱；有的是刻意造成的，比如圆崎家的祖训，魅音她们的隐瞒。单有误会其实还不算什么大事，但是这种误会遇到了一种病，叫雏见泽候群症，两者结合再加上第三方势力的插入（“东京”、沙都子的叔父、怜奈的“后妈”等）就会造成各个篇章里的悲剧。</p>
-<p>要破解这个局，需要解开这些误会，来获得朋友的帮助。因为个人的力量是有限的，梨花在《皆杀篇》之前一直不相信自己的朋友，没有将事情告诉她们。在《皆杀篇》里看到圭一联合众人救了沙都子，于是开始相信朋友，将事情告诉了她们。但在最后因为之前错信了人，导致功亏一篑，自己也同样的死法死去。到了最后一章，由于羽入的帮忙，梨花众人团结一心，再加上 bug 一样的赤坂，成功拯救自己以及整个雏见泽。</p>
-<p>我想整个故事想说的是，有困难要多和朋友沟通，多相信朋友，否则很容易出事。</p>
-<p>转自我的知乎回答 <a href="https://www.zhihu.com/question/276855671/answer/1503964672" target="_blank" rel="noopener">https://www.zhihu.com/question/276855671/answer/1503964672</a></p>
-<h3 id="文件地址"><a href="#文件地址" class="headerlink" title="文件地址"></a>文件地址</h3><p>Github 地址：<a href="https://github.com/jinl1874/e-book/，欢迎star。" target="_blank" rel="noopener">https://github.com/jinl1874/e-book/，欢迎star。</a></p>
-<p>蓝奏云地址： <a href="https://wwa.lanzous.com/b0cqj1kti" target="_blank" rel="noopener">https://wwa.lanzous.com/b0cqj1kti</a> 密码:achq</p>
+    <title>《夏日重现》：孤岛轮回故事</title>
+    <url>/2020/08/19/%E6%BC%AB%E8%AF%84-%E3%80%8A%E5%A4%8F%E6%97%A5%E9%87%8D%E7%8E%B0%E3%80%8B/</url>
+    <content><![CDATA[<p><img src="https://pic4.zhimg.com/80/v2-bb93bd931cf296761d456b59563a998f.jpg" alt="Image"><br>先下结论，就目前来看，是一部优秀的悬疑轮回漫画。</p>
+<p>这是一部轮回悬疑漫画，就目前来讲，伏笔众多，回收合理，故事展开优秀。目前看到了一百多话，漫画有一个合理结尾不是太大问题。</p>
+<p>故事发生一个小岛上，这也是常用的场景了，与隔绝的农村、小镇的作用一样，用来隔绝外界。并且这些地方都有一些不为人知的背后。比如在一些 18 禁的作品里，村里只有一男村长，其它的都是女性，就给外来的人提供了一个舞台。而本作是属于有一段神奇的过去，有几个神奇的人(或者应该叫妖？)，并一直影响到现在。</p>
+<p>男主得知青梅竹马死去的消息，于是赶回小岛参加其葬礼。在船上做了一个有关死去的青梅竹马的梦，醒来后扑到一个女性的胸上……</p>
+<p>参加葬礼后，主角发现澪被杀，接着又发现船上的女性也被杀。这时又出现了第二个澪，然后被其杀死，轮回开始……</p>
+<p>去年发现这部漫画时只有四十多话，看第二遍时发现了很多剧情伏笔铺垫，作者大概已经想好整个故事了吧。</p>
+<p>令我印象深刻的还是开头不久，澪来接男主的时候，没刹住自行车跌到海底时露出了内裤被男主看到。这个场景在日本漫画里比比皆是，本以为是单纯的卖肉，但没想到后面男主确定她的身份时用到了这个。</p>
+<p>本漫画是一本悬疑漫画，在其基础上加入了轮回的设定，男主通过轮回来一点点地解开悬疑。并且作者也给男主的轮回添加了一些限制，每次轮回的时间都会向前走，让反派也可以继承轮回的记忆与数据。故事进行下去，越来越复杂，但是都有前面的铺垫一一对应。烂尾的可能性应该比较小，值得一看。</p>
+<p>吐槽一下动漫之家上的译名，或者说根本没译，直接把英文名搬过来了，导致贴吧上只有寥寥几人。</p>
+<p>目前连载在 jump + 平台上，漫画是优秀的，不知道未来有没有机会动画化。</p>
 ]]></content>
       <categories>
         <category>读书</category>
       </categories>
       <tags>
-        <tag>book</tag>
+        <tag>manga</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网友见面会</title>
+    <url>/2020/10/13/%E7%BD%91%E5%8F%8B%E8%A7%81%E9%9D%A2%E4%BC%9A/</url>
+    <content><![CDATA[<p>多天以后，在面对学校的饭菜时，将会想起那天在吃西红柿炒鸡蛋时的遗憾。</p>
+<a id="more"></a>
+
+<p>10 月，为数不多在学校过的国庆。</p>
+<p>想找个词形容，发现还是网友见面最合适，毕竟大家有同校的有不同校的，称呼也是靠网名称呼，不是鱼虾猫狗鼠等动物，就是瓜咖喱等植物，又或者是各种不知道是什么意义网名，比如风酷什么的，还有一些性别错乱的名字。大家不知道对面的名字（也许就只有我一个不知道，其实我是曾经知道的，但是确实也没必要去记，毕竟虾是虾，酷姐姐是酷姐姐就行了），总之，网友见面会是不会错的，毕竟大家都是从一个 Q 群开始，到现在还是在 Q 群里（其实也不能算是群里，毕竟微信一建一大群，真的很想吐槽微信的零成本建群。不过说到底，也有很多人不在群里，每年人暑假开始活跃，到国庆到慢慢冷下去，周而复始，正应了那句歌词——”位置变了，各有队友“。）。</p>
+<p>扯太远了，扯回到当天。</p>
+<h3 id="早点"><a href="#早点" class="headerlink" title="早点"></a>早点</h3><p>只记得那天早早地走校园，坐上地铁，最后来到传说中的南粤早点。</p>
+<p>据说此处有南粤第一包和第二包（其实我是后面才听到的），但到了那时已经是饥肠辘辘，已无心第一第二包，只想喝粥。或者说是不想吃包吧，心里莫名地对面包有一种排斥感。又想到他们还有一段时间才到，于是就先点了。他们都先点了几个早点，然后给菜单给我。在那里翻了又翻，发现有一道叫什么豆腐的，想了想自己还挺喜欢吃豆腐的，于是就勾上了。</p>
+<p><img src="http://image.jinl1874.xyz/img/IMG_20201003_101718.jpg" alt=""></p>
+<p>但是我没想到的有两点，一是这里没有白饭，二是这个豆腐实在是太咸了，没有米饭的加持，实在是难以下咽。我实在是不知道为什么会有这么一个菜出现在这里，我也不知道为什么会这么咸，我唯一知道的是这个豆腐没几个人能吃得下……</p>
+<p><img src="http://image.jinl1874.xyz/img/mmexport1601691280698.jpg" alt=""></p>
+<p>点了大概有十几种早点吧，虽然是当午饭一起吃了。中间穿插了几波拍照风波，毕竟是个拍照狂，走路时还说要从下往上拍……可以理解可以理解。印象比较深的是那个虾蛟，不是有多好吃，虽然确实挺好吃，而是个人对香菜不太感冒，所以就第一个提出来了。（其实我挺好奇那个菜花是什么味道来着。）</p>
+<p>还有那个”巧克力“，奶油味的巧克力，或者说到底是不是巧克力都不知道。就是下图左边那个萌萌的东西。</p>
+<p><img src="http://image.jinl1874.xyz/img/mmexport1601694514160.jpg" alt=""></p>
+<p>被众人怂恿地吃了一”脚“后：</p>
+<p><img src="http://image.jinl1874.xyz/img/image-20201011003621598.png" alt="image-20201011003621598"></p>
+<p>到底是不是巧克力的味道呢，其实我太久没吃巧克力，忘了具体的味道。不过确实吃出一股浓浓地不和谐味道——塑料制品的味道……</p>
+<p><img src="http://image.jinl1874.xyz/img/mmexport1601866528382.jpg" alt="image-20201011010529126"></p>
+<p>右边尽头那个是南粤第二包。</p>
+<p>之后有两个小伙伴没来到，于是大家就打算把精美的点心以及南粤第一二包带去。南粤第二包已经说了，南粤第一包说是第一包其实也不算南粤第一包，毕竟也不是南粤做的，而是波仔从学校里的带出来的，说是第一包也没有错，毕竟这是第一个出场的，而第二包是第二个出场的。可惜的是到最后也没有人吃下这个第一包，毕竟两块钱一个肉馅呢。</p>
+<h3 id="买菜"><a href="#买菜" class="headerlink" title="买菜"></a>买菜</h3><p>其中，那个娃娃机里面的鼠仔挺可爱的，可惜薯仔没能夹到。</p>
+<p>分两波人，大概就是走走停停买买，毕竟有专业人士买，我只负责跟就行了。</p>
+<h3 id="合宿"><a href="#合宿" class="headerlink" title="合宿"></a>合宿</h3><h4 id="KTV"><a href="#KTV" class="headerlink" title="KTV"></a>KTV</h4><p>三点未到，人已到，还好房东在场，得以顺利进去。</p>
+<p>麻将、桌球、游戏机、智能电视、KTV 房以及厨房，麻雀虽小，五脏俱全。</p>
+<p>各人找到自己的位置坐下，麻将四人组，还有街机二人组，麦霸二人组，PS4 游戏机。</p>
+<p>我走进 KTV，理狗也在此处，唯独不见麦霸。在那里折腾一下，拿起了人生的第一个 KTV 麦克风（好吧，此处是夸张，其实以前唱过，但是由此发现自己唱歌实在太难听，就很少唱了，都是听麦霸唱），试过音，才发现这个 KTV 声音有点小，看来五脏全是全了，但未必够吃了。所以导致唱的时候需要很卖力地唱（不会发音的后果），不久之后就感觉出声困难了。在原唱的掩护下，也听不出我唱的声音了。所以我真的佩服，也感谢能唱个把小时的，能在晚上看恐怖片是给我一种甜甜的、安心的感觉。</p>
+<p><img src="http://image.jinl1874.xyz/img/image-20201011015117546.png" alt="image-20201011015117546"></p>
+<p>其后不久，大家陆陆续续来到。其中最大的惊讶是酷姐姐来了，其实在此之前就隐隐约约有这种感觉了，之前说在上海度假，但是偏偏买了机票回来。所以来也不会很奇怪，但实在是在群里装得太像了，以至于在 KTV 里看到时还有些略微地不相信，或许这就是惊喜吧。虽然长相已经忘得差不多了，但靠着能和鲤鱼拌嘴，以及仅存的一点身高印象还是认出来了。但为了避免认错人，还是谨慎地问了一句。</p>
+<p>之后走出 KTV，发现猫在教薯仔以及瓜在玩 PS4，我其实想说一句，早上的时候，自己摸索着玩果然是不行的。</p>
+<p>不久，小哥在群里说十分钟后到，没想到三十分钟过后还没见影子呢……来了就开始秀桌球技术，仅有风才能与之抗衡，像志斌姐、虾这些，只能眼睁睁地看着他一杆一杆地打进洞里。</p>
+<h4 id="菜"><a href="#菜" class="headerlink" title="菜"></a>菜</h4><p><img src="http://image.jinl1874.xyz/img/mmexport1601728039014.jpg" alt=""></p>
+<blockquote>
+<p>西红柿炒鸡蛋就在右上角，虽然用盆装不太好看。</p>
+</blockquote>
+<p>走进厨房时，他们正在做饭，或者说是准备菜吧，因为有很大一部分是用来打火锅的。现在回想起来，当时我的帮忙是不是有点多余呢，毕竟……或许吧。</p>
+<p>来到电视机前，想和鲤鱼来一盘久违的童年 FC 游戏，感叹一下爷青回，没想到读取不了。遂放弃，选择再打开电视，来看一下久违的《猫和老鼠》，毕竟也就这个能看。其实每到一个地方，我就喜欢用这个电视去看。</p>
+<p>所谓的家常菜有六样，一是炒玉米黄瓜火腿粒，二是西红柿炒鸡蛋，三是可乐鸡翅，四是炒豆角，五是辣炒猪肉丁，六是水煮菜心。在制作过程中貌似出现了一点意外，因为火力过大的缘故，厨房里充满油烟，而且油烟机用不了，导致整个房间都弃满油烟，不得不关上门来，所以其实我也不知道具体发生了什么。最后端上来的豆角出现了黑化，一直想试下，但最后被吃光。一开始我在想为什么风哥这么有经验怎么还会出现这样的事，后来在群里无意间看到一张咖喱在炒豆角的图片，怪不得风哥后面吃黑化豆角时还点评了一句“还挺好吃的”。</p>
+<p>还有西红柿炒鸡蛋，这是个人比较喜爱的一道菜，曾陪我走过一段段孤寂的时光。自己在家也做了好多次，但总是不得精髓，在一些地方总是差了许多，比如有时放得太多油了盖住了鸡蛋的香气，有时弄得太干了，有时搞得很多汁，总之没能做成一个满意的西红柿炒鸡蛋。而这次的做法第一个不同的地方就是把西红柿的皮削掉了，虽然我也没觉得皮有多好吃，但是从来没想过把皮削掉。然后就不知道，毕竟当时我也不在场。之后吃到成品时，确实是记忆中（雅食园）的味道，但又有不同之处，削了皮之后的西红柿更碎了，西红柿特有的酸味少了许多，并且与鸡蛋融合得更好了。而汁水也恰到好处，香味恰好处。可惜的是，缺少一份白米饭。西红柿炒鸡蛋在什么时候最好吃？是在西红柿炒鸡蛋与白米饭这对 CP 在一起时，没有米饭的西红柿炒鸡蛋就像缺了灵魂了，虽然好吃，但仅仅也只是好吃而己。当时最大的遗憾莫过于此。</p>
+<p>顺道一讲，拍黄瓜挺好吃的。</p>
+<p>晚饭由家常菜和火锅菜组成，内容大致都差不多，用当晚不知道是谁说的话来讲就是“有家的感觉”。</p>
+<p>晚饭过后，来了一阵子轻松的桌球，师出咖喱、末尝一胜。</p>
+<h4 id="恐怖片"><a href="#恐怖片" class="headerlink" title="恐怖片"></a>恐怖片</h4><p>之后就到了紧张刺激的看恐怖电影的时间，虽然一点也不紧张刺激。</p>
+<p>一是片子，二是环境，三设备。</p>
+<p>恐怖片是《死寂》，讲的是灵异人偶的故事。你说它恐怖吧，确实恐怖，但在观影过程确实没感到有多恐怖。可能血腥镜头较少，我可能没感受到危险，但最重要的原因入不了戏。入不了戏主要是因为环境的事，门时不时地开一下，旁边的酷姐姐森罗时不时大叫一下，波仔冷不防地来几句剧透，并且被理狗的体重压着。不过也能可能是沙雕网友在身边感觉比较有安全感吧。还有就是设备的问题，那个电影经常性地重复画面，大概是剪辑出错了。但这不是重点，重点是网络问题，也许不是网络问题，但是哪个问题都一样，就是一到关键时候，突然显示 <code>0B/s</code>，嗓子眼都要提起来了，但突然就卡住了。只能说观影体验极差。</p>
+<p>又和理狗来了几次桌球，但无一不是完败。</p>
+<h4 id="尾声"><a href="#尾声" class="headerlink" title="尾声"></a>尾声</h4><p>合宿的尾声，是一首生日歌，风哥的新历生日。说实话，我是挺佩服记住别人生日的，我连生日的那天到了都没感觉，也许是记不记住都没什么区别吧。最后惯例，合唱拍照一气呵成。不久因精力不足不得不去休息，其实我挺想知道那晚唱浮夸的是谁，唱得那么大声，隔着两层门都能听到……</p>
+<h3 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h3><p><img src="http://image.jinl1874.xyz/img/1602567465205.jpg" alt=""></p>
+<p>第二天去了个饭馆吃饭，这是后话，不提。</p>
+<p>很多人都说了，这天最大的感受是开心，很幸福。</p>
+<p>我也是这样，从内到外的开心，没什么拘束，彼此认识又不认识，熟悉又不熟悉，也许这是最好的相处吧。</p>
+<p>期待下一次见面，下次打球肯定赢理狗。</p>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>life</tag>
       </tags>
   </entry>
   <entry>
@@ -2086,6 +2357,76 @@
       <tags>
         <tag>manga</tag>
         <tag>脑洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>百年孤独全人物</title>
+    <url>/2020/10/09/%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC%E5%85%A8%E4%BA%BA%E7%89%A9/</url>
+    <content><![CDATA[<h3 id="人物表"><a href="#人物表" class="headerlink" title="人物表"></a>人物表</h3><ul>
+<li>奥雷里亚诺·布恩迪亚上校：开头面对行刑队的人，最后在家中死去。</li>
+</ul>
+<a id="more"></a>
+
+<ul>
+<li>梅尔基亚德斯：身形肥大的吉卜赛人，一位炼金术师以及航海家，经常拿新奇的东西来马孔多，最后在新加坡的沙洲上死于热病，被丢到了爪哇海的最深处。但又重返人世，拯救了陷入失眠症的马孔多，最后死在马孔多。</li>
+<li>何塞·阿尔卡蒂奥·布恩迪亚：马孔多的族长，爱研究一些稀奇古怪的东西，上校的父亲。拥有传奇的一生，最后死在马孔多。</li>
+<li>何塞·阿尔卡蒂奥：上校的哥哥，貌似他们家喜欢用一样的名字，一开始我把哥哥和父亲混为同一个人了。长大后与庇拉尔·特尔内拉发生肉体关系，但是由于庇拉尔告知其怀孕后，开始逃避她。后来与吉卜赛女朗发生关系，并与其离开马孔多。在蕾梅黛丝死后回来，与丽贝卡发生关系，并结为夫妇，被乌尔苏拉逐出家门。最后在家中被枪杀。</li>
+<li>乌尔苏拉·伊瓜兰：何塞的妻子，寻找大儿子途中发现走得太远了，索性不再回头（当时我看到这里是极其懵逼的，这样就走了……）。直到五个月后才回来，并带来大沼泽另一边的人。那场四年的大雨过后，开始清除家里各种虫子，不久后死去，年龄在一百一十五到一百二十五里。</li>
+<li>弗朗西斯·德雷克：袭击里奥阿查的海盗，乌尔苏拉的曾祖母因其受到烫伤。并由此，乌尔苏拉的曾祖父与何塞·阿尔卡蒂奥·布恩迪亚的的曾祖父合作经营。这是为了促进他们之间联系而有的战斗。</li>
+<li>普鲁邓希奥·阿基拉尔：何塞的斗鸡对手，输了之后用鸡内涵何塞。而何塞与其决斗，最后被何塞用长矛刺死，何塞也由此于乌尔苏拉行夫妻之事。但最后何塞夫妻因良心烦扰（经常看到死去的他的出现）而决定离开原本的里奥阿查。在其死后经常去马孔多与已经发疯何塞谈话，最后拉何塞到另一个世界去。</li>
+<li>庇拉尔·特尔内拉：十四岁时强暴她的男人，因为外来户的关系直到二十二岁也没公开关系，被家人强迫离开来到马孔多。想一直等他，但已经厌倦了等待，于是转去勾引何塞·阿尔卡蒂奥（上校的哥哥），或者说与其发生肉体关系。告诉何塞·阿尔卡蒂奥怀孕的消息后不久，何塞·阿尔卡蒂奥同样走了。之后，她又与上校发生关系并生下一儿子。指导奥雷里亚诺后，在一个欢宴的夜晚中死在藤摇椅上。</li>
+<li>阿玛兰妲：何塞·阿尔卡蒂奥·布恩迪亚新出生的女儿，上校的妹妹，爱上了丽贝卡爱的男人，并阻止他们结婚，不幸下手毒死蕾梅黛丝。丽贝卡与何塞·阿尔卡蒂奥结婚后，阿玛兰妲与皮埃特罗相恋，但拒绝与其结婚。之后又与赫里内勒多·马尔克斯相恋，仍拒绝与其结婚。最后以一个老处女的身份在家死去。</li>
+<li>何塞·阿尔卡蒂奥：庇拉尔·特尔内拉与何塞·阿尔卡蒂奥的儿子，继承了何塞·阿尔卡蒂奥的名字，避免混淆，只叫阿尔卡蒂奥。长大后过于疯狂，面对保守派时执意抵抗，投降后被判处枪决。</li>
+<li>比西塔西翁：瓜希拉印第安人，为逃避部落的失眠症，放弃王位与弟弟来到此处，也是众多孩子的保姆。最后在马孔多安详离去。</li>
+<li>卡塔乌雷：比西塔西翁的弟弟，发现丽贝卡有其祖国的失眠症后，逃离马孔多。何塞·阿尔卡蒂奥·布恩迪亚死的那天回到马孔多，是为了“王的下葬”。</li>
+<li>丽贝卡·布恩迪亚：从马纳乌雷来马孔多投奔，是乌尔苏拉的远房表妹、何塞·阿尔卡蒂奥·布恩迪亚的亲人，尼卡诺尔·乌略亚和丽贝卡·蒙铁尔的女儿。因为对所有名字都没反应，所以就使用她母亲的名字作为其名字，姓是后来加上的。一到爱情烦恼的时候就爱吃土，并且容易出事。先是与皮埃特罗相爱订婚，但何塞·阿尔卡蒂奥回来后瞬间就抛弃了皮埃特罗，并与其结婚。何塞·阿尔卡蒂奥死后，将自己封闭起来，被镇人的人遗忘。最后在乌尔苏拉死的那年年底死去。</li>
+<li>好汉弗朗西斯科：两百岁的江湖艺人，常带来各地见闻。</li>
+<li>堂阿波利纳尔·摩斯科特：里正，政府人员，地方官 。</li>
+<li>安帕萝·摩斯科特：堂阿波利纳尔的女儿。</li>
+<li>蕾梅黛丝·摩斯科特：堂阿波利纳尔九岁的小女儿，被上校看上。后来过了青春后成为了上校的妻子，但在皮埃特罗与丽贝卡婚礼前的一星期里被阿玛兰妲下毒，导致内脏撕裂，三天后被自己的血毒死，双胞胎也胎死腹中。</li>
+<li>皮埃特罗·克雷斯皮：意大利技师，负责安装和调试自动钢琴，与丽贝卡订婚，但阿玛兰妲亦喜欢他，百般阻挠其婚礼。最后他与阿玛兰妲相恋，但是阿玛兰妲拒绝与其结婚，绝望之下割腕自杀。</li>
+<li>马格尼菲科·比斯马勒：上校最亲密的好友，建村元老的儿子，名字与其父亲相同。最后死在马孔多的暴徒手里。</li>
+<li>赫里内勒多·马尔克斯：上校最亲密的好友，建村元老的儿子，名字与其父亲相同。喜欢阿玛兰妲，但阿玛兰妲一直不肯与其结婚，被拒绝后发给上校一个电报“马孔多在下雨”。曾被俘，但是上校用战俘救他出来。晚年时拒绝了上校重新发起战争的请求，最后在那场四年多的大雨中死去。</li>
+<li>尼卡诺尔·雷伊纳：主持婚礼的神甫。</li>
+<li>奥雷里亚诺·何塞：奥雷里亚诺和庇拉尔·特尔内拉的儿子，长大后爱上自己的姑妈阿玛兰妲，想与其发生关系，但被拒绝。之后成为了一个浪荡人士，最后被阿基莱斯·里卡多上尉开枪打死。</li>
+<li>阿利黎奥·诺格拉：表面上是马孔多医生，实际上是自由党狂热人士。</li>
+<li>维多利奥·梅迪纳：上校投奔的革命军将领。</li>
+<li>桑塔索菲亚·德拉·彼达：阿尔卡蒂奥的情人。晚年时试图拯救被各种虫子侵蚀的家，但是失败了。最后离开了这个家。</li>
+<li>格雷戈·史蒂文森上校：受奥雷里亚诺之托向阿尔卡蒂奥报信，但阿尔卡蒂奥并不相信他，将其关押起来。最后保守派攻打马孔多时被放出来一起作战，被大炮轰死。</li>
+<li>罗格·卡尔尼塞罗：执行枪决奥雷里亚诺·布恩迪亚的上尉军官，但枪决被何塞·阿尔卡蒂奥阻止，叛变到奥雷里亚诺阵营。</li>
+<li>蕾梅黛丝：桑塔索菲亚·德拉·彼达与阿尔卡蒂奥的长女，被称为美 人儿蕾梅黛。最后连带着床单飞上天。·</li>
+<li>何塞·阿尔卡蒂奥第二：桑塔索菲亚·德拉·彼达与阿尔卡蒂奥的双胞胎儿子之一。长大后成为工会领导人，但是在一次活动中发生一个大屠杀，此后除他之外，领导人被官方全部杀死，官方宣传没发生任何事。他自己被一个年轻的军官放过。最后在梅尔基亚德斯的房间里与其孪生兄弟交谈中死去。</li>
+<li>奥雷里亚诺第二：桑塔索菲亚·德拉·彼达与阿尔卡蒂奥的双胞胎儿子之一。孪生兄弟死后不久，他也在妻子旁死去。在最后下葬时弄混了，把两人葬在各自的坟墓里。又或者是，这才是正确的坟墓呢。</li>
+<li>何塞·拉克尔·蒙卡达：保守党将军，战后马孔多的第一任市长。上校攻打马孔多时想逃走，但被捕了。最后判处死刑。</li>
+<li>奥雷里亚诺：上校的十七个儿子的名都是这样，姓随其母亲，后来被一一暗杀。</li>
+<li>阿基莱斯·里卡多：马孔多驻军首领，掌握马孔多的市政大权。开枪打奥雷里亚诺·何塞时，被两发来源不明的子弹打死。</li>
+<li>费尔南达·德尔·卡皮奥：奥雷里亚诺第二的妻子，外来的女王，马达加斯 加女王。最后她穿着她的女王衣服在床上死去。</li>
+<li>佩特拉·科特斯：曾与双胞胎一起睡觉的女人，后来成为奥雷里诺第二的情人。奥雷里亚诺第二因不满妻子的各种规矩以及所做之事，经常到她家里住。</li>
+<li>何塞·阿尔卡蒂奥：费尔南达·德尔·卡皮奥与奥雷里亚诺第二的长子。从小就被期望成为教皇，但是到罗马后就立即放弃了神学。费尔南达死后回到马孔多，发现了那些金币。最后，他在沐浴时，被他赶出去的四个孩子按死在水池里，连金币也被掳走。</li>
+<li>雷纳塔·蕾梅黛丝：费尔南达·德尔·卡皮奥与奥雷里亚诺第二的第一个女儿，昵称是梅梅。男友出事后终生一言不发，被母亲带到一个修道院，最后在克拉科夫一家阴森的医院衰老而死。</li>
+<li>奥雷里亚诺·特里斯特：黑白混血儿，上校的十七个儿子之一。曾到马孔多生活，最后被猎杀。</li>
+<li>奥雷里亚诺·森特诺：上校的十七个儿子之一。同样被猎杀。</li>
+<li>卡米拉·萨迦丝杜梅：以“母象”（即能吃）的美名享誉全球。在马孔多曾和奥雷里亚诺第二来过一场大胃王比赛。</li>
+<li>阿玛兰妲·乌尔苏拉：费尔南达·德尔·卡皮奥与奥雷里亚诺第二的第二个女儿。成年后带着丈夫回到马孔多，改变这个已经被虫蚁腐蚀得破旧无比的家。丈夫走后，与奥雷里亚诺过上了情欲泛滥的生活，造成的破坏却比虫蚁更大。不久家中也处于家居密林的深处，等到加泰罗尼亚智者最后的信到来后，他们已经与外界脱离一联系。生下一个有猪尾巴的儿子之后，因失血过多而死去。</li>
+<li>马乌里肖·巴比伦：梅梅的男朋友。潜入梅梅家中，正揭开屋瓦钻进浴室时，被守夜人当作偷鸡贼一枪放倒，此后卧床不起，孤独终老而死。</li>
+<li>奥雷里亚诺：梅梅与马乌里肖·马比伦的儿子，前三年一直被费尔南达关在上校的作坊里。长大后爱上了自己的姑姑阿玛兰妲·乌尔苏拉，受到庇拉尔的指导，没有像奥雷里亚诺·何塞一样听从姑姑的话离开，而是强行地与其发生关系 。加斯通走后，便与姑姑过上了纵欲的生活。姑姑和儿子死了之后，发现梅尔基亚德的羊皮卷记载着百年来他们家族所有的事，他也从其中找到了自己的身世。还没翻到自己的死期时，就明白自己不会走出这个房间以及整个家族的所有一世都从世人的记忆中抹去。</li>
+<li>洛化索·加比兰：墨西哥革命中的上校，流亡到马孔多。与何塞·阿尔卡蒂奥第二成为地下工会的领导人。最后被政府抹杀。</li>
+<li>奥雷里亚诺·阿玛多：上校十七个儿子里唯一的幸存者，在晚年时来到马孔多，被奥雷里亚诺以及何塞·阿尔卡蒂奥拒绝进屋，随后被多年来追踪的警察射穿他的前额的灰烬十字。</li>
+<li>加斯通：阿玛兰妲·乌尔苏拉四十多岁的丈夫。来到马孔多后计划建造一个飞机场，或者其目的是为了让阿玛兰妲·乌尔苏拉厌倦在这里的生活。但自己却厌倦了苦苦等待的飞机，回到了布鲁塞尔。之后表明要回来时，阿玛兰妲·乌尔共拉挑明了话题，而他也顺水推舟地祝他们幸福。</li>
+<li>尼格罗曼妲：奥雷里亚诺的朋友的曾孙女，亦是一个妓女。后来奥雷里亚诺因阿玛兰妲·乌尔苏拉产生了相思之情，想缓解这种感情，来找她睡觉，不久便与她成为情人。</li>
+<li>阿尔瓦罗、赫尔曼、阿尔丰索和加夫列尔：因争吵中世纪是如何杀来蟑螂而与奥雷里亚诺成为最初也是最后的朋友。阿尔瓦罗、赫尔曼和阿尔丰索相继离去马孔多，加夫列尔赢了大奖后也去了巴黎。</li>
+<li>罗德里戈/奥雷里亚诺：阿玛兰妲·乌尔苏拉与奥雷里亚诺的儿子，生下来有一条猪尾巴。母亲取名为罗德里戈，父亲取名为奥雷里亚诺。但奥雷里亚诺因失去了阿玛兰妲·乌尔苏拉的悲痛，没有管他，导致他被蚂蚁吃掉。</li>
+</ul>
+<h3 id="地名"><a href="#地名" class="headerlink" title="地名"></a>地名</h3><ul>
+<li>马孔多：一个小村落 ；</li>
+<li>里奥阿查：马孔多向东山脉一侧的古老城市；</li>
+</ul>
+]]></content>
+      <categories>
+        <category>读书</category>
+      </categories>
+      <tags>
+        <tag>book</tag>
       </tags>
   </entry>
   <entry>
@@ -2176,138 +2517,6 @@
       </tags>
   </entry>
   <entry>
-    <title>百年孤独全人物</title>
-    <url>/2020/10/09/%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC%E5%85%A8%E4%BA%BA%E7%89%A9/</url>
-    <content><![CDATA[<h3 id="人物表"><a href="#人物表" class="headerlink" title="人物表"></a>人物表</h3><ul>
-<li>奥雷里亚诺·布恩迪亚上校：开头面对行刑队的人，最后在家中死去。</li>
-</ul>
-<a id="more"></a>
-
-<ul>
-<li>梅尔基亚德斯：身形肥大的吉卜赛人，一位炼金术师以及航海家，经常拿新奇的东西来马孔多，最后在新加坡的沙洲上死于热病，被丢到了爪哇海的最深处。但又重返人世，拯救了陷入失眠症的马孔多，最后死在马孔多。</li>
-<li>何塞·阿尔卡蒂奥·布恩迪亚：马孔多的族长，爱研究一些稀奇古怪的东西，上校的父亲。拥有传奇的一生，最后死在马孔多。</li>
-<li>何塞·阿尔卡蒂奥：上校的哥哥，貌似他们家喜欢用一样的名字，一开始我把哥哥和父亲混为同一个人了。长大后与庇拉尔·特尔内拉发生肉体关系，但是由于庇拉尔告知其怀孕后，开始逃避她。后来与吉卜赛女朗发生关系，并与其离开马孔多。在蕾梅黛丝死后回来，与丽贝卡发生关系，并结为夫妇，被乌尔苏拉逐出家门。最后在家中被枪杀。</li>
-<li>乌尔苏拉·伊瓜兰：何塞的妻子，寻找大儿子途中发现走得太远了，索性不再回头（当时我看到这里是极其懵逼的，这样就走了……）。直到五个月后才回来，并带来大沼泽另一边的人。那场四年的大雨过后，开始清除家里各种虫子，不久后死去，年龄在一百一十五到一百二十五里。</li>
-<li>弗朗西斯·德雷克：袭击里奥阿查的海盗，乌尔苏拉的曾祖母因其受到烫伤。并由此，乌尔苏拉的曾祖父与何塞·阿尔卡蒂奥·布恩迪亚的的曾祖父合作经营。这是为了促进他们之间联系而有的战斗。</li>
-<li>普鲁邓希奥·阿基拉尔：何塞的斗鸡对手，输了之后用鸡内涵何塞。而何塞与其决斗，最后被何塞用长矛刺死，何塞也由此于乌尔苏拉行夫妻之事。但最后何塞夫妻因良心烦扰（经常看到死去的他的出现）而决定离开原本的里奥阿查。在其死后经常去马孔多与已经发疯何塞谈话，最后拉何塞到另一个世界去。</li>
-<li>庇拉尔·特尔内拉：十四岁时强暴她的男人，因为外来户的关系直到二十二岁也没公开关系，被家人强迫离开来到马孔多。想一直等他，但已经厌倦了等待，于是转去勾引何塞·阿尔卡蒂奥（上校的哥哥），或者说与其发生肉体关系。告诉何塞·阿尔卡蒂奥怀孕的消息后不久，何塞·阿尔卡蒂奥同样走了。之后，她又与上校发生关系并生下一儿子。指导奥雷里亚诺后，在一个欢宴的夜晚中死在藤摇椅上。</li>
-<li>阿玛兰妲：何塞·阿尔卡蒂奥·布恩迪亚新出生的女儿，上校的妹妹，爱上了丽贝卡爱的男人，并阻止他们结婚，不幸下手毒死蕾梅黛丝。丽贝卡与何塞·阿尔卡蒂奥结婚后，阿玛兰妲与皮埃特罗相恋，但拒绝与其结婚。之后又与赫里内勒多·马尔克斯相恋，仍拒绝与其结婚。最后以一个老处女的身份在家死去。</li>
-<li>何塞·阿尔卡蒂奥：庇拉尔·特尔内拉与何塞·阿尔卡蒂奥的儿子，继承了何塞·阿尔卡蒂奥的名字，避免混淆，只叫阿尔卡蒂奥。长大后过于疯狂，面对保守派时执意抵抗，投降后被判处枪决。</li>
-<li>比西塔西翁：瓜希拉印第安人，为逃避部落的失眠症，放弃王位与弟弟来到此处，也是众多孩子的保姆。最后在马孔多安详离去。</li>
-<li>卡塔乌雷：比西塔西翁的弟弟，发现丽贝卡有其祖国的失眠症后，逃离马孔多。何塞·阿尔卡蒂奥·布恩迪亚死的那天回到马孔多，是为了“王的下葬”。</li>
-<li>丽贝卡·布恩迪亚：从马纳乌雷来马孔多投奔，是乌尔苏拉的远房表妹、何塞·阿尔卡蒂奥·布恩迪亚的亲人，尼卡诺尔·乌略亚和丽贝卡·蒙铁尔的女儿。因为对所有名字都没反应，所以就使用她母亲的名字作为其名字，姓是后来加上的。一到爱情烦恼的时候就爱吃土，并且容易出事。先是与皮埃特罗相爱订婚，但何塞·阿尔卡蒂奥回来后瞬间就抛弃了皮埃特罗，并与其结婚。何塞·阿尔卡蒂奥死后，将自己封闭起来，被镇人的人遗忘。最后在乌尔苏拉死的那年年底死去。</li>
-<li>好汉弗朗西斯科：两百岁的江湖艺人，常带来各地见闻。</li>
-<li>堂阿波利纳尔·摩斯科特：里正，政府人员，地方官 。</li>
-<li>安帕萝·摩斯科特：堂阿波利纳尔的女儿。</li>
-<li>蕾梅黛丝·摩斯科特：堂阿波利纳尔九岁的小女儿，被上校看上。后来过了青春后成为了上校的妻子，但在皮埃特罗与丽贝卡婚礼前的一星期里被阿玛兰妲下毒，导致内脏撕裂，三天后被自己的血毒死，双胞胎也胎死腹中。</li>
-<li>皮埃特罗·克雷斯皮：意大利技师，负责安装和调试自动钢琴，与丽贝卡订婚，但阿玛兰妲亦喜欢他，百般阻挠其婚礼。最后他与阿玛兰妲相恋，但是阿玛兰妲拒绝与其结婚，绝望之下割腕自杀。</li>
-<li>马格尼菲科·比斯马勒：上校最亲密的好友，建村元老的儿子，名字与其父亲相同。最后死在马孔多的暴徒手里。</li>
-<li>赫里内勒多·马尔克斯：上校最亲密的好友，建村元老的儿子，名字与其父亲相同。喜欢阿玛兰妲，但阿玛兰妲一直不肯与其结婚，被拒绝后发给上校一个电报“马孔多在下雨”。曾被俘，但是上校用战俘救他出来。晚年时拒绝了上校重新发起战争的请求，最后在那场四年多的大雨中死去。</li>
-<li>尼卡诺尔·雷伊纳：主持婚礼的神甫。</li>
-<li>奥雷里亚诺·何塞：奥雷里亚诺和庇拉尔·特尔内拉的儿子，长大后爱上自己的姑妈阿玛兰妲，想与其发生关系，但被拒绝。之后成为了一个浪荡人士，最后被阿基莱斯·里卡多上尉开枪打死。</li>
-<li>阿利黎奥·诺格拉：表面上是马孔多医生，实际上是自由党狂热人士。</li>
-<li>维多利奥·梅迪纳：上校投奔的革命军将领。</li>
-<li>桑塔索菲亚·德拉·彼达：阿尔卡蒂奥的情人。晚年时试图拯救被各种虫子侵蚀的家，但是失败了。最后离开了这个家。</li>
-<li>格雷戈·史蒂文森上校：受奥雷里亚诺之托向阿尔卡蒂奥报信，但阿尔卡蒂奥并不相信他，将其关押起来。最后保守派攻打马孔多时被放出来一起作战，被大炮轰死。</li>
-<li>罗格·卡尔尼塞罗：执行枪决奥雷里亚诺·布恩迪亚的上尉军官，但枪决被何塞·阿尔卡蒂奥阻止，叛变到奥雷里亚诺阵营。</li>
-<li>蕾梅黛丝：桑塔索菲亚·德拉·彼达与阿尔卡蒂奥的长女，被称为美 人儿蕾梅黛。最后连带着床单飞上天。·</li>
-<li>何塞·阿尔卡蒂奥第二：桑塔索菲亚·德拉·彼达与阿尔卡蒂奥的双胞胎儿子之一。长大后成为工会领导人，但是在一次活动中发生一个大屠杀，此后除他之外，领导人被官方全部杀死，官方宣传没发生任何事。他自己被一个年轻的军官放过。最后在梅尔基亚德斯的房间里与其孪生兄弟交谈中死去。</li>
-<li>奥雷里亚诺第二：桑塔索菲亚·德拉·彼达与阿尔卡蒂奥的双胞胎儿子之一。孪生兄弟死后不久，他也在妻子旁死去。在最后下葬时弄混了，把两人葬在各自的坟墓里。又或者是，这才是正确的坟墓呢。</li>
-<li>何塞·拉克尔·蒙卡达：保守党将军，战后马孔多的第一任市长。上校攻打马孔多时想逃走，但被捕了。最后判处死刑。</li>
-<li>奥雷里亚诺：上校的十七个儿子的名都是这样，姓随其母亲，后来被一一暗杀。</li>
-<li>阿基莱斯·里卡多：马孔多驻军首领，掌握马孔多的市政大权。开枪打奥雷里亚诺·何塞时，被两发来源不明的子弹打死。</li>
-<li>费尔南达·德尔·卡皮奥：奥雷里亚诺第二的妻子，外来的女王，马达加斯 加女王。最后她穿着她的女王衣服在床上死去。</li>
-<li>佩特拉·科特斯：曾与双胞胎一起睡觉的女人，后来成为奥雷里诺第二的情人。奥雷里亚诺第二因不满妻子的各种规矩以及所做之事，经常到她家里住。</li>
-<li>何塞·阿尔卡蒂奥：费尔南达·德尔·卡皮奥与奥雷里亚诺第二的长子。从小就被期望成为教皇，但是到罗马后就立即放弃了神学。费尔南达死后回到马孔多，发现了那些金币。最后，他在沐浴时，被他赶出去的四个孩子按死在水池里，连金币也被掳走。</li>
-<li>雷纳塔·蕾梅黛丝：费尔南达·德尔·卡皮奥与奥雷里亚诺第二的第一个女儿，昵称是梅梅。男友出事后终生一言不发，被母亲带到一个修道院，最后在克拉科夫一家阴森的医院衰老而死。</li>
-<li>奥雷里亚诺·特里斯特：黑白混血儿，上校的十七个儿子之一。曾到马孔多生活，最后被猎杀。</li>
-<li>奥雷里亚诺·森特诺：上校的十七个儿子之一。同样被猎杀。</li>
-<li>卡米拉·萨迦丝杜梅：以“母象”（即能吃）的美名享誉全球。在马孔多曾和奥雷里亚诺第二来过一场大胃王比赛。</li>
-<li>阿玛兰妲·乌尔苏拉：费尔南达·德尔·卡皮奥与奥雷里亚诺第二的第二个女儿。成年后带着丈夫回到马孔多，改变这个已经被虫蚁腐蚀得破旧无比的家。丈夫走后，与奥雷里亚诺过上了情欲泛滥的生活，造成的破坏却比虫蚁更大。不久家中也处于家居密林的深处，等到加泰罗尼亚智者最后的信到来后，他们已经与外界脱离一联系。生下一个有猪尾巴的儿子之后，因失血过多而死去。</li>
-<li>马乌里肖·巴比伦：梅梅的男朋友。潜入梅梅家中，正揭开屋瓦钻进浴室时，被守夜人当作偷鸡贼一枪放倒，此后卧床不起，孤独终老而死。</li>
-<li>奥雷里亚诺：梅梅与马乌里肖·马比伦的儿子，前三年一直被费尔南达关在上校的作坊里。长大后爱上了自己的姑姑阿玛兰妲·乌尔苏拉，受到庇拉尔的指导，没有像奥雷里亚诺·何塞一样听从姑姑的话离开，而是强行地与其发生关系 。加斯通走后，便与姑姑过上了纵欲的生活。姑姑和儿子死了之后，发现梅尔基亚德的羊皮卷记载着百年来他们家族所有的事，他也从其中找到了自己的身世。还没翻到自己的死期时，就明白自己不会走出这个房间以及整个家族的所有一世都从世人的记忆中抹去。</li>
-<li>洛化索·加比兰：墨西哥革命中的上校，流亡到马孔多。与何塞·阿尔卡蒂奥第二成为地下工会的领导人。最后被政府抹杀。</li>
-<li>奥雷里亚诺·阿玛多：上校十七个儿子里唯一的幸存者，在晚年时来到马孔多，被奥雷里亚诺以及何塞·阿尔卡蒂奥拒绝进屋，随后被多年来追踪的警察射穿他的前额的灰烬十字。</li>
-<li>加斯通：阿玛兰妲·乌尔苏拉四十多岁的丈夫。来到马孔多后计划建造一个飞机场，或者其目的是为了让阿玛兰妲·乌尔苏拉厌倦在这里的生活。但自己却厌倦了苦苦等待的飞机，回到了布鲁塞尔。之后表明要回来时，阿玛兰妲·乌尔共拉挑明了话题，而他也顺水推舟地祝他们幸福。</li>
-<li>尼格罗曼妲：奥雷里亚诺的朋友的曾孙女，亦是一个妓女。后来奥雷里亚诺因阿玛兰妲·乌尔苏拉产生了相思之情，想缓解这种感情，来找她睡觉，不久便与她成为情人。</li>
-<li>阿尔瓦罗、赫尔曼、阿尔丰索和加夫列尔：因争吵中世纪是如何杀来蟑螂而与奥雷里亚诺成为最初也是最后的朋友。阿尔瓦罗、赫尔曼和阿尔丰索相继离去马孔多，加夫列尔赢了大奖后也去了巴黎。</li>
-<li>罗德里戈/奥雷里亚诺：阿玛兰妲·乌尔苏拉与奥雷里亚诺的儿子，生下来有一条猪尾巴。母亲取名为罗德里戈，父亲取名为奥雷里亚诺。但奥雷里亚诺因失去了阿玛兰妲·乌尔苏拉的悲痛，没有管他，导致他被蚂蚁吃掉。</li>
-</ul>
-<h3 id="地名"><a href="#地名" class="headerlink" title="地名"></a>地名</h3><ul>
-<li>马孔多：一个小村落 ；</li>
-<li>里奥阿查：马孔多向东山脉一侧的古老城市；</li>
-</ul>
-]]></content>
-      <categories>
-        <category>读书</category>
-      </categories>
-      <tags>
-        <tag>book</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>网友见面会</title>
-    <url>/2020/10/13/%E7%BD%91%E5%8F%8B%E8%A7%81%E9%9D%A2%E4%BC%9A/</url>
-    <content><![CDATA[<p>多天以后，在面对学校的饭菜时，将会想起那天在吃西红柿炒鸡蛋时的遗憾。</p>
-<a id="more"></a>
-
-<p>10 月，为数不多在学校过的国庆。</p>
-<p>想找个词形容，发现还是网友见面最合适，毕竟大家有同校的有不同校的，称呼也是靠网名称呼，不是鱼虾猫狗鼠等动物，就是瓜咖喱等植物，又或者是各种不知道是什么意义网名，比如风酷什么的，还有一些性别错乱的名字。大家不知道对面的名字（也许就只有我一个不知道，其实我是曾经知道的，但是确实也没必要去记，毕竟虾是虾，酷姐姐是酷姐姐就行了），总之，网友见面会是不会错的，毕竟大家都是从一个 Q 群开始，到现在还是在 Q 群里（其实也不能算是群里，毕竟微信一建一大群，真的很想吐槽微信的零成本建群。不过说到底，也有很多人不在群里，每年人暑假开始活跃，到国庆到慢慢冷下去，周而复始，正应了那句歌词——”位置变了，各有队友“。）。</p>
-<p>扯太远了，扯回到当天。</p>
-<h3 id="早点"><a href="#早点" class="headerlink" title="早点"></a>早点</h3><p>只记得那天早早地走校园，坐上地铁，最后来到传说中的南粤早点。</p>
-<p>据说此处有南粤第一包和第二包（其实我是后面才听到的），但到了那时已经是饥肠辘辘，已无心第一第二包，只想喝粥。或者说是不想吃包吧，心里莫名地对面包有一种排斥感。又想到他们还有一段时间才到，于是就先点了。他们都先点了几个早点，然后给菜单给我。在那里翻了又翻，发现有一道叫什么豆腐的，想了想自己还挺喜欢吃豆腐的，于是就勾上了。</p>
-<p><img src="http://image.jinl1874.xyz/img/IMG_20201003_101718.jpg" alt=""></p>
-<p>但是我没想到的有两点，一是这里没有白饭，二是这个豆腐实在是太咸了，没有米饭的加持，实在是难以下咽。我实在是不知道为什么会有这么一个菜出现在这里，我也不知道为什么会这么咸，我唯一知道的是这个豆腐没几个人能吃得下……</p>
-<p><img src="http://image.jinl1874.xyz/img/mmexport1601691280698.jpg" alt=""></p>
-<p>点了大概有十几种早点吧，虽然是当午饭一起吃了。中间穿插了几波拍照风波，毕竟是个拍照狂，走路时还说要从下往上拍……可以理解可以理解。印象比较深的是那个虾蛟，不是有多好吃，虽然确实挺好吃，而是个人对香菜不太感冒，所以就第一个提出来了。（其实我挺好奇那个菜花是什么味道来着。）</p>
-<p>还有那个”巧克力“，奶油味的巧克力，或者说到底是不是巧克力都不知道。就是下图左边那个萌萌的东西。</p>
-<p><img src="http://image.jinl1874.xyz/img/mmexport1601694514160.jpg" alt=""></p>
-<p>被众人怂恿地吃了一”脚“后：</p>
-<p><img src="http://image.jinl1874.xyz/img/image-20201011003621598.png" alt="image-20201011003621598"></p>
-<p>到底是不是巧克力的味道呢，其实我太久没吃巧克力，忘了具体的味道。不过确实吃出一股浓浓地不和谐味道——塑料制品的味道……</p>
-<p><img src="http://image.jinl1874.xyz/img/mmexport1601866528382.jpg" alt="image-20201011010529126"></p>
-<p>右边尽头那个是南粤第二包。</p>
-<p>之后有两个小伙伴没来到，于是大家就打算把精美的点心以及南粤第一二包带去。南粤第二包已经说了，南粤第一包说是第一包其实也不算南粤第一包，毕竟也不是南粤做的，而是波仔从学校里的带出来的，说是第一包也没有错，毕竟这是第一个出场的，而第二包是第二个出场的。可惜的是到最后也没有人吃下这个第一包，毕竟两块钱一个肉馅呢。</p>
-<h3 id="买菜"><a href="#买菜" class="headerlink" title="买菜"></a>买菜</h3><p>其中，那个娃娃机里面的鼠仔挺可爱的，可惜薯仔没能夹到。</p>
-<p>分两波人，大概就是走走停停买买，毕竟有专业人士买，我只负责跟就行了。</p>
-<h3 id="合宿"><a href="#合宿" class="headerlink" title="合宿"></a>合宿</h3><h4 id="KTV"><a href="#KTV" class="headerlink" title="KTV"></a>KTV</h4><p>三点未到，人已到，还好房东在场，得以顺利进去。</p>
-<p>麻将、桌球、游戏机、智能电视、KTV 房以及厨房，麻雀虽小，五脏俱全。</p>
-<p>各人找到自己的位置坐下，麻将四人组，还有街机二人组，麦霸二人组，PS4 游戏机。</p>
-<p>我走进 KTV，理狗也在此处，唯独不见麦霸。在那里折腾一下，拿起了人生的第一个 KTV 麦克风（好吧，此处是夸张，其实以前唱过，但是由此发现自己唱歌实在太难听，就很少唱了，都是听麦霸唱），试过音，才发现这个 KTV 声音有点小，看来五脏全是全了，但未必够吃了。所以导致唱的时候需要很卖力地唱（不会发音的后果），不久之后就感觉出声困难了。在原唱的掩护下，也听不出我唱的声音了。所以我真的佩服，也感谢能唱个把小时的，能在晚上看恐怖片是给我一种甜甜的、安心的感觉。</p>
-<p><img src="http://image.jinl1874.xyz/img/image-20201011015117546.png" alt="image-20201011015117546"></p>
-<p>其后不久，大家陆陆续续来到。其中最大的惊讶是酷姐姐来了，其实在此之前就隐隐约约有这种感觉了，之前说在上海度假，但是偏偏买了机票回来。所以来也不会很奇怪，但实在是在群里装得太像了，以至于在 KTV 里看到时还有些略微地不相信，或许这就是惊喜吧。虽然长相已经忘得差不多了，但靠着能和鲤鱼拌嘴，以及仅存的一点身高印象还是认出来了。但为了避免认错人，还是谨慎地问了一句。</p>
-<p>之后走出 KTV，发现猫在教薯仔以及瓜在玩 PS4，我其实想说一句，早上的时候，自己摸索着玩果然是不行的。</p>
-<p>不久，小哥在群里说十分钟后到，没想到三十分钟过后还没见影子呢……来了就开始秀桌球技术，仅有风才能与之抗衡，像志斌姐、虾这些，只能眼睁睁地看着他一杆一杆地打进洞里。</p>
-<h4 id="菜"><a href="#菜" class="headerlink" title="菜"></a>菜</h4><p><img src="http://image.jinl1874.xyz/img/mmexport1601728039014.jpg" alt=""></p>
-<blockquote>
-<p>西红柿炒鸡蛋就在右上角，虽然用盆装不太好看。</p>
-</blockquote>
-<p>走进厨房时，他们正在做饭，或者说是准备菜吧，因为有很大一部分是用来打火锅的。现在回想起来，当时我的帮忙是不是有点多余呢，毕竟……或许吧。</p>
-<p>来到电视机前，想和鲤鱼来一盘久违的童年 FC 游戏，感叹一下爷青回，没想到读取不了。遂放弃，选择再打开电视，来看一下久违的《猫和老鼠》，毕竟也就这个能看。其实每到一个地方，我就喜欢用这个电视去看。</p>
-<p>所谓的家常菜有六样，一是炒玉米黄瓜火腿粒，二是西红柿炒鸡蛋，三是可乐鸡翅，四是炒豆角，五是辣炒猪肉丁，六是水煮菜心。在制作过程中貌似出现了一点意外，因为火力过大的缘故，厨房里充满油烟，而且油烟机用不了，导致整个房间都弃满油烟，不得不关上门来，所以其实我也不知道具体发生了什么。最后端上来的豆角出现了黑化，一直想试下，但最后被吃光。一开始我在想为什么风哥这么有经验怎么还会出现这样的事，后来在群里无意间看到一张咖喱在炒豆角的图片，怪不得风哥后面吃黑化豆角时还点评了一句“还挺好吃的”。</p>
-<p>还有西红柿炒鸡蛋，这是个人比较喜爱的一道菜，曾陪我走过一段段孤寂的时光。自己在家也做了好多次，但总是不得精髓，在一些地方总是差了许多，比如有时放得太多油了盖住了鸡蛋的香气，有时弄得太干了，有时搞得很多汁，总之没能做成一个满意的西红柿炒鸡蛋。而这次的做法第一个不同的地方就是把西红柿的皮削掉了，虽然我也没觉得皮有多好吃，但是从来没想过把皮削掉。然后就不知道，毕竟当时我也不在场。之后吃到成品时，确实是记忆中（雅食园）的味道，但又有不同之处，削了皮之后的西红柿更碎了，西红柿特有的酸味少了许多，并且与鸡蛋融合得更好了。而汁水也恰到好处，香味恰好处。可惜的是，缺少一份白米饭。西红柿炒鸡蛋在什么时候最好吃？是在西红柿炒鸡蛋与白米饭这对 CP 在一起时，没有米饭的西红柿炒鸡蛋就像缺了灵魂了，虽然好吃，但仅仅也只是好吃而己。当时最大的遗憾莫过于此。</p>
-<p>顺道一讲，拍黄瓜挺好吃的。</p>
-<p>晚饭由家常菜和火锅菜组成，内容大致都差不多，用当晚不知道是谁说的话来讲就是“有家的感觉”。</p>
-<p>晚饭过后，来了一阵子轻松的桌球，师出咖喱、末尝一胜。</p>
-<h4 id="恐怖片"><a href="#恐怖片" class="headerlink" title="恐怖片"></a>恐怖片</h4><p>之后就到了紧张刺激的看恐怖电影的时间，虽然一点也不紧张刺激。</p>
-<p>一是片子，二是环境，三设备。</p>
-<p>恐怖片是《死寂》，讲的是灵异人偶的故事。你说它恐怖吧，确实恐怖，但在观影过程确实没感到有多恐怖。可能血腥镜头较少，我可能没感受到危险，但最重要的原因入不了戏。入不了戏主要是因为环境的事，门时不时地开一下，旁边的酷姐姐森罗时不时大叫一下，波仔冷不防地来几句剧透，并且被理狗的体重压着。不过也能可能是沙雕网友在身边感觉比较有安全感吧。还有就是设备的问题，那个电影经常性地重复画面，大概是剪辑出错了。但这不是重点，重点是网络问题，也许不是网络问题，但是哪个问题都一样，就是一到关键时候，突然显示 <code>0B/s</code>，嗓子眼都要提起来了，但突然就卡住了。只能说观影体验极差。</p>
-<p>又和理狗来了几次桌球，但无一不是完败。</p>
-<h4 id="尾声"><a href="#尾声" class="headerlink" title="尾声"></a>尾声</h4><p>合宿的尾声，是一首生日歌，风哥的新历生日。说实话，我是挺佩服记住别人生日的，我连生日的那天到了都没感觉，也许是记不记住都没什么区别吧。最后惯例，合唱拍照一气呵成。不久因精力不足不得不去休息，其实我挺想知道那晚唱浮夸的是谁，唱得那么大声，隔着两层门都能听到……</p>
-<h3 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h3><p><img src="http://image.jinl1874.xyz/img/1602567465205.jpg" alt=""></p>
-<p>第二天去了个饭馆吃饭，这是后话，不提。</p>
-<p>很多人都说了，这天最大的感受是开心，很幸福。</p>
-<p>我也是这样，从内到外的开心，没什么拘束，彼此认识又不认识，熟悉又不熟悉，也许这是最好的相处吧。</p>
-<p>期待下一次见面，下次打球肯定赢理狗。</p>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>life</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>雾山五行-剧评</title>
     <url>/2020/07/29/%E9%9B%BE%E5%B1%B1%E7%AC%AC%E4%B8%80%E9%9B%86/</url>
     <content><![CDATA[<p>就第一集来看，是一部非常优秀的动画。</p>
@@ -2323,215 +2532,6 @@
 ]]></content>
       <tags>
         <tag>anime</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>生日快乐</title>
-    <url>/2020/11/01/curry-happy-birthday/</url>
-    <content><![CDATA[<p>在我的眼里，咖喱的形象已经变了三次，一次是由物变为人，一次是由北方汉子变成了一个小女生，最后一次是由虚拟人物形象变成了实实在在的人。</p>
-<a id="more"></a>
-
-<h2 id="惜"><a href="#惜" class="headerlink" title="惜"></a>惜</h2><p>2018 年以前，咖喱一种多个香料配成的酱料，金鱼还是在鱼缸里的观赏鱼。</p>
-<p>2018 年到十月份之前，咖喱变成了一个北方汉子。“金鱼”，这个跟我毫无联系的词，在 17 年暑假时和我加入群时，海螺给我取了这么一个昵称，但是等到用这个词时还要等到 18 年春。</p>
-<p>2018 年春，我开始在群里发言，或许是想知道也想认识一直“活着”的群(当时其它 QQ 群已经死了），里面的人会是怎么样的，又或者是该群的生活气息吸引了我。记得当时，我还没在群里发言，有个人在群里吐槽同学使用图书馆打印机时还在修改文档，导致速度极慢，下面其它人的回复也很正常，都在附合。他们的群昵称里顶着各种奇奇怪怪的名字，这在 QQ 群里是很常见的，但总是有一种不协调感。</p>
-<p>在那之后，我开始在群里水，那时有人还讲过一句，“怎么之前没见过这条鱼”。群里水多了，也认识了很多网友，其中包括“北方汉子”咖喱。</p>
-<p>为什么咖喱在我眼里是北方汉子的形象呢？我离上次与网友长时间群聊时间太久了，上一次是在初三时加入的火影群，之后的群聊全是和基本认识的同学一起的，忘了网络的虚拟性。在我的认知里咖喱是男性，因为他在群里说他是男性。当然，这还不是最重要的，有一次不知道是谁提起了广东人称呼外地人的方式，我说广东人往广东以北的男性都叫“北佬”，记得咖喱在群里的发言特别激动，大意最如果有谁敢这么叫他就会非常生气的。我当时的脑回路是这样的，不想被叫-&gt;觉得有侮辱性-&gt;他就是高大的汉子。</p>
-<p>自那时起，一个高大的北方汉子形象被我套在咖喱身上。不过到现在我也没想明白为什么咖喱会有那种反应，也许这不是咖喱的发言，被我自顾自地安给了咖喱。</p>
-<p>2018 年 10 月 27 号，我第一次和网友面基。是的，之前都是和社团什么之类的面基，并且本来我也只想和他们保持纯洁的网友关系，但一切都在那天改变了。</p>
-<p>记得那天，他们在群上约好了见面，刚好我也在水群，于是他们也邀请我一起去。那时刚好没什么事，于是就去了。</p>
-<p>他们的形象也在那天发生了翻天覆地的变化，当然，一个知心大姐姐怎么就变成了一个男的。他们在跟志斌姐说话的时候，我还在往四处看，“志斌姐在哪”，又去翻其朋友圈，发现里面有几个全是男性合照，还有个人挺像面前的人。</p>
-<p>然后，当他们把一个脸圆圆的女生叫咖喱的时候，受到志斌姐冲击的我心里在想着，怎么你也是这样啊……</p>
-<p>此后，我根据各种群聊信息一步步地完善（脑补）咖喱的形象：</p>
-<ol>
-<li>爱喝酒，喝的还不是啤酒，像什么白酒葡萄酒都不在话下；</li>
-<li>喜欢去酒吧喝酒；</li>
-<li>爱到处去玩；</li>
-<li>精力特别多；</li>
-<li>喜欢二刺元；</li>
-</ol>
-<p>上面的信息也不一定正确，毕竟是捕风捉影来的。然后咖喱在我眼里就是一个自由的“不良少女”。这个“不良少女”是日本冻鳗里的形象，于是就用中国特色的“社会”代替了，所以这就是“社会女孩”的由来。</p>
-<p>当然，说社会也不正确，更准确的说法是与众不同。</p>
-<p>2020 年 10 月，再次见到咖喱时，她说了句“真的好久不见了，鱼哥哥”，当时我有点奇怪，去年不是才刚见过吗，怎么说好久不见。这里就暴露出我不察“时事”的特点了，以前我刷朋友圈的时候，还没加好友，后来加了好友，我把朋友圈的入口关了，所以在朋友圈发布的信息基本全都不知道，像什么官宣啊小长文之类，还是得自己专门点进个人主页才知道。不点不知道，一看吓一跳，好家伙，三天一小聚，五天一大聚。</p>
-<p>周一去玩的时候，认识到了一个新的咖喱，一个会笑会哭会害怕会生气的咖喱， 以前的咖喱总是笑嘻嘻的，那时我才意识到，咖喱也是一个大学女孩啊。</p>
-<h2 id="今"><a href="#今" class="headerlink" title="今"></a>今</h2><p>我不怎么会表达自己的感情，每次用文字表达出来都不满意，强行发出去但后面看总是会感到尴尬。</p>
-<p>真的挺羡慕能在朋友圈/QQ 空间把自己的感情表达出来的，我每次想表达自己的感情总是来来回回那么几个词，以前写推文时经常在这里卡住，有时干脆就不表达了。因为不管怎么表达都会感到尴尬，做一名记叙者对我来说更有意思。也有可能是忘了怎么表达了。</p>
-<p>于是我把朋友圈里所有表达感情的内容都隐藏了，发表内容也不再发表在朋友圈，直到现在还有一股冲动，想把 QQ 那篇日志隐藏掉。因此，发在知乎以及个人博客里。即使是这样，也很少有抒情的内容，尽量写事。说起来，大家还是我的第一批博客读者呢（笑），阿波哥还说这是流水账（不是）。</p>
-<p>或者换种说法，其实是表达能力差，是中文词汇量比较少，别人经常会误解。比如上次回校时，我问咖喱是不是回宿舍，产生这种疑问的直接原因是上次国庆假期时，大家都要休息了，她还这么有精神去到处逛，所以即使是晚上十点的时候，我还有一种她会走到下一个目的地继续玩的感觉。但是措词不当，咖喱表示深深地伤害到她了，这里再次向咖喱表示道歉。语言是一门艺术，而我经常用它伤害朋友。</p>
-<p>想了很久，还是不知道该说什么。</p>
-<p>想用第二视角写，但是又不习惯，所以还是用回第三视角。</p>
-<p>当初的不协调感觉，到现在终于明白了，那种现象可以出现在游戏群里，出现在贴吧群里，又或者是动漫群里，但是在一个新生群感觉特别突兀（当时的名字还是 2017 新生群），这种群不是过了招生季就会沉寂的吗？而且明明是互相认识的，为什么要叫网名呢？也许是习惯了吧，也许是像我一样根本不知道名字吧。</p>
-<p>如果当初我嫌 QQ 群有点吵，然后退了，又或者我一直把其留在那里，不管不顾，又会怎么样。我不知道，但我知道的是肯定不会比现在好。因为在那里我认识了咖喱，认识了大家。</p>
-<p>不管大家怎么想，对我而言，咖喱，还有大家，早就是我最好的朋友了。</p>
-<p>今天是 11 月 1 日，是星期天，也是咖喱的生日，</p>
-<blockquote>
-<p>愿你有一个灿烂的前程</p>
-<p>愿你有情人终成眷属，</p>
-<p>愿你在尘世获得幸福。</p>
-</blockquote>
-<p>自由的少女要永远自由下去。</p>
-<p>生日快乐，<strong>咖喱</strong>。</p>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>life</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【流水账】生日聚会</title>
-    <url>/2020/11/03/birthday-day/</url>
-    <content><![CDATA[<h2 id="起"><a href="#起" class="headerlink" title="起"></a>起</h2><p>此处删去。</p>
-<h2 id="时"><a href="#时" class="headerlink" title="时"></a>时</h2><p>11 月 1 号晚上七点多，按照计划，虾带着咖喱出来，鱼、猫、瓜风、薯在操场早己等候多时。</p>
-<a id="more"></a>
-
-<p>大家和咖喱在有说有笑着。</p>
-<p>突然，有人要去上厕所。不久之后，他带着个人回来，手里还捧着东西，定睛一看，原来是阿波哥带着生日蛋糕过来了。</p>
-<p>咖喱似乎有点惊讶。</p>
-<p>计划在完美地执行，</p>
-<p>……</p>
-<p>……</p>
-<p>才怪。<br>这里面出了一个计划最大的变数，或者说虾就是变数本身。所以说根本没有计划（其实我什么都不知道，只负责到场），要说有计划的是，就是虾负责把咖喱拖出来。</p>
-<p>十一月的广东，秋天似乎真的要来了，傍晚时分没有闷热，没有严寒，时不时有一点小风吹过，全部的感觉都是舒服。月亮在一边挂着，似乎比平时更底，发出的光线也蒙着淡淡的黄色，为今晚笼照出奇特的气氛。</p>
-<p>当晚七点多，波仔带好蛋糕、花以及大小兔子匆匆打车过来，来到主席台对面的操场与大家汇合。</p>
-<p>之后要干什么？不知道，虾说得模棱两可，听者亦一头雾水。所以大家只好整理整理现场，先把蛋糕放好，再摆上小兔纸。</p>
-<p><img src="http://image.jinl1874.xyz/img/20201102194659.png" alt="image-20201102194653882"></p>
-<p>不一会儿，虾借口上厕所离开咖喱来到现场，经过一番沟通后，终于明确了该怎么做。全员背向咖喱方向，将蜡烛点起，等虾将其带来。说是带，但其实并不是带，而是做个大冒险，带咖喱环绕操场一圈，因为她当天穿着一件豹皮（还是虎皮？）衣服（后来还问我胖不胖，其实当时胖只是句玩笑话而己啦）。为免起疑心，虾也分别用约会、宅家、睡觉、回家交待五人的行踪，波仔则没有提。</p>
-<p>虾离去不久，大家就在收拾东西，并插上两根蜡烛蛋糕上。然后再叫波仔去另一边藏起来。那时，在夜晚中昏暗的灯光照下，五个人低头面对两根正在燃烧的蜡烛，蜡烛发出暗淡的红光，一言不发的我们营造出一种诡异的气氛，宛如宗教场景一般。还听到旁边路过的人说了一句”他们在干嘛“。（不知道咖喱看到我们时是什么感觉）</p>
-<p>蜡烛续了一根后，虾终于来到了。咖喱的声音在背后慢慢靠近，走过之后也没有发现我们。然后虾突然把咖喱（硬生生）转过来……看到我们的咖喱还处于惊讶之中时，背后的波仔抱着花出现并祝其生日快乐……</p>
-<p>风哥有一幅画，里面有三个人，我根据特征猜出了猫猫和咖喱，却没猜出瓜姐。因为咖喱和猫猫的特征都比较明显，一眼就能看出来，但是中间的瓜姐却感觉不到明显什么特征（也许那个发型是？）。说起来，其实我对瓜姐印象最深的还是在打狼人杀时，那双在浓浓夜色下也遮不住的熊猫眼。</p>
-<p>生日歌、礼物、许愿、吹蜡烛、切蛋糕、吃蛋糕、抹蛋糕、洗脸。</p>
-<h2 id="转"><a href="#转" class="headerlink" title="转"></a>转</h2><p>吃完蛋糕后，风哥去虾的宿舍拿三国杀（虽然最后也没用上），在一顿收拾后转移阵地，来到了”老地方“（大概就是靠宿舍半场球场的禁区附近）。猫和瓜去买饮料后归来后，失踪人口虾又不知道去哪了。</p>
-<p>大家到齐后，失踪人口虾带着另一只猫来了。小黑猫来的时候带着个礼物，虽然把薯仔认成咖喱的时候有些许搞笑。</p>
-<p>狼人杀，有所耳闻过，毕竟有太多梗了，比如刀了预言家，狼人自爆等，但却没亲自玩过。</p>
-<p>那天玩了三局，当时的内心活动如下：</p>
-<p>第一局：我是谁？他们在干什么？我在干什么？</p>
-<p>第二局：我要干什么？</p>
-<p>第三局：预言家知道身份要干什么？</p>
-<p>玩之前，虾给我科普了下阵营划分，狼、神、民，神和民是好人阵营，狼是坏人阵营。最后狼比人神多就是恶人赢，反之神与民杀光狼即好人赢（第一局还不知道输赢规则）。</p>
-<p>第一局我是预言家。预预言家是干什么的，不知道。晚上我验明了虾的身份，然后呢？也不知道。于是在当晚用手机打开知乎，搜索有关狼人杀预言家的内容，然后里面是什么警徽一阶之类的术语，还说要做一个工具人，加上断断续续地看，导致还是不明白要做什么，发什么言。<br>第一轮要指谁时，我指向了波仔，你要问原因，我也不知道有什么原因，也分析不出什么来，<br>然后就在不知不觉中结束了，大概理清了逻辑，是根据大家的发言来怀疑分析出谁是狼谁是人神。</p>
-<p>第二局，我抽到了狼。狼要干什么呢？上一局有听他们说过要带什么节奏来着。于是一开始就先带个波仔的节奏，然后波仔就出局了。然后就莫名其妙地赢了。</p>
-<p>第三局，我还是成了预言家，预言家要不要说出来？不知道，所以我就选择了沉默。然后我就被刀了，这真是个悲伤的故事。虾坑了我两把，第一把是他让我误解波仔是好人，在我阵亡后告诉我真相。第二把是我问他遗言可以说什么的时候，他表示除了他刚才所说的，其它的都可以说。那时我以为他刚才所说指的就是波仔是狼这件事不能说，所以我只表明了自己的身份，没有说波仔的事。后来想想，应该指的他弄错好人坏人的事？</p>
-<p>总而言之，感觉狼人杀还是个挺有意思的游戏，我大概只知道到个皮毛 ，不对，连皮毛都不知道，大概就是个凑数的。</p>
-<h2 id="结"><a href="#结" class="headerlink" title="结"></a>结</h2><p>之后，小黑猫要去锻炼身体，波仔要回校了。本来想来一局久违的三国杀，但好像还有哆啦 A 梦的万圣节特辑没看，于是就在足球场上面对着 iPad 来了一次更久违的哆啦 A 梦，上次看的时候还是几年前。</p>
-<p>之后，送完波仔的虾和咖喱回来了，也将近十一点了。天下无不散的宴席，不久与众人分别。</p>
-<h2 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h2><p>由于写的另一篇挤尽了想要说的话，导致这篇感觉写的有点无力，就是货真价实的流水账了，不过还是先暂且记下来吧。<br>波仔似乎出了点什么事，有点不开心，希望他能好好渡过吧。<br>瓜仔的名也懒得改了。</p>
-<p>时 11 月 3 日。</p>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>life</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>跨越两座城市的距离只为遇见她</title>
-    <url>/2020/11/01/only-for-she/</url>
-    <content><![CDATA[<h1 id="跨两城只为见她"><a href="#跨两城只为见她" class="headerlink" title="跨两城只为见她"></a>跨两城只为见她</h1><h2 id="启程"><a href="#启程" class="headerlink" title="启程"></a>启程</h2><p>傍晚六点开始坐车，晚吗？<br>晚，但是只要她在那里，这一切都值得。</p>
-<h2 id="遇见"><a href="#遇见" class="headerlink" title="遇见"></a>遇见</h2><p>走进东门，还是熟悉的车道，熟悉的灯光，熟悉的行政楼，熟悉的花草，还有熟悉的树木。深吸一口气，感受到的是大自然带来的清新，同时夜晚的校区还有一丝丝沁凉。走过那条连通行政楼与实验楼的小桥，流水从桥下缓缓走过，桥下荷叶应犹在，不见当年小荷花。</p>
-<p>走过实验楼，一年未见，校内的主流共享单车-哈罗单车不知何时被青桔电动车取代，只剩下形单影只的自行车留在那里。伴着轻快的音乐，中厅练舞人群依然坚守那里。</p>
-<p>路过图书馆，图书馆阶梯前仍排满了一排共享电动车，依旧有一些人在此处练习滑板与轮鞋。七点多的图书馆夜晚，正是最年轻的时候。而图书馆下的湖泊则因秋季到来，水位不断下降，桥下水浅处生满了水草。环顾四周，却没找到鸭子的踪迹，不知道是不是又被二饭的阿姨捉去做烧鸭了呢。但鸭子是湖面的点缀，嘎嘎嘎的声音彰显着湖泊的生命力，没见到总有些许遗憾。</p>
-<p>穿过一教时，回来了，全都回来了，记忆中的场景全都回来了。耳边响起的喧嚣声，走过有些崎岖的路面。再跨过没几步的阶梯走上走廊，里面的教室永远都会有几个女生。下一个转角会出现什么东西，皆与记忆中的场景吻合。不过那个草丛堆里的蘑菇倒是不见了。</p>
-<p>走下李园，门后的小道上飘着一点桂花香。在其路上时，有一种自己仍住在那里的感觉。继续往左边的小径走，最后来到一饭。一饭旁的“披头士”鸡排店不知什么时候关闭了，曾经闪闪发光的招牌被拆掉了，只剩下除却装修的店面，以及边上褪色的海报。</p>
-<p>进入一饭，扑面而来的是一股饭堂的味道，感觉并不好闻。里面的服装颜色不知何时已经变成了深灰，有一个阿姨，虽然我已经忘了具体的样子（话说应该是从没见过吧），但其身形以及声音仍印在脑海里。几年过去了，仍留在这里。</p>
-<p>走出一饭，角落里的师兄奶茶店悄悄地换成了更换成另一个品牌“三口井”（怪怪的名字），可能是师兄没钱了。学而优商品旁不知何时又多了个蜜雪冰城，闪闪发光的招牌使得旁边的学而优黯然失色，让我差点以为学而优又倒闭了。不过学而优也变成了天猫小店，里面从一个小卖部模样变成了有点精致的商店。七喜则搬到那栋屋子的另一侧，其面积也少了这么多。</p>
-<p>一路上，在校道上慢慢走着，最后来到西门，鼓捣一番后出示报备信息出到西门。</p>
-<h2 id="凌晨"><a href="#凌晨" class="headerlink" title="凌晨"></a>凌晨</h2><p>凌晨将近五点时醒来，无论如何再也睡不下去。于是在各个地方走来走去，最后拿了一个垫子，坐在窗边。天已泛白，微弱的光线走进并未完全封闭的窗户的里面，外边时常传来汽车的轰鸣，身上吹过早晨的秋风，还感到有些许冷感。</p>
-<h2 id="上午"><a href="#上午" class="headerlink" title="上午"></a>上午</h2><p>之后在床上躺了一会儿，本来不想睡的，明明将手机的声音调到最小但声音依旧很大，较以前似乎有一股催眠魔力，眼皮逐渐地沉重了起来。</p>
-<h2 id="中午"><a href="#中午" class="headerlink" title="中午"></a>中午</h2><p>吃完饭后，去散了散步。</p>
-<h2 id="下午"><a href="#下午" class="headerlink" title="下午"></a>下午</h2><p>校运会结束的学校，是冷清的。空无一人的大操场，学院的所有营地、校运会的横幅、旗帜，仿佛人间蒸发一般，再不能寻其踪影。唯有球场旁阿姨拆解其材料时，才能找到其存在的足迹。</p>
-<p><img src="http://image.jinl1874.xyz/img/20201106220151.jpg" alt="img"></p>
-<p>排球，一个从没接触过的球类运动，在今天接触上了。踏入校门的那刻起，目标只有一个，那就是风雨球场。风雨球场，一个奇怪到不能再奇怪的名字。明明有盖子为遮风挡雨，在里面见不到任何风雨，为何偏偏要叫风雨球场呢？难道是想说，风里雨里，只有风雨球场在等你？</p>
-<p>以前的涂鸦仍留在上面。</p>
-<p><img src="http://image.jinl1874.xyz/img/20201107175500.png" alt="image-20201107175457490"></p>
-<p>风雨球场有排球场，它在大棚的外面。其中的一个排球架子上，夹着一个比较破烂的球。岁月给其留下了痕迹，它也在记录着时间。</p>
-<p><img src="https://raw.githubusercontent.com/jinl1874/image/master/20201106220059.jpg" alt="img"></p>
-<blockquote>
-<p>即左边架上的球</p>
-</blockquote>
-<h3 id="雅食园"><a href="#雅食园" class="headerlink" title="雅食园"></a>雅食园</h3><p>离开风雨球场后，向二饭进发。传闻中进宿舍都需要刷脸，所以选择绕道，由风雨球场转向杏园，再经由中心花园，路过一教，到达二饭。</p>
-<p>校门通往中心花园的小道一侧，隔一段距离摆着一张沾满灰尘，并且满是锈迹的金属椅子，还有几片落叶落在其上面。杏园停车场，在将近两年前早已经决定拆除，建立新的“有为书院”。多年过去，路过杏园时却没发现其入口，而有为书院的大门则抢尽风头。传统园区与其相比，稍显落后，无论是设备还是外观。而中心花园正中间，则摆着一张庆祝 37 周年的宣传牌。</p>
-<p>一教与二饭的幽静小道里，两旁是山，阳光透过路边茂密的树木里洒下稀稀疏疏斑照。在有阳光照过的光束中，有一些微小的粒子在绕来绕去，似是灰尘，又似是花粉。走进一看，却是蜂，却不知是何品种。</p>
-<p>二饭，即雅食园。以前雅食园这个名字，与第一饭堂“恰”膳园一样，意义不明，只是个名字罢了，里面的环境也与一般饭堂无异。那年暑假，二饭经过一轮更新装修，桌子椅子全部更换。让二饭不再是那种单调一条金属桌加上一条塑料横杠椅子的构成，而是全部换成了木制的桌椅，还有各种款式。其内部环境还有各种装饰品，那一年过后，二饭不再是像普通的饭堂，而像一个小餐厅。而二楼的桌椅则由一饭接收（老接盘侠了），成为了一饭二楼的桌椅。</p>
-<p>再次踏入雅食园时，印入眼帘的是书。</p>
-<p>是摆在左边架子上的书，那一瞬间我仿佛以为我进错地方了。而进去的左边各类棋以及各种桌游，包括象棋围棋，狼人杀扑克牌等等。更有趣的是，一部分桌子上印着围棋的棋盘，而有一部分则印着中国象棋的棋盘。</p>
-<p>桌椅再一次发生改变，内部也再次变化，但这次不再是浮于表面的改变，而是能过书本围棋等来增加自身的气质，雅食园已不愧为名副其实的雅食园。</p>
-<h2 id="傍晚"><a href="#傍晚" class="headerlink" title="傍晚"></a>傍晚</h2><p>从二饭出来后，已经接近校车返校时间，就决定从网球场那边走到东门。因为三个分岔口中，只有这一条还没走过。一路上，感觉园区周围的树似乎少了许多，似乎有准备要做种其它的树了。鞋底踩过夹杂着树叶的草地，伴随窸窸窣窣的声音。但是鞋踩过的声音，并不会发出这么大和这种类型的声音，再定睛一瞧，当然在路灯的的光线不足以瞧出来什么来。但这么晚了还在钻来钻去的，除了老鼠也没其它东西了。</p>
-<p>行政楼的厕所，总是那么地难找。先是走到右边尽头，再回来走到左边尽头都没能发现，之后才想起在这里上课时，是走出来往中间进的。</p>
-<p>而在外面的地板上，有一只黑色的蝴蝶倒在上面，似是已死。黑色的翅膀融入夜色中，若不是无意中蹲下来，是决然看不到的。</p>
-<p><img src="http://image.jinl1874.xyz/img/20201107094820.jpg" alt="IMG_20201106_182543"></p>
-<blockquote>
-<p>又是什么让它倒在这里的呢</p>
-</blockquote>
-<h2 id="归程"><a href="#归程" class="headerlink" title="归程"></a>归程</h2><p>走出校门后，来到大门前，想拍一张好看的照片作为其终点，但是相机的素质太差，照出来的照片噪点太多，逐止。</p>
-<p>要上车之际，回头望了一眼，再见了。</p>
-<p>最后踏上回校的车。</p>
-<h2 id="她"><a href="#她" class="headerlink" title="她"></a>她</h2><p>再次踏上满是森林的校园时，心情有一点小激动，也有一点小怀念。一年多了，她变了，她似乎也没变。变了的不仅仅是她，也有自己。也许她一直变，但又一直保持不变。又或者是谁都没有变，但是变不变又有何分别。</p>
-<blockquote>
-<p>好风景多的是，夕阳平常事，然而每天眼见的，永不相似。<a href="#refer"><sup>[1]</sup></a></p>
-</blockquote>
-<hr>
-<a id="more"></a>
-
-<h1 id="不仅仅只为见她"><a href="#不仅仅只为见她" class="headerlink" title="不仅仅只为见她"></a>不仅仅只为见她</h1><h2 id="他们"><a href="#他们" class="headerlink" title="他们"></a>他们</h2><p>她们、他们，还有未曾谋面的她们和他们。</p>
-<h2 id="启程-1"><a href="#启程-1" class="headerlink" title="启程"></a>启程</h2><blockquote>
-<p>若天气良好，我会去见你们。 ——瓜 <a href="#refer"><sup>[2]</sup></a></p>
-</blockquote>
-<p>乘兴而去，随即踏上人生的第一辆（不要问为什么这么多第一次）校巴。</p>
-<h2 id="遇见-1"><a href="#遇见-1" class="headerlink" title="遇见"></a>遇见</h2><p><img src="http://image.jinl1874.xyz/img/20201107163134.png" alt="image-20201107163132232"></p>
-<p>西门口处不知何时树立了一块防疫宣传牌，而牌后面传出一个大声说话的声音，那个咋咋呼呼的声音，那个再熟悉不过的声音，那是虾的声音。</p>
-<p>我快步走到后面，发现了众人的影子。</p>
-<p>此时的他们都非常漂亮，俗说认真的人最美丽，因为拍照的他们无比认真，沉浸在拍照的结界里。</p>
-<p>拍照，出门在外必做的流程之一。曾经的我也很喜欢拍照，不知道什么时候 起，拍照频率已经下降了很多。</p>
-<p>第一个见到的是志斌姐，她戴着一个帽子，似乎是在掩饰其日益增高的发际线。只见她睁大了眼睛，问我为什么会在来？不是说不来吗。其实几天前我是不想来的，但是今天恰好想来了，想见你们，想来说一句好久不见（虽然没说）。之后众人陆陆续续地发现了我。那时，我问虾蹲在地上的 2<sup>33</sup>是谁时，由于志斌姐遮住了他，让我以为他也戴帽子，就讲了戴帽子的那个。没想虾竟然以为我认不出志斌姐。志斌姐曾给我带了这么大的阴影，使我在冲浪不再对表面信息简单地加以相信，所以忘记是不是可能忘记的，这辈子都不可能的。</p>
-<p>虾旁边站着个之前从没见过的女孩子，是志愿者毛毛。说实话，见到她在这还是挺奇怪，毕竟今天做志愿者跑来跑去确实挺累的，而且明天还有长跑比赛，这时不是应该在宿舍里舒服地泡泡脚，休养生息吗。不过，也挺好的。</p>
-<p>拍完照后，分为两路，一批人去环学校游，而我和志斌姐薯仔猫猫毛毛去一饭坐坐。一路上，志斌姐不断地在吐槽以及模仿我发出的那个语气词“啊~”，此时的他，或许还没想到他模仿之后带来的影响。</p>
-<p><img src="http://image.jinl1874.xyz/img/20201107163048.png" alt="image-20201107163044069"></p>
-<p>在一饭时，上完厕所的志斌姐带了臭 dd 过来，一起唠嗑了一阵后，再度与众人在一饭前会和，然后往下一目的地出发。<del>炮姐</del>秋秋过来了，身为龙王的她竟然有点安静，还是有点出乎意料的。在唠嗑期间，猫猫提出要我去认人，其实也不是特别难，一般而言，他们越是着重形容和描述哪点，这点是假的概率就特大，比如华稽。而鸡腿倒是如（网络）印象中一般，话唠属性一览无余。后来，鸡腿说我像他见过的人，其实我也感觉他很眼熟，在哪见过来着。<br>路上遇到了嘟嘟，差指一算，上次见面还是两年前呢，这次是真的好久不见。</p>
-<h2 id="凌晨-1"><a href="#凌晨-1" class="headerlink" title="凌晨"></a>凌晨</h2><p>来到目的地后，如果说之前的是麻雀五脏俱全，那这个算是房厅吧，也找不到形容词了，不过好在便宜。劳累的毛毛在车上就在秋秋的怀抱中睡去，不得不说，女生之间的感情太好嗑了。</p>
-<p>之后在里面来了几局狼人杀，平时看起来没什么话的森罗在其游戏上突然强势起来，劳劳地掌控着局势的发展。而鸡腿的话唠属性在此刻派上大用处，新手在第一次玩就说得头头是道，倒是我到现在还不知道怎么发言。贴心的薯仔还给输了的人涂上指甲油，当晚有两局，我的两个手指甲也上了色。</p>
-<p>凌晨中最难受的事是什么？是明明已经两点多了，但是亢奋的大脑却没有任何困意，同时白晃晃的石灰墙壁在不段地刺痛眼睛。无奈之下，只好退出，强迫自己去睡觉。睡之前，先把瓜姐充满的手机拔下，再插上快没电的充电宝，没想到我那个续航血崩的手机一直在上车之前都没用上，倒是意外地在拔下的手机派上用场。</p>
-<h2 id="上午-1"><a href="#上午-1" class="headerlink" title="上午"></a>上午</h2><p>七点多，我回到那个带镜子的舞蹈室里，新面孔在七点多就全部回去了。</p>
-<p>经过昨晚志斌姐不间段地发出那个语气词，便有一种席卷之势，谁都要来一句。声音由”啊“发展过来，发音变成了”嗯”，只是用于表达惊讶和掩饰尴尬来着。一直以来听起来都很正常，然后志斌姐带起了这个头，导到变得非常不正常，以至于到后来瓜表示烦的情况下风哥还拿手机录下来……</p>
-<p>所以说罪魁祸首是志斌姐。</p>
-<h2 id="中午-1"><a href="#中午-1" class="headerlink" title="中午"></a>中午</h2><p>咖喱再次起床时，已经接近中午，全员都起床后徒步去吃早餐——牛杂煲以及榴芒煲。说起早餐，早上还是第一次吃冰冷的粽子，味道说得上是难吃，最后想带其到一饭热一热，吃上一口热粽子，但在散步时被扔掉了，甚是可惜。</p>
-<p>牛杂煲，顾名思义，即牛杂做的煲，精髓在其牛杂上。</p>
-<p><img src="http://image.jinl1874.xyz/img/20201107173128.png" alt="image-20201107173123837"></p>
-<p>榴芒煲，也顾名思义，里面包括榴莲和芒果，再用鸡肉汤做其汤底，精髓在其汤上，鸡肉有点柴，味道尚不及汤里的胡萝卜；而榴莲则稍有过甜，一个还行，两个容易腻；芒果则是如平常熟透的芒果味道一般，虽在煲里，但没有沾上过多味道，应是后加上的；而汤的味道带着榴莲的甜，又夹着鸡肉的鲜，味道可算不错。</p>
-<p><img src="http://image.jinl1874.xyz/img/20201107173525.png" alt="image-20201107173521906"></p>
-<blockquote>
-<p>黑暗料理是也</p>
-</blockquote>
-<p>吃完饭后，薯仔和森罗提前坐车回家了，而大家则向北江大提出发。广东的 11 月下午，烈阳高照，却阻挡了不钓鱼佬钓鱼的决心。一人一伞一凳一杆，在河边静静地等待着鱼儿的上钩，而在其一旁的虾似乎在思考，或许是在想会不会有虾上钩吧。</p>
-<p><img src="http://image.jinl1874.xyz/img/20201107181509.png" alt="image-20201107181505558"></p>
-<h2 id="下午-1"><a href="#下午-1" class="headerlink" title="下午"></a>下午</h2><p>到学校时，与嘟嘟分别。</p>
-<p>排球场上，与众人来了一段连菜鸡都打不出的排球。老旧的排球拍的时候感觉很轻，但是真正拍出去的时候感觉特别重，拍得也很低，发了好几次球仅有一次过网，排球也砸在手里的时候也感觉有点痛。而咖喱貌似没把球弄过网过，猫猫也能时不时来个好球。倒是风哥似乎上手极快，发球接球都挺顺利。不过正要大展身手之时，排球部的人来训练了，这时大家忙把球放回原位，悻悻地收拾收拾之后就跑路了。</p>
-<p>雅食园中，与大家来了几局棋。</p>
-<p><img src="http://image.jinl1874.xyz/img/20201107181420.png" alt="image-20201107181418134"></p>
-<p>先是和猫猫来一局象棋，然后与咖喱先来几局五子棋，再来一局围棋。五子棋被完虐，经志斌姐解释一波玩法后，局势先处下风，再扳回一点局势，最后被志斌姐虐杀。</p>
-<p>为找回场子，我换了象棋与志斌姐再战一盘，最后在送了一个车的情况下实现绝杀。那时我好像想起了大二那年曾参加校内棋协办的比赛，最后得了第二名，这么多年了，我还是没得过一次第一名。</p>
-<h2 id="傍晚-1"><a href="#傍晚-1" class="headerlink" title="傍晚"></a>傍晚</h2><p>出到甜密密买了蛋糕之后，与志斌姐分别。</p>
-<p>慢悠悠走在那条小路上的时候，后来者咖喱、猫猫和虾骑着电动车居上了。越过我时，虾在前面停下，表示时间不多了，并示意我站上共享电动车与其一起前进。犹豫了一下，便站上车轮边上的横杠，双手紧紧地抱着虾，肩膀还是那么温暖，那么有安全感。</p>
-<h2 id="归程-1"><a href="#归程-1" class="headerlink" title="归程"></a>归程</h2><p>来到东门时，虾正和门卫大爷唠嗑，而我则是到处走走。</p>
-<p>回到门口时，瓜仔和风哥还没到，却意外发现毛毛和鸡腿出现了。是啊，他俩来送我们了。</p>
-<p>在那里，与鸡腿毛毛挥手告别，再见了。</p>
-<h2 id="他们-1"><a href="#他们-1" class="headerlink" title="他们"></a>他们</h2><p>他们，包括了他们和她们，还有未曾谋面的他们和她们。他们里面有给我造成心理阴影的他，疯颠的他，甜甜的他俩，圆圆的她，瘦瘦的她，高大的他，爸爸的他，累累的她，令我印象深刻的她，印象较少的他，话唠的他，安静的他，不知道怎么形容的他。</p>
-<p>他们，以及她，都是我想见的。</p>
-<blockquote>
-<p>遇见你的注定，她会有多幸运。<a href="#refer"><sup>[3]</sup></a></p>
-</blockquote>
-<div id="refer"> </div>
-
-<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><p>[1]：<a href="https://www.bilibili.com/video/BV1p7411u7M4" target="_blank" rel="noopener">陈奕迅：夕阳无限好</a></p>
-<p>[2]： <a href="https://mp.weixin.qq.com/s/53l79kW5eomkcI35mjYp8Q" target="_blank" rel="noopener">西瓜瓜 CH：No.78</a></p>
-<p>[3]：<a href="https://www.bilibili.com/video/BV1BW411h7rp" target="_blank" rel="noopener">田馥甄：小幸运</a></p>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>life</tag>
       </tags>
   </entry>
 </search>
