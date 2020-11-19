@@ -23,15 +23,15 @@
     var CONFIG = {"hostname":"jinl1874.xyz","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="1.  元素在 HTML 代码中插入 js 脚本，需要script元素，它有几个属性：  async：可选，表示应该立即下载脚本。 charset：可选，表示 src 属性指定代码的字符集，一般没人用。 defer：可选，表示脚本延迟到文档完全解析后才执行。 src：可选，执行的外部文件。 type：可选是 language 的替代属性，表示编写代码使用的脚本语言的类型。默认值是 text&#x2F;jav">
+  <meta name="description" content="1. script 元素在 HTML 代码中插入 js 脚本，需要script元素，它有几个属性：  async：可选，表示应该立即下载脚本。 charset：可选，表示 src 属性指定代码的字符集，一般没人用。 defer：可选，表示脚本延迟到文档完全解析后才执行。 src：可选，执行的外部文件。 type：可选是 language 的替代属性，表示编写代码使用的脚本语言的类型。默认值是 te">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript 高级程序设计（1）">
 <meta property="og:url" content="https://jinl1874.xyz/2020/08/01/JavaScript-%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%881%EF%BC%89/index.html">
 <meta property="og:site_name" content="jinl&#39;s blog">
-<meta property="og:description" content="1.  元素在 HTML 代码中插入 js 脚本，需要script元素，它有几个属性：  async：可选，表示应该立即下载脚本。 charset：可选，表示 src 属性指定代码的字符集，一般没人用。 defer：可选，表示脚本延迟到文档完全解析后才执行。 src：可选，执行的外部文件。 type：可选是 language 的替代属性，表示编写代码使用的脚本语言的类型。默认值是 text&#x2F;jav">
+<meta property="og:description" content="1. script 元素在 HTML 代码中插入 js 脚本，需要script元素，它有几个属性：  async：可选，表示应该立即下载脚本。 charset：可选，表示 src 属性指定代码的字符集，一般没人用。 defer：可选，表示脚本延迟到文档完全解析后才执行。 src：可选，执行的外部文件。 type：可选是 language 的替代属性，表示编写代码使用的脚本语言的类型。默认值是 te">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-08-01T04:08:56.000Z">
-<meta property="article:modified_time" content="2020-11-19T03:01:27.216Z">
+<meta property="article:modified_time" content="2020-11-19T03:03:11.171Z">
 <meta property="article:author" content="道理">
 <meta property="article:tag" content="js">
 <meta name="twitter:card" content="summary">
@@ -242,7 +242,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-19 11:01:27" itemprop="dateModified" datetime="2020-11-19T11:01:27+08:00">2020-11-19</time>
+                <time title="修改时间：2020-11-19 11:03:11" itemprop="dateModified" datetime="2020-11-19T11:03:11+08:00">2020-11-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -286,7 +286,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h4 id="1-元素"><a href="#1-元素" class="headerlink" title="1.  元素"></a>1. <script> 元素</h4><p>在 HTML 代码中插入 js 脚本，需要<code>script</code>元素，它有几个属性：</p>
+        <h2 id="1-script-元素"><a href="#1-script-元素" class="headerlink" title="1. script 元素"></a>1. script 元素</h2><p>在 HTML 代码中插入 js 脚本，需要<code>script</code>元素，它有几个属性：</p>
 <ul>
 <li>async：可选，表示应该立即下载脚本。</li>
 <li>charset：可选，表示 src 属性指定代码的字符集，一般没人用。</li>
@@ -405,32 +405,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-元素"><span class="nav-number">1.</span> <span class="nav-text">1.  元素&lt;&#x2F;h4&gt;&lt;p&gt;在 HTML 代码中插入 js 脚本，需要&lt;code&gt;script&lt;&#x2F;code&gt;元素，它有几个属性：&lt;&#x2F;p&gt;
-&lt;ul&gt;
-&lt;li&gt;async：可选，表示应该立即下载脚本。&lt;&#x2F;li&gt;
-&lt;li&gt;charset：可选，表示 src 属性指定代码的字符集，一般没人用。&lt;&#x2F;li&gt;
-&lt;li&gt;defer：可选，表示脚本延迟到文档完全解析后才执行。&lt;&#x2F;li&gt;
-&lt;li&gt;src：可选，执行的外部文件。&lt;&#x2F;li&gt;
-&lt;li&gt;type：可选是 language 的替代属性，表示编写代码使用的脚本语言的类型。默认值是 &lt;code&gt;text&#x2F;javascript&lt;&#x2F;code&gt;。&lt;&#x2F;li&gt;
-&lt;&#x2F;ul&gt;
-&lt;p&gt;标签一般会放在&lt;code&gt;&lt;head&gt;&lt;&#x2F;code&gt;元素里，但是会出现延迟，所以可以选择放在 &lt;code&gt;&lt;body&gt;&lt;&#x2F;code&gt; 的底部。&lt;&#x2F;p&gt;
-&lt;p&gt;或者可以选择在 &lt;code&gt;&lt;script&gt;&lt;&#x2F;code&gt; 元素中添加 defer 属性。&lt;&#x2F;p&gt;
-&lt;figure class&#x3D;&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class&#x3D;&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class&#x3D;&quot;line&quot;&gt;1&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;&quot;line&quot;&gt;2&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;&quot;line&quot;&gt;3&lt;&#x2F;span&gt;&lt;br&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;td&gt;&lt;td class&#x3D;&quot;code&quot;&gt;&lt;pre&gt;&lt;span class&#x3D;&quot;line&quot;&gt;&lt;span class&#x3D;&quot;tag&quot;&gt;&lt;&lt;span class&#x3D;&quot;name&quot;&gt;head&lt;&#x2F;span&gt;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;&quot;line&quot;&gt;&lt;span class&#x3D;&quot;tag&quot;&gt;&lt;&lt;span class&#x3D;&quot;name&quot;&gt;script&lt;&#x2F;span&gt; &lt;span class&#x3D;&quot;attr&quot;&gt;type&lt;&#x2F;span&gt;&#x3D;&lt;span class&#x3D;&quot;string&quot;&gt;&quot;text&#x2F;javascript&quot;&lt;&#x2F;span&gt; &lt;span class&#x3D;&quot;attr&quot;&gt;defer&lt;&#x2F;span&gt;&#x3D;&lt;span class&#x3D;&quot;string&quot;&gt;&quot;defer&quot;&lt;&#x2F;span&gt; &lt;span class&#x3D;&quot;attr&quot;&gt;src&lt;&#x2F;span&gt;&#x3D;&lt;span class&#x3D;&quot;string&quot;&gt;&quot;example.js&quot;&lt;&#x2F;span&gt;&gt;&lt;&#x2F;span&gt; &lt;span class&#x3D;&quot;tag&quot;&gt;&lt;&#x2F;&lt;span class&#x3D;&quot;name&quot;&gt;script&lt;&#x2F;span&gt;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;&quot;line&quot;&gt;&lt;span class&#x3D;&quot;tag&quot;&gt;&lt;&lt;span class&#x3D;&quot;name&quot;&gt;head&lt;&#x2F;span&gt;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;br&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;table&gt;&lt;&#x2F;figure&gt;
-
-&lt;p&gt;asyn 属性与 defer 属性类似，用于改变处理脚本。async 只用于外部脚本文件，告诉浏览器立即下载，不保证顺序。&lt;&#x2F;p&gt;
-&lt;figure class&#x3D;&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class&#x3D;&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class&#x3D;&quot;line&quot;&gt;1&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;&quot;line&quot;&gt;2&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;&quot;line&quot;&gt;3&lt;&#x2F;span&gt;&lt;br&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;td&gt;&lt;td class&#x3D;&quot;code&quot;&gt;&lt;pre&gt;&lt;span class&#x3D;&quot;line&quot;&gt;&lt;span class&#x3D;&quot;tag&quot;&gt;&lt;&lt;span class&#x3D;&quot;name&quot;&gt;head&lt;&#x2F;span&gt;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;&quot;line&quot;&gt;&lt;span class&#x3D;&quot;tag&quot;&gt;&lt;&lt;span class&#x3D;&quot;name&quot;&gt;script&lt;&#x2F;span&gt; &lt;span class&#x3D;&quot;attr&quot;&gt;type&lt;&#x2F;span&gt;&#x3D;&lt;span class&#x3D;&quot;string&quot;&gt;&quot;text&#x2F;javascript&quot;&lt;&#x2F;span&gt; &lt;span class&#x3D;&quot;attr&quot;&gt;async&lt;&#x2F;span&gt; &lt;span class&#x3D;&quot;attr&quot;&gt;src&lt;&#x2F;span&gt;&#x3D;&lt;span class&#x3D;&quot;string&quot;&gt;&quot;example.js&quot;&lt;&#x2F;span&gt;&gt;&lt;&#x2F;span&gt; &lt;span class&#x3D;&quot;tag&quot;&gt;&lt;&#x2F;&lt;span class&#x3D;&quot;name&quot;&gt;script&lt;&#x2F;span&gt;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;&quot;line&quot;&gt;&lt;span class&#x3D;&quot;tag&quot;&gt;&lt;&lt;span class&#x3D;&quot;name&quot;&gt;head&lt;&#x2F;span&gt;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;br&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;table&gt;&lt;&#x2F;figure&gt;
-
-&lt;p&gt;因为当有些浏览器不支持的 js 的时候，导致 js 代码会显示在页面当中。&lt;&#x2F;p&gt;
-&lt;h4 id&#x3D;&quot;2-嵌入代码与外部文件&quot;&gt;&lt;a href&#x3D;&quot;#2-嵌入代码与外部文件&quot; class&#x3D;&quot;headerlink&quot; title&#x3D;&quot;2. 嵌入代码与外部文件&quot;&gt;&lt;&#x2F;a&gt;2. 嵌入代码与外部文件&lt;&#x2F;h4&gt;&lt;p&gt;不推荐把 javascript 代码包在 HTML 中，如下面：&lt;&#x2F;p&gt;
-&lt;figure class&#x3D;&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class&#x3D;&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class&#x3D;&quot;line&quot;&gt;1&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;&quot;line&quot;&gt;2&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;&quot;line&quot;&gt;3&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;&quot;line&quot;&gt;4&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;&quot;line&quot;&gt;5&lt;&#x2F;span&gt;&lt;br&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;td&gt;&lt;td class&#x3D;&quot;code&quot;&gt;&lt;pre&gt;&lt;span class&#x3D;&quot;line&quot;&gt;&lt;span class&#x3D;&quot;tag&quot;&gt;&lt;&lt;span class&#x3D;&quot;name&quot;&gt;script&lt;&#x2F;span&gt;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;&quot;line&quot;&gt;&lt;span class&#x3D;&quot;actionscript&quot;&gt;  &lt;span class&#x3D;&quot;function&quot;&gt;&lt;span class&#x3D;&quot;keyword&quot;&gt;function&lt;&#x2F;span&gt; &lt;span class&#x3D;&quot;title&quot;&gt;test&lt;&#x2F;span&gt;&lt;span class&#x3D;&quot;params&quot;&gt;()&lt;&#x2F;span&gt; &lt;&#x2F;span&gt;&amp;#123;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;&quot;line&quot;&gt;&lt;span class&#x3D;&quot;actionscript&quot;&gt;    &lt;span class&#x3D;&quot;comment&quot;&gt;&#x2F;&#x2F; statement&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;&quot;line&quot;&gt;  &amp;#125;&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;&quot;line&quot;&gt;&lt;span class&#x3D;&quot;tag&quot;&gt;&lt;&#x2F;&lt;span class&#x3D;&quot;name&quot;&gt;script&lt;&#x2F;span&gt;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;br&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;table&gt;&lt;&#x2F;figure&gt;
-
-&lt;p&gt;一般选择外部文件更好，因为在外部文件更好维护，可缓存（两个页面使用同一个文件，那么只需要一次下载），适应未来。&lt;&#x2F;p&gt;
-&lt;h4 id&#x3D;&quot;3-文档模式&quot;&gt;&lt;a href&#x3D;&quot;#3-文档模式&quot; class&#x3D;&quot;headerlink&quot; title&#x3D;&quot;3. 文档模式&quot;&gt;&lt;&#x2F;a&gt;3. 文档模式&lt;&#x2F;h4&gt;&lt;p&gt;通过文档类型（doctype）切换实现。&lt;&#x2F;p&gt;
-&lt;h4 id&#x3D;&quot;4-元素&quot;&gt;&lt;a href&#x3D;&quot;#4-元素&quot; class&#x3D;&quot;headerlink&quot; title&#x3D;&quot;4.  元素&quot;&gt;&lt;&#x2F;a&gt;4. &lt;noscript&gt; 元素&lt;&#x2F;h4&gt;&lt;p&gt;当浏览器不支持脚本，或者浏览器支持脚本，但脚本被禁用的情况下，浏览器才会显示 &lt;code&gt;&lt;noscript&gt;&lt;&#x2F;code&gt; 的内容。&lt;&#x2F;p&gt;
-&lt;figure class&#x3D;&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class&#x3D;&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class&#x3D;&quot;line&quot;&gt;1&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;&quot;line&quot;&gt;2&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;&quot;line&quot;&gt;3&lt;&#x2F;span&gt;&lt;br&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;td&gt;&lt;td class&#x3D;&quot;code&quot;&gt;&lt;pre&gt;&lt;span class&#x3D;&quot;line&quot;&gt;&lt;span class&#x3D;&quot;tag&quot;&gt;&lt;&lt;span class&#x3D;&quot;name&quot;&gt;body&lt;&#x2F;span&gt;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;&quot;line&quot;&gt;  &lt;span class&#x3D;&quot;tag&quot;&gt;&lt;&lt;span class&#x3D;&quot;name&quot;&gt;noscript&lt;&#x2F;span&gt;&gt;&lt;&#x2F;span&gt; &lt;span class&#x3D;&quot;tag&quot;&gt;&lt;&lt;span class&#x3D;&quot;name&quot;&gt;p&lt;&#x2F;span&gt;&gt;&lt;&#x2F;span&gt;本页面需要浏览器支持（启用）JavaScript.&lt;span class&#x3D;&quot;tag&quot;&gt;&lt;&#x2F;&lt;span class&#x3D;&quot;name&quot;&gt;p&lt;&#x2F;span&gt;&gt;&lt;&#x2F;span&gt;&lt;span class&#x3D;&quot;tag&quot;&gt;&lt;&#x2F;&lt;span class&#x3D;&quot;name&quot;&gt;noscript&lt;&#x2F;span&gt;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;&quot;line&quot;&gt;&lt;span class&#x3D;&quot;tag&quot;&gt;&lt;&#x2F;&lt;span class&#x3D;&quot;name&quot;&gt;body&lt;&#x2F;span&gt;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;br&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;table&gt;&lt;&#x2F;figure&gt;
-
-&lt;p&gt;结束&lt;&#x2F;p&gt;
-</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-script-元素"><span class="nav-number">1.</span> <span class="nav-text">1. script 元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-嵌入代码与外部文件"><span class="nav-number">1.0.1.</span> <span class="nav-text">2. 嵌入代码与外部文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-文档模式"><span class="nav-number">1.0.2.</span> <span class="nav-text">3. 文档模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-元素"><span class="nav-number">1.0.3.</span> <span class="nav-text">4.  元素</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
