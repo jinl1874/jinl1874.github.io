@@ -23,20 +23,26 @@
     var CONFIG = {"hostname":"jinl1874.xyz","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="起因很久之前就听说过这个作品，前些天终于决定要看。本来是想直接看动画的，但是在知乎看到其动画的评价很低，并推荐去玩原作游戏。">
+  <meta name="description" content="使用 python requests 来下载知乎的视频，虽然有更简单的方法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="寒蝉鸣泣之时-小说">
-<meta property="og:url" content="https://jinl1874.xyz/2020/10/06/%E5%AF%92%E8%9D%89%E9%B8%A3%E6%B3%A3%E4%B9%8B%E6%97%B6/index.html">
+<meta property="og:title" content="使用 Python 爬取知乎答案上的视频">
+<meta property="og:url" content="https://jinl1874.xyz/2020/11/20/python-zhihu-video/index.html">
 <meta property="og:site_name" content="jinl&#39;s blog">
-<meta property="og:description" content="起因很久之前就听说过这个作品，前些天终于决定要看。本来是想直接看动画的，但是在知乎看到其动画的评价很低，并推荐去玩原作游戏。">
+<meta property="og:description" content="使用 python requests 来下载知乎的视频，虽然有更简单的方法">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-10-06T05:24:54.000Z">
-<meta property="article:modified_time" content="2020-10-28T11:40:10.774Z">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-bb617555b12dd3be6c590dc0f4239893.jpg">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-7e27c91b207ddb2c058ade3d4ca5b3c1.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-ca4e22e60affb10e8da45280f9600d69.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-a67f2f921865a245851fdc95abb8a7a5.png">
+<meta property="article:published_time" content="2020-11-20T03:02:00.000Z">
+<meta property="article:modified_time" content="2020-11-20T03:05:07.283Z">
 <meta property="article:author" content="道理">
-<meta property="article:tag" content="book">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="spider">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic4.zhimg.com/80/v2-bb617555b12dd3be6c590dc0f4239893.jpg">
 
-<link rel="canonical" href="https://jinl1874.xyz/2020/10/06/%E5%AF%92%E8%9D%89%E9%B8%A3%E6%B3%A3%E4%B9%8B%E6%97%B6/">
+<link rel="canonical" href="https://jinl1874.xyz/2020/11/20/python-zhihu-video/">
 
 
 <script id="page-configurations">
@@ -49,7 +55,7 @@
   };
 </script>
 
-  <title>寒蝉鸣泣之时-小说 | jinl's blog</title>
+  <title>使用 Python 爬取知乎答案上的视频 | jinl's blog</title>
   
 
 
@@ -212,7 +218,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/10/06/%E5%AF%92%E8%9D%89%E9%B8%A3%E6%B3%A3%E4%B9%8B%E6%97%B6/">
+    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/11/20/python-zhihu-video/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.jpg">
@@ -225,7 +231,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          寒蝉鸣泣之时-小说
+          使用 Python 爬取知乎答案上的视频
         </h1>
 
         <div class="post-meta">
@@ -234,28 +240,22 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-10-06 13:24:54" itemprop="dateCreated datePublished" datetime="2020-10-06T13:24:54+08:00">2020-10-06</time>
+              <time title="创建时间：2020-11-20 11:02:00 / 修改时间：11:05:07" itemprop="dateCreated datePublished" datetime="2020-11-20T11:02:00+08:00">2020-11-20</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-28 19:40:10" itemprop="dateModified" datetime="2020-10-28T19:40:10+08:00">2020-10-28</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BB%E4%B9%A6/" itemprop="url" rel="index"><span itemprop="name">读书</span></a>
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
                 </span>
             </span>
 
           
-            <span id="/2020/10/06/%E5%AF%92%E8%9D%89%E9%B8%A3%E6%B3%A3%E4%B9%8B%E6%97%B6/" class="post-meta-item leancloud_visitors" data-flag-title="寒蝉鸣泣之时-小说" title="阅读次数">
+            <span id="/2020/11/20/python-zhihu-video/" class="post-meta-item leancloud_visitors" data-flag-title="使用 Python 爬取知乎答案上的视频" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -270,8 +270,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/10/06/%E5%AF%92%E8%9D%89%E9%B8%A3%E6%B3%A3%E4%B9%8B%E6%97%B6/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/06/%E5%AF%92%E8%9D%89%E9%B8%A3%E6%B3%A3%E4%B9%8B%E6%97%B6/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/11/20/python-zhihu-video/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/11/20/python-zhihu-video/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -286,29 +286,29 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>很久之前就听说过这个作品，前些天终于决定要看。本来是想直接看动画的，但是在知乎看到其动画的评价很低，并推荐去玩原作游戏。</p>
+        <p><img src="https://pic4.zhimg.com/80/v2-bb617555b12dd3be6c590dc0f4239893.jpg" alt="Image"></p>
+<p>使用 python requests 来下载知乎的视频，虽然有更简单的方法</p>
 <a id="more"></a>
 
-<p>于是我开启了寻找游戏的流程，去各大 Gal 网站都没找到资源，然后发现 steam 上有免费的鬼隐篇。但是发现仅支持日文以及英文。之后，我在本吧找到其汉化补丁。大概两三天的时间，就玩完了鬼隐篇。本来想在 steam 上买的，但是没找到汉化补丁。</p>
-<p>然后我又在贴吧找到了游戏资源，但是萌化版的画质、分辨率都太低了。然后继续找资源，发现还有小说。</p>
-<p>但是在老福特分享的小说都是 txt 文件，找了很久也没找到 EPUB 文件。所以就决定自己制作一份，毕竟对于我来说，没有排版的 TXT 文件是读不下去。<br>于是将其重新制作排版了一下（中间换了一个译本来源），我没找到本书的 epub 文件，于是就加了一些原作可能不存在的目录。</p>
-<p>还有就是一些原译本扫描过程中带来的错，一个对话分段，也已经尽可能修复了。（大部分都集中在第二篇中，因为这里的译本是从其它地方拿来的</p>
-<p>也就导致某些译名不一样，比如寒蝉会翻译成暮蝉）。推荐大家使用”多看阅读“来阅读，另外，排版就个人而言还是挺不错的，至少能看得下去。<br>最后就是，如果大家能接受小说的话，还是推荐大家去阅读一下的。</p>
-<h3 id="制作过程"><a href="#制作过程" class="headerlink" title="制作过程"></a>制作过程</h3><p>寒蝉有解题篇以及出题篇。解题篇还是比出题篇长的，没找到书本的封面，然后只能找漫画的封面来填。里面还插了几张漫画内容或者其它卷的封面。</p>
-<p>还有就是解题篇的目录实在是太难找了，在前面的目录是中文，但是在内容的标题却夹着日文，导致只能一个个对比加上。有的还找不到，只能靠感觉加上了，或许会有一些目录会出错吧。</p>
-<p>不过年代这么久远了，已经找不到这些书的 epub 文件了，也算是给补上了吧。但是寒蝉有游戏、漫画以及动画的情况下，阅读小说的人是非常少的。</p>
-<p>不过这也算是个人的偏执吧，小说只有文字，没有因年代留下的痕迹。而其动画以及游戏因年代过于久远，画质以及其它方面的制作都比较落后。现在就算看/玩的话，也很难看下去。</p>
-<p>如果有什么遗憾的话，就是小说的译本都很差（个人感觉），如果有正版的就好了（虽然是不可能的）。而且文本里太多省略号了，无论是什么样的语气都加个省略号。在省略号后加标点符号、在文本开始前加，无处不在的省略号使我发狂，于是我删去了大量的省略号，仅有一些表示无语以及是真的省略的省略号。不过只有在解题篇删了。</p>
-<p>重制版动画就要来了，期待新动画的表现。</p>
-<h3 id="简评（有小部分剧透）"><a href="#简评（有小部分剧透）" class="headerlink" title="简评（有小部分剧透）"></a>简评（有小部分剧透）</h3><p>有时候，一部作品没有看完，他人的玩梗式评价会导致很多人误解这部作品，或者说造成误解才是正常的，毕竟这个故事很多都是由误会引起的。</p>
-<p>《寒蝉》最出名的梗大概就是那句“蝉在叫，人坏掉”吧，还有各种论坛里时不时地来一句治愈番之类的话，再配上一张柴刀少女图，导致我对这部作品的印象是一部猎奇血腥动画。</p>
-<p>看完出题篇以及解题篇后，猎奇血腥固然有，不过仅在《目明篇》有较多描写，其它篇章的杀人都算是比较“正常”的杀人。或者说是每个篇章的侧重点都不一样，都有不同的元素，猎奇仅仅是其中一种，而出题篇前三篇注重恐怖气氛的渲染，由圭一的第一视角来认识雏见泽，第四篇《暇溃篇》更像是一个小外传；后面解题篇则是各有各的风格，《目明篇》是比较血腥，而《罪灭篇》以及《皆杀篇》的气氛则是比较紧张刺激，各方势力在明争暗斗，但最后都逃不过“大灾难”。至于最后的《祭囃篇》，是比较欢快的，最后的决战像小孩子过家家一样（虽然一方的年龄确实不怎么大），治愈番也许就是从最后一篇来的吧。对我而则是比较无趣的，不过前面的鹰野的故事以及中间的碎片整理是挺有意思的，把事件的原貌基本都展现了出来。</p>
-<p>总结一下，整部作品说的是一个误会的故事，这种误会有的是无意引起的，比如鬼隐篇里那个带“针”的饼，怜奈强大的推理能力导致圭一怀疑人生，以及最后的“针筒”恶作剧，还有《祟杀篇》里的圭一明明不现场，但是伙伴们却一口咬定圭一在绵流祭上，导致圭一开始怀疑人生，其中最大的误会是羽入时不时的灵异表现，这导致本来是正常发生的事，愣是加了一层不正常的面纱；有的是刻意造成的，比如圆崎家的祖训，魅音她们的隐瞒。单有误会其实还不算什么大事，但是这种误会遇到了一种病，叫雏见泽候群症，两者结合再加上第三方势力的插入（“东京”、沙都子的叔父、怜奈的“后妈”等）就会造成各个篇章里的悲剧。</p>
-<p>要破解这个局，需要解开这些误会，来获得朋友的帮助。因为个人的力量是有限的，梨花在《皆杀篇》之前一直不相信自己的朋友，没有将事情告诉她们。在《皆杀篇》里看到圭一联合众人救了沙都子，于是开始相信朋友，将事情告诉了她们。但在最后因为之前错信了人，导致功亏一篑，自己也同样的死法死去。到了最后一章，由于羽入的帮忙，梨花众人团结一心，再加上 bug 一样的赤坂，成功拯救自己以及整个雏见泽。</p>
-<p>我想整个故事想说的是，有困难要多和朋友沟通，多相信朋友，否则很容易出事。</p>
-<p>转自我的知乎回答 <a href="https://www.zhihu.com/question/276855671/answer/1503964672" target="_blank" rel="noopener">https://www.zhihu.com/question/276855671/answer/1503964672</a></p>
-<h3 id="文件地址"><a href="#文件地址" class="headerlink" title="文件地址"></a>文件地址</h3><p>Github 地址：<a href="https://github.com/jinl1874/e-book/，欢迎star。" target="_blank" rel="noopener">https://github.com/jinl1874/e-book/，欢迎star。</a></p>
-<p>蓝奏云地址： <a href="https://wwa.lanzous.com/b0cqj1kti" target="_blank" rel="noopener">https://wwa.lanzous.com/b0cqj1kti</a> 密码:achq</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>老规矩，先抓包。<br>随便进入一个<a href="https://www.zhihu.com/question/398940907/answer/1275941024" target="_blank" rel="noopener">视频页面</a>，进入开发者模式，选择网络，再筛选为 XHR。<br>很快啊，啪的一下进来，就找到了这么一个请求。<br><img src="https://pic4.zhimg.com/80/v2-7e27c91b207ddb2c058ade3d4ca5b3c1.png" alt="Image"><br>再点开这个 json，发现里面这么些数据：<br><img src="https://pic4.zhimg.com/80/v2-ca4e22e60affb10e8da45280f9600d69.png" alt="Image"><br>很明显，这里面有三个不同清晰度的视频，分别是 LD、HD、SD。点开里面的’play_url’之后，就会提示下载一个视频文件。这已经很明显了，这就是我们要找的视频地址。</p>
+<p>那要怎么获取呢？</p>
+<p>先看下 url，是这样的——(<a href="https://lens.zhihu.com/api/v4/videos/1254186650735267840)，前面的都是不变的，只有后面ID是动态的。" target="_blank" rel="noopener">https://lens.zhihu.com/api/v4/videos/1254186650735267840)，前面的都是不变的，只有后面ID是动态的。</a><br>那么首要任务就是将这个 ID 找出来，在网页代码搜索一下，发现为空。<br>由于新版的知乎视频里，在答案上插入视频需要将视频发表到另一个地方，所以试着找一下在答案找到这个视频的地址。然后再去访问一下那里，看有没有这个 ID。</p>
+<p>很明显，我们在答案的代码中找到了视频的 url 地址，在一个 <code>&lt;script id=&quot;js-clientConfig&quot; type=&quot;text/json&quot;&gt;</code>标签里，有一个整个页面的 json 文件，包括了题目、答案和作者等详细信息，而视频 url 也在里面。</p>
+<p>使用正则表达式提取出来，再去访问视频的 url。在视频的网页页面下，搜索一下视频 ID，果然在里面。<br><img src="https://pic4.zhimg.com/80/v2-a67f2f921865a245851fdc95abb8a7a5.png" alt="Image"></p>
+<p>所以这就很简单了。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol>
+<li>先获取答案上的所有的视频 url；</li>
+<li>再分别访问视频，获取一个返回包含视频信息的 json 的 url；</li>
+<li>从 json 上获取到真实的视频 url 地址；</li>
+<li>访问，再保存；</li>
+</ol>
+<h2 id="提取-url"><a href="#提取-url" class="headerlink" title="提取 url"></a>提取 url</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_video_urls</span><span class="params">(url)</span>:</span></span><br><span class="line">    res = requests.get(url, headers=headers)</span><br><span class="line">    <span class="comment"># 获取答案url上的id</span></span><br><span class="line">    answer_id = re.findall(<span class="string">r'answer/(\d+)'</span>, url)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取json文本</span></span><br><span class="line">    text = res.text</span><br><span class="line">    json_text = re.findall(</span><br><span class="line">        <span class="string">r'&lt;script id="js-initialData" type="text/json"&gt;(.*?)&lt;/script&gt;'</span>, text)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 提取答案的content文件。</span></span><br><span class="line">    data = json.loads(json_text)</span><br><span class="line">    content = data[<span class="string">'initialState'</span>][<span class="string">'entities'</span>][<span class="string">'answers'</span>][answer_id][<span class="string">'content'</span>]</span><br><span class="line">    <span class="comment"># 提取url</span></span><br><span class="line">    video_urls = re.findall(<span class="string">r'(https://www.zhihu.com/zvideo/\d+)'</span>, content)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> video_urls</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取真实的视频地址以及标题"><a href="#获取真实的视频地址以及标题" class="headerlink" title="获取真实的视频地址以及标题"></a>获取真实的视频地址以及标题</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_name_url</span><span class="params">(url)</span>:</span></span><br><span class="line">    get_video_url = <span class="string">'https://lens.zhihu.com/api/v4/videos/&#123;&#125;'</span></span><br><span class="line">    <span class="comment"># 找到 json_url 的id</span></span><br><span class="line">    res = requests.get(url, headers=headers)</span><br><span class="line">    url = re.findall(</span><br><span class="line">        <span class="string">'&lt;iframe class="ZVideo-player" src=\"(.*?)\"'</span>, res.text)[<span class="number">0</span>]</span><br><span class="line">    video_id = re.findall(<span class="string">r'/video/(\d+)'</span>, url)[<span class="number">0</span>]</span><br><span class="line">    <span class="comment"># 合并</span></span><br><span class="line">    json_url = get_video_url.format(video_id)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取真实的视频url</span></span><br><span class="line">    res = requests.get(json_url, headers=headers)</span><br><span class="line">    data = json.loads(res.text)</span><br><span class="line">    <span class="comment"># 可选 LD 和 SD，不过一般选最清晰的 HD</span></span><br><span class="line">    HD_url = data[<span class="string">'playlist'</span>][<span class="string">'HD'</span>][<span class="string">'play_url'</span>]</span><br><span class="line"></span><br><span class="line">    title = data[<span class="string">'title'</span>]</span><br><span class="line">    video_name = title + <span class="string">'.mp4'</span></span><br><span class="line">    <span class="keyword">return</span> video_name, HD_url</span><br></pre></td></tr></table></figure>
+
+<h2 id="保存"><a href="#保存" class="headerlink" title="保存"></a>保存</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save</span><span class="params">(name, url)</span>:</span></span><br><span class="line">    res = requests.get(url, headers=headers)</span><br><span class="line">    <span class="keyword">with</span> open(name, <span class="string">'wb'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">        fp.write(res.content)</span><br></pre></td></tr></table></figure>
+
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><p><a href="https://github.com/jinl1874/spider/tree/master/zhihu_video" target="_blank" rel="noopener">Github|spider</a></p>
 
     </div>
 
@@ -327,7 +327,8 @@
  </div>
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/book/" rel="tag"># book</a>
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/spider/" rel="tag"># spider</a>
           </div>
 
         
@@ -336,13 +337,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/08/19/%E6%BC%AB%E8%AF%84-%E3%80%8A%E5%A4%8F%E6%97%A5%E9%87%8D%E7%8E%B0%E3%80%8B/" rel="prev" title="《夏日重现》：孤岛轮回故事">
-      <i class="fa fa-chevron-left"></i> 《夏日重现》：孤岛轮回故事
+    <a href="/2020/11/19/get-bilibili-video/" rel="prev" title="Python 爬取 BiliBili 的视频、弹幕以及封面">
+      <i class="fa fa-chevron-left"></i> Python 爬取 BiliBili 的视频、弹幕以及封面
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/10/09/%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC%E5%85%A8%E4%BA%BA%E7%89%A9/" rel="next" title="百年孤独全人物">
-      百年孤独全人物 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -403,7 +401,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#起因"><span class="nav-number">1.</span> <span class="nav-text">起因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#制作过程"><span class="nav-number">2.</span> <span class="nav-text">制作过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简评（有小部分剧透）"><span class="nav-number">3.</span> <span class="nav-text">简评（有小部分剧透）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件地址"><span class="nav-number">4.</span> <span class="nav-text">文件地址</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#分析"><span class="nav-number">1.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提取-url"><span class="nav-number">3.</span> <span class="nav-text">提取 url</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取真实的视频地址以及标题"><span class="nav-number">4.</span> <span class="nav-text">获取真实的视频地址以及标题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保存"><span class="nav-number">5.</span> <span class="nav-text">保存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完整代码"><span class="nav-number">6.</span> <span class="nav-text">完整代码</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

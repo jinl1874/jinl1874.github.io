@@ -1105,6 +1105,8 @@
     <title>JavaScript 高级程序设计（1）</title>
     <url>/2020/08/01/JavaScript-%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%881%EF%BC%89/</url>
     <content><![CDATA[<h2 id="1-script-元素"><a href="#1-script-元素" class="headerlink" title="1. script 元素"></a>1. script 元素</h2><p>在 HTML 代码中插入 js 脚本，需要<code>script</code>元素，它有几个属性：</p>
+<a id="more"></a>
+
 <ul>
 <li>async：可选，表示应该立即下载脚本。</li>
 <li>charset：可选，表示 src 属性指定代码的字符集，一般没人用。</li>
@@ -1125,7 +1127,7 @@
 
 <p>一般选择外部文件更好，因为在外部文件更好维护，可缓存（两个页面使用同一个文件，那么只需要一次下载），适应未来。</p>
 <h4 id="3-文档模式"><a href="#3-文档模式" class="headerlink" title="3. 文档模式"></a>3. 文档模式</h4><p>通过文档类型（doctype）切换实现。</p>
-<h4 id="4-元素"><a href="#4-元素" class="headerlink" title="4.  元素"></a>4. <noscript> 元素</h4><p>当浏览器不支持脚本，或者浏览器支持脚本，但脚本被禁用的情况下，浏览器才会显示 <code>&lt;noscript&gt;</code> 的内容。</p>
+<h4 id="4-noscript-元素"><a href="#4-noscript-元素" class="headerlink" title="4. noscript 元素"></a>4. noscript 元素</h4><p>当浏览器不支持脚本，或者浏览器支持脚本，但脚本被禁用的情况下，浏览器才会显示 <code>&lt;noscript&gt;</code> 的内容。</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">noscript</span>&gt;</span> <span class="tag">&lt;<span class="name">p</span>&gt;</span>本页面需要浏览器支持（启用）JavaScript.<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">noscript</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>结束</p>
@@ -1195,6 +1197,8 @@
     <url>/2020/08/01/JavaScript-%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%882%EF%BC%89/</url>
     <content><![CDATA[<h4 id="1-数据类型"><a href="#1-数据类型" class="headerlink" title="1. 数据类型"></a>1. 数据类型</h4><p>有五种简单数据类型：Undefined、Null、Boolean、Number、String，一种复杂数据——Object。</p>
 <p>typeof 操作符，其返回值是一个字符串有：</p>
+<a id="more"></a>
+
 <ul>
 <li>undefined：该值未定义；</li>
 <li>boolean：该值为布尔值；</li>
@@ -2727,6 +2731,41 @@
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">video = VideoFileClip(video_name)</span><br><span class="line">audio = AudioFileClip(audio_name)</span><br><span class="line">new_video = video.set_audio(audio)</span><br><span class="line">new_video.to_videofile(<span class="string">"test.mp4"</span>, fps=<span class="number">24</span>, remove_temp=<span class="literal">False</span>)</span><br><span class="line">os.remove(video_name)</span><br><span class="line">os.remove(audio_name)</span><br></pre></td></tr></table></figure>
 
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>完整代码查看我的 <a href="https://github.com/jinl1874/spider/tree/master/bilibili" target="_blank" rel="noopener">Github 地址</a></p>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>spider</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 Python 爬取知乎答案上的视频</title>
+    <url>/2020/11/20/python-zhihu-video/</url>
+    <content><![CDATA[<p><img src="https://pic4.zhimg.com/80/v2-bb617555b12dd3be6c590dc0f4239893.jpg" alt="Image"></p>
+<p>使用 python requests 来下载知乎的视频，虽然有更简单的方法</p>
+<a id="more"></a>
+
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>老规矩，先抓包。<br>随便进入一个<a href="https://www.zhihu.com/question/398940907/answer/1275941024" target="_blank" rel="noopener">视频页面</a>，进入开发者模式，选择网络，再筛选为 XHR。<br>很快啊，啪的一下进来，就找到了这么一个请求。<br><img src="https://pic4.zhimg.com/80/v2-7e27c91b207ddb2c058ade3d4ca5b3c1.png" alt="Image"><br>再点开这个 json，发现里面这么些数据：<br><img src="https://pic4.zhimg.com/80/v2-ca4e22e60affb10e8da45280f9600d69.png" alt="Image"><br>很明显，这里面有三个不同清晰度的视频，分别是 LD、HD、SD。点开里面的’play_url’之后，就会提示下载一个视频文件。这已经很明显了，这就是我们要找的视频地址。</p>
+<p>那要怎么获取呢？</p>
+<p>先看下 url，是这样的——(<a href="https://lens.zhihu.com/api/v4/videos/1254186650735267840)，前面的都是不变的，只有后面ID是动态的。" target="_blank" rel="noopener">https://lens.zhihu.com/api/v4/videos/1254186650735267840)，前面的都是不变的，只有后面ID是动态的。</a><br>那么首要任务就是将这个 ID 找出来，在网页代码搜索一下，发现为空。<br>由于新版的知乎视频里，在答案上插入视频需要将视频发表到另一个地方，所以试着找一下在答案找到这个视频的地址。然后再去访问一下那里，看有没有这个 ID。</p>
+<p>很明显，我们在答案的代码中找到了视频的 url 地址，在一个 <code>&lt;script id=&quot;js-clientConfig&quot; type=&quot;text/json&quot;&gt;</code>标签里，有一个整个页面的 json 文件，包括了题目、答案和作者等详细信息，而视频 url 也在里面。</p>
+<p>使用正则表达式提取出来，再去访问视频的 url。在视频的网页页面下，搜索一下视频 ID，果然在里面。<br><img src="https://pic4.zhimg.com/80/v2-a67f2f921865a245851fdc95abb8a7a5.png" alt="Image"></p>
+<p>所以这就很简单了。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol>
+<li>先获取答案上的所有的视频 url；</li>
+<li>再分别访问视频，获取一个返回包含视频信息的 json 的 url；</li>
+<li>从 json 上获取到真实的视频 url 地址；</li>
+<li>访问，再保存；</li>
+</ol>
+<h2 id="提取-url"><a href="#提取-url" class="headerlink" title="提取 url"></a>提取 url</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_video_urls</span><span class="params">(url)</span>:</span></span><br><span class="line">    res = requests.get(url, headers=headers)</span><br><span class="line">    <span class="comment"># 获取答案url上的id</span></span><br><span class="line">    answer_id = re.findall(<span class="string">r'answer/(\d+)'</span>, url)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取json文本</span></span><br><span class="line">    text = res.text</span><br><span class="line">    json_text = re.findall(</span><br><span class="line">        <span class="string">r'&lt;script id="js-initialData" type="text/json"&gt;(.*?)&lt;/script&gt;'</span>, text)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 提取答案的content文件。</span></span><br><span class="line">    data = json.loads(json_text)</span><br><span class="line">    content = data[<span class="string">'initialState'</span>][<span class="string">'entities'</span>][<span class="string">'answers'</span>][answer_id][<span class="string">'content'</span>]</span><br><span class="line">    <span class="comment"># 提取url</span></span><br><span class="line">    video_urls = re.findall(<span class="string">r'(https://www.zhihu.com/zvideo/\d+)'</span>, content)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> video_urls</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取真实的视频地址以及标题"><a href="#获取真实的视频地址以及标题" class="headerlink" title="获取真实的视频地址以及标题"></a>获取真实的视频地址以及标题</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_name_url</span><span class="params">(url)</span>:</span></span><br><span class="line">    get_video_url = <span class="string">'https://lens.zhihu.com/api/v4/videos/&#123;&#125;'</span></span><br><span class="line">    <span class="comment"># 找到 json_url 的id</span></span><br><span class="line">    res = requests.get(url, headers=headers)</span><br><span class="line">    url = re.findall(</span><br><span class="line">        <span class="string">'&lt;iframe class="ZVideo-player" src=\"(.*?)\"'</span>, res.text)[<span class="number">0</span>]</span><br><span class="line">    video_id = re.findall(<span class="string">r'/video/(\d+)'</span>, url)[<span class="number">0</span>]</span><br><span class="line">    <span class="comment"># 合并</span></span><br><span class="line">    json_url = get_video_url.format(video_id)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取真实的视频url</span></span><br><span class="line">    res = requests.get(json_url, headers=headers)</span><br><span class="line">    data = json.loads(res.text)</span><br><span class="line">    <span class="comment"># 可选 LD 和 SD，不过一般选最清晰的 HD</span></span><br><span class="line">    HD_url = data[<span class="string">'playlist'</span>][<span class="string">'HD'</span>][<span class="string">'play_url'</span>]</span><br><span class="line"></span><br><span class="line">    title = data[<span class="string">'title'</span>]</span><br><span class="line">    video_name = title + <span class="string">'.mp4'</span></span><br><span class="line">    <span class="keyword">return</span> video_name, HD_url</span><br></pre></td></tr></table></figure>
+
+<h2 id="保存"><a href="#保存" class="headerlink" title="保存"></a>保存</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save</span><span class="params">(name, url)</span>:</span></span><br><span class="line">    res = requests.get(url, headers=headers)</span><br><span class="line">    <span class="keyword">with</span> open(name, <span class="string">'wb'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">        fp.write(res.content)</span><br></pre></td></tr></table></figure>
+
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><p><a href="https://github.com/jinl1874/spider/tree/master/zhihu_video" target="_blank" rel="noopener">Github|spider</a></p>
 ]]></content>
       <categories>
         <category>Python</category>
