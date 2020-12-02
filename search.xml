@@ -2886,4 +2886,24 @@
         <tag>脑洞</tag>
       </tags>
   </entry>
+  <entry>
+    <title>微软商店不能联网的问题</title>
+    <url>/2020/10/15/ms-store-network/</url>
+    <content><![CDATA[<p>#! <a href="https://zhuanlan.zhihu.com/p/326491789" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/326491789</a></p>
+<p><img src="https://pic4.zhimg.com/80/v2-93c03b740bdf08706f6111a3d81d1caa.jpg" alt="Image"></p>
+<h1 id="解决微软商店不能联网的问题"><a href="#解决微软商店不能联网的问题" class="headerlink" title="解决微软商店不能联网的问题"></a>解决微软商店不能联网的问题</h1><p>微软商店 每次都不能连上网，犯了 N 次错之后，发现主要是代理问题。</p>
+<a id="more"></a>
+
+<p>打开 IE 浏览器，在上面的工具栏上点击“工具”，再选择 Internet 选项。<br><img src="https://pic4.zhimg.com/80/v2-a2f83c2c43871f0cee175c0889b7817e.png" alt="Image"></p>
+<p>连接 -&gt; 局域网设置 -&gt; 去掉勾选“为 Lan 使用代理服务器” -&gt; 确定<br><img src="https://pic4.zhimg.com/80/v2-2d75fcd25b306a158809ca681d24c761.png" alt="Image">!</p>
+<p>然后就可以了。<br><img src="https://pic4.zhimg.com/80/v2-5e538d785089542df5e9b32a363eb91d.png" alt="Image"></p>
+]]></content>
+      <categories>
+        <category>Window</category>
+      </categories>
+      <tags>
+        <tag>soft</tag>
+        <tag>window</tag>
+      </tags>
+  </entry>
 </search>
