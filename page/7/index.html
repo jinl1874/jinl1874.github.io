@@ -208,6 +208,213 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/07/08/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%884%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="道理">
+      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="jinl's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/08/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%884%EF%BC%89/" class="post-title-link" itemprop="url">JavaScript-学习笔记（4）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-08 19:36:17" itemprop="dateCreated datePublished" datetime="2020-07-08T19:36:17+08:00">2020-07-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-10 22:42:32" itemprop="dateModified" datetime="2020-07-10T22:42:32+08:00">2020-07-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/07/08/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%884%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="JavaScript-学习笔记（4）" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/07/08/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%884%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/08/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%884%EF%BC%89/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="平衡退化"><a href="#平衡退化" class="headerlink" title="平衡退化"></a>平衡退化</h3><h4 id="1-定义"><a href="#1-定义" class="headerlink" title="1. 定义"></a>1. 定义</h4><ol>
+<li><p>定义：网站的访问者有可能使用不支持 js 的浏览器（虽说现在应该没有了），又或者是禁止网页使用 js（因为弹窗广告），所以需要在浏览器不支持 js 的情况下浏览网站，这就是平稳退化（graceful degradation）。</p>
+</li>
+<li><p>例子：新窗口打开一个链接，许多电子商务网站的结算页面都有指向服务条款的链接，与其让用户手动点击打开，不如自动打开一个新窗口来显示相关信息。<br>js 使用 window 对象的<code>open()</code>方法来创建新的浏览器窗口。使用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// url 表示要打开的链接，name 表示是新窗口的名字，方便js调用，features 表示的是新窗口的属性。</span></span><br><span class="line"><span class="built_in">window</span>.open(url, name, features);</span><br></pre></td></tr></table></figure></li>
+<li><p>具体应用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pop_up</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">window</span>.open(url, <span class="string">"pop_up"</span>, <span class="string">"weight=300, height=400"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>函数不会对网页的访问有任何影响，影响到网页的只有：如何使用此函数。可以使用伪协议（pseudo-protocol)。</p>
+</li>
+</ol>
+<h4 id="2-伪协议"><a href="#2-伪协议" class="headerlink" title="2. 伪协议"></a>2. 伪协议</h4><ol>
+<li><p>真协议用来在计算机之间传输数据包，如 HTTP 协议。伪协议使用非标准化协议，可以通过一个链接来调用 js 函数。</p>
+</li>
+<li><p>具体应用：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">onclick</span>=<span class="string">"pop_up('https://zhihu.com'); return false;"</span>&gt;</span></span><br><span class="line">  知乎网</span><br><span class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>上述代码同样无法平稳退化。要使得平稳退化，须得在 a 标签的 href 属性加上 url 链接。具体如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span></span></span><br><span class="line"><span class="tag">  <span class="attr">href</span>=<span class="string">"https://zhihu.com"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">onclick</span>=<span class="string">"pop_up('https://zhihu.com'); return false;"</span></span></span><br><span class="line"><span class="tag">&gt;</span></span><br><span class="line">  知乎网</span><br><span class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>简化一下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span></span></span><br><span class="line"><span class="tag">  <span class="attr">href</span>=<span class="string">"https://zhihu.com"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">onclick</span>=<span class="string">"pop_up(this.getAttribute('href')); return false;"</span></span></span><br><span class="line"><span class="tag">&gt;</span></span><br><span class="line">  知乎网</span><br><span class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>更简明的引用方法————<code>this.href</code>：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://zhihu.com"</span> <span class="attr">onclick</span>=<span class="string">"pop_up(this.href); return false;"</span>&gt;</span></span><br><span class="line">  知乎网</span><br><span class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="分离-JavaScript"><a href="#分离-JavaScript" class="headerlink" title="分离 JavaScript"></a>分离 JavaScript</h3><h4 id="1-分离"><a href="#1-分离" class="headerlink" title="1. 分离"></a>1. 分离</h4><ol>
+<li><p>使用类似于 CSS 的方法，比如使用下面这个语句来表明“当这个链接点击时，也可以调用<code>pop_up</code>函数”。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://zhihu.com"</span> <span class="attr">class</span>=<span class="string">"pop_up"</span>&gt;</span>知乎网<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>js 语言不强制事件必须在 HTML 文档上处理，因此可以在外部把事件添加到某个元素上。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.event = action;</span><br></pre></td></tr></table></figure>
+
+<p>可以使用 id 或者 className 或者 TagName 来确定元素，比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getElementById(id).event = action;</span><br></pre></td></tr></table></figure>
+
+<p>涉及多个元素时，可以用<code>getElementByTagName</code>以及<code>getAttribute</code>把事件添加到特定属性的元素上。<br>具体操作为：</p>
+<ul>
+<li>先用使用<code>getElementByTagName</code>获取元素数组。</li>
+<li>遍历数组。</li>
+<li>再根据属性值<code>class==pop_up</code>筛选出那个元素。</li>
+<li>把这个链接的<code>href</code>属性值传递给<code>pop_up()</code>函数。</li>
+<li>取消这个链接的默认行为。</li>
+</ul>
+<p>具体代码为：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> links = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"a"</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; links.length; i++) &#123;</span><br><span class="line">  <span class="keyword">if</span> (links[i].getAttribute(<span class="string">"class"</span>) === <span class="string">"pop_up"</span>) &#123;</span><br><span class="line">    links[i].onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      pop_up(<span class="keyword">this</span>.getAttribute(<span class="string">"href"</span>));</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>只要把上述代码存入一个外部 js 文件，就等于把这些操作从 html 分离出来了。</p>
+</li>
+<li><p>上述代码存入外部文件后，会无法正常运行。<br>因为这个语句的第一语使用了 document 这个对象，js 文件加载的时候文档可能会不完整。所以要等文档全部加载后才能运行，这时可以使用 window.onload 函数，当触发这个函数时，document 对象已经存在。<br>所以最终代码为：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = prepareLinks;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">prepareLinks</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> links = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"a"</span>);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; links.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (links[i].getAttribute(<span class="string">"class"</span>) === <span class="string">"pop_up"</span>) &#123;</span><br><span class="line">      links[i].onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        pop_up(<span class="keyword">this</span>.getAttribute(<span class="string">"href"</span>));</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="向后兼容"><a href="#向后兼容" class="headerlink" title="向后兼容"></a>向后兼容</h3><pre><code>某些支持js脚本的古老浏览器，也不一定能正常工作。</code></pre><h4 id="1-对象检测-object-detection"><a href="#1-对象检测-object-detection" class="headerlink" title="1. 对象检测(object detection)"></a>1. 对象检测(object detection)</h4><ol>
+<li><p>js 万物皆是对象，所以只要判断是否有对应的对象存在即可。</p>
+</li>
+<li><p>根据条件表达的求值结果，使用<code>if</code>语句来决定应该执行什么操作。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (method) &#123;</span><br><span class="line">  statements;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>例如，有一个使用了<code>getElementById()</code>方法的函数，就可以在调用前检查浏览器是否支持这个函数。使用对象检测时，要删掉方法名后面的括号，如果不删掉，测试的是方法的结果，无论方法存不存在。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> <span class="keyword">if</span>(<span class="built_in">document</span>.getElementById)&#123;</span><br><span class="line">   statements using getElementById;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果浏览器不支持方法的话，那么将永远无法调用。</p>
+</li>
+<li><p>上面使用的方法有一个不足之处是，会增加花括号，多了以后会导致代码阅读困难。<br>改进方法是换一种方式。改为“当不支持这个方法是，就结束”。具体代码为：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!getElementById) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>所以在把 onclick 事件加到链接时，可以加一 if 语来判断浏览器是否支持。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = prepareLinks;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">prepareLinks</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementsByTagName) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> links = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"a"</span>);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; links.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (links[i].getAttribute(<span class="string">"class"</span>) === <span class="string">"pop_up"</span>) &#123;</span><br><span class="line">      links[i].onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        pop_up(<span class="keyword">this</span>.getAttribute(<span class="string">"href"</span>));</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="2-嗅探技术"><a href="#2-嗅探技术" class="headerlink" title="2. 嗅探技术"></a>2. 嗅探技术</h4><ol>
+<li>定义：指通过提取浏览器供应商提供的信息来解决向后兼容的问题。</li>
+<li>理论上可行，不过随着浏览器的发展，这种技术已经被淘汰了。</li>
+</ol>
+<h3 id="性能考虑"><a href="#性能考虑" class="headerlink" title="性能考虑"></a>性能考虑</h3><h4 id="1-少访问-DOM-和减少标记"><a href="#1-少访问-DOM-和减少标记" class="headerlink" title="1. 少访问 DOM 和减少标记"></a>1. 少访问 DOM 和减少标记</h4><ol>
+<li><p>以下面的代码为例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="built_in">document</span>.getElementsByTagName(<span class="string">"a"</span>))&#123;</span><br><span class="line">  <span class="keyword">var</span> links = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"a"</span>);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i &lt;links.length; i++)&#123;</span><br><span class="line">    statements......</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码可以运行，但相同的操作重复了两次，浪费了性能，所以可以进行优化一下。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">links = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"a"</span>);</span><br><span class="line"><span class="keyword">if</span> (links.length &gt; <span class="number">0</span>)&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;links.length; i++)&#123;</span><br><span class="line">    statements......</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="2-合并和放置脚本"><a href="#2-合并和放置脚本" class="headerlink" title="2. 合并和放置脚本"></a>2. 合并和放置脚本</h4><ol>
+<li>包含脚本的方式是使用外部文件，而不是包在<code>&lt;script&gt;</code>里。并且可以把 funtionA.js、funtionB.js 和 futntionC.js 合并到同一个文件，这样就可以减少加载页面时发送的请求。</li>
+<li>把脚本放在<code>&lt;head&gt;</code>标签会有一个问题，位于<code>&lt;head&gt;</code>块中的脚本会导致浏览器无法并行加载其它文件（如图像和其它脚本）。</li>
+<li>把<code>&lt;script&gt;</code>标签都放在文档的末尾，<code>&lt;/body&gt;</code>的标记之前，可以使页面变得更快。</li>
+</ol>
+<h4 id="3-压缩脚本"><a href="#3-压缩脚本" class="headerlink" title="3. 压缩脚本"></a>3. 压缩脚本</h4><ol>
+<li>定义：把脚本中不必要的字节，如空格和注释，统统删除，从而达到压缩文件的目的。有的甚至会重写部分代码，使用更短的变量名等。</li>
+<li>精简后的代码很难看懂，却能减少文件大小，很多情况下，应该有两版本，一个是工作副本，可以修改并添加注释，一个是精简副本，用于放在站点上。为了区分，一般会在精简版本的文件名上加上 min 字符。</li>
+<li>代码压缩工具：<ul>
+<li>Douglas Crockford 的 JSMin <a href="http://www.crockford.com/javascript/jsmin.html" target="_blank" rel="noopener">http://www.crockford.com/javascript/jsmin.html</a>;</li>
+<li>雅虎的 YUI compressor <a href="http://developer.yahoo.com/yui/compressor" target="_blank" rel="noopener">http://developer.yahoo.com/yui/compressor</a></li>
+<li>谷歌的 Closure Compiler <a href="http://closure-compiler.appspot.com/home" target="_blank" rel="noopener">http://closure-compiler.appspot.com/home</a></li>
+</ul>
+</li>
+</ol>
+<p>几个 DOM 脚本编辑工作相关的概念和实践：</p>
+<ul>
+<li>平稳退化</li>
+<li>分离 Javascript</li>
+<li>向后兼容</li>
+<li>性能考虑</li>
+</ul>
+<blockquote>
+<p>欢迎访问我的个人<a href="https://jinl1874.xyz">博客</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/07/07/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -830,140 +1037,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/06/30/%E4%BD%BF%E7%94%A8js%E6%93%8D%E4%BD%9C%E9%97%AE%E5%8D%B7%E6%98%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.jpg">
-      <meta itemprop="name" content="道理">
-      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jinl's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/30/%E4%BD%BF%E7%94%A8js%E6%93%8D%E4%BD%9C%E9%97%AE%E5%8D%B7%E6%98%9F/" class="post-title-link" itemprop="url">使用 javascript 编写自动填写问卷星的脚本</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-06-30 16:59:07 / 修改时间：21:55:16" itemprop="dateCreated datePublished" datetime="2020-06-30T16:59:07+08:00">2020-06-30</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/06/30/%E4%BD%BF%E7%94%A8js%E6%93%8D%E4%BD%9C%E9%97%AE%E5%8D%B7%E6%98%9F/" class="post-meta-item leancloud_visitors" data-flag-title="使用 javascript 编写自动填写问卷星的脚本" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/06/30/%E4%BD%BF%E7%94%A8js%E6%93%8D%E4%BD%9C%E9%97%AE%E5%8D%B7%E6%98%9F/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/30/%E4%BD%BF%E7%94%A8js%E6%93%8D%E4%BD%9C%E9%97%AE%E5%8D%B7%E6%98%9F/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h5 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h5><p>最近闲来无事，想来做一个自动填写的问卷星 JS 脚本。</p>
-<h5 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h5><p>此脚本目前仅支持单选、多选以及填空题。<br>单选、多选采用随机选择的方法，而填空题则需要自己配置填写的内容。<br>具体配置方法为：<br>如果问卷里的第四题是填空题，那么在全局变量<code>config</code>加上一个键值，里面有 id 和 answer 两个键，填上相应的值（第四题即<code>id: 4</code>)即可。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> config = [</span><br><span class="line">  &#123;</span><br><span class="line">    id: <span class="number">4</span>,</span><br><span class="line">    answer: [<span class="string">"不知道"</span>, <span class="string">"随便吧"</span>, <span class="string">"自学去"</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
-
-<h5 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h5><p>打开浏览器，进入问卷页面如<a href="https://www.wjx.cn/jq/83481770.aspx" target="_blank" rel="noopener">js 测试</a>。<br>有以下两种方法运行：</p>
-<blockquote>
-<p>我用的是 Firefox 浏览器，其它浏览器的操作都差不多，可以就是快捷键有区别。</p>
-</blockquote>
-<ol>
-<li>按<code>F12</code>，点击控制台，再把脚本粘贴到文本输入框，再点击上面的<code>运行</code>即可。<br><img src="http://image.jinl1874.xyz/img/20200630132036.png" alt="运行js"></li>
-<li>浏览器安装一个名为<code>Violentmonkey</code>即<a href="https://violentmonkey.github.io/get-it/" target="_blank" rel="noopener">暴力猴</a>的脚本插件。安装完成之后，进入问卷页面，点击 violentmonkey 的图标，会出现一个弹框，<br><img src="http://image.jinl1874.xyz/img/20200630133801.png" alt="violentmonkey"><br>再点击其中的<code>+</code>，会出现编辑脚本的页面。<br><img src="http://image.jinl1874.xyz/img/20200630134305.png" alt="edit"><br>将脚本粘贴进去，保存文件，再回到问卷页面刷新，此时脚本即可自动运行。</li>
-</ol>
-<h5 id="脚本编写思路"><a href="#脚本编写思路" class="headerlink" title="脚本编写思路"></a>脚本编写思路</h5><ol>
-<li><p>主体思路，找到所有<code>class=&quot;div_question&quot;</code>的 div，再遍历<code>div</code>，分析每个 div 是什么类型的题目，再选择对应的操作。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Traverse</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> title_list = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"div_question"</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; title_list.length; i++) &#123;</span><br><span class="line">        <span class="keyword">const</span> title = title_list[i];</span><br><span class="line">        <span class="keyword">var</span> lies = title.getElementsByTagName(<span class="string">"li"</span>);</span><br><span class="line">        <span class="keyword">var</span> textarea = title.getElementsByTagName(<span class="string">"textarea"</span>);</span><br><span class="line">        <span class="keyword">var</span> lis = [];</span><br><span class="line">        <span class="comment">// 将lies放在数组里</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> kl = <span class="number">0</span>; kl &lt; lies.length; kl++) &#123;</span><br><span class="line">            lis.push(lies[kl]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果是选择，那么执行以下操作</span></span><br><span class="line">        <span class="keyword">if</span> (lis.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// 如果是多选</span></span><br><span class="line">            <span class="keyword">if</span> (lis[<span class="number">0</span>].getElementsByClassName(<span class="string">'jqCheckbox'</span>).length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                multiple_selection(lis);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 如果是单选</span></span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                single_selection(lis);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 如果是填空题，那么调用对应的处理函数。</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (textarea.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            blanks(title, textarea);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 如果是其它，添加相应的操作.....</span></span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"other"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>单选和多选采用随机数算法</p>
-<ul>
-<li>单选题，直接生成一个随机数，再点击随机数的选项。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 处理单选</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">single_selection</span>(<span class="params">lis</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> random_0 = random_num(lis.length);</span><br><span class="line">    lis[random_0].getElementsByClassName(<span class="string">'jqRadio'</span>)[<span class="number">0</span>].click();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>多选题，先随机生成一个要选的选项数，再用一个 for 循环执行。循环里面再生成随机数，接着去点击随机数对应的选项。<br>在随机的情况下，有可能会重复点击选项，导致没有选项选上，这时就需要检测一下有没有选项被选上了，如果没有，那就手动选一个。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 处理多选</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">multiple_selection</span>(<span class="params">lis</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 获取随机数</span></span><br><span class="line">    <span class="keyword">var</span> random_0 = random_num(lis.length);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt;= random_0; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> random_1 = random_num(lis.length);</span><br><span class="line">        lis[random_1].getElementsByClassName(<span class="string">'jqCheckbox'</span>)[<span class="number">0</span>].click();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果选中的全部抵消了，那么就手动加上一个</span></span><br><span class="line">    <span class="keyword">var</span> flag = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; lis.length; i++) &#123;</span><br><span class="line">        <span class="keyword">const</span> element = lis[i].getElementsByClassName(<span class="string">"jqChecked"</span>);</span><br><span class="line">        <span class="keyword">if</span> (element.length &gt; <span class="number">0</span>)</span><br><span class="line">            flag = <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!flag) &#123;</span><br><span class="line">        lis[random_0].getElementsByClassName(<span class="string">'jqCheckbox'</span>)[<span class="number">0</span>].click();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>填空题的内容从配置文件里找出，也采用随机填写。<br>先获取题目的 id，然后从<code>config</code>中找到对应的值，再随机选取一个值将其赋值到文本框里。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 填空</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">blanks</span>(<span class="params">title, textarea</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 获取当前题目的id</span></span><br><span class="line">    <span class="keyword">var</span> id_text = title.getAttribute(<span class="string">"id"</span>);</span><br><span class="line">    <span class="keyword">var</span> re_id = <span class="regexp">/div(\d+)/</span>;</span><br><span class="line">    <span class="keyword">var</span> id = re_id.exec(id_text)[<span class="number">1</span>]</span><br><span class="line">    <span class="comment">// 遍历config里id值为id的answer</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; config.length; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (id == config[j].id) &#123;</span><br><span class="line">            textarea[<span class="number">0</span>].innerHTML = config[j].answer[random_num(config[j].answer.length)];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重定向到 PC 版网页。<br>由于问卷星手机版的网页与 PC 版相差无几，因此使用正则表达式修改即可。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将手机版网页转为PC版</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">redirect</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> re = <span class="regexp">/(https:\/\/www\.wjx\.cn\/)(m|jq)(.*)g/</span></span><br><span class="line">        <span class="keyword">var</span> obj = re.exec(url);</span><br><span class="line">        <span class="keyword">if</span> (obj[<span class="number">2</span>] == <span class="string">'m'</span>) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"redirect now"</span>);</span><br><span class="line">            <span class="built_in">window</span>.location.href = obj[<span class="number">1</span>] + <span class="string">"jq"</span> + obj[<span class="number">3</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"do......"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="5">
-<li>由于填写完成并提交后会跳转到一个抽奖页面，此时的网址含有问卷页面的 id，因此可以将其抽取出来，重定向到问卷填写页面。</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 完成填写重新打开填写界面</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">new_wxj</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> url = <span class="built_in">window</span>.location.href;</span><br><span class="line">    <span class="comment">//https://www.wjx.cn/wjx/join/complete.aspx?q=83481770&amp;JoinID=106588372552&amp;jidx=1&amp;s=&amp;njqj=1</span></span><br><span class="line">    <span class="keyword">var</span> re = <span class="regexp">/complete\.aspx\?q=(\d+)/</span>;</span><br><span class="line">    <span class="keyword">var</span> obj = re.exec(url);</span><br><span class="line">    <span class="keyword">if</span> (obj) &#123;</span><br><span class="line">        <span class="built_in">window</span>.location.href = <span class="string">"https://www.wjx.cn/jq/"</span> + obj[<span class="number">1</span>] + <span class="string">".aspx"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"no pat"</span>, obj);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p>完整代码<a href="https://github.com/jinl1874/Javascript" target="_blank" rel="noopener">在此</a>，<br>欢迎访问我的博客<a href="https://jinl1874.xyz">网站</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1031,7 +1108,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-count">46</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

@@ -208,6 +208,155 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/05/23/useCoding/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="道理">
+      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="jinl's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/23/useCoding/" class="post-title-link" itemprop="url">Hexo 双线布置到2020新版 Coding 和 GithubPage</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-23 02:24:16" itemprop="dateCreated datePublished" datetime="2020-05-23T02:24:16+08:00">2020-05-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-24 00:25:16" itemprop="dateModified" datetime="2020-05-24T00:25:16+08:00">2020-05-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/BlogBuild/" itemprop="url" rel="index"><span itemprop="name">BlogBuild</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HEXO/" itemprop="url" rel="index"><span itemprop="name">HEXO</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/05/23/useCoding/" class="post-meta-item leancloud_visitors" data-flag-title="Hexo 双线布置到2020新版 Coding 和 GithubPage" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/23/useCoding/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/23/useCoding/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="为什么使用-Coding"><a href="#为什么使用-Coding" class="headerlink" title="为什么使用 Coding"></a>为什么使用 Coding</h4><p>现在国内访问 github 的速度已经非常慢了，而且百度的爬虫也无法抓取到 github page 上面的内容。<br>而 Coding 类似于 github，也是一个免费的代码托管平台，随便一个仓库都可以用来做静态网页服务，访问速度也还可以。</p>
+<p>关于 github page 的使用可以参考我的上一篇博客<a href="https://jinl1874.xyz/2020/05/21/hexo-0/">使用 Hexo 和 GithubPage 免费搭建博客网站</a>。</p>
+<h4 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h4><ul>
+<li>打开<a href="https://coding.net/" target="_blank" rel="noopener">Coding</a>，注册账号。</li>
+<li>现在 Coding 只能注册团队了，不过五人以下是免费的。团队名称以及域名按自己喜好而填吧。</li>
+</ul>
+<h4 id="建仓"><a href="#建仓" class="headerlink" title="建仓"></a>建仓</h4><ul>
+<li>全部项目 $\rightarrow$ 新建项目 $\rightarrow$ 代码托管项目 $\rightarrow$ 填写名称、标识 $\rightarrow$ 勾选启用 Readme.md 及公开源代码 $\rightarrow$ 完成创建。</li>
+</ul>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><ul>
+<li>项目设置 $\rightarrow$ 功能开关 $\rightarrow$ 打开持续部署和持续集成<br><img src="http://image.jinl1874.xyz/img/20200523233703.png" alt="项目设置"><br><img src="http://image.jinl1874.xyz/img/20200523233828.png" alt="功能"></li>
+<li>持续部署 $\rightarrow$ 静态网站 $\rightarrow$ 立即发布静态网站<br><img src="http://image.jinl1874.xyz/img/20200523234059.png" alt="部署"></li>
+<li>填写网站名字 $\rightarrow$ 保存<br><img src="http://image.jinl1874.xyz/img/20200523234300.png" alt="保存"></li>
+</ul>
+<h4 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h4><ul>
+<li><p>配置好后在静态网站选项里会有一个访问地址，先记好。<br><img src="http://image.jinl1874.xyz/img/20200523234509.png" alt="address"></p>
+</li>
+<li><p>域名解析控制台 $\rightarrow$ 解析 $\rightarrow$ 修改 github 记录 $\rightarrow$ 解析路线设为境外<br><img src="http://image.jinl1874.xyz/img/20200523235105.png" alt="github"></p>
+<blockquote>
+<p>两个都记录都要改</p>
+</blockquote>
+</li>
+<li><p>如果你之前在 github 设置了强制 https，那么在修改后，先暂停使用两个 github 记录，否则之后 Coding 申请证书会失败。不过建议还是要暂停一下，免得后面出现问题。</p>
+</li>
+<li><p>添加两个记录，类型为 CNAME，主机记录分别为@和 www，记录值为刚才得到的访问地址。<br><img src="http://image.jinl1874.xyz/img/20200524000911.png" alt=""><br><img src="http://image.jinl1874.xyz/img/20200524000014.png" alt="添加记录"></p>
+</li>
+<li><p>回到 Coding，点击右上角的“齿轮设置”，拉到下面“自定义域名”，分别绑定两个域名，如“<a href="http://www.jinl1874.xyz”和“jinl1874.xyz”。" target="_blank" rel="noopener">www.jinl1874.xyz”和“jinl1874.xyz”。</a><br><img src="http://image.jinl1874.xyz/img/20200524000244.png" alt=""></p>
+</li>
+<li><p>可以选择首选域名，也可以勾选跳转到首先，这样打开网站时地址栏就会默认是那个域名了。</p>
+</li>
+<li><p>然后就默默地等申请证书成功，几分钟到十几分钟不等。最后显示证书状态为正常就算成功了。<br><img src="http://image.jinl1874.xyz/img/20200524000745.png" alt="证书"></p>
+</li>
+<li><p>回到域名解析器，恢复 github 的域名解析记录。</p>
+</li>
+</ul>
+<h4 id="绑定"><a href="#绑定" class="headerlink" title="绑定"></a>绑定</h4><ul>
+<li>进入你的主目录[C://Users//xxx]，勾选查看隐藏文件，找到<code>.ssh</code>目录，用记事本打开<code>id_rsa.pub</code>，复制全部内容。</li>
+<li>代码仓库 $\rightarrow$ 设置 $\rightarrow$ 部署公钥 $\rightarrow$ 新建部署公钥 $\rightarrow$ 粘贴到公钥内容 $\rightarrow$ 新建。</li>
+</ul>
+<h4 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h4><ul>
+<li>复制 Coding 仓库地址。</li>
+<li>打开项目配置文件<code>_config.yml</code>，修改<code>deploy</code>内容。<br><img src="http://image.jinl1874.xyz/img/20200524001602.png" alt="项目"></li>
+<li>打开命令行进入 Hexo 所目录，输入<code>▶ hexo g -d</code>。不久会跳出来一个提示输入账号密码的窗口，输入 Coding 的邮箱与密码，无误后会上传代码至仓库。</li>
+</ul>
+<h4 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h4><ul>
+<li>由于设置的是自动部署，代码上传后就会自动部署。</li>
+<li>可以打开浏览器，输入域名查看网站</li>
+</ul>
+<p>至此，在 Coding 配置 Hexo 已经完成了。</p>
+<p>欢迎访问个人博客主页<a href="https://jinl1874.xyz">jinl1874</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/05/22/blog-problem-0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -765,102 +914,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/05/20/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.jpg">
-      <meta itemprop="name" content="道理">
-      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jinl's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/20/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-20 12:35:14" itemprop="dateCreated datePublished" datetime="2020-05-20T12:35:14+08:00">2020-05-20</time>
-            </span>
-
-          
-            <span id="/2020/05/20/hello-world/" class="post-meta-item leancloud_visitors" data-flag-title="Hello World" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/05/20/hello-world/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/20/hello-world/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span>
+    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -928,7 +985,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-count">46</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
