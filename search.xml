@@ -1888,7 +1888,7 @@
   </entry>
   <entry>
     <title>电脑有哪些可以提升体验的软件？</title>
-    <url>/2020/07/18/window-soft/</url>
+    <url>/2020/12/04/window-soft/</url>
     <content><![CDATA[<p>以下这些都是可以提升电脑使用体验的 10 款软件。</p>
 <h4 id="1-截图软件：Snipaste"><a href="#1-截图软件：Snipaste" class="headerlink" title="1. 截图软件：Snipaste"></a>1. 截图软件：Snipaste</h4><p>曾经我是个手机拍屏党，后来被诸多表情大师教会截图后，毅然地转到截图派。<br><img src="https://pic4.zhimg.com/80/v2-a8e78bd7fd888e942cd369fa8128fdf5.jpg" alt="Image"></p>
 <p>一开始使用的是 QQ 截图以及微信截图，但是这两个截图方式都要事先打开这俩软件，并且也不够专业/好用，最后找到了这个截图软件——Snipaste。<br>这个号称最好用的的截图软件，目前已经有 win 版、mac beta 版。</p>
@@ -2912,6 +2912,7 @@
     <content><![CDATA[<p><img src="https://pic4.zhimg.com/80/v2-b21c06eeb655b1279657a641307254c7.jpg" alt="Image"></p>
 <h1 id="Python-实现快速排序"><a href="#Python-实现快速排序" class="headerlink" title="Python 实现快速排序"></a>Python 实现快速排序</h1><p>快速排序，排序中最基本的算法，也是用得最多的算法。</p>
 <p>python 里的 <code>sorted()</code> 方法，就是使用快速排序来执行的。</p>
+<a id="more"></a>
 <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>在数据中选定一个基准，将小于这个基准的的数据放在左边，大于这个基准的放在右边，然后以这个基准为分界线，递归地实现左边以及右边的数据。</p>
 <p>这个基准可以选中位数，也可以选第一个以及最后一个数，不同的数会导致不同的执行效率。</p>
 <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><ol>

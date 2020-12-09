@@ -208,6 +208,201 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/07/22/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="道理">
+      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="jinl's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/22/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/" class="post-title-link" itemprop="url">JavaScript-学习笔记（9）：HTML5</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-07-22 19:25:32 / 修改时间：19:27:42" itemprop="dateCreated datePublished" datetime="2020-07-22T19:25:32+08:00">2020-07-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">-[JavaScript]</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/07/22/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="JavaScript-学习笔记（9）：HTML5" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/07/22/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/22/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="https://pic4.zhimg.com/80/v2-806d2ac14c387bdd9db1b26b581320ec.jpg" alt="Image"></p>
+<h1 id="JavaScript-笔记（9）：HTML5"><a href="#JavaScript-笔记（9）：HTML5" class="headerlink" title="JavaScript-笔记（9）：HTML5"></a>JavaScript-笔记（9）：HTML5</h1><h4 id="HTML5-简介"><a href="#HTML5-简介" class="headerlink" title="HTML5 简介"></a>HTML5 简介</h4><p>HTML5 是 HTML 当前及未来的新标准。</p>
+<p>web 设计有三个层：结构层、样式层、行为层，这三个层分别使用 HTML、CSS 和 JavaScript 三个技术。HTML5 将上面三个层装入一个小集合，也仅仅只是一个集合。<br>HTML5 添加了很多新的标记元素，详情 <a href="http://www.w3.org/TR/html5" target="_blank" rel="noopener">http://www.w3.org/TR/html5</a>。<br>将文档“升级”到 HTML5，只需把文档类型声明改成<code>&lt;!DOCTYPE html&gt;</code>即可。</p>
+<p>HTML5 的兼容非常强，缺斤短两的 HTML5 文档都可以完美地通过验证。</p>
+<h4 id="忠告"><a href="#忠告" class="headerlink" title="忠告"></a>忠告</h4><p>一个工具：Modernizr（<a href="https://modernizr.com/" target="_blank" rel="noopener">https://modernizr.com/</a>），这是一个开源 js 库，利用其富特性检测功能，对 HTML5 文档进行更好的控制。</p>
+<p>在文档中嵌入 Modernizr 后，它会随着页面加载而变一些小戏法。</p>
+<p>首先，它会修改 <code>&lt;html&gt;</code> 的 class 属性，要使用它编写文档，通常要给<code>&lt;html&gt;</code>属性添加一个 no-js 类：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">class</span>=<span class="string">"no-js"</span>&gt;</span><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>利用这个类，可以浏览器不支持 JavaScript 的情况下应用 CSS 样式。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">;<span class="selector-class">.nojs</span> <span class="selector-tag">selector</span> &#123;</span><br><span class="line">    style properties;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后，它还会检测浏览器可以支持的各种特性，并添加相应的类名。<br>实际情况是浏览器会支持部分特性，不支持另一些特性，这时，类名中就会间或出现 features 和 no-feature。</p>
+<p>它还可以帮一些老旧浏览器处理 <code>&lt;section&gt;</code> 和 <code>&lt;article&gt;</code> 等新 HTML5 元素。</p>
+<p>使用它非常简单，从 <a href="http://www.modernizr.com/" target="_blank" rel="noopener">http://www.modernizr.com/</a> 下载它，然后在文档的<code>&lt;head&gt;</code>中添加该脚本：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"modernizr-1.5.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>一定要把这个脚本放在<head>元素中，因为放在文档开头，可以在加载其它标记之前先加载它，以便能更好地创建 HTML5 元素。</p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>一些有关 Canvas、视频/音频以及表单的例子，需要以下浏览器：</p>
+<ul>
+<li>苹果 Safari 5+</li>
+<li>Chrome 6+</li>
+<li>Firefox 3.6+</li>
+<li>IE 9+</li>
+<li>opera 10.6+</li>
+</ul>
+<h5 id="1-Canvas"><a href="#1-Canvas" class="headerlink" title="1. Canvas"></a>1. Canvas</h5><p>浏览器一般只能显示静态图片，使用 GIF 或许可以实现一些动画，或者使用 CSS 加 JavaScript 也能变化一些样式。<br>但 HTML5 的<code>&lt;Canvas&gt;</code> 元素可以动态创建和操作图形图像。<br>支起一张“画布”：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"draw-in-me"</span> <span class="attr">width</span>=<span class="string">"120"</span> <span class="attr">height</span>=<span class="string">"40"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>Powered by HTML5 canvas！<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在上面作画需要了解详细的绘画方法，参考<code>&lt;canvas&gt;</code>元素规范(<a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html" target="_blank" rel="noopener">http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html</a>)</p>
+<p>用<code>&lt;Canvas&gt;</code> 画一个圆角小黑盒子，带有 2 像素宽的白色描边效果。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"draw-in-me"</span>);</span><br><span class="line">  <span class="keyword">if</span> (canvas.getContext) &#123;</span><br><span class="line">    <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.moveTo(<span class="number">120.0</span>, <span class="number">32.0</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">120.0</span>, <span class="number">36.4</span>, <span class="number">116.4</span>, <span class="number">40.0</span>, <span class="number">112.0</span>, <span class="number">40.0</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">8.0</span>, <span class="number">40.0</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">3.6</span>, <span class="number">40.0</span>, <span class="number">0.0</span>, <span class="number">36.4</span>, <span class="number">0.0</span>, <span class="number">32.0</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">0.0</span>, <span class="number">8.0</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">0.0</span>, <span class="number">3.6</span>, <span class="number">3.6</span>, <span class="number">0.0</span>, <span class="number">8.0</span>, <span class="number">0.0</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">112.0</span>, <span class="number">0.0</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">116.4</span>, <span class="number">0.0</span>, <span class="number">120.0</span>, <span class="number">3.6</span>, <span class="number">120.0</span>, <span class="number">8.0</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">120.0</span>, <span class="number">32.0</span>);</span><br><span class="line">    ctx.closePath();</span><br><span class="line">    ctx.fill();</span><br><span class="line">    ctx.lineWidth = <span class="number">2.0</span>;</span><br><span class="line">    ctx.strokeStyle = <span class="string">"rgb(255, 255, 255)"</span>;</span><br><span class="line">    ctx.stroke();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.onload = draw;</span><br></pre></td></tr></table></figure>
+
+<p>结果：<br><img src="https://pic4.zhimg.com/80/v2-e1c8ba6c44d4a642fe4ee1e4df2dcad1.png" alt="Image"></p>
+<h5 id="2-音频和视频"><a href="#2-音频和视频" class="headerlink" title="2. 音频和视频"></a>2. 音频和视频</h5><ul>
+<li>HTML 的 <code>&lt;video&gt;</code>元素在文档中嵌入影片以及影片交互定义了一种标准方式，同时也把嵌入操作简化成了一个标签：</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">src</span>=<span class="string">"movie.mp4"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 不支持 &lt;video&gt; 的替代内容  --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"movie.mp4"</span>&gt;</span>Download movie.mp4<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>同样，音频也是：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">src</span>=<span class="string">"audio.mp3"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"audio.mp3"</span>&gt;</span>Download audio.mp3<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>自定义控件<br>浏览器显示 <code>&lt;video&gt;</code>元素时，会为其添加一些与浏览器样式统一的标准播放控件，要想自定义这些控件的外观，或者添加新的控件，可以通过 DOM 属性来实现。主要有：</p>
+<ul>
+<li>currentTime，返回当前播放的位置，以秒表示；</li>
+<li>duration，返回媒体的总时长，以秒表示，对流媒体返回无穷大；</li>
+<li>paused，表示是否处于暂停；</li>
+<li>play，在媒体播放开始时发生；</li>
+<li>pause，在媒体暂停时发生；</li>
+<li>loadedata，在媒体可以从当前播放位置开始播放时发生；</li>
+<li>ended，在媒体已播放完成而停止时发生。</li>
+</ul>
+<p>记住，无论创建什么控件，都别忘了在<code>&lt;video&gt;</code>元素中添加 control 控件。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">src</span>=<span class="string">"movie.mp4"</span> <span class="attr">controls</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样才会显示控制条：<br><img src="https://pic4.zhimg.com/80/v2-827cdf4e9596f102b9f9a1609a839236.png" alt="Image"></p>
+</li>
+</ul>
+<h5 id="3-表单"><a href="#3-表单" class="headerlink" title="3. 表单"></a>3. 表单</h5><p>传统的表单可用的输入控件类型很少，文本框、单选按钮、复选框对简单的表单是够了，但需要更多交互功能的时候，仍需要 DOM 上阵。<br>HTML5 提供了新的输入型表单：</p>
+<ul>
+<li>email，输入邮箱</li>
+<li>url，输入 url</li>
+<li>date，输入日期和时间</li>
+<li>number，输入数值</li>
+<li>range，用于生成滑动条</li>
+<li>search，用于搜索框</li>
+<li>tel，用于输入电话号码</li>
+<li>color，用于选择颜色</li>
+</ul>
+<p>新的属性：</p>
+<ul>
+<li>autocomplete，用于为文本（text）输入框添加一组建议的输入项；</li>
+<li>autofocus，用于让表单元素自动获得焦点；</li>
+<li>form，用于对<code>&lt;form&gt;</code>标签外部的表单元素分组；</li>
+<li>min、max 和 step，用在范围和数值输入框中；</li>
+<li>pattern，用于定义一个正则表达式，以便验证输入的值；</li>
+<li>placeholder，用于在文本输入框中显示临时性的提示信息；</li>
+<li>required，表示必填</li>
+</ul>
+<p>使用的时候要检测浏览器是否支持对应的控件，可以使用 inputtypes.type 属性，如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!Modernizr.inputtypes.date) &#123;</span><br><span class="line">  <span class="comment">// 生成日期选择器的脚本</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>检查属性，可以使用 input.attribute 属性，如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!Modernizr.input.placeholder) &#123;</span><br><span class="line">  <span class="comment">// 生成占位符提示信息的脚本</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果没有使用 Modernizr，可以使用 inputSupportType 函数来检查浏览器是否支持某种输入控件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inpurtSupportsType</span>(<span class="params">type</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!<span class="built_in">document</span>.createElement) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">var</span> input = <span class="built_in">document</span>.createElement(<span class="string">'input'</span>);</span><br><span class="line">    input.setAttribute(<span class="string">'type'</span>, type);</span><br><span class="line">    <span class="keyword">if</span>(input.type == <span class="string">'text &amp;&amp; type != '</span>text<span class="string">')&#123;</span></span><br><span class="line"><span class="string">        return false;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    else&#123;</span></span><br><span class="line"><span class="string">        return true;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>使用方式和 modernizr 一样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!inputSupportType(date)) &#123;</span><br><span class="line">  <span class="comment">// 生成日期选择器的脚本</span></span><br></pre></td></tr></table></figure>
+
+<p>检查特定的属性，可以使用这个 elementSupportsAttribute 函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">elementSupportsAttribute</span>(<span class="params">elementName, attribute</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.createElement) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> temp = <span class="built_in">document</span>.crateElement(elementName);</span><br><span class="line">  <span class="keyword">return</span> attribute <span class="keyword">in</span> test;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用方式和 modernizr 一样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!elementSupportType(<span class="string">'input'</span>, <span class="string">'placeholder'</span>)) &#123;</span><br><span class="line">  <span class="comment">// 生成提示占位符的脚本</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="4-HTML5-的其它特性"><a href="#4-HTML5-的其它特性" class="headerlink" title="4. HTML5 的其它特性"></a>4. HTML5 的其它特性</h5><ul>
+<li>localStorage 和 sessionStorage 在客户存储大型和复杂数据集的更有效方案</li>
+<li>使用 WebSocket 与服务器端脚本进行开放的双向通信</li>
+<li>使用 Web Worker 在后台执行 JavaScript</li>
+<li>标准化的拖放实现</li>
+<li>在浏览器中实现地理位置服务<br>…………</li>
+</ul>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>了解了 HTML5 以及使用 Modernizr 等工具检测特性的重要性。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/07/20/JavaScript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -680,147 +875,6 @@
 
 <p>这样，函数的抽象化就完成了。<br>无论何时，发现函数可以抽象，都应该马上去做，这总是一个好主意。</p>
 <h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>CSS-DOM 针对的是如何得到和设置 style 对象的各种属性。<br>style 属性不支持外部 css 设置的样式，不过仍然可以利用 style 属性去改变 html 元素的呈现效果。<br>不过一般都应该选择更新 classname 属性，而不是直接更新 style 对象的相关属性。<br>使用 js 干 css 的活无非就俩原因，一是 css 无法干这种活，二是一些残疾浏览器不支持最新属性。js 能够重复执行一组操作，这是 css 做不了的。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/07/18/window-soft/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.jpg">
-      <meta itemprop="name" content="道理">
-      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jinl's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/18/window-soft/" class="post-title-link" itemprop="url">电脑有哪些可以提升体验的软件？</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-07-18 12:52:28" itemprop="dateCreated datePublished" datetime="2020-07-18T12:52:28+08:00">2020-07-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-02 17:12:38" itemprop="dateModified" datetime="2020-12-02T17:12:38+08:00">2020-12-02</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Window/" itemprop="url" rel="index"><span itemprop="name">Window</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/07/18/window-soft/" class="post-meta-item leancloud_visitors" data-flag-title="电脑有哪些可以提升体验的软件？" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/07/18/window-soft/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/18/window-soft/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>以下这些都是可以提升电脑使用体验的 10 款软件。</p>
-<h4 id="1-截图软件：Snipaste"><a href="#1-截图软件：Snipaste" class="headerlink" title="1. 截图软件：Snipaste"></a>1. 截图软件：Snipaste</h4><p>曾经我是个手机拍屏党，后来被诸多表情大师教会截图后，毅然地转到截图派。<br><img src="https://pic4.zhimg.com/80/v2-a8e78bd7fd888e942cd369fa8128fdf5.jpg" alt="Image"></p>
-<p>一开始使用的是 QQ 截图以及微信截图，但是这两个截图方式都要事先打开这俩软件，并且也不够专业/好用，最后找到了这个截图软件——Snipaste。<br>这个号称最好用的的截图软件，目前已经有 win 版、mac beta 版。</p>
-<p>它好用在哪里呢？<br>第一，软件轻量，并且无广告。这个软件有免费版和专业版，免费版没有任何广告，提供的功能也足够个人用户使用；<br>第二，功能强：</p>
-<blockquote>
-<p>自动检测界面元素区域</p>
-<p>像素级的鼠标移动控制、截图范围控制</p>
-<p>取色器 (试试 F1, C, F3)</p>
-<p>历史记录回放 (,/.)</p>
-<p>支持多屏</p>
-<p>支持高分屏</p>
-</blockquote>
-<p>第三，无与伦与的贴图功能。当你写文档需要查资料时，把相关截图贴上屏幕后，体验瞬间上一档次；</p>
-<p><img src="https://pic4.zhimg.com/80/v2-170c49a04f7547fa4bb5c85fef5b147c.png" alt="Image"></p>
-<p>第四，更强的图像标注功能，基本一个常见图片编辑器有的，这个都有；</p>
-<p>第五，可自定义截图的分辨率。</p>
-<p>更多的功能可以去看<a href="https://docs.snipaste.com/zh-cn/" target="_blank" rel="noopener">官方文档</a>。<br>官网下载<a href="https://zh.snipaste.com/" target="_blank" rel="noopener">地址</a></p>
-<h4 id="2-文件查找——Everything"><a href="#2-文件查找——Everything" class="headerlink" title="2. 文件查找——Everything"></a>2. 文件查找——Everything</h4><p><img src="https://pic4.zhimg.com/80/v2-37f70af2050b2a4dab90016cf2eade08.png" alt="Image"></p>
-<p>一个轻量级的查找文件的软件，当做好索引后，查找文件的速度是秒计的。<br>不过这个是实在找不到文件时才用的，平时做好文件的分类索引后，就很少有它的用武之地。</p>
-<p><a href="https://www.voidtools.com/" target="_blank" rel="noopener">下载地址</a></p>
-<h4 id="3-解压缩软件——7z"><a href="#3-解压缩软件——7z" class="headerlink" title="3. 解压缩软件——7z"></a>3. 解压缩软件——7z</h4><p><img src="https://pic4.zhimg.com/80/v2-b8897b531c317f6d1180a27d4856cf95.png" alt="Image"></p>
-<p>解压缩软件是电脑里必备的软件之一了。<br>常见的解压缩软件有——winrar、360 压缩、bendzip 等。</p>
-<p>7Z 的优点是开源、免费、轻量（安装包仅 1.3Mb），压缩比也高，并且压缩软件该有的功能一个不少。缺点就是颜值一般般，追求这方面的话，推荐另一款同样优秀的压缩软件——Bendzip。</p>
-<p><a href="https://sparanoid.com/lab/7z/" target="_blank" rel="noopener">官网下载地址</a></p>
-<h4 id="4-阅读-PDF-文件——sumatra"><a href="#4-阅读-PDF-文件——sumatra" class="headerlink" title="4. 阅读 PDF 文件——sumatra"></a>4. 阅读 PDF 文件——sumatra</h4><p><img src="https://pic4.zhimg.com/80/v2-df0a829b4032f0226b887427a201798c.png" alt="Image"><br>说是阅读 PDF 软件，其实还支持 epub、mobi、CHM 等文件的阅读。</p>
-<blockquote>
-<p>Sumatra PDF is a PDF, ePub, MOBI, CHM, XPS, DjVu, CBZ, CBR reader for Windows.</p>
-</blockquote>
-<p>优点是轻量、占用内存小、简洁、开源。</p>
-<p><a href="https://www.sumatrapdfreader.org/download-free-pdf-viewer.html" target="_blank" rel="noopener">官网下载地址</a></p>
-<h4 id="5-下载软件——IDM"><a href="#5-下载软件——IDM" class="headerlink" title="5. 下载软件——IDM"></a>5. 下载软件——IDM</h4><p><img src="https://pic4.zhimg.com/80/v2-41146ab15375705b71f80c0ba4b59187.png" alt="Image"></p>
-<p>一个使用多线程的下载软件，可以接管浏览器里的下载，下载速度非常快。不仅如此，该软件还可以几乎所有网站上的视频，还可以下载百度网盘的文件不过需要一点配置。</p>
-<p>曾经写过一篇 IDM 下载的配置，里面有 IDM 的下载链接，<a href="https://jinl1874.xyz/2020/06/28/use-idm/">地址</a>。</p>
-<h4 id="6-视频软件——PotPlayer"><a href="#6-视频软件——PotPlayer" class="headerlink" title="6. 视频软件——PotPlayer"></a>6. 视频软件——PotPlayer</h4><p><img src="https://pic4.zhimg.com/80/v2-ee68e61b55fca6dcd2473d322f6f2df8.png" alt="Image"><br>大概是最优秀的视频播放器了，界面简洁美观，没有流氓软件有的一切行为，比如突然修改你的默认播放软件等。<br>功能多，录屏、截 gif 之类的不在话下，支持逐帧跳转，截图非常方便。总之一般视频播放软件有的，它也有；其它播放软件没有的，它也有，比如可以收看电视信号，看直播等，可以去网上搜一下教程。</p>
-<p><a href="http://www.potplayercn.com/" target="_blank" rel="noopener">官网下载链接</a></p>
-<h4 id="7-记事本替代——notepad3"><a href="#7-记事本替代——notepad3" class="headerlink" title="7. 记事本替代——notepad3"></a>7. 记事本替代——notepad3</h4><p><img src="https://pic4.zhimg.com/80/v2-23c994c8de63a39c0dca508da2e29a06.png" alt="Image"></p>
-<p>相信大家在写一些事情或者打开文本文件的时候经常会用到记事本，但是记事本的功能界面实在是太简陋了，比如常见的代码高亮、正则表达式、更改主题等全都没有。<br>然后就找到了这一款软件——notepad3，安装会自动替代系统的 notepad 软件，也就是说你打开 notepad 即是打开 notepad3。基本的使用方式是和 notepad 是一样的，但多了很多配置功能。</p>
-<p><a href="https://www.rizonesoft.com/downloads/notepad3/" target="_blank" rel="noopener">下载链接</a></p>
-<h4 id="8-window-任务栏透明小软件——TranslucentTB"><a href="#8-window-任务栏透明小软件——TranslucentTB" class="headerlink" title="8. window 任务栏透明小软件——TranslucentTB"></a>8. window 任务栏透明小软件——TranslucentTB</h4><p>任务栏默认是黑色的，有的会随主题颜色改变而改变，不过都不是透明的，并且有点显丑。</p>
-<p>TranslucentTB，可以使任务栏改变状态。一般有两种<br>模糊<br><img src="https://pic4.zhimg.com/80/v2-c52e293bb1f781b8980476c0961fb64c.png" alt="Image"><br>清晰<br><img src="https://pic4.zhimg.com/80/v2-a51aa1f41395567578f68cc5ea1815b1.png" alt="Image"></p>
-<p><a href="https://github.com/TranslucentTB/TranslucentTB" target="_blank" rel="noopener">github 地址</a></p>
-<p>该软件已上架微软商店，可以去<a href="https://www.microsoft.com/zh-cn/p/translucenttb/9pf4kz2vn4w9?rtc=1" target="_blank" rel="noopener">该处</a>下载安装。</p>
-<h4 id="9-浏览器——Firefox"><a href="#9-浏览器——Firefox" class="headerlink" title="9. 浏览器——Firefox"></a>9. 浏览器——Firefox</h4><p>火狐浏览器一款开源浏览器，可能是仅存的非 chomium 内核浏览器。<br>对比 chrome 的优点是，上扩展商店以及同步数据的时候不用特别的上网方式。</p>
-<p>注意下载浏览器的时候不要下载到国内特供版，看准网址，如果域名是(firefox.com.cn)的话，那就是国内特供的了，认准域名(mozilla.org)。国内特供版的数据无法与非国内版的同步，曾经我就是被这个坑过。</p>
-<p><a href="https://www.mozilla.org/en-US/firefox/new/" target="_blank" rel="noopener">下载地址</a></p>
-<h4 id="10-安全软件——火绒"><a href="#10-安全软件——火绒" class="headerlink" title="10. 安全软件——火绒"></a>10. 安全软件——火绒</h4><p>一个没有任何流氓行为的安全软件，不过我也就是用它来管管弹窗，以及开机自启动软件的，一般的安全问题有 window defense 就够了。<br>如果你的电脑安装有其它国产免费安全软件的话，早卸早安全。</p>
 
       
     </div>
