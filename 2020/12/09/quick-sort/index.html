@@ -23,30 +23,35 @@
     var CONFIG = {"hostname":"jinl1874.xyz","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="这个人很懒，什么也没有留下！">
-<meta property="og:type" content="website">
-<meta property="og:title" content="jinl&#39;s blog">
-<meta property="og:url" content="https://jinl1874.xyz/index.html">
+  <meta name="description" content="Python 实现快速排序快速排序，排序中最基本的算法，也是用得最多的算法。 python 里的 sorted() 方法，就是使用快速排序来执行的。 原理在数据中选定一个基准，将小于这个基准的的数据放在左边，大于这个基准的放在右边，然后以这个基准为分界线，递归地实现左边以及右边的数据。 这个基准可以选中位数，也可以选第一个以及最后一个数，不同的数会导致不同的执行效率。 实现 常见的实现代码这个代">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 实现快速排序">
+<meta property="og:url" content="https://jinl1874.xyz/2020/12/09/quick-sort/index.html">
 <meta property="og:site_name" content="jinl&#39;s blog">
-<meta property="og:description" content="这个人很懒，什么也没有留下！">
+<meta property="og:description" content="Python 实现快速排序快速排序，排序中最基本的算法，也是用得最多的算法。 python 里的 sorted() 方法，就是使用快速排序来执行的。 原理在数据中选定一个基准，将小于这个基准的的数据放在左边，大于这个基准的放在右边，然后以这个基准为分界线，递归地实现左边以及右边的数据。 这个基准可以选中位数，也可以选第一个以及最后一个数，不同的数会导致不同的执行效率。 实现 常见的实现代码这个代">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-b21c06eeb655b1279657a641307254c7.jpg">
+<meta property="article:published_time" content="2020-12-09T12:22:28.000Z">
+<meta property="article:modified_time" content="2020-12-09T12:26:13.636Z">
 <meta property="article:author" content="道理">
+<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic4.zhimg.com/80/v2-b21c06eeb655b1279657a641307254c7.jpg">
 
-<link rel="canonical" href="https://jinl1874.xyz/">
+<link rel="canonical" href="https://jinl1874.xyz/2020/12/09/quick-sort/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>jinl's blog</title>
+  <title>Python 实现快速排序 | jinl's blog</title>
   
 
 
@@ -202,9 +207,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -220,10 +226,9 @@
       <meta itemprop="name" content="jinl's blog">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/09/quick-sort/" class="post-title-link" itemprop="url">Python 实现快速排序</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          Python 实现快速排序
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -277,7 +282,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><img src="https://pic4.zhimg.com/80/v2-b21c06eeb655b1279657a641307254c7.jpg" alt="Image"></p>
+        <p><img src="https://pic4.zhimg.com/80/v2-b21c06eeb655b1279657a641307254c7.jpg" alt="Image"></p>
 <h1 id="Python-实现快速排序"><a href="#Python-实现快速排序" class="headerlink" title="Python 实现快速排序"></a>Python 实现快速排序</h1><p>快速排序，排序中最基本的算法，也是用得最多的算法。</p>
 <p>python 里的 <code>sorted()</code> 方法，就是使用快速排序来执行的。</p>
 <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>在数据中选定一个基准，将小于这个基准的的数据放在左边，大于这个基准的放在右边，然后以这个基准为分界线，递归地实现左边以及右边的数据。</p>
@@ -310,423 +315,50 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sort = <span class="keyword">lambda</span> A: A <span class="keyword">if</span> len(A) &lt;= <span class="number">1</span> <span class="keyword">else</span> sort([i <span class="keyword">for</span> i <span class="keyword">in</span> A[<span class="number">1</span>:] <span class="keyword">if</span> i &lt;= A[<span class="number">0</span>]]) + [A[<span class="number">0</span>]] + sort([i <span class="keyword">for</span> i <span class="keyword">in</span> A[<span class="number">1</span>:] <span class="keyword">if</span> i &gt; A[<span class="number">0</span>]])</span><br></pre></td></tr></table></figure>
 
 
-      
     </div>
 
     
     
     
+
+<div>
+    
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------------    感谢你的阅读    ------------</div>
+    
+</div>
+    
+ </div>
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+          </div>
 
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/12/02/nono-biyori-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.jpg">
-      <meta itemprop="name" content="道理">
-      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jinl's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/02/nono-biyori-2/" class="post-title-link" itemprop="url">【悠哉日常大王·解】光华的苦恼</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-12-02 17:06:21 / 修改时间：17:08:32" itemprop="dateCreated datePublished" datetime="2020-12-02T17:06:21+08:00">2020-12-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%8A%A8%E6%BC%AB/" itemprop="url" rel="index"><span itemprop="name">动漫</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/12/02/nono-biyori-2/" class="post-meta-item leancloud_visitors" data-flag-title="【悠哉日常大王·解】光华的苦恼" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/12/02/nono-biyori-2/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/12/02/nono-biyori-2/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="https://pic4.zhimg.com/80/v2-5e88f01c16d3448d5b12574e272e6d5d.png" alt="Image"></p>
-<p>多年以后，面对要毁灭世界的恶魔时，光华将会想起九岁那年木实带她城市购物的那个下午。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/12/02/nono-biyori-2/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
 
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/11/25/ex/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.jpg">
-      <meta itemprop="name" content="道理">
-      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jinl's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/25/ex/" class="post-title-link" itemprop="url">以前的她</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-11-25 21:01:00 / 修改时间：21:05:09" itemprop="dateCreated datePublished" datetime="2020-11-25T21:01:00+08:00">2020-11-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/11/25/ex/" class="post-meta-item leancloud_visitors" data-flag-title="以前的她" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/11/25/ex/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/11/25/ex/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="https://pic4.zhimg.com/80/v2-5ce6e313ee4a976fbddf4dc9424ce4fd.jpg" alt="Image"></p>
-<h2 id="以前的她"><a href="#以前的她" class="headerlink" title="以前的她"></a>以前的她</h2><p>网友喜欢听故事，那就写一篇故事吧。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/25/ex/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/02/nono-biyori-2/" rel="prev" title="【悠哉日常大王·解】光华的苦恼">
+      <i class="fa fa-chevron-left"></i> 【悠哉日常大王·解】光华的苦恼
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
 
   </article>
   
   
   
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/11/20/python-zhihu-video/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.jpg">
-      <meta itemprop="name" content="道理">
-      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jinl's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/20/python-zhihu-video/" class="post-title-link" itemprop="url">使用 Python 爬取知乎答案上的视频</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-11-20 11:02:00 / 修改时间：11:06:54" itemprop="dateCreated datePublished" datetime="2020-11-20T11:02:00+08:00">2020-11-20</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/11/20/python-zhihu-video/" class="post-meta-item leancloud_visitors" data-flag-title="使用 Python 爬取知乎答案上的视频" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/11/20/python-zhihu-video/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/11/20/python-zhihu-video/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="https://pic4.zhimg.com/80/v2-bb617555b12dd3be6c590dc0f4239893.jpg" alt="Image"></p>
-<p>使用 python requests 来下载知乎的视频，虽然有更简单的方法。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/20/python-zhihu-video/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/11/19/get-bilibili-video/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.jpg">
-      <meta itemprop="name" content="道理">
-      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jinl's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/19/get-bilibili-video/" class="post-title-link" itemprop="url">Python 爬取 BiliBili 的视频、弹幕以及封面</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-11-19 11:00:00 / 修改时间：11:00:32" itemprop="dateCreated datePublished" datetime="2020-11-19T11:00:00+08:00">2020-11-19</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/11/19/get-bilibili-video/" class="post-meta-item leancloud_visitors" data-flag-title="Python 爬取 BiliBili 的视频、弹幕以及封面" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/11/19/get-bilibili-video/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/11/19/get-bilibili-video/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="https://pic4.zhimg.com/80/v2-7845078e3c79cca06685bd947ee64e1f.jpg" alt="Image"></p>
-<p>详细解析 Python 该如何爬取 bilibili 的视频、弹幕以及封面，最后保存到本地。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/19/get-bilibili-video/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-
-  </article>
-  
-  
-  
-
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
 
 
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -773,6 +405,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python-实现快速排序"><span class="nav-number">1.</span> <span class="nav-text">Python 实现快速排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">1.2.</span> <span class="nav-text">实现</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
