@@ -208,6 +208,357 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/05/22/qiniuImage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="道理">
+      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="jinl's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/22/qiniuImage/" class="post-title-link" itemprop="url">使用七牛云和PicGo来创建自己的图床</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-22 16:42:07" itemprop="dateCreated datePublished" datetime="2020-05-22T16:42:07+08:00">2020-05-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-23 00:05:57" itemprop="dateModified" datetime="2020-05-23T00:05:57+08:00">2020-05-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/BlogBuild/" itemprop="url" rel="index"><span itemprop="name">BlogBuild</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Other/" itemprop="url" rel="index"><span itemprop="name">Other</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/05/22/qiniuImage/" class="post-meta-item leancloud_visitors" data-flag-title="使用七牛云和PicGo来创建自己的图床" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/22/qiniuImage/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/22/qiniuImage/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>最近搭了个博客，就有较大放置图片的需求，于是就想搭了个图床。<br>其它的图床不是要收费就是使用体验非常差，经常出现上传错误。而七牛云有10G的免费空间，对个人用户而言足够了。再加上PicGo的使用，能很方便能上传图户并获取链接。</p>
+</blockquote>
+<hr>
+<h3 id="所需工具"><a href="#所需工具" class="headerlink" title="所需工具"></a>所需工具</h3><p>七牛云，PicGo，备案好的域名。</p>
+<h4 id="1-注册七牛云"><a href="#1-注册七牛云" class="headerlink" title="1. 注册七牛云"></a>1. 注册七牛云</h4><ul>
+<li>打开<a href="https://www.qiniu.com/" target="_blank" rel="noopener">七牛云</a>注册账号，进行个人账号认证。需要上传身份，有了支付宝的认证也不需要人工审核了，上传身份后就认证成功了。<h4 id="2-创建空间"><a href="#2-创建空间" class="headerlink" title="2. 创建空间"></a>2. 创建空间</h4></li>
+<li>管理控制台 $\rightarrow$ 对象储存 $\rightarrow$ 空间管理 $\rightarrow$ 新建空间。</li>
+<li>空间名称随便填，储存区域也可以随便选，访问控制选择公开，点击确定创建。</li>
+</ul>
+<h4 id="3-注册2级域名"><a href="#3-注册2级域名" class="headerlink" title="3. 注册2级域名"></a>3. 注册2级域名</h4><ul>
+<li>域名控制台 $\rightarrow$ 解析 $\rightarrow$ 添加记录 $\rightarrow$<br><img src="http://image.jinl1874.xyz/img/%E6%8E%A7%E5%88%B6.png" alt="域名控制"></li>
+<li>记录类型选择CNAME，主机记录按自己喜好，记录值随便填一个能用的。<br><img src="http://image.jinl1874.xyz/img/add_sub_domain.png" alt="域名"></li>
+</ul>
+<h4 id="4-绑定二级域名"><a href="#4-绑定二级域名" class="headerlink" title="4. 绑定二级域名"></a>4. 绑定二级域名</h4><ul>
+<li><p>空间管理 $\rightarrow$ 域名管理 $\rightarrow$ 绑定域名 $\rightarrow$ 加速域名 $\rightarrow$填入子域名(如 &lt;image.jinl1874.xyz&gt;)。<br><img src="http://image.jinl1874.xyz/img/input_sub_domain.png" alt="填入子域名"></p>
+</li>
+<li><p>绑定成功后会跳转，复制CNAME的值。</p>
+</li>
+<li><p>回到域名控制台，修改刚才添加的记录，把CNAME的值放入放进记录值，然后保存。<br><img src="http://image.jinl1874.xyz/img/sub_domain_success.png" alt="成功"></p>
+</li>
+<li><p>可能会有一段时间的等待，回到域名管理，如果下图红圈出成功，那么七牛云已经创建并绑定成功了。<br><img src="http://image.jinl1874.xyz/img/success.png" alt="sucees"></p>
+</li>
+</ul>
+<h4 id="5-使用PicGO"><a href="#5-使用PicGO" class="headerlink" title="5. 使用PicGO"></a>5. 使用PicGO</h4><ul>
+<li><p>推荐下载<a href="https://github.com/Molunerfinn/PicGo/releases/tag/v2.2.2" target="_blank" rel="noopener">2.22版本</a></p>
+</li>
+<li><p>安装成功后，打开PicGo设置，拉到最下面，勾选“七牛图床”。</p>
+</li>
+<li><p>在图床设置，设置七牛图床。<br><img src="http://image.jinl1874.xyz/img/picgo_setting.png" alt="picGoSetting"></p>
+</li>
+<li><p>打开七牛云，进入密钥管理，复制AK和SK分别填到AccessKey和SecretKey；</p>
+</li>
+<li><p>存储空间名即是你创建的对象存储的名字</p>
+</li>
+<li><p>访问地址即你的http://+二级域名（如<a href="http://image.jinl1874.xyz" target="_blank" rel="noopener">http://image.jinl1874.xyz</a>)</p>
+</li>
+<li><p>存储区域根据下图而填，我的是华南区，所以填Z2。<br><img src="http://image.jinl1874.xyz/img/20200522225637.png" alt="area"></p>
+</li>
+<li><p>点击确定，建议设为默认图床。</p>
+</li>
+<li><p>此时已经设置成功，可以在“上传区”上传图片。</p>
+</li>
+</ul>
+<h4 id="到了此处，搭建图床的工作已经完成。"><a href="#到了此处，搭建图床的工作已经完成。" class="headerlink" title="到了此处，搭建图床的工作已经完成。"></a>到了此处，搭建图床的工作已经完成。</h4><p>欢迎访问个人博客主页<a href="jinl1874.github.io">jinl1874</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/05/21/hexo-0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="道理">
+      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="jinl's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/21/hexo-0/" class="post-title-link" itemprop="url">使用Hexo和GithubPage免费搭建博客网站</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-21 18:57:08" itemprop="dateCreated datePublished" datetime="2020-05-21T18:57:08+08:00">2020-05-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-22 00:27:54" itemprop="dateModified" datetime="2020-05-22T00:27:54+08:00">2020-05-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/BlogBuild/" itemprop="url" rel="index"><span itemprop="name">BlogBuild</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HEXO/" itemprop="url" rel="index"><span itemprop="name">HEXO</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/05/21/hexo-0/" class="post-meta-item leancloud_visitors" data-flag-title="使用Hexo和GithubPage免费搭建博客网站" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/21/hexo-0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/21/hexo-0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>如果已经安装了下面两个软件，那么可以直接安装Hexo了。</p>
+<h3 id="1-安装Node-js"><a href="#1-安装Node-js" class="headerlink" title="1. 安装Node.js"></a>1. 安装Node.js</h3><p><a href="https://nodejs.org/en/" target="_blank" rel="noopener">安装node</a>，也可以去node.js中文网<a href="http://nodejs.cn/download/" target="_blank" rel="noopener">下载</a></p>
+<blockquote>
+<p>注意：windowns 用户要把 “Add to Path” 勾选上</p>
+</blockquote>
+<h3 id="2-安装Git"><a href="#2-安装Git" class="headerlink" title="2. 安装Git"></a>2. 安装Git</h3><p>Windows: <a href="https://git-scm.com/download/win" target="_blank" rel="noopener">下载</a><br>MAC: <code>▶ brew install git</code><br>Linux (Ubuntu, Debian)：<code>▶ sudo apt-get install git-core</code><br>Linux (Fedora, Red Hat, CentOS)：<code>▶ sudo yum install git-core</code></p>
+<h3 id="3-安装Hexo"><a href="#3-安装Hexo" class="headerlink" title="3. 安装Hexo"></a>3. 安装Hexo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">▶ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<p>上述步骤完成后，就可以进入下一环节——生成项目文件了。</p>
+<h2 id="建成"><a href="#建成" class="headerlink" title="建成"></a>建成</h2><h3 id="1-生成"><a href="#1-生成" class="headerlink" title="1. 生成"></a>1. 生成</h3><ul>
+<li>打开cmd或者powershell，进入要放置文件的目录，再生成目录和博客文件。<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">▶ hexo init blog(自定义)</span><br></pre></td></tr></table></figure></li>
+<li>进入对应目录<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">▶ cd blog</span><br></pre></td></tr></table></figure></li>
+<li>安装npm <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">▶ npm install</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="2-配置"><a href="#2-配置" class="headerlink" title="2. 配置"></a>2. 配置</h3><ul>
+<li>打开 <code>_config.yml</code>文件，来进行详细博客网站配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Site</span><br><span class="line">title: Hexo # 网站名字</span><br><span class="line">subtitle: &#39;&#39; # 网站副标题</span><br><span class="line">description: &#39;&#39; # 网站描述</span><br><span class="line">keywords:  # 关键词</span><br><span class="line">author: John Doe # 作者名字</span><br><span class="line">language: zh-CN # 语言选择 &quot;zh-CN&quot;</span><br><span class="line">timezone: &#39;Asia&#x2F;Shanghai&#39; # 时区选择 &quot;Asia&#x2F;Shanghai&quot;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注：内容与注释之间需要空格隔开<br>更多详细配置可以访问 Hexo 的<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">中文文档</a></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="3-写文章"><a href="#3-写文章" class="headerlink" title="3. 写文章"></a>3. 写文章</h3><p>输入<code>▶ hexo new TestArticle</code>，出现下列文字，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INFO  Created: D:\web\my_blog\source\_posts\TestArticle.md</span><br></pre></td></tr></table></figure>
+<p>说明创建文章成功。<br>打开并编辑该文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: TestArticle</span><br><span class="line">date: 2020-05-21 21:39:56</span><br><span class="line">tags:</span><br><span class="line">---</span><br><span class="line">生活就像海洋，只有意志坚强的人才能到达彼岸。</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-发布"><a href="#4-发布" class="headerlink" title="4. 发布"></a>4. 发布</h3><ul>
+<li><p>生成静态文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">▶ hexo generate</span><br><span class="line">INFO  Start processing</span><br><span class="line">INFO  Files loaded in 248 ms</span><br><span class="line">INFO  Generated: index.html</span><br><span class="line">INFO  Generated: archives&#x2F;index.html</span><br><span class="line">INFO  Generated: fancybox&#x2F;blank.gif</span><br><span class="line">INFO  Generated: fancybox&#x2F;jquery.fancybox.css</span><br><span class="line">INFO  Generated: fancybox&#x2F;jquery.fancybox.pack.js</span><br><span class="line">INFO  Generated: fancybox&#x2F;fancybox_sprite.png</span><br><span class="line">INFO  Generated: fancybox&#x2F;fancybox_overlay.png</span><br><span class="line">INFO  Generated: fancybox&#x2F;jquery.fancybox.js</span><br><span class="line">INFO  Generated: fancybox&#x2F;fancybox_loading.gif</span><br><span class="line">INFO  Generated: fancybox&#x2F;fancybox_loading@2x.gif</span><br><span class="line">INFO  Generated: fancybox&#x2F;fancybox_sprite@2x.png</span><br><span class="line">INFO  Generated: fancybox&#x2F;helpers&#x2F;fancybox_buttons.png</span><br><span class="line">INFO  Generated: archives&#x2F;2020&#x2F;05&#x2F;index.html</span><br><span class="line">INFO  Generated: archives&#x2F;2020&#x2F;index.html</span><br><span class="line">INFO  Generated: css&#x2F;fonts&#x2F;FontAwesome.otf</span><br><span class="line">INFO  Generated: js&#x2F;script.js</span><br><span class="line">INFO  Generated: fancybox&#x2F;helpers&#x2F;jquery.fancybox-buttons.js</span><br><span class="line">INFO  Generated: fancybox&#x2F;helpers&#x2F;jquery.fancybox-thumbs.css</span><br><span class="line">INFO  Generated: fancybox&#x2F;helpers&#x2F;jquery.fancybox-media.js</span><br><span class="line">INFO  Generated: css&#x2F;style.css</span><br><span class="line">INFO  Generated: css&#x2F;fonts&#x2F;fontawesome-webfont.eot</span><br><span class="line">INFO  Generated: fancybox&#x2F;helpers&#x2F;jquery.fancybox-thumbs.js</span><br><span class="line">INFO  Generated: fancybox&#x2F;helpers&#x2F;jquery.fancybox-buttons.css</span><br><span class="line">INFO  Generated: css&#x2F;fonts&#x2F;fontawesome-webfont.woff</span><br><span class="line">INFO  Generated: css&#x2F;fonts&#x2F;fontawesome-webfont.ttf</span><br><span class="line">INFO  Generated: css&#x2F;fonts&#x2F;fontawesome-webfont.svg</span><br><span class="line">INFO  Generated: 2020&#x2F;05&#x2F;21&#x2F;TestArticle&#x2F;index.html</span><br><span class="line">INFO  Generated: 2020&#x2F;05&#x2F;21&#x2F;hello-world&#x2F;index.html</span><br><span class="line">INFO  Generated: css&#x2F;images&#x2F;banner.jpg</span><br><span class="line">INFO  29 files generated in 978 ms</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>该命令可以简写为 <code>hexo g</code></p>
+</blockquote>
+</li>
+<li><p>启动本地服务器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">▶ hexo server</span><br><span class="line">INFO  Start processing</span><br><span class="line">INFO  Hexo is running at http://localhost:4000 . Press Ctrl+C to stop.</span><br></pre></td></tr></table></figure></li>
+<li><p>打开浏览器，输入 <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a></p>
+</li>
+<li><p>出现下述画面后，博客可以算是初步完成了。<br><img src="https://s1.ax1x.com/2020/05/21/YqoCcD.png" alt="结果截图"></p>
+</li>
+</ul>
+<blockquote>
+<p>更多详细的命令，可以参考官方<a href="https://hexo.io/zh-cn/docs/commands" target="_blank" rel="noopener">文档</a></p>
+</blockquote>
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><p>github上有一个免费的 <a href="https://pages.github.com/" target="_blank" rel="noopener">GithubPages</a> 供大家使用。</p>
+<blockquote>
+<p>Websites for you and your projects.</p>
+</blockquote>
+<h3 id="1-仓库"><a href="#1-仓库" class="headerlink" title="1. 仓库"></a>1. 仓库</h3><ul>
+<li>打开<a href="https://github.com/" target="_blank" rel="noopener">github</a>注册账号。</li>
+<li>新建一个 Repository，仓库名为 <code>yourname.github.io</code>，例如 <code>jinl1874.github.io</code>，</li>
+<li>“Description”选填，</li>
+<li>勾选”Initialize this repository with a README”，</li>
+<li>最后点击”Create repository”。</li>
+<li>点击仓库左边的Settings，把<code>yourname.github.io</code>填进”Repository name”，最后点击”Rename”。</li>
+</ul>
+<h3 id="2-连接"><a href="#2-连接" class="headerlink" title="2. 连接"></a>2. 连接</h3><p><em>将本地git与github连接起来</em></p>
+<ul>
+<li>创建SSH Key<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">▶ ssh-keygen -t rsa -C &quot;youremail@example.com&quot;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>把上面的邮件地址换成你自己的邮件地址，然后一直回车</p>
+</blockquote>
+</li>
+<li>进入你的主目录[C://Users//xxx]，勾选查看隐藏文件，找到<code>.ssh</code>目录，用记事本打开<code>id_rsa.pub</code>，复制全部内容。</li>
+<li>打开github的”Settings”，点击”SSH and GPG keys”，再”New SSH key”，起一个名字，然后把刚才复制的内容放在key里面，最后点击”Add SSH key”。</li>
+<li>这样，你的git就与远程仓库github连接起来了。</li>
+</ul>
+<h3 id="3-上线"><a href="#3-上线" class="headerlink" title="3. 上线"></a>3. 上线</h3><ul>
+<li><p>安装 <code>hexo-deployer-git</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">▶ npm install hexo-deployer-git --save</span><br><span class="line">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.1.3 (node_modules\fsevents):</span><br><span class="line">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.1.3: wanted &#123;&quot;os&quot;:&quot;darwin&quot;,&quot;arch&quot;:&quot;any&quot;&#125; (current: &#123;&quot;os&quot;:&quot;win32&quot;,&quot;arch&quot;:&quot;x64&quot;&#125;)</span><br><span class="line"></span><br><span class="line">+ hexo-deployer-git@2.1.0</span><br><span class="line">added 1 package from 1 contributor in 2.588s</span><br><span class="line"></span><br><span class="line">5 packages are looking for funding</span><br><span class="line">  run &#96;npm fund&#96; for details</span><br></pre></td></tr></table></figure></li>
+<li><p>更改配置，打开<code>_config.yml</code>，找到deploy</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https:&#x2F;&#x2F;hexo.io&#x2F;docs&#x2F;deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: &lt;repository url&gt; # https:&#x2F;&#x2F;github.com&#x2F;jinl1874&#x2F;jinl1874.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行<code>hexo deploy</code>(可简化为<code>hexo d</code>)，打开浏览器，输入(yourname.github.io)即可访问网站。</p>
+</li>
+</ul>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="发表文章"><a href="#发表文章" class="headerlink" title="发表文章"></a>发表文章</h3><ul>
+<li>写好文章后使用下面两条命令进行发表<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g # 生成静态页面</span><br><span class="line">hexo d # 同步到github page</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h2><h3 id="1-使用自己的域名"><a href="#1-使用自己的域名" class="headerlink" title="1. 使用自己的域名"></a>1. 使用自己的域名</h3><ul>
+<li>前往阿里云或者腾讯云注册自己的域名。</li>
+<li>在<code>yourname.github.io</code>的setting里，找到”Custom domain”，将其更改为你的域名后保存。<br><img src="https://raw.githubusercontent.com/jinl1874/image/master/github.png" alt="githubPage"></li>
+<li>到域名控制台上，找到域名列表点击解析设置，添加两个CNAME类型即可。<br><img src="https://s1.ax1x.com/2020/05/21/YL9TdP.png" alt="cname"></li>
+</ul>
+<h3 id="2-使用next主题"><a href="#2-使用next主题" class="headerlink" title="2. 使用next主题"></a>2. 使用next主题</h3><ul>
+<li><p>下载安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">▶ cd your-hexo-site</span><br><span class="line">▶ git clone https:&#x2F;&#x2F;github.com&#x2F;theme-next&#x2F;hexo-theme-next themes&#x2F;next</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开站点<code>_config.yml</code>，找到<code>theme</code>字段，并更改为next</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置布局。打开主题配置文件<code>_config.yml</code>（与上个<code>_config.yml</code>不同），设置 Scheme</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Schemes</span><br><span class="line"># scheme: Muse # 默认 Scheme，这是 NexT 最初的版本，黑白主调，大量留白</span><br><span class="line"># scheme: Mist # Muse 的紧凑版本，整洁有序的单栏外观</span><br><span class="line">#scheme: Pisces # 双栏 Scheme，小家碧玉似的清新</span><br><span class="line">scheme: Gemini # 个人更喜欢双栏分割</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置菜单<br>把home, categories, archives, tags, schedule,以及about留下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: &#x2F; || fa fa-home</span><br><span class="line">  categories: &#x2F;categories&#x2F; || fa fa-th</span><br><span class="line">  archives: &#x2F;archives&#x2F; || fa fa-archive</span><br><span class="line">  tags: &#x2F;tags&#x2F; || fa fa-tags</span><br><span class="line">  about: &#x2F;about&#x2F; || fa fa-user</span><br><span class="line">  schedule: &#x2F;schedule&#x2F; || fa fa-calendar</span><br><span class="line">  # sitemap: &#x2F;sitemap.xml || fa fa-sitemap</span><br><span class="line">  # commonweal: &#x2F;404&#x2F; || fa fa-heartbeat</span><br></pre></td></tr></table></figure>
+<p>添加对应的页面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo new page tags</span><br><span class="line">hexo new page categories</span><br><span class="line">hexo new page archives</span><br><span class="line">hexo new page cabout</span><br><span class="line">hexo new page schedule</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<blockquote>
+<p>更多next主题配置请访问next<a href="http://theme-next.iissnan.com/" target="_blank" rel="noopener">官方文档</a></p>
+</blockquote>
+<p>欢迎访问个人博客主页<a href="https://jinl1874.github.io" target="_blank" rel="noopener">jinl1874</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/05/20/Test-Article/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -464,7 +815,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
