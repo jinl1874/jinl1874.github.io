@@ -208,6 +208,275 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/06/30/%E4%BD%BF%E7%94%A8js%E6%93%8D%E4%BD%9C%E9%97%AE%E5%8D%B7%E6%98%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="道理">
+      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="jinl's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/30/%E4%BD%BF%E7%94%A8js%E6%93%8D%E4%BD%9C%E9%97%AE%E5%8D%B7%E6%98%9F/" class="post-title-link" itemprop="url">使用 javascript 编写自动填写问卷星的脚本</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-30 16:59:07 / 修改时间：21:55:16" itemprop="dateCreated datePublished" datetime="2020-06-30T16:59:07+08:00">2020-06-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/06/30/%E4%BD%BF%E7%94%A8js%E6%93%8D%E4%BD%9C%E9%97%AE%E5%8D%B7%E6%98%9F/" class="post-meta-item leancloud_visitors" data-flag-title="使用 javascript 编写自动填写问卷星的脚本" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/06/30/%E4%BD%BF%E7%94%A8js%E6%93%8D%E4%BD%9C%E9%97%AE%E5%8D%B7%E6%98%9F/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/30/%E4%BD%BF%E7%94%A8js%E6%93%8D%E4%BD%9C%E9%97%AE%E5%8D%B7%E6%98%9F/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h5 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h5><p>最近闲来无事，想来做一个自动填写的问卷星 JS 脚本。</p>
+<h5 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h5><p>此脚本目前仅支持单选、多选以及填空题。<br>单选、多选采用随机选择的方法，而填空题则需要自己配置填写的内容。<br>具体配置方法为：<br>如果问卷里的第四题是填空题，那么在全局变量<code>config</code>加上一个键值，里面有 id 和 answer 两个键，填上相应的值（第四题即<code>id: 4</code>)即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> config = [</span><br><span class="line">  &#123;</span><br><span class="line">    id: <span class="number">4</span>,</span><br><span class="line">    answer: [<span class="string">"不知道"</span>, <span class="string">"随便吧"</span>, <span class="string">"自学去"</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<h5 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h5><p>打开浏览器，进入问卷页面如<a href="https://www.wjx.cn/jq/83481770.aspx" target="_blank" rel="noopener">js 测试</a>。<br>有以下两种方法运行：</p>
+<blockquote>
+<p>我用的是 Firefox 浏览器，其它浏览器的操作都差不多，可以就是快捷键有区别。</p>
+</blockquote>
+<ol>
+<li>按<code>F12</code>，点击控制台，再把脚本粘贴到文本输入框，再点击上面的<code>运行</code>即可。<br><img src="http://image.jinl1874.xyz/img/20200630132036.png" alt="运行js"></li>
+<li>浏览器安装一个名为<code>Violentmonkey</code>即<a href="https://violentmonkey.github.io/get-it/" target="_blank" rel="noopener">暴力猴</a>的脚本插件。安装完成之后，进入问卷页面，点击 violentmonkey 的图标，会出现一个弹框，<br><img src="http://image.jinl1874.xyz/img/20200630133801.png" alt="violentmonkey"><br>再点击其中的<code>+</code>，会出现编辑脚本的页面。<br><img src="http://image.jinl1874.xyz/img/20200630134305.png" alt="edit"><br>将脚本粘贴进去，保存文件，再回到问卷页面刷新，此时脚本即可自动运行。</li>
+</ol>
+<h5 id="脚本编写思路"><a href="#脚本编写思路" class="headerlink" title="脚本编写思路"></a>脚本编写思路</h5><ol>
+<li><p>主体思路，找到所有<code>class=&quot;div_question&quot;</code>的 div，再遍历<code>div</code>，分析每个 div 是什么类型的题目，再选择对应的操作。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Traverse</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> title_list = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"div_question"</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; title_list.length; i++) &#123;</span><br><span class="line">        <span class="keyword">const</span> title = title_list[i];</span><br><span class="line">        <span class="keyword">var</span> lies = title.getElementsByTagName(<span class="string">"li"</span>);</span><br><span class="line">        <span class="keyword">var</span> textarea = title.getElementsByTagName(<span class="string">"textarea"</span>);</span><br><span class="line">        <span class="keyword">var</span> lis = [];</span><br><span class="line">        <span class="comment">// 将lies放在数组里</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> kl = <span class="number">0</span>; kl &lt; lies.length; kl++) &#123;</span><br><span class="line">            lis.push(lies[kl]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果是选择，那么执行以下操作</span></span><br><span class="line">        <span class="keyword">if</span> (lis.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// 如果是多选</span></span><br><span class="line">            <span class="keyword">if</span> (lis[<span class="number">0</span>].getElementsByClassName(<span class="string">'jqCheckbox'</span>).length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                multiple_selection(lis);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 如果是单选</span></span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                single_selection(lis);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 如果是填空题，那么调用对应的处理函数。</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (textarea.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            blanks(title, textarea);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 如果是其它，添加相应的操作.....</span></span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"other"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>单选和多选采用随机数算法</p>
+<ul>
+<li>单选题，直接生成一个随机数，再点击随机数的选项。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 处理单选</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">single_selection</span>(<span class="params">lis</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> random_0 = random_num(lis.length);</span><br><span class="line">    lis[random_0].getElementsByClassName(<span class="string">'jqRadio'</span>)[<span class="number">0</span>].click();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>多选题，先随机生成一个要选的选项数，再用一个 for 循环执行。循环里面再生成随机数，接着去点击随机数对应的选项。<br>在随机的情况下，有可能会重复点击选项，导致没有选项选上，这时就需要检测一下有没有选项被选上了，如果没有，那就手动选一个。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 处理多选</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">multiple_selection</span>(<span class="params">lis</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 获取随机数</span></span><br><span class="line">    <span class="keyword">var</span> random_0 = random_num(lis.length);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt;= random_0; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> random_1 = random_num(lis.length);</span><br><span class="line">        lis[random_1].getElementsByClassName(<span class="string">'jqCheckbox'</span>)[<span class="number">0</span>].click();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果选中的全部抵消了，那么就手动加上一个</span></span><br><span class="line">    <span class="keyword">var</span> flag = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; lis.length; i++) &#123;</span><br><span class="line">        <span class="keyword">const</span> element = lis[i].getElementsByClassName(<span class="string">"jqChecked"</span>);</span><br><span class="line">        <span class="keyword">if</span> (element.length &gt; <span class="number">0</span>)</span><br><span class="line">            flag = <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!flag) &#123;</span><br><span class="line">        lis[random_0].getElementsByClassName(<span class="string">'jqCheckbox'</span>)[<span class="number">0</span>].click();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>填空题的内容从配置文件里找出，也采用随机填写。<br>先获取题目的 id，然后从<code>config</code>中找到对应的值，再随机选取一个值将其赋值到文本框里。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 填空</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">blanks</span>(<span class="params">title, textarea</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 获取当前题目的id</span></span><br><span class="line">    <span class="keyword">var</span> id_text = title.getAttribute(<span class="string">"id"</span>);</span><br><span class="line">    <span class="keyword">var</span> re_id = <span class="regexp">/div(\d+)/</span>;</span><br><span class="line">    <span class="keyword">var</span> id = re_id.exec(id_text)[<span class="number">1</span>]</span><br><span class="line">    <span class="comment">// 遍历config里id值为id的answer</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; config.length; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (id == config[j].id) &#123;</span><br><span class="line">            textarea[<span class="number">0</span>].innerHTML = config[j].answer[random_num(config[j].answer.length)];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重定向到 PC 版网页。<br>由于问卷星手机版的网页与 PC 版相差无几，因此使用正则表达式修改即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将手机版网页转为PC版</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">redirect</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> re = <span class="regexp">/(https:\/\/www\.wjx\.cn\/)(m|jq)(.*)g/</span></span><br><span class="line">        <span class="keyword">var</span> obj = re.exec(url);</span><br><span class="line">        <span class="keyword">if</span> (obj[<span class="number">2</span>] == <span class="string">'m'</span>) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"redirect now"</span>);</span><br><span class="line">            <span class="built_in">window</span>.location.href = obj[<span class="number">1</span>] + <span class="string">"jq"</span> + obj[<span class="number">3</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"do......"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>由于填写完成并提交后会跳转到一个抽奖页面，此时的网址含有问卷页面的 id，因此可以将其抽取出来，重定向到问卷填写页面。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 完成填写重新打开填写界面</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">new_wxj</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> url = <span class="built_in">window</span>.location.href;</span><br><span class="line">    <span class="comment">//https://www.wjx.cn/wjx/join/complete.aspx?q=83481770&amp;JoinID=106588372552&amp;jidx=1&amp;s=&amp;njqj=1</span></span><br><span class="line">    <span class="keyword">var</span> re = <span class="regexp">/complete\.aspx\?q=(\d+)/</span>;</span><br><span class="line">    <span class="keyword">var</span> obj = re.exec(url);</span><br><span class="line">    <span class="keyword">if</span> (obj) &#123;</span><br><span class="line">        <span class="built_in">window</span>.location.href = <span class="string">"https://www.wjx.cn/jq/"</span> + obj[<span class="number">1</span>] + <span class="string">".aspx"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"no pat"</span>, obj);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>完整代码<a href="https://github.com/jinl1874/Javascript" target="_blank" rel="noopener">在此</a>，<br>欢迎访问我的博客<a href="https://jinl1874.xyz">网站</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/06/28/use-idm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="道理">
+      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="jinl's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/28/use-idm/" class="post-title-link" itemprop="url">安装并使用IDM(Internet Download Manager)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-28 17:13:10" itemprop="dateCreated datePublished" datetime="2020-06-28T17:13:10+08:00">2020-06-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-29 02:24:09" itemprop="dateModified" datetime="2020-06-29T02:24:09+08:00">2020-06-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Other/" itemprop="url" rel="index"><span itemprop="name">Other</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/06/28/use-idm/" class="post-meta-item leancloud_visitors" data-flag-title="安装并使用IDM(Internet Download Manager)" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/06/28/use-idm/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/28/use-idm/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="IDM-是什么？"><a href="#IDM-是什么？" class="headerlink" title="IDM 是什么？"></a>IDM 是什么？</h4><blockquote>
+<p>Internet Download Manager（简称 IDM）是一个用于 Windows 系统的下载管理器。<br>IDM 可以让用户自动下载某些类型的文件，可将文件划分为多个下载点以更快下载，并列出最近的下载，方便存取文件。相对于其他下载管理器，具有独特的动态档案分割技术。<br>其优点在于，能分析下载地址中的实际地址，但若地址无效时则跳换成失效网页，当地址重新有效而无法恢复成原来的地址。<br>而缺点在于，必须设置分段的临时文件存放的磁盘位置，下载完成后再自动合并成一个完整的文件，同时删除临时文件（这种做法不同于其他下载软件预先分配一整块磁盘空间）。所以，下载的如果是机密文件，就容易被数据恢复软件恢复，造成安全隐患。<br>– 摘自<a href="https://zh.wikipedia.org/zh-hans/Internet_Download_Manager" target="_blank" rel="noopener">维基百科</a></p>
+</blockquote>
+<p>通俗来讲就是一个优秀的下载工具。</p>
+<h4 id="为什么使用-IDM"><a href="#为什么使用-IDM" class="headerlink" title="为什么使用 IDM"></a>为什么使用 IDM</h4><p>因为 IDM 使用的是多线程下载，所以比浏览器自带的下载要快很多。<br>并且 IDM 其它的功能：</p>
+<ul>
+<li>下载百度网盘；</li>
+<li>下载 BIliBili、Youtube 等主流视频网站以及几乎所有的盗版视频网站的视频。</li>
+<li>下载文件自动分类</li>
+</ul>
+<h4 id="安装使用"><a href="#安装使用" class="headerlink" title="安装使用"></a>安装使用</h4><ol>
+<li>这是个收费软件，可以去<a href="https://www.internetdownloadmanager.com/" target="_blank" rel="noopener">官网</a>购买下载。</li>
+<li>也可使用绿色版：<br><a href="https://pan.baidu.com/s/1o_QEqKeSZLFKu9WQToo-8Q" target="_blank" rel="noopener">网盘地址</a><br>提取码：jinl<ul>
+<li>下载上述文件后，提取到一个纯英文目录（养好安装文件都放在纯英文目录的习惯）。</li>
+<li>打开其文件目录，点击<code>绿化.bat</code>文件。<small>// 不执行这一步的话浏览器无法调用 IDM 下载</small></li>
+</ul>
+</li>
+</ol>
+<h4 id="推荐配置"><a href="#推荐配置" class="headerlink" title="推荐配置"></a>推荐配置</h4><ul>
+<li>常规<br><img src="http://image.jinl1874.xyz/img/20200629000033.png" alt="image"></li>
+<li>连接<br>把最大连接数改为 32(虽然一般不会用到这么多）。</li>
+<li>代理服务器<br>如果你的电脑已经挂了代理，并希望下载 Youtube 等网站的东西，可选择切换为<code>使用系统代理</code>。</li>
+<li>其它的保持默认即可。</li>
+</ul>
+<h4 id="配置浏览器"><a href="#配置浏览器" class="headerlink" title="配置浏览器"></a>配置浏览器</h4><ul>
+<li>Firefox：打开浏览器$\rightarrow$打开 Firefox 附加组件$\rightarrow$搜索 idm$\rightarrow$点进第一个搜索结果安装。</li>
+<li>Chrome：打开浏览器$\rightarrow$打开 Chrome 网上应用$\rightarrow$搜索 idm$\rightarrow$点进第一个搜索结果安装。<br><small>Chrome 需要额外配置：右上三点$\rightarrow$更多工具$\rightarrow$扩展$\rightarrow$<em>IDM Integration Module</em>$\rightarrow$详细信息$\rightarrow$打开允许访问文件网址。</small></li>
+<li>其它浏览器：同上</li>
+</ul>
+<p>配置好浏览器后，以后下载文件就是自动调用 IDM 下载了。</p>
+<h4 id="下载视频"><a href="#下载视频" class="headerlink" title="下载视频"></a>下载视频</h4><p>当浏览器开打含有视频播放的网页时，视视屏框的右上角会出现一个悬浮条，直接点击下载即可。<br><img src="http://image.jinl1874.xyz/img/20200629005318.png" alt=""><br>注意：</p>
+<ol>
+<li>下载优酷的官方上传的版权视频时，会下载到一个无法解析的.ts 文件。</li>
+<li>当 B 站的使用 HTML5 播放器时，下载的 B 站视频没有声音，此时使用 Flash 播放器即可。Flash 就要淘汰了怎么办？可以在 Chrome 浏览下载一款名为“B 站下载助手”的插件。</li>
+</ol>
+<h4 id="下载百度网盘的文件"><a href="#下载百度网盘的文件" class="headerlink" title="下载百度网盘的文件"></a>下载百度网盘的文件</h4><ol>
+<li>首先下载插件<a href="http://pan.newday.me/" target="_blank" rel="noopener">网盘助手</a>。<br>这个插件可以直接生成直链，而 IDM 需要直链才能下载。除此之外，此插件还有很多功能，如自动填充提取码等，就不一一赘述了。</li>
+<li>要下载网盘里的文件，首先需要将文件保存在自己的网盘里。在要下载的文件前打上勾，这时上方就会出现<code>生成链接</code>的选项$\downarrow$。<br><img src="http://image.jinl1874.xyz/img/20200629011751.png" alt="生成链接"></li>
+<li>点击后会出现下载直链$\downarrow$<br><img src="http://image.jinl1874.xyz/img/20200629012103.png" alt="直链"></li>
+<li>右键该链接，选择 IDM 下载。<br><img src="http://image.jinl1874.xyz/img/20200629012412.png" alt="idm"></li>
+</ol>
+<p>注意：如果出现 403、401 等错误，可以点击修改步骤三的里的应用 ID，一般改为<code>778750</code>即可。</p>
+<hr>
+<p>以上就是全部内容，欢迎访问个人<a href="https://jinl1874.xyz">博客</a>。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/06/21/Jmeter/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -576,272 +845,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/05/23/useCoding/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.jpg">
-      <meta itemprop="name" content="道理">
-      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jinl's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/23/useCoding/" class="post-title-link" itemprop="url">Hexo 双线布置到2020新版 Coding 和 GithubPage</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-23 02:24:16" itemprop="dateCreated datePublished" datetime="2020-05-23T02:24:16+08:00">2020-05-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-24 00:25:16" itemprop="dateModified" datetime="2020-05-24T00:25:16+08:00">2020-05-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/BlogBuild/" itemprop="url" rel="index"><span itemprop="name">BlogBuild</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HEXO/" itemprop="url" rel="index"><span itemprop="name">HEXO</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/05/23/useCoding/" class="post-meta-item leancloud_visitors" data-flag-title="Hexo 双线布置到2020新版 Coding 和 GithubPage" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/05/23/useCoding/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/23/useCoding/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="为什么使用-Coding"><a href="#为什么使用-Coding" class="headerlink" title="为什么使用 Coding"></a>为什么使用 Coding</h4><p>现在国内访问 github 的速度已经非常慢了，而且百度的爬虫也无法抓取到 github page 上面的内容。<br>而 Coding 类似于 github，也是一个免费的代码托管平台，随便一个仓库都可以用来做静态网页服务，访问速度也还可以。</p>
-<p>关于 github page 的使用可以参考我的上一篇博客<a href="https://jinl1874.xyz/2020/05/21/hexo-0/">使用 Hexo 和 GithubPage 免费搭建博客网站</a>。</p>
-<h4 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h4><ul>
-<li>打开<a href="https://coding.net/" target="_blank" rel="noopener">Coding</a>，注册账号。</li>
-<li>现在 Coding 只能注册团队了，不过五人以下是免费的。团队名称以及域名按自己喜好而填吧。</li>
-</ul>
-<h4 id="建仓"><a href="#建仓" class="headerlink" title="建仓"></a>建仓</h4><ul>
-<li>全部项目 $\rightarrow$ 新建项目 $\rightarrow$ 代码托管项目 $\rightarrow$ 填写名称、标识 $\rightarrow$ 勾选启用 Readme.md 及公开源代码 $\rightarrow$ 完成创建。</li>
-</ul>
-<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><ul>
-<li>项目设置 $\rightarrow$ 功能开关 $\rightarrow$ 打开持续部署和持续集成<br><img src="http://image.jinl1874.xyz/img/20200523233703.png" alt="项目设置"><br><img src="http://image.jinl1874.xyz/img/20200523233828.png" alt="功能"></li>
-<li>持续部署 $\rightarrow$ 静态网站 $\rightarrow$ 立即发布静态网站<br><img src="http://image.jinl1874.xyz/img/20200523234059.png" alt="部署"></li>
-<li>填写网站名字 $\rightarrow$ 保存<br><img src="http://image.jinl1874.xyz/img/20200523234300.png" alt="保存"></li>
-</ul>
-<h4 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h4><ul>
-<li><p>配置好后在静态网站选项里会有一个访问地址，先记好。<br><img src="http://image.jinl1874.xyz/img/20200523234509.png" alt="address"></p>
-</li>
-<li><p>域名解析控制台 $\rightarrow$ 解析 $\rightarrow$ 修改 github 记录 $\rightarrow$ 解析路线设为境外<br><img src="http://image.jinl1874.xyz/img/20200523235105.png" alt="github"></p>
-<blockquote>
-<p>两个都记录都要改</p>
-</blockquote>
-</li>
-<li><p>如果你之前在 github 设置了强制 https，那么在修改后，先暂停使用两个 github 记录，否则之后 Coding 申请证书会失败。不过建议还是要暂停一下，免得后面出现问题。</p>
-</li>
-<li><p>添加两个记录，类型为 CNAME，主机记录分别为@和 www，记录值为刚才得到的访问地址。<br><img src="http://image.jinl1874.xyz/img/20200524000911.png" alt=""><br><img src="http://image.jinl1874.xyz/img/20200524000014.png" alt="添加记录"></p>
-</li>
-<li><p>回到 Coding，点击右上角的“齿轮设置”，拉到下面“自定义域名”，分别绑定两个域名，如“<a href="http://www.jinl1874.xyz”和“jinl1874.xyz”。" target="_blank" rel="noopener">www.jinl1874.xyz”和“jinl1874.xyz”。</a><br><img src="http://image.jinl1874.xyz/img/20200524000244.png" alt=""></p>
-</li>
-<li><p>可以选择首选域名，也可以勾选跳转到首先，这样打开网站时地址栏就会默认是那个域名了。</p>
-</li>
-<li><p>然后就默默地等申请证书成功，几分钟到十几分钟不等。最后显示证书状态为正常就算成功了。<br><img src="http://image.jinl1874.xyz/img/20200524000745.png" alt="证书"></p>
-</li>
-<li><p>回到域名解析器，恢复 github 的域名解析记录。</p>
-</li>
-</ul>
-<h4 id="绑定"><a href="#绑定" class="headerlink" title="绑定"></a>绑定</h4><ul>
-<li>进入你的主目录[C://Users//xxx]，勾选查看隐藏文件，找到<code>.ssh</code>目录，用记事本打开<code>id_rsa.pub</code>，复制全部内容。</li>
-<li>代码仓库 $\rightarrow$ 设置 $\rightarrow$ 部署公钥 $\rightarrow$ 新建部署公钥 $\rightarrow$ 粘贴到公钥内容 $\rightarrow$ 新建。</li>
-</ul>
-<h4 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h4><ul>
-<li>复制 Coding 仓库地址。</li>
-<li>打开项目配置文件<code>_config.yml</code>，修改<code>deploy</code>内容。<br><img src="http://image.jinl1874.xyz/img/20200524001602.png" alt="项目"></li>
-<li>打开命令行进入 Hexo 所目录，输入<code>▶ hexo g -d</code>。不久会跳出来一个提示输入账号密码的窗口，输入 Coding 的邮箱与密码，无误后会上传代码至仓库。</li>
-</ul>
-<h4 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h4><ul>
-<li>由于设置的是自动部署，代码上传后就会自动部署。</li>
-<li>可以打开浏览器，输入域名查看网站</li>
-</ul>
-<p>至此，在 Coding 配置 Hexo 已经完成了。</p>
-<p>欢迎访问个人博客主页<a href="https://jinl1874.xyz">jinl1874</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jinl1874.xyz/2020/05/22/blog-problem-0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.jpg">
-      <meta itemprop="name" content="道理">
-      <meta itemprop="description" content="这个人很懒，什么也没有留下！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jinl's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/22/blog-problem-0/" class="post-title-link" itemprop="url">使用自定义域名后出现“404There isn't a GitHub Pages site here”解决方法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-22 23:43:03" itemprop="dateCreated datePublished" datetime="2020-05-22T23:43:03+08:00">2020-05-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-23 00:01:26" itemprop="dateModified" datetime="2020-05-23T00:01:26+08:00">2020-05-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Problem/" itemprop="url" rel="index"><span itemprop="name">Problem</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/05/22/blog-problem-0/" class="post-meta-item leancloud_visitors" data-flag-title="使用自定义域名后出现“404There isn't a GitHub Pages site here”解决方法" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/05/22/blog-problem-0/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/22/blog-problem-0/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><ul>
-<li>每次将新文章使用“hexo d”推送后，再打开浏览器就会显示“404There isn’t a GitHub Pages site here”这个错误。</li>
-</ul>
-<h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><ul>
-<li>我们在自定义域名之前会在下图里“Custom domain”，<br><img src="http://image.jinl1874.xyz/img/blog_problem.png" alt="setting"></li>
-<li>点击“save”后，仓库的根目录会生成一个“CNAME”文件，<br><img src="http://image.jinl1874.xyz/img/blog_problem_2.png" alt=""></li>
-<li>但是本地的“public”目录里面并没有这个文件，所以更新会删除这个文件，就会导致访问失败。</li>
-</ul>
-<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><ul>
-<li>在hexo的source文件夹下新建一个CNAME文件，内容如下。这样使用<code>hexo generate</code>就会在public目录生成CNAME文件了，这样推送过去后就不会删除了。<br><img src="http://image.jinl1874.xyz/img/20200522235649.png" alt="solve"></li>
-<li>添加文件后，重新生成推送后，问题就迎刃而解了。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-<blockquote>
-<p>欢迎访问个人博客主页 <a href="https://jinl1874.github.io" target="_blank" rel="noopener">jinl1874</a></p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -909,20 +916,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -963,7 +970,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
